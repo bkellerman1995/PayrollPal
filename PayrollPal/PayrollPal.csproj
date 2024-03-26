@@ -32,8 +32,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,15 +58,88 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enumeraciones\Enumeradores.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\frmPrincipal.cs">
+    <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
+    <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
+    <Compile Include="Layers\Entities\Colaborador.cs" />
+    <Compile Include="Layers\Entities\ControlDeMarcas.cs" />
+    <Compile Include="Layers\Enumeraciones\Enumeradores.cs" />
+    <Compile Include="Layers\Persistencia\DataBase.cs" />
+    <Compile Include="Layers\Persistencia\FactoryConexion.cs" />
+    <Compile Include="Layers\Persistencia\FactoryDataBase.cs" />
+    <Compile Include="Layers\Persistencia\IDataBase.cs" />
+    <Compile Include="Layers\UI\Consultas\frmConsultaMarcas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\frmPrincipal.Designer.cs">
+    <Compile Include="Layers\UI\Consultas\frmConsultaMarcas.Designer.cs">
+      <DependentUpon>frmConsultaMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.Designer.cs">
+      <DependentUpon>frmMantenimientoDeduccionesPercepciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoPlanillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoPlanillas.Designer.cs">
+      <DependentUpon>frmMantenimientoPlanillas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\Util\JSONGenericList.cs" />
+    <Compile Include="Layers\Util\JSONGenericObject.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Layers\UI\frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoColaboradores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoColaboradores.Designer.cs">
+      <DependentUpon>frmMantenimientoColaboradores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoEmpresa.Designer.cs">
+      <DependentUpon>frmMantenimientoEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoPuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoPuestos.Designer.cs">
+      <DependentUpon>frmMantenimientoPuestos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoSolicitudVacaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoSolicitudVacaciones.Designer.cs">
+      <DependentUpon>frmMantenimientoSolicitudVacaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoUsuarios.Designer.cs">
+      <DependentUpon>frmMantenimientoUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.Designer.cs">
+      <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Layers\UI\Consultas\frmConsultaMarcas.resx">
+      <DependentUpon>frmConsultaMarcas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.resx">
+      <DependentUpon>frmMantenimientoDeduccionesPercepciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoPlanillas.resx">
+      <DependentUpon>frmMantenimientoPlanillas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -65,9 +150,28 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\frmPrincipal.resx">
+    <EmbeddedResource Include="Layers\UI\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoColaboradores.resx">
+      <DependentUpon>frmMantenimientoColaboradores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoEmpresa.resx">
+      <DependentUpon>frmMantenimientoEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoPuestos.resx">
+      <DependentUpon>frmMantenimientoPuestos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoSolicitudVacaciones.resx">
+      <DependentUpon>frmMantenimientoSolicitudVacaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoUsuarios.resx">
+      <DependentUpon>frmMantenimientoUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.resx">
+      <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,14 +186,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Documentos\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Layers\" />
-    <Folder Include="Patrones\" />
-    <Folder Include="Util\" />
+    <Folder Include="Layers\Patrones\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Imagenes\Logo.png" />
+    <None Include="Layers\Imagenes\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Layers\Imagenes\Json_sinCheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Layers\Imagenes\Json_conCheck.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

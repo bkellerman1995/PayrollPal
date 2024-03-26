@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PayrollPal.UI
+namespace PayrollPal.UI.Mantenimientos
 {
-    public partial class frmPrincipal : Form
+    public partial class frmMantenimientoEmpresa : Form
     {
-        public frmPrincipal()
+        public frmMantenimientoEmpresa()
         {
             InitializeComponent();
         }
