@@ -24,7 +24,9 @@ class FactoryConexion
 
         if (!existe)
         {
-            throw new Exception("No existe registrada en ConnectionStrings del app.config el Key default!");
+            throw new Exception();
+
+            //throw new Exception("No existe registrada en ConnectionStrings del app.config el Key default!");
         }
 
         return ConfigurationManager.ConnectionStrings["dataBase"].ConnectionString;

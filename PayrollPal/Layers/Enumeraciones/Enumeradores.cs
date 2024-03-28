@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace PayrollPal.Enumeraciones
 {
-    public class Enumeradores
+    public enum Estado
     {
+        Activo = 'A',
+        Inactivo = 'I'
+    }
 
+    public enum CRUD
+    {
+        Create = 'C',
+        Read = 'R',
+        Update = 'U',
+        Delete = 'D'
     }
 }

@@ -41,12 +41,19 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.17.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.17\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,9 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
+    <Compile Include="Layers\BLL\BLLUsuario.cs" />
     <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
+    <Compile Include="Layers\DAL\DALUsuario.cs" />
     <Compile Include="Layers\Entities\Colaborador.cs" />
     <Compile Include="Layers\Entities\ControlDeMarcas.cs" />
+    <Compile Include="Layers\Entities\Usuario.cs" />
     <Compile Include="Layers\Enumeraciones\Enumeradores.cs" />
     <Compile Include="Layers\Persistencia\DataBase.cs" />
     <Compile Include="Layers\Persistencia\FactoryConexion.cs" />
@@ -85,8 +95,16 @@
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoPlanillas.Designer.cs">
       <DependentUpon>frmMantenimientoPlanillas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layers\Util\Contrasenna.cs" />
+    <Compile Include="Layers\Util\Criptografia.cs" />
+    <Compile Include="Layers\Util\Email.cs" />
+    <Compile Include="Layers\Util\FormatStrings.cs" />
     <Compile Include="Layers\Util\JSONGenericList.cs" />
     <Compile Include="Layers\Util\JSONGenericObject.cs" />
+    <Compile Include="Layers\Util\LeerDatos.cs" />
+    <Compile Include="Layers\Util\ProperCase.cs" />
+    <Compile Include="Layers\Util\QuickResponse.cs" />
+    <Compile Include="Layers\Util\Utilitarios.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Layers\UI\frmPrincipal.cs">
