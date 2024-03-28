@@ -66,11 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
+    <Compile Include="Layers\BLL\BLLDepartamento.cs" />
     <Compile Include="Layers\BLL\BLLUsuario.cs" />
     <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
+    <Compile Include="Layers\DAL\DALDepartamento.cs" />
     <Compile Include="Layers\DAL\DALUsuario.cs" />
     <Compile Include="Layers\Entities\Colaborador.cs" />
     <Compile Include="Layers\Entities\ControlDeMarcas.cs" />
+    <Compile Include="Layers\Entities\Departamento.cs" />
     <Compile Include="Layers\Entities\Usuario.cs" />
     <Compile Include="Layers\Enumeraciones\Enumeradores.cs" />
     <Compile Include="Layers\Persistencia\DataBase.cs" />
@@ -88,6 +91,12 @@
     </Compile>
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.Designer.cs">
       <DependentUpon>frmMantenimientoDeduccionesPercepciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoDepartamentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoDepartamentos.Designer.cs">
+      <DependentUpon>frmMantenimientoDepartamentos.cs</DependentUpon>
     </Compile>
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoPlanillas.cs">
       <SubType>Form</SubType>
@@ -154,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.resx">
       <DependentUpon>frmMantenimientoDeduccionesPercepciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoDepartamentos.resx">
+      <DependentUpon>frmMantenimientoDepartamentos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoPlanillas.resx">
       <DependentUpon>frmMantenimientoPlanillas.cs</DependentUpon>

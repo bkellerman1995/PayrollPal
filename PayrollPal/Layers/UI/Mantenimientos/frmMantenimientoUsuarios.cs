@@ -136,7 +136,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                         //habilitar los controles de texto (txtBox)
 
-                        this.mktID.Enabled = true;
+                        this.mktID.ReadOnly = true;
                         this.txtNombre.Enabled = true;
                         this.txtContrasenna.Enabled = true;
                         this.txtConfirmarContrasenna.Enabled = true;
@@ -161,20 +161,36 @@ namespace PayrollPal.UI.Mantenimientos
         }
 
         /// <summary>
-        /// Método para inhabilitar los campos de texto
+        /// Método para inhabilitar los controles (botones y campos de texto)
         /// </summary>
         private void InhabilitarControles()
         {
-            this.btnAgregar.Enabled = true;
-            this.btnEditar.Enabled = false;
-            this.btnEliminar.Enabled = false;
-            this.btnLimpiar.Enabled = false;
-            this.btnConfirmar.Visible = false;
+            try
+            {
+                this.btnAgregar.Enabled = true;
+                this.btnEditar.Enabled = false;
+                this.btnEliminar.Enabled = false;
+                this.btnLimpiar.Enabled = false;
+                this.btnConfirmar.Visible = false;
 
-            this.mktID.Enabled = false;
-            this.txtNombre.Enabled = false;
-            this.txtContrasenna.Enabled = false;
-            this.txtConfirmarContrasenna.Enabled = false;
+                this.mktID.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.txtContrasenna.Enabled = false;
+                this.txtConfirmarContrasenna.Enabled = false;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+
         }
 
         /// <summary>
@@ -227,17 +243,13 @@ namespace PayrollPal.UI.Mantenimientos
             try
             {
                 //Habilitar botones de Editar
-                //y Eliminar
+                //Eliminar y Editar
                 //tambien deshabilita el boton de Agregar
 
                 this.btnAgregar.Enabled = false;
                 this.btnEditar.Enabled = true;
                 this.btnEliminar.Enabled = true;
                 this.btnLimpiar.Enabled = true;
-
-                this.txtNombre.ReadOnly = false;
-                this.txtContrasenna.ReadOnly = false;
-                this.txtConfirmarContrasenna.ReadOnly = false;
 
                 if (this.dgvUsuarios.SelectedRows.Count == 1)
                 {
@@ -400,19 +412,24 @@ namespace PayrollPal.UI.Mantenimientos
             oUsuario.NombreUsuario = this.txtNombre.Text;
             oUsuario.Contrasenna = this.txtContrasenna.Text;
 
-            //Si el selectbyID del BLLUsuario 
-            //retorna un objeto ya existente, 
-            //se llama al metodo SelectByID del BLLUsuario
+            //Se llama al método Create del Usuario 
+            //que se encarga de revisar si el usuario existe primero
+            //antes de agregar al usuario
 
             if (BLLUsuario.SelectById(this.mktID.Text)!=null)
             {
+
                 BLLUsuario.Update(oUsuario);
+            }
+            else
+            {
+                BLLUsuario.Create(oUsuario);
             }
 
             //Insertar el usuario a la base de datos
             //por medio del BLLUsuario (método CREATE)
 
-            BLLUsuario.Create(oUsuario);
+
 
             //Refrescar la lista
             CargarLista();
@@ -438,7 +455,7 @@ namespace PayrollPal.UI.Mantenimientos
         }
 
         /// <summary>
-        /// Evento del botón Eliminar para editar al 
+        /// Evento del botón Eliminar para eliminar al 
         /// usuario exitosamente en la base de datos
         /// </summary>
         /// <param name="sender"></param>
@@ -494,7 +511,7 @@ namespace PayrollPal.UI.Mantenimientos
             }
             else
             {
-                this.errProv1.SetError(this.txtNombre, "Campo ID de usuario no es correcto");
+                this.errProv1.SetError(this.txtNombre, "Campo Nombre de usuario no es correcto");
                 this.txtNombre.BackColor = Color.MistyRose;
             }
         }
@@ -552,9 +569,15 @@ namespace PayrollPal.UI.Mantenimientos
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarControles();
-            InhabilitarControles();
         }
 
+        /// <summary>
+        /// Evento del botón confirmar para
+        /// crear o actualizar un usario
+        /// después 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             //Validar que todos los campos del form (ID, usuario, contraseña y
