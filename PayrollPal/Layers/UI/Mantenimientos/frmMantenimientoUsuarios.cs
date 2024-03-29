@@ -574,7 +574,6 @@ namespace PayrollPal.UI.Mantenimientos
         /// <summary>
         /// Evento del botón confirmar para
         /// crear o actualizar un usario
-        /// después 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

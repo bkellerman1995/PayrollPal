@@ -323,7 +323,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <summary>
         /// Evento del botón confirmar para
         /// crear o actualizar un departamento
-        /// después 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

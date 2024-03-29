@@ -67,13 +67,16 @@
   <ItemGroup>
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
     <Compile Include="Layers\BLL\BLLDepartamento.cs" />
+    <Compile Include="Layers\BLL\BLLPuesto.cs" />
     <Compile Include="Layers\BLL\BLLUsuario.cs" />
     <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
     <Compile Include="Layers\DAL\DALDepartamento.cs" />
+    <Compile Include="Layers\DAL\DALPuesto.cs" />
     <Compile Include="Layers\DAL\DALUsuario.cs" />
     <Compile Include="Layers\Entities\Colaborador.cs" />
     <Compile Include="Layers\Entities\ControlDeMarcas.cs" />
     <Compile Include="Layers\Entities\Departamento.cs" />
+    <Compile Include="Layers\Entities\Puesto.cs" />
     <Compile Include="Layers\Entities\Usuario.cs" />
     <Compile Include="Layers\Enumeraciones\Enumeradores.cs" />
     <Compile Include="Layers\Persistencia\DataBase.cs" />
