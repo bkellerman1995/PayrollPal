@@ -1,37 +1,33 @@
-﻿using PayrollPal.Layers.BLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
-using System.Reflection;
+using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
-using System.IO;
-using UTNLeccion8B;
-using PayrollPal.Layers.Util;
-using System.Diagnostics.Eventing.Reader;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-
-namespace PayrollPal.UI.Mantenimientos
+namespace PayrollPal.Layers.UI.Mantenimientos
 {
-    public partial class frmMantenimientoUsuarios : Form
+    public partial class frmMantenimientoRol : Form
     {
         private static readonly log4net.ILog _MyLogControlEventos =
-                                     log4net.LogManager.GetLogger("MyControlEventos");
+                             log4net.LogManager.GetLogger("MyControlEventos");
 
-        public frmMantenimientoUsuarios()
+        public frmMantenimientoRol()
         {
             InitializeComponent();
         }
 
         /// <summary>
         /// Evento para cerrar el form de Mantenimiento de 
-        /// Usuarios
+        /// Roles
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -42,18 +38,19 @@ namespace PayrollPal.UI.Mantenimientos
 
         /// <summary>
         /// Método load del form 
-        /// de mantenimiento de usuarios 
+        /// de mantenimiento de roles 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void frmMantenimientoUsuarios_Load(object sender, EventArgs e)
+        private void frmMantenimientoRol_Load(object sender, EventArgs e)
         {
             try
             {
-                //Cargar el datagridview de usuarios con el SELECT_ALL 
-                //del DALUsuario
+                //Cargar el datagridview de roles con el SELECT_ALL 
+                //del DALRol
 
                 CargarLista();
+                CargarCombo();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
@@ -74,16 +71,15 @@ namespace PayrollPal.UI.Mantenimientos
 
         /// <summary>
         /// Método que se encarga de cargar la lista 
-        /// de usuarios desde la base de datos 
+        /// de roles desde la base de datos 
         /// y cargarlo al datagridview
         /// </summary>
         private void CargarLista()
         {
             try
             {
-
-                this.dgvUsuarios.DataSource = BLLUsuario.SelectAll();
-                this.dgvUsuarios.ClearSelection();
+                this.dgvRoles.DataSource = BLLRol.SelectAll();
+                this.dgvRoles.ClearSelection();
             }
             catch (Exception msg)
             {
@@ -98,6 +94,37 @@ namespace PayrollPal.UI.Mantenimientos
 
             }
         }
+
+        /// <summary>
+        /// Método que se encarga de cargar el comboBox 
+        /// de roles desde el enum
+        /// </summary>
+        private void CargarCombo()
+        {
+
+            foreach (var item in BLLRol.IDRolesCombo())
+            {
+                switch (item)
+                {
+                    case 1:
+                        this.cmbIdRol.Items.Add((int)Enumeraciones.Rol.Administrador);
+                        break;
+                    case 2:
+                        this.cmbIdRol.Items.Add((int)Enumeraciones.Rol.Supervisor);
+                        break;
+                    case 3:
+                        this.cmbIdRol.Items.Add((int)Enumeraciones.Rol.Colaborador);
+                        break;
+                }
+            }
+
+            if(this.cmbIdRol.Items.Count == 0)
+            {
+                this.cmbIdRol.Enabled = false;
+            }
+
+        }
+
 
         /// <summary>
         /// Método para configurar el estado de los controles
@@ -121,25 +148,24 @@ namespace PayrollPal.UI.Mantenimientos
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
 
-                        //habilitar los controles de texto (txtBox)
+                        //habilitar los controles
 
-                        this.mktID.Enabled = true;
-                        this.txtNombre.Enabled = true;
-                        this.txtContrasenna.Enabled = true;
-                        this.txtConfirmarContrasenna.Enabled = true;
+                        this.cmbIdRol.Enabled = true;
+                        this.cmbIdRol.Items.Clear();
+                        CargarCombo();
                         break;
 
+                    //chequear que el comboBox de ID Rol se llene
+                    //conrespecto a los IDs que hagan falta de agregar.
+
                     case 'U':
-                        //habiitar los botones de limpiar, 
-                        //y salir
+                        //habiitar el boton de salir, 
                         this.btnSalir.Enabled = true;
 
-                        //habilitar los controles de texto (txtBox)
+                        //habilitar los controles 
 
-                        this.mktID.ReadOnly = true;
-                        this.txtNombre.Enabled = true;
-                        this.txtContrasenna.Enabled = true;
-                        this.txtConfirmarContrasenna.Enabled = true;
+                        this.cmbIdRol.Enabled = true;
+
                         break;
 
 
@@ -168,15 +194,12 @@ namespace PayrollPal.UI.Mantenimientos
             try
             {
                 this.btnAgregar.Enabled = true;
-                this.btnEditar.Enabled = false;
                 this.btnEliminar.Enabled = false;
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
 
-                this.mktID.Enabled = false;
-                this.txtNombre.Enabled = false;
-                this.txtContrasenna.Enabled = false;
-                this.txtConfirmarContrasenna.Enabled = false;
+                this.cmbIdRol.Enabled = false;
+                this.txtNombre.ReadOnly = true;
             }
             catch (Exception msg)
             {
@@ -201,17 +224,10 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.mktID.Clear();
-                this.mktID.BackColor = Color.White;
+                this.cmbIdRol.SelectedIndex = -1;
 
                 this.txtNombre.Clear();
                 this.txtNombre.BackColor = Color.White;
-
-                this.txtContrasenna.Clear();
-                this.txtContrasenna.BackColor = Color.White;
-
-                this.txtConfirmarContrasenna.Clear();
-                this.txtConfirmarContrasenna.BackColor = Color.White;
 
                 InhabilitarControles();
 
@@ -232,13 +248,13 @@ namespace PayrollPal.UI.Mantenimientos
 
         /// <summary>
         /// Evento que se encarga de seleccionar 
-        /// el objeto usuario en el datagrid view 
+        /// el objeto rol en el datagrid view 
         /// y cargarlo en los campos respectivos
         /// del form (para editar o borrar o simplemente ver)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvUsuarios_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvRoles_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -247,21 +263,36 @@ namespace PayrollPal.UI.Mantenimientos
                 //tambien deshabilita el boton de Agregar
 
                 this.btnAgregar.Enabled = false;
-                this.btnEditar.Enabled = true;
                 this.btnEliminar.Enabled = true;
                 this.btnLimpiar.Enabled = true;
+                this.cmbIdRol.Items.Clear();
 
-                if (this.dgvUsuarios.SelectedRows.Count == 1)
+
+                if (this.dgvRoles.SelectedRows.Count == 1)
                 {
-                    //Crear instancia de usuario
-                    Usuario oUsuario = new Usuario();
-                    //Asignar la fila seleccionada del datagridview al objeto usuario
-                    oUsuario = this.dgvUsuarios.SelectedRows[0].DataBoundItem as Usuario;
-                    //Asignar a cada control los datos del usuario
-                    this.mktID.Text = oUsuario.IDUsuario.ToString();
-                    this.txtNombre.Text = oUsuario.NombreUsuario.ToString();
-                    this.txtContrasenna.Text = oUsuario.Contrasenna.ToString();
-                    this.txtConfirmarContrasenna.Text = oUsuario.Contrasenna.ToString();
+                    //Crear instancia de rol
+                    Rol oRol = new Rol();
+                    //Asignar la fila seleccionada del datagridview al objeto rol
+                    oRol = this.dgvRoles.SelectedRows[0].DataBoundItem as Rol;
+                    //Asignar a cada control los datos del rol
+
+                    switch (oRol.IDRol)
+                    {
+                        case 1:
+                            this.cmbIdRol.Items.Add((int)Enumeraciones.Rol.Administrador);
+                            this.cmbIdRol.SelectedIndex = 0;
+                            break;
+                        case 2:
+                            this.cmbIdRol.Items.Add((int)Enumeraciones.Rol.Supervisor);
+                            this.cmbIdRol.SelectedIndex = 0;
+                            break;
+                        case 3:
+                            this.cmbIdRol.Items.Add((int)Enumeraciones.Rol.Colaborador);
+                            this.cmbIdRol.SelectedIndex = 0;
+                            break;
+                    }
+
+                    this.txtNombre.Text = oRol.Descripcion.ToString(); 
                 }
             }
             catch (Exception msg)
@@ -280,7 +311,7 @@ namespace PayrollPal.UI.Mantenimientos
 
         /// <summary>
         /// Evento del botón Agregar para agregar al 
-        /// usuario exitosamente a la base de datos
+        /// rol exitosamente a la base de datos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -331,55 +362,27 @@ namespace PayrollPal.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                //ValidarID del usuario
-                if (this.mktID.MaskCompleted)
+                //ValidarID del rol
+                if (this.cmbIdRol.SelectedIndex >= 0)
                 {
-                    this.errProv1.SetError(this.mktID, string.Empty);
+                    this.errProv1.SetError(this.cmbIdRol, string.Empty);
 
                 }
                 else
                 {
-                    this.errProv1.SetError(this.mktID, "Campo ID de usuario no es correcto");
+                    this.errProv1.SetError(this.cmbIdRol, "El ID de rol no es correcto");
                     return false;
                 }
 
-                // Validar Nombre
+                // Validar Nombre/Descripcion
+
                 if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
                 {
                     this.errProv1.SetError(this.txtNombre, string.Empty);
                 }
                 else
                 {
-                    this.errProv1.SetError(this.txtNombre, "Campo Nombre de Usuario no es correcto");
-                    return false;
-                }
-
-                //Validar Campos contrasenna
-
-                if (PayrollPal.Layers.Util.Contrasenna.ContrasennaFuerte(this.txtContrasenna.Text))
-                {
-                    this.errProv1.SetError(this.txtContrasenna, string.Empty);
-                }
-                else
-                {
-                    this.errProv1.SetError(this.txtContrasenna, "La contraseña debe cumplir con los siguientes requisitos: " +
-                        "\n- Longitud entre 8 y 16 caracteres" +
-                        "\n- Debe incluir al menos una letra" +
-                        "\n- Debe incluir al menos un dígito" +
-                        "\n- Debe incluir al menos un caracter especial (@ ; / .)");
-                    return false;
-                }
-
-                //Validar contrasennas coinciden
-
-                if (!String.IsNullOrEmpty(this.txtConfirmarContrasenna.Text.Trim())
-                    && (this.txtContrasenna.Text.Equals(this.txtConfirmarContrasenna.Text)))
-                {
-                    this.errProv1.SetError(this.txtConfirmarContrasenna, string.Empty);
-                }
-                else
-                {
-                    this.errProv1.SetError(this.txtConfirmarContrasenna, "Los campos de contraseña no coinciden");
+                    this.errProv1.SetError(this.txtNombre, "Campo Nombre de rol no es correcto");
                     return false;
                 }
 
@@ -400,34 +403,23 @@ namespace PayrollPal.UI.Mantenimientos
         }
 
         /// <summary>
-        /// Método para crear los usuarios y de igual manera actualizarlos
+        /// Método para crear los roles y de igual manera actualizarlos
         /// </summary>
-        private void CrearActualizarUsuario()
+        private void CrearActualizarRoles()
         {
-            //Crear la instancia de Usuario
-            Usuario oUsuario = new Usuario();
+            //Crear la instancia de Rol
+            Rol oRol = new Rol();
+            oRol.IDRol = (int)this.cmbIdRol.SelectedItem;
+            oRol.Descripcion = this.txtNombre.Text;
 
+            //Se llama al método Create del Rol 
+            //que se encarga de revisar si el rol existe primero
+            //antes de agregar al rol
 
-            oUsuario.IDUsuario = this.mktID.Text;
-            oUsuario.NombreUsuario = this.txtNombre.Text;
-            oUsuario.Contrasenna = this.txtContrasenna.Text;
+            BLLRol.Create(oRol);
 
-            //Se llama al método Create del Usuario 
-            //que se encarga de revisar si el usuario existe primero
-            //antes de agregar al usuario
-
-            if (BLLUsuario.SelectById(this.mktID.Text)!=null)
-            {
-
-                BLLUsuario.Update(oUsuario);
-            }
-            else
-            {
-                BLLUsuario.Create(oUsuario);
-            }
-
-            //Insertar el usuario a la base de datos
-            //por medio del BLLUsuario (método CREATE)
+            //Insertar el rol a la base de datos
+            //por medio del BLLRol (método CREATE)
 
 
 
@@ -444,7 +436,7 @@ namespace PayrollPal.UI.Mantenimientos
 
         /// <summary>
         /// Evento del botón Editar para editar al 
-        /// usuario exitosamente en la base de datos
+        /// rol exitosamente en la base de datos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -456,44 +448,25 @@ namespace PayrollPal.UI.Mantenimientos
 
         /// <summary>
         /// Evento del botón Eliminar para eliminar al 
-        /// usuario exitosamente en la base de datos
+        /// rol exitosamente en la base de datos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string idUsuario = this.mktID.Text;
-            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el usuario?","Aviso",
+            int idRol = (int)this.cmbIdRol.SelectedItem;
+
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el rol?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-                BLLUsuario.Delete(idUsuario);
+                BLLRol.Delete(idRol);
                 CargarLista();
                 LimpiarControles();
             }
 
 
-        }
-
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// ID es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktID_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktID.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktID, string.Empty);
-                this.mktID.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktID, "Campo ID de usuario no es correcto");
-                this.mktID.BackColor = Color.MistyRose;
-            }
         }
 
         /// <summary>
@@ -511,53 +484,8 @@ namespace PayrollPal.UI.Mantenimientos
             }
             else
             {
-                this.errProv1.SetError(this.txtNombre, "Campo Nombre de usuario no es correcto");
+                this.errProv1.SetError(this.txtNombre, "Campo Nombre/Descripción de rol no es correcto");
                 this.txtNombre.BackColor = Color.MistyRose;
-            }
-        }
-
-        /// <summary>
-        /// Evento para revisar si el campo de la 
-        /// contraseña es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtContrasenna_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (PayrollPal.Layers.Util.Contrasenna.ContrasennaFuerte(this.txtContrasenna.Text))
-            {
-                this.errProv1.SetError(this.txtContrasenna, string.Empty);
-                this.txtContrasenna.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.txtContrasenna, "La contraseña debe cumplir con los siguientes requisitos: " +
-                    "\n- Longitud entre 8 y 16 caracteres" +
-                    "\n- Debe incluir al menos una letra" +
-                    "\n- Debe incluir al menos un dígito" +
-                    "\n- Debe incluir al menos un caracter especial (@ ; / .)");
-                this.txtContrasenna.BackColor = Color.MistyRose;
-            }
-        }
-
-        /// <summary>
-        /// Evento para revisar si el campo de confirmar contraseña
-        /// y el campo de contraseña coinciden (se colore el campo respectivamente)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtConfirmarContrasenna_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (!String.IsNullOrEmpty(this.txtConfirmarContrasenna.Text.Trim())
-                && (this.txtContrasenna.Text.Equals(this.txtConfirmarContrasenna.Text)))
-            {
-                this.errProv1.SetError(this.txtConfirmarContrasenna, string.Empty);
-                this.txtConfirmarContrasenna.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.txtConfirmarContrasenna, "Los campos de contraseña no coinciden");
-                this.txtConfirmarContrasenna.BackColor = Color.MistyRose;
             }
         }
 
@@ -579,16 +507,36 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            //Validar que todos los campos del form (ID, usuario, contraseña y
+            //Validar que todos los campos del form (IDRol y descripción) y 
             //su comprobación se agreguen correctamente
             if (!ValidarCampos())
             {
                 return;
             }
 
-            //Llamar al método que crea y actualiza los usuarios
-            CrearActualizarUsuario();
+            //Llamar al método que crea y actualiza los roles
+            CrearActualizarRoles();
             LimpiarControles();
+        }
+
+        /// <summary>
+        /// Método para cambiar el nombre del textbox con el 
+        /// nombre del rol dependiendo del rol que 
+        /// se elija del combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbIdRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()) || this.cmbIdRol.Enabled == false)
+            {
+                return;
+            }
+            else
+            {
+                this.txtNombre.Text = ((Enumeraciones.Rol)this.cmbIdRol.SelectedItem).ToString();
+            }
+
         }
 
         /// <summary>
@@ -596,11 +544,11 @@ namespace PayrollPal.UI.Mantenimientos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == 2 && e.Value != null)
-                e.Value = new String('*', e.Value.ToString().Length);
+        //private void dgvRoles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 2 && e.Value != null)
+        //        e.Value = new String('*', e.Value.ToString().Length);
 
-        }
+        //}
     }
 }

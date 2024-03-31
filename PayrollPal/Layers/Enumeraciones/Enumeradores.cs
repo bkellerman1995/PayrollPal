@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,5 +20,12 @@ namespace PayrollPal.Enumeraciones
         Read = 'R',
         Update = 'U',
         Delete = 'D'
+    }
+
+    public enum Rol
+    {
+        Administrador = 1,
+        Supervisor = 2,
+        Colaborador = 3
     }
 }
