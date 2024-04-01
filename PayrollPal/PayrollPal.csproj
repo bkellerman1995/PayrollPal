@@ -85,11 +85,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layers\BLL\BLLColaborador.cs" />
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
     <Compile Include="Layers\BLL\BLLDepartamento.cs" />
     <Compile Include="Layers\BLL\BLLPuesto.cs" />
     <Compile Include="Layers\BLL\BLLRol.cs" />
     <Compile Include="Layers\BLL\BLLUsuario.cs" />
+    <Compile Include="Layers\DAL\DALColaborador.cs" />
     <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
     <Compile Include="Layers\DAL\DALDepartamento.cs" />
     <Compile Include="Layers\DAL\DALPuesto.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Layers\Entities\Departamento.cs" />
     <Compile Include="Layers\Entities\Puesto.cs" />
     <Compile Include="Layers\Entities\Rol.cs" />
+    <Compile Include="Layers\Entities\Supervisor.cs" />
     <Compile Include="Layers\Entities\Usuario.cs" />
     <Compile Include="Layers\Enumeraciones\Enumeradores.cs" />
     <Compile Include="Layers\Persistencia\DataBase.cs" />
@@ -135,6 +138,12 @@
     </Compile>
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoRol.Designer.cs">
       <DependentUpon>frmMantenimientoRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoSupervisores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoSupervisores.Designer.cs">
+      <DependentUpon>frmMantenimientoSupervisores.cs</DependentUpon>
     </Compile>
     <Compile Include="Layers\Util\Contrasenna.cs" />
     <Compile Include="Layers\Util\Criptografia.cs" />
@@ -204,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoRol.resx">
       <DependentUpon>frmMantenimientoRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoSupervisores.resx">
+      <DependentUpon>frmMantenimientoSupervisores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

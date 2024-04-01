@@ -77,7 +77,6 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(150, 29);
             this.txtNombre.TabIndex = 54;
-            this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
             // 
             // lblNombre
             // 
@@ -253,7 +252,7 @@
             this.cmbIdRol.Name = "cmbIdRol";
             this.cmbIdRol.Size = new System.Drawing.Size(150, 29);
             this.cmbIdRol.TabIndex = 61;
-            this.cmbIdRol.SelectedIndexChanged += new System.EventHandler(this.cmbIdRol_SelectedIndexChanged);
+            this.cmbIdRol.SelectedValueChanged += new System.EventHandler(this.cmbIdRol_SelectedValueChanged);
             // 
             // frmMantenimientoRol
             // 

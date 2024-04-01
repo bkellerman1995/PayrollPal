@@ -51,6 +51,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 CargarLista();
                 CargarCombo();
+                this.cmbIdRol.Focus();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
@@ -118,7 +119,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 }
             }
 
-            if(this.cmbIdRol.Items.Count == 0)
+            if (this.cmbIdRol.Items.Count == 0)
             {
                 this.cmbIdRol.Enabled = false;
             }
@@ -292,7 +293,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                             break;
                     }
 
-                    this.txtNombre.Text = oRol.Descripcion.ToString(); 
+                    this.txtNombre.Text = oRol.Descripcion.ToString();
                 }
             }
             catch (Exception msg)
@@ -470,26 +471,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         }
 
         /// <summary>
-        /// Evento para revisar si el campo del
-        /// nombre es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtNombre_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
-            {
-                this.errProv1.SetError(this.txtNombre, string.Empty);
-                this.txtNombre.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.txtNombre, "Campo Nombre/Descripción de rol no es correcto");
-                this.txtNombre.BackColor = Color.MistyRose;
-            }
-        }
-
-        /// <summary>
         /// Evento del botón Limpiar para limpiar los campos
         /// </summary>
         /// <param name="sender"></param>
@@ -519,6 +500,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             LimpiarControles();
         }
 
+
         /// <summary>
         /// Método para cambiar el nombre del textbox con el 
         /// nombre del rol dependiendo del rol que 
@@ -526,18 +508,19 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmbIdRol_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbIdRol_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()) || this.cmbIdRol.Enabled == false)
-            {
-                return;
-            }
-            else
+            if (this.cmbIdRol.Enabled == false || this.cmbIdRol.SelectedItem != null)
             {
                 this.txtNombre.Text = ((Enumeraciones.Rol)this.cmbIdRol.SelectedItem).ToString();
             }
+            else
+            {
+                return;
+            }
 
         }
+
 
         /// <summary>
         /// Evento para ocultar la contraseña del usuario en el datagridview
