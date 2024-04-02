@@ -63,6 +63,16 @@ namespace PayrollPal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Colaborador_Generico {
+            get {
+                object obj = ResourceManager.GetObject("Colaborador_Generico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Json_conCheck {
             get {
                 object obj = ResourceManager.GetObject("Json_conCheck", resourceCulture);

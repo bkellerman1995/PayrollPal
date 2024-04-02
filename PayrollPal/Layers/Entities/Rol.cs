@@ -10,6 +10,10 @@ namespace PayrollPal.Layers.Entities
     {
         public int IDRol { set; get; }
         public string Descripcion { set; get; }
+        public override string ToString()
+        {
+            return IDRol + " - " + Descripcion;
+        }
     }
 
 }

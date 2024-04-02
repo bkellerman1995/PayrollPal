@@ -11,6 +11,10 @@ namespace PayrollPal.Layers.Entities
         public int CodigoPuesto { set; get; }
         public string Nombre { set; get; }
         public bool Estado { set; get; }
+        public override string ToString()
+        {
+            return CodigoPuesto + " - " + Nombre;
+        }
     }
 
 }

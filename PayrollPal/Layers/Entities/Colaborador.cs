@@ -8,7 +8,7 @@ namespace PayrollPal.Layers.Entities
 {
     public class Colaborador
     {
-        public int IDColaborador { get; set; }  
+        public string IDColaborador { get; set; }  
         public string Nombre { get; set; }
         public string Apellido1 { get; set; }
         public string Apellido2 { get; set; }

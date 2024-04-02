@@ -61,5 +61,18 @@ namespace PayrollPal.Layers.BLL
             DAL.DALRol.DELETE(pIDRol);
         }
         #endregion
+
+        #region SELECCIONA ROL COLABORADOR
+
+        public static bool EsColaborador(Rol pRol)
+        {
+            if (pRol.IDRol == 3)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
     }
 }

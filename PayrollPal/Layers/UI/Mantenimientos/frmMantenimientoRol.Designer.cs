@@ -246,6 +246,7 @@
             // 
             // cmbIdRol
             // 
+            this.cmbIdRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIdRol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbIdRol.FormattingEnabled = true;
             this.cmbIdRol.Location = new System.Drawing.Point(214, 49);

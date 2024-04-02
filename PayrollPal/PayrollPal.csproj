@@ -90,12 +90,14 @@
     <Compile Include="Layers\BLL\BLLDepartamento.cs" />
     <Compile Include="Layers\BLL\BLLPuesto.cs" />
     <Compile Include="Layers\BLL\BLLRol.cs" />
+    <Compile Include="Layers\BLL\BLLSupervisor.cs" />
     <Compile Include="Layers\BLL\BLLUsuario.cs" />
     <Compile Include="Layers\DAL\DALColaborador.cs" />
     <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
     <Compile Include="Layers\DAL\DALDepartamento.cs" />
     <Compile Include="Layers\DAL\DALPuesto.cs" />
     <Compile Include="Layers\DAL\DALRol.cs" />
+    <Compile Include="Layers\DAL\DALSupervisor.cs" />
     <Compile Include="Layers\DAL\DALUsuario.cs" />
     <Compile Include="Layers\Entities\Colaborador.cs" />
     <Compile Include="Layers\Entities\ControlDeMarcas.cs" />
@@ -273,6 +275,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Layers\Imagenes\Json_conCheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Layers\Imagenes\Colaborador_Generico.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

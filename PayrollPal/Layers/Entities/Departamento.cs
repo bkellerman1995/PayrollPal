@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayrollPal.Enumeraciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,11 @@ namespace PayrollPal.Layers.Entities
     {
         public string IDDepartamento { set; get; }
         public string Descripcion { set; get; }
+
+        public override string ToString()
+        {
+            return IDDepartamento + " - " + Descripcion;
+        }
     }
 
 }

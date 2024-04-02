@@ -37,7 +37,7 @@ namespace PayrollPal.Layers.DAL {
                     {
 
                         Colaborador colaborador = new Colaborador();
-                        colaborador.IDColaborador = int.Parse(dr["IdColaborador"].ToString());
+                        colaborador.IDColaborador = dr["IdColaborador"].ToString();
                         colaborador.Nombre = dr["Nombre"].ToString();
                         colaborador.Apellido1 = dr["Apellido1"].ToString();
                         colaborador.Apellido2 = dr["Apellido2"].ToString();
@@ -81,7 +81,7 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region SELECT BY ID
-        public static Colaborador SelectById(int Id)
+        public static Colaborador SelectById(string Id)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace PayrollPal.Layers.DAL {
                 {
                     DataTable dt = ds.Tables[0];
                     Colaborador oColaborador = new Colaborador();
-                    oColaborador.IDColaborador = int.Parse(dt.Rows[0]["IdColaborador"].ToString());
+                    oColaborador.IDColaborador = dt.Rows[0]["IdColaborador"].ToString();
                     oColaborador.Nombre = dt.Rows[0]["Nombre"].ToString();
                     oColaborador.Apellido1 = dt.Rows[0]["Apellido1"].ToString();
                     oColaborador.Apellido2 = dt.Rows[0]["Apellido2"].ToString();
@@ -143,7 +143,7 @@ namespace PayrollPal.Layers.DAL {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_INSERT_Colaborador");
-                    command.Parameters.AddWithValue("@IdColaborador", pColaborador.IDUsuario);
+                    command.Parameters.AddWithValue("@IdColaborador", pColaborador.IDUsuario.ToString().Replace("-",""));
                     command.Parameters.AddWithValue("@Nombre", pColaborador.Nombre);
                     command.Parameters.AddWithValue("@Apellido1", pColaborador.Apellido1);
                     command.Parameters.AddWithValue("@Apellido2", pColaborador.Apellido2);
@@ -159,7 +159,6 @@ namespace PayrollPal.Layers.DAL {
                     command.Parameters.AddWithValue("@CuentaIBAN", pColaborador.CuentaIBAN);
                     command.Parameters.AddWithValue("@IDUsuario", pColaborador.IDUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@IDSupervisor", pColaborador.IDSupervisor.IDSupervisor);
-                    command.Parameters.AddWithValue("@Estado", pColaborador.Estado);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -191,7 +190,7 @@ namespace PayrollPal.Layers.DAL {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_UPDATE_Colaborador");
-                    command.Parameters.AddWithValue("@IdColaborador", pColaborador.IDUsuario);
+                    command.Parameters.AddWithValue("@IdColaborador", pColaborador.IDUsuario.ToString().Replace("-", ""));
                     command.Parameters.AddWithValue("@Nombre", pColaborador.Nombre);
                     command.Parameters.AddWithValue("@Apellido1", pColaborador.Apellido1);
                     command.Parameters.AddWithValue("@Apellido2", pColaborador.Apellido2);
@@ -240,7 +239,7 @@ namespace PayrollPal.Layers.DAL {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_DELETE_Colaborador_ByID");
-                    command.Parameters.AddWithValue("@IdColaborador", pIdColaborador);
+                    command.Parameters.AddWithValue("@IdColaborador", pIdColaborador.ToString());
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
                 }
