@@ -85,7 +85,7 @@ namespace PayrollPal.Layers.DAL
                     DataTable dt = ds.Tables[0];
                     Supervisor oSupervisor = new Supervisor();
                     oSupervisor.IDSupervisor = dt.Rows[0]["IDSupervisor"].ToString();
-                    oSupervisor.IDRol = BLL.BLLRol.SelectById(int.Parse(dt.Rows[0]["NombreUsuario"].ToString()));
+                    oSupervisor.IDRol = BLL.BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
                     oSupervisor.Descripcion = dt.Rows[0]["Descripcion"].ToString();
                     return oSupervisor;
                 }
@@ -148,8 +148,8 @@ namespace PayrollPal.Layers.DAL
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_UPDATE_Supervisor");
-                    command.Parameters.AddWithValue("@IDUsuario", pSupervisor.IDSupervisor);
-                    command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol);
+                    command.Parameters.AddWithValue("@IDSupervisor", pSupervisor.IDSupervisor);
+                    command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol.IDRol);
                     command.Parameters.AddWithValue("@Descripcion", pSupervisor.Descripcion);
 
                     command.CommandType = CommandType.StoredProcedure;

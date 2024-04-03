@@ -21,6 +21,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        List<Colaborador> listaColaboradoresSupervisor = new List<Colaborador>();
+        List<Colaborador> listaColaboradoresALL = new List<Colaborador>();
+
         public frmMantenimientoSupervisores()
         {
             InitializeComponent();
@@ -41,7 +44,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 //Cargar el datagridview de supervisores con el SELECT_ALL 
                 //del DALSupervisor
 
-                CargarListas();
+                CargarListasColaboradoresALLySupervisores();
 
                 //Programar el textBox de ROL con el ROL 2 (Supervisore) 
                 //automáticamente
@@ -74,15 +77,25 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// de supervisores desde la base de datos 
         /// y cargarlo al datagridview
         /// </summary>
-        private void CargarListas()
+        private void CargarListasColaboradoresALLySupervisores()
         {
             try
             {
+                this.lstColaboradoresALL.Items.Clear();
+                this.lstColaboradoresSup.Items.Clear();
+                listaColaboradoresALL = BLLColaborador.SelectSoloColaboradores();
+
+                foreach (var item in listaColaboradoresALL)
+                {
+                    this.lstColaboradoresALL.Items.Add(item);
+                }
+
+                this.lstColaboradoresALL.ClearSelected();
 
                 this.dgvSupervisores.DataSource = BLLSupervisor.SelectAll();
                 this.dgvSupervisores.ClearSelection();
 
-                this.lstColaboradoresALL.DataSource = BLLColaborador.SelectAll();
+
             }
             catch (Exception msg)
             {
@@ -152,6 +165,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 this.btnConfirmar.Visible = false;
                 this.btnAgregarCol.Enabled = false;
                 this.btnQuitarColab.Enabled = false;
+                this.lstColaboradoresALL.Enabled = false;
+                this.lstColaboradoresSup.Enabled = false;
 
                 this.mktID.Enabled = false;
                 this.txtRol.Enabled = false;
@@ -238,12 +253,15 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         this.txtDescripcion.Enabled = true;
                         this.btnQuitarColab.Enabled = true;
                         VerificarHayColaboradores();
+                        this.lstColaboradoresALL.Enabled = true;
+                        this.lstColaboradoresSup.Enabled = true;
                         break;
 
                     case 'U':
                         //habiitar los botones de limpiar, 
                         //y salir
                         this.btnSalir.Enabled = true;
+                        this.btnLimpiar.Enabled = true;
 
                         //habilitar los controles de texto (txtBox)
                         //y los botones para agregar y quitar en la lista
@@ -254,6 +272,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         this.btnAgregarCol.Enabled = true;
                         this.btnQuitarColab.Enabled = true;
                         VerificarHayColaboradores();
+                        this.lstColaboradoresALL.Enabled = true;
+                        this.lstColaboradoresSup.Enabled = true;
                         break;
 
                 }
@@ -322,9 +342,85 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnAgregarCol_Click(object sender, EventArgs e)
         {
+            if (this.lstColaboradoresALL.SelectedItem != null)
+            {
+                Colaborador oColaborador = this.lstColaboradoresALL.SelectedItem as Colaborador;
+                listaColaboradoresSupervisor.Add(oColaborador);
+                listaColaboradoresALL.Remove(oColaborador);
+
+                RefrescarListaColaboradoresPorSup();
+                RefrescarListaColaboradoresALL();
+            }
+            else
+            {
+                this.errProv1.SetError(this.lstColaboradoresALL, "Debe seleccionar un colaborador de la lista" +
+                    "para poder agregarlo como colaborador del supervisor");
+                this.lstColaboradoresALL.BackColor = Color.MistyRose;
+            }
+
+            if (this.lstColaboradoresALL.Items.Count == 0)
+            {
+                this.btnAgregarCol.Enabled = false;
+            }
 
         }
-        
+
+        /// <summary>
+        /// Evento del botón Agregar Colaborador 
+        /// que se encarga de verificar si se puede 
+        /// agregar un colaborador en la lista de 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnQuitarColab_Click(object sender, EventArgs e)
+        {
+            if (this.lstColaboradoresSup.SelectedItem != null)
+            {
+                Colaborador oColaborador = this.lstColaboradoresSup.SelectedItem as Colaborador;
+                listaColaboradoresALL.Add(oColaborador);
+                listaColaboradoresSupervisor.Remove(oColaborador);
+
+
+                RefrescarListaColaboradoresPorSup();
+                RefrescarListaColaboradoresALL();
+            }
+            else
+            {
+                this.errProv1.SetError(this.lstColaboradoresSup, "Debe seleccionar un colaborador de la lista" +
+                    "para poder quitarlo como colaborador del supervisor");
+                this.lstColaboradoresSup.BackColor = Color.MistyRose;
+            }
+
+            if (this.lstColaboradoresSup.Items.Count == 0)
+            {
+                this.btnQuitarColab.Enabled = false;
+            }
+
+        }
+
+        private void RefrescarListaColaboradoresPorSup()
+        {
+            this.lstColaboradoresSup.Items.Clear();
+
+            foreach (var item in listaColaboradoresSupervisor)
+            {
+                this.lstColaboradoresSup.Items.Add(item);
+            }
+            this.errProv1.SetError(this.lstColaboradoresSup, string.Empty);
+        }
+
+        private void RefrescarListaColaboradoresALL()
+        {
+            this.lstColaboradoresALL.Items.Clear();
+
+            foreach (var item in listaColaboradoresALL)
+            {
+                this.lstColaboradoresALL.Items.Add(item);
+            }
+
+            this.errProv1.SetError(this.lstColaboradoresALL, string.Empty);
+        }
+
         /// <summary>
         /// Método para verificar si hay colaboradores disponibles en 
         /// la empresa para añadirlos como colaboradores 
@@ -333,13 +429,20 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <returns></returns>
         private void VerificarHayColaboradores()
         {
-            if (BLL.BLLColaborador.SelectAll().Count > 0)
+
+            //Validar los listbox de lista de supervisores y lista all colaboradores
+
+            if (this.lstColaboradoresALL.Items.Count == 0)
             {
-                this.btnAgregarCol.Enabled = true;
+                this.errProv1.SetError(this.lstColaboradoresALL, "¡No hay colaboradores para agregar, debe agregarlos" +
+                    " en mantenimiento de Colaboradores");
+                this.btnAgregarCol.Enabled = false;
+                this.btnQuitarColab.Enabled = false;
             }
             else
             {
-                this.btnAgregarCol.Enabled = false;
+                this.btnAgregarCol.Enabled = true;
+                this.btnQuitarColab.Enabled = true;
             }
         }
 
@@ -380,6 +483,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarControles();
+            CargarListasColaboradoresALLySupervisores();
         }
 
         /// <summary>
@@ -441,7 +545,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     this.errProv1.SetError(this.txtDescripcion, "Campo Descripción de Supervisor no es correcto");
                     return false;
                 }
-
             }
             catch (Exception msg)
             {
@@ -472,6 +575,11 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             oSupervisor.IDRol = rol;
             oSupervisor.Descripcion = this.txtDescripcion.Text;
 
+            foreach (var item in listaColaboradoresSupervisor)
+            {
+                item.IDSupervisor = oSupervisor;
+            }
+
 
             //Se llama al método Create del Supervisor 
             //que se encarga de revisar si el supervisor existe primero
@@ -493,7 +601,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
 
             //Refrescar las listas
-            CargarListas();
+            CargarListasColaboradoresALLySupervisores();
 
             //Ocultar el boton de confirmar
             this.btnConfirmar.Visible = false;
@@ -533,6 +641,13 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     //Asignar a cada control los datos del supervisor
                     this.mktID.Text = oSupervisor.IDSupervisor.ToString();
                     this.txtDescripcion.Text = oSupervisor.Descripcion.ToString();
+
+                    this.lstColaboradoresSup.Items.Clear();
+
+                    foreach (var item in BLL.BLLColaborador.SelectColaboradorIdSupervisor(oSupervisor.IDSupervisor))
+                    {
+                        this.lstColaboradoresSup.Items.Add(item);
+                    }
                 }
             }
             catch (Exception msg)
@@ -576,11 +691,44 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             if (resultado == DialogResult.Yes)
             {
                 BLLSupervisor.Delete(idSupervisor);
-                CargarListas();
+                CargarListasColaboradoresALLySupervisores();
                 LimpiarControles();
             }
 
 
         }
+
+        /// <summary>
+        /// Evento para borrar el error provider en la lista 
+        /// de colaboradores ALL si se selecciona un objeto colaborador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstColaboradoresALL_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (this.lstColaboradoresALL.SelectedItem != null)
+            {
+                this.errProv1.SetError(this.lstColaboradoresALL, string.Empty);
+                this.lstColaboradoresALL.BackColor = Color.White;
+                this.btnAgregarCol.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Evento para borrar el error provider en la lista 
+        /// de colaboradores por supervisor si se selecciona un objeto colaborador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstColaboradoresSup_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (this.lstColaboradoresSup.SelectedItem != null)
+            {
+                this.errProv1.SetError(this.lstColaboradoresSup, string.Empty);
+                this.lstColaboradoresSup.BackColor = Color.White;
+                this.btnQuitarColab.Enabled = true;
+            }
+        }
+
     }
 }

@@ -42,6 +42,7 @@ namespace PayrollPal.Layers.DAL
                         usuario.IDUsuario = dr["IDUsuario"].ToString();
                         usuario.NombreUsuario = dr["NombreUsuario"].ToString();
                         usuario.Contrasenna = Criptografia.DecrypthAES(dr["Contrasenna"].ToString());
+                        usuario.Asignado = bool.Parse(dr["Asignado"].ToString());
 
                         lista.Add(usuario);
                     }
@@ -89,6 +90,7 @@ namespace PayrollPal.Layers.DAL
                     oUsuario.IDUsuario = dt.Rows[0]["IDUsuario"].ToString();
                     oUsuario.NombreUsuario = dt.Rows[0]["NombreUsuario"].ToString();
                     oUsuario.Contrasenna = dt.Rows[0]["Contrasenna"].ToString();
+                    oUsuario.Asignado = bool.Parse(dt.Rows[0]["Asignado"].ToString());
                     return oUsuario;
                 }
                 return null;
@@ -98,6 +100,55 @@ namespace PayrollPal.Layers.DAL
 
                 //Salvar un mensaje de error en la tabla Bitacora_Log4Net
                 //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+        #endregion
+
+        #region SELECT ALL NO ASIGNADO
+        public static List<Usuario> SelectAllNoAsignado()
+        {
+            try
+            {
+                DataSet ds = null;
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_SELECT_UsuarioNoAsignado_All");
+                    command.CommandType = CommandType.StoredProcedure;
+                    ds = db.ExecuteReader(command, "Usuario");
+                }
+
+                List<Usuario> lista = new List<Usuario>();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+
+                        Usuario usuario = new Usuario();
+                        usuario.IDUsuario = dr["IDUsuario"].ToString();
+                        usuario.NombreUsuario = dr["NombreUsuario"].ToString();
+                        usuario.Contrasenna = Criptografia.DecrypthAES(dr["Contrasenna"].ToString());
+                        usuario.Asignado = bool.Parse(dr["Asignado"].ToString());
+
+                        lista.Add(usuario);
+                    }
+                }
+
+                //Salvar un mensaje de info en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Info("Se cargó la lista de usuarios");
+
+                return lista;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
                 _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
                     , msg)));
 
@@ -119,6 +170,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@IDUsuario", pUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@NombreUsuario", pUsuario.NombreUsuario);
                     command.Parameters.AddWithValue("@Contrasenna", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+                    command.Parameters.AddWithValue("@Asignado", Criptografia.EncrypthAES(pUsuario.Contrasenna));
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -154,6 +206,8 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@IDUsuario", pUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@NombreUsuario", pUsuario.NombreUsuario);
                     command.Parameters.AddWithValue("@Contrasenna", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+                    command.Parameters.AddWithValue("@Asignado", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+
 
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);

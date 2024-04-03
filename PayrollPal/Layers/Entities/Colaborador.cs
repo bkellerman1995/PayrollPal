@@ -25,5 +25,10 @@ namespace PayrollPal.Layers.Entities
         public Usuario IDUsuario { get; set; }        
         public Supervisor IDSupervisor { get; set; }
         public bool Estado { get; set; }
+
+        public override string ToString()
+        {
+            return IDColaborador + " - " + Nombre;
+        }
     }
 }

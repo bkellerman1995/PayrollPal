@@ -600,7 +600,6 @@ namespace PayrollPal.UI.Mantenimientos
         {
             if (e.ColumnIndex == 2 && e.Value != null)
                 e.Value = new String('*', e.Value.ToString().Length);
-
         }
     }
 }

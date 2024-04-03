@@ -13,6 +13,7 @@ namespace PayrollPal.Layers.Entities
         public string IDUsuario { get; set; }
         public string NombreUsuario { get; set; }
         public string Contrasenna { get; set; }
+        public bool Asignado { get; set; }
 
         public override string ToString()
         {

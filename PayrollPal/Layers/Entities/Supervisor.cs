@@ -17,10 +17,15 @@ namespace PayrollPal.Layers.Entities
         public Supervisor()
         {
             colaboradores = new List<Colaborador>();
-            IDSupervisor = "";
+            IDSupervisor = "0";
             IDRol = null;
             Descripcion = Enumeraciones.Rol.Supervisor.ToString();
 
+        }
+
+        public override string ToString()
+        {
+            return IDSupervisor + " - " + Descripcion;
         }
     }
 

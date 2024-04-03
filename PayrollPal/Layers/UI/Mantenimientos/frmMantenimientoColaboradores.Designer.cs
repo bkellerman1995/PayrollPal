@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoColaboradores));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.rdbInactivo = new System.Windows.Forms.RadioButton();
+            this.rdbActivo = new System.Windows.Forms.RadioButton();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.lblColon = new System.Windows.Forms.Label();
             this.mktSalarioHora = new System.Windows.Forms.MaskedTextBox();
             this.lblCR = new System.Windows.Forms.Label();
@@ -75,6 +78,23 @@
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvColaboradores = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaIngreso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalarioHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CorreoElectronico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoPuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CuentaIBAN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDSupervisor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fotografia = new System.Windows.Forms.DataGridViewImageColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,6 +117,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbActivo);
+            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
             this.splitContainer1.Panel1.Controls.Add(this.lblColon);
             this.splitContainer1.Panel1.Controls.Add(this.mktSalarioHora);
             this.splitContainer1.Panel1.Controls.Add(this.lblCR);
@@ -138,10 +161,41 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvColaboradores);
-            this.splitContainer1.Size = new System.Drawing.Size(929, 827);
-            this.splitContainer1.SplitterDistance = 564;
+            this.splitContainer1.Size = new System.Drawing.Size(1429, 941);
+            this.splitContainer1.SplitterDistance = 641;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // rdbInactivo
+            // 
+            this.rdbInactivo.AutoSize = true;
+            this.rdbInactivo.Location = new System.Drawing.Point(632, 571);
+            this.rdbInactivo.Name = "rdbInactivo";
+            this.rdbInactivo.Size = new System.Drawing.Size(82, 25);
+            this.rdbInactivo.TabIndex = 69;
+            this.rdbInactivo.TabStop = true;
+            this.rdbInactivo.Text = "Inactivo";
+            this.rdbInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbActivo
+            // 
+            this.rdbActivo.AutoSize = true;
+            this.rdbActivo.Location = new System.Drawing.Point(632, 521);
+            this.rdbActivo.Name = "rdbActivo";
+            this.rdbActivo.Size = new System.Drawing.Size(71, 25);
+            this.rdbActivo.TabIndex = 68;
+            this.rdbActivo.TabStop = true;
+            this.rdbActivo.Text = "Activo";
+            this.rdbActivo.UseVisualStyleBackColor = true;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(494, 548);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(56, 21);
+            this.lblEstado.TabIndex = 67;
+            this.lblEstado.Text = "Estado";
             // 
             // lblColon
             // 
@@ -184,7 +238,7 @@
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(9, 526);
+            this.btnConfirmar.Location = new System.Drawing.Point(5, 548);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(100, 35);
             this.btnConfirmar.TabIndex = 62;
@@ -536,7 +590,7 @@
             this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
             this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(929, 28);
+            this.toolStripMantEmpresa.Size = new System.Drawing.Size(1429, 28);
             this.toolStripMantEmpresa.TabIndex = 17;
             this.toolStripMantEmpresa.Text = "toolStrip1";
             // 
@@ -560,6 +614,7 @@
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(54, 25);
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 
@@ -570,6 +625,7 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(71, 25);
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnLimpiar
             // 
@@ -580,6 +636,7 @@
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(67, 25);
             this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnSalir
             // 
@@ -605,6 +662,24 @@
             this.dgvColaboradores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvColaboradores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvColaboradores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvColaboradores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Nombre,
+            this.Apellido1,
+            this.Apellido2,
+            this.FechaNacimiento,
+            this.Direccion,
+            this.FechaIngreso,
+            this.IDDepartamento,
+            this.SalarioHora,
+            this.CorreoElectronico,
+            this.CodigoPuesto,
+            this.IDRol,
+            this.CuentaIBAN,
+            this.IDUsuario,
+            this.IDSupervisor,
+            this.Estado,
+            this.Fotografia});
             this.dgvColaboradores.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvColaboradores.Location = new System.Drawing.Point(0, 0);
             this.dgvColaboradores.Margin = new System.Windows.Forms.Padding(1);
@@ -614,8 +689,148 @@
             this.dgvColaboradores.RowHeadersWidth = 102;
             this.dgvColaboradores.RowTemplate.Height = 40;
             this.dgvColaboradores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvColaboradores.Size = new System.Drawing.Size(929, 261);
+            this.dgvColaboradores.Size = new System.Drawing.Size(1429, 298);
             this.dgvColaboradores.TabIndex = 5;
+            this.dgvColaboradores.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColaboradores_CellContentDoubleClick);
+            this.dgvColaboradores.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvColaboradores_CellFormatting);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "IdColaborador";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 50;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 93;
+            // 
+            // Apellido1
+            // 
+            this.Apellido1.DataPropertyName = "Apellido1";
+            this.Apellido1.HeaderText = "Apellido1";
+            this.Apellido1.Name = "Apellido1";
+            this.Apellido1.ReadOnly = true;
+            this.Apellido1.Width = 101;
+            // 
+            // Apellido2
+            // 
+            this.Apellido2.DataPropertyName = "Apellido2";
+            this.Apellido2.HeaderText = "Apellido2";
+            this.Apellido2.Name = "Apellido2";
+            this.Apellido2.ReadOnly = true;
+            this.Apellido2.Width = 101;
+            // 
+            // FechaNacimiento
+            // 
+            this.FechaNacimiento.DataPropertyName = "FechaNacimiento";
+            this.FechaNacimiento.HeaderText = "Fec.Nac.";
+            this.FechaNacimiento.Name = "FechaNacimiento";
+            this.FechaNacimiento.ReadOnly = true;
+            this.FechaNacimiento.Width = 91;
+            // 
+            // Direccion
+            // 
+            this.Direccion.DataPropertyName = "Direccion";
+            this.Direccion.HeaderText = "Dirección";
+            this.Direccion.Name = "Direccion";
+            this.Direccion.ReadOnly = true;
+            // 
+            // FechaIngreso
+            // 
+            this.FechaIngreso.DataPropertyName = "FechaIngreso";
+            this.FechaIngreso.HeaderText = "Fec.Ing.";
+            this.FechaIngreso.Name = "FechaIngreso";
+            this.FechaIngreso.ReadOnly = true;
+            this.FechaIngreso.Width = 86;
+            // 
+            // IDDepartamento
+            // 
+            this.IDDepartamento.DataPropertyName = "IDDepartamento";
+            this.IDDepartamento.HeaderText = "Departamento";
+            this.IDDepartamento.Name = "IDDepartamento";
+            this.IDDepartamento.ReadOnly = true;
+            this.IDDepartamento.Width = 135;
+            // 
+            // SalarioHora
+            // 
+            this.SalarioHora.DataPropertyName = "SalarioHora";
+            this.SalarioHora.HeaderText = "Salario/Hora";
+            this.SalarioHora.Name = "SalarioHora";
+            this.SalarioHora.ReadOnly = true;
+            this.SalarioHora.Width = 123;
+            // 
+            // CorreoElectronico
+            // 
+            this.CorreoElectronico.DataPropertyName = "CorreoElectronico";
+            this.CorreoElectronico.HeaderText = "E-Mail";
+            this.CorreoElectronico.Name = "CorreoElectronico";
+            this.CorreoElectronico.ReadOnly = true;
+            this.CorreoElectronico.Width = 79;
+            // 
+            // CodigoPuesto
+            // 
+            this.CodigoPuesto.DataPropertyName = "CodigoPuesto";
+            this.CodigoPuesto.HeaderText = "Puesto";
+            this.CodigoPuesto.Name = "CodigoPuesto";
+            this.CodigoPuesto.ReadOnly = true;
+            this.CodigoPuesto.Width = 82;
+            // 
+            // IDRol
+            // 
+            this.IDRol.DataPropertyName = "IDRol";
+            this.IDRol.HeaderText = "Rol";
+            this.IDRol.Name = "IDRol";
+            this.IDRol.ReadOnly = true;
+            this.IDRol.Width = 58;
+            // 
+            // CuentaIBAN
+            // 
+            this.CuentaIBAN.DataPropertyName = "CuentaIBAN";
+            this.CuentaIBAN.HeaderText = "Cta.IBAN";
+            this.CuentaIBAN.Name = "CuentaIBAN";
+            this.CuentaIBAN.ReadOnly = true;
+            this.CuentaIBAN.Width = 96;
+            // 
+            // IDUsuario
+            // 
+            this.IDUsuario.DataPropertyName = "IDUsuario";
+            this.IDUsuario.HeaderText = "Usuario";
+            this.IDUsuario.Name = "IDUsuario";
+            this.IDUsuario.ReadOnly = true;
+            this.IDUsuario.Width = 89;
+            // 
+            // IDSupervisor
+            // 
+            this.IDSupervisor.DataPropertyName = "IDSupervisor";
+            this.IDSupervisor.HeaderText = "Supervisor";
+            this.IDSupervisor.Name = "IDSupervisor";
+            this.IDSupervisor.ReadOnly = true;
+            this.IDSupervisor.Width = 110;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 81;
+            // 
+            // Fotografia
+            // 
+            this.Fotografia.DataPropertyName = "Foto";
+            this.Fotografia.HeaderText = "Foto";
+            this.Fotografia.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Fotografia.Name = "Fotografia";
+            this.Fotografia.ReadOnly = true;
+            this.Fotografia.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Fotografia.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Fotografia.Width = 66;
             // 
             // errProv1
             // 
@@ -626,7 +841,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(929, 827);
+            this.ClientSize = new System.Drawing.Size(1429, 941);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "frmMantenimientoColaboradores";
@@ -694,5 +909,26 @@
         private System.Windows.Forms.ErrorProvider errProv1;
         private System.Windows.Forms.MaskedTextBox mktSalarioHora;
         private System.Windows.Forms.Label lblColon;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.RadioButton rdbInactivo;
+        private System.Windows.Forms.RadioButton rdbActivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Foto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaNacimiento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaIngreso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDDepartamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalarioHora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CorreoElectronico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoPuesto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDRol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaIBAN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDSupervisor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewImageColumn Fotografia;
     }
 }

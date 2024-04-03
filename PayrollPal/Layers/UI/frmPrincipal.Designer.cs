@@ -28,130 +28,190 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
-            this.toolStripPrincipal = new System.Windows.Forms.ToolStrip();
-            this.toolStripPrincipalArchivo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPrincipalMantenimientos = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPrincipalProcesos = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPrincipalReportes = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPrincipalAyuda = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPrincipal.SuspendLayout();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.puestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supervisorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colaboradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // toolStripPrincipal
-            // 
-            this.toolStripPrincipal.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStripPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripPrincipalArchivo,
-            this.toolStripPrincipalMantenimientos,
-            this.toolStripPrincipalProcesos,
-            this.toolStripPrincipalReportes,
-            this.toolStripPrincipalAyuda});
-            this.toolStripPrincipal.Location = new System.Drawing.Point(0, 0);
-            this.toolStripPrincipal.Name = "toolStripPrincipal";
-            this.toolStripPrincipal.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.toolStripPrincipal.Size = new System.Drawing.Size(863, 25);
-            this.toolStripPrincipal.TabIndex = 1;
-            this.toolStripPrincipal.Text = "toolStrip1";
-            // 
-            // toolStripPrincipalArchivo
-            // 
-            this.toolStripPrincipalArchivo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripPrincipalArchivo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrincipalArchivo.Image")));
-            this.toolStripPrincipalArchivo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPrincipalArchivo.Name = "toolStripPrincipalArchivo";
-            this.toolStripPrincipalArchivo.Size = new System.Drawing.Size(52, 22);
-            this.toolStripPrincipalArchivo.Text = "&Archivo";
-            // 
-            // toolStripPrincipalMantenimientos
-            // 
-            this.toolStripPrincipalMantenimientos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripPrincipalMantenimientos.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrincipalMantenimientos.Image")));
-            this.toolStripPrincipalMantenimientos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPrincipalMantenimientos.Name = "toolStripPrincipalMantenimientos";
-            this.toolStripPrincipalMantenimientos.Size = new System.Drawing.Size(98, 22);
-            this.toolStripPrincipalMantenimientos.Text = "&Mantenimientos";
-            // 
-            // toolStripPrincipalProcesos
-            // 
-            this.toolStripPrincipalProcesos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripPrincipalProcesos.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrincipalProcesos.Image")));
-            this.toolStripPrincipalProcesos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPrincipalProcesos.Name = "toolStripPrincipalProcesos";
-            this.toolStripPrincipalProcesos.Size = new System.Drawing.Size(58, 22);
-            this.toolStripPrincipalProcesos.Text = "&Procesos";
-            // 
-            // toolStripPrincipalReportes
-            // 
-            this.toolStripPrincipalReportes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripPrincipalReportes.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrincipalReportes.Image")));
-            this.toolStripPrincipalReportes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPrincipalReportes.Name = "toolStripPrincipalReportes";
-            this.toolStripPrincipalReportes.Size = new System.Drawing.Size(57, 22);
-            this.toolStripPrincipalReportes.Text = "&Reportes";
-            // 
-            // toolStripPrincipalAyuda
-            // 
-            this.toolStripPrincipalAyuda.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripPrincipalAyuda.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrincipalAyuda.Image")));
-            this.toolStripPrincipalAyuda.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPrincipalAyuda.Name = "toolStripPrincipalAyuda";
-            this.toolStripPrincipalAyuda.Size = new System.Drawing.Size(45, 22);
-            this.toolStripPrincipalAyuda.Text = "&Ayuda";
             // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 458);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 420);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(863, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(86, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(115, 22);
             this.toolStripLabel1.Text = "toolStripLabel1";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.mantenimientosToolStripMenuItem,
+            this.procesosToolStripMenuItem,
+            this.consultasToolStripMenuItem,
+            this.reportesToolStripMenuItem,
+            this.ayudaToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(863, 29);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(75, 25);
+            this.archivoToolStripMenuItem.Text = "&Archivo";
+            // 
+            // mantenimientosToolStripMenuItem
+            // 
+            this.mantenimientosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usuariosToolStripMenuItem,
+            this.rolToolStripMenuItem,
+            this.puestoToolStripMenuItem,
+            this.supervisorToolStripMenuItem,
+            this.colaboradoresToolStripMenuItem});
+            this.mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
+            this.mantenimientosToolStripMenuItem.Size = new System.Drawing.Size(135, 25);
+            this.mantenimientosToolStripMenuItem.Text = "&Mantenimientos";
+            // 
+            // procesosToolStripMenuItem
+            // 
+            this.procesosToolStripMenuItem.Name = "procesosToolStripMenuItem";
+            this.procesosToolStripMenuItem.Size = new System.Drawing.Size(84, 25);
+            this.procesosToolStripMenuItem.Text = "&Procesos";
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(84, 25);
+            this.reportesToolStripMenuItem.Text = "&Reportes";
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(66, 25);
+            this.ayudaToolStripMenuItem.Text = "A&yuda";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.salirToolStripMenuItem.Text = "&Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.usuariosToolStripMenuItem.Text = "Usuarios";
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
+            // 
+            // rolToolStripMenuItem
+            // 
+            this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
+            this.rolToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.rolToolStripMenuItem.Text = "Rol";
+            this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
+            // 
+            // puestoToolStripMenuItem
+            // 
+            this.puestoToolStripMenuItem.Name = "puestoToolStripMenuItem";
+            this.puestoToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.puestoToolStripMenuItem.Text = "Puesto";
+            this.puestoToolStripMenuItem.Click += new System.EventHandler(this.puestoToolStripMenuItem_Click);
+            // 
+            // supervisorToolStripMenuItem
+            // 
+            this.supervisorToolStripMenuItem.Name = "supervisorToolStripMenuItem";
+            this.supervisorToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.supervisorToolStripMenuItem.Text = "Supervisor";
+            this.supervisorToolStripMenuItem.Click += new System.EventHandler(this.supervisorToolStripMenuItem_Click);
+            // 
+            // colaboradoresToolStripMenuItem
+            // 
+            this.colaboradoresToolStripMenuItem.Name = "colaboradoresToolStripMenuItem";
+            this.colaboradoresToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.colaboradoresToolStripMenuItem.Text = "Colaboradores";
+            this.colaboradoresToolStripMenuItem.Click += new System.EventHandler(this.colaboradoresToolStripMenuItem_Click);
+            // 
+            // consultasToolStripMenuItem
+            // 
+            this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(90, 25);
+            this.consultasToolStripMenuItem.Text = "&Consultas";
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackgroundImage = global::PayrollPal.Properties.Resources.Logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(863, 483);
+            this.ClientSize = new System.Drawing.Size(863, 445);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.toolStripPrincipal);
+            this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "frmPrincipal";
             this.Text = "Menú Principal";
-            this.toolStripPrincipal.ResumeLayout(false);
-            this.toolStripPrincipal.PerformLayout();
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStripPrincipal;
-        private System.Windows.Forms.ToolStripButton toolStripPrincipalArchivo;
-        private System.Windows.Forms.ToolStripButton toolStripPrincipalMantenimientos;
-        private System.Windows.Forms.ToolStripButton toolStripPrincipalProcesos;
-        private System.Windows.Forms.ToolStripButton toolStripPrincipalReportes;
-        private System.Windows.Forms.ToolStripButton toolStripPrincipalAyuda;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mantenimientosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem procesosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem puestoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supervisorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colaboradoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem;
     }
 }

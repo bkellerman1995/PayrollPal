@@ -24,6 +24,14 @@ namespace PayrollPal.Layers.BLL
         }
         #endregion
 
+        #region SELECT ALL NO ASIGNADO
+        public static List<Usuario> SelectAllNoAsignado()
+        {
+
+            return DAL.DALUsuario.SelectAllNoAsignado();
+        }
+        #endregion
+
         #region SELECT BY ID
         public static Usuario SelectById(string Id)
         {

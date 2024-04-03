@@ -29,6 +29,22 @@ namespace PayrollPal.Layers.BLL
         }
         #endregion
 
+        #region SELECT Solo Colaboradores
+        public static List<Colaborador> SelectSoloColaboradores()
+        {
+
+            return DAL.DALColaborador.SelectSoloColaboradores();
+        }
+        #endregion
+
+        #region SELECT Colaborador BY ID Supervisor
+        public static List<Colaborador> SelectColaboradorIdSupervisor(string Id)
+        {
+            return DAL.DALColaborador.SelectColaboradorIdSupervisor(Id);
+        }
+
+        #endregion
+
         #region CREATE
         public static void Create(Colaborador pColaborador)
         {
@@ -61,7 +77,7 @@ namespace PayrollPal.Layers.BLL
         #endregion
 
         #region DELETE
-        public static void Delete(int pIdColaborador)
+        public static void Delete(string pIdColaborador)
         {
             DAL.DALColaborador.DELETE(pIdColaborador);
         }

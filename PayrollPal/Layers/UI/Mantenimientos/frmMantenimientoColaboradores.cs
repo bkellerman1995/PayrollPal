@@ -110,11 +110,54 @@ namespace PayrollPal.UI.Mantenimientos
         /// </summary>
         private void CargarCombos()
         {
+            string combosVacios = "";
+            bool vacio = false;
             this.cmbDepartamento.DataSource = BLLDepartamento.SelectAll();
-            this.cmbUsuario.DataSource = BLLUsuario.SelectAll();
+            this.cmbUsuario.DataSource = BLLUsuario.SelectAllNoAsignado();
             this.cmbPuesto.DataSource = BLLPuesto.SelectAll();
             this.cmbRol.DataSource = BLLRol.SelectAll();
             this.cmbSupervisor.DataSource = BLLSupervisor.SelectAll();
+
+            if (BLLDepartamento.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Departamento";
+                vacio = true;
+            }
+
+            if (BLLUsuario.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Usuario";
+                vacio = true;
+            }
+
+            if (BLLPuesto.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Puesto";
+                vacio = true;
+            }
+
+            if (BLLRol.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Rol";
+                vacio = true;
+            }
+
+            if (BLLSupervisor.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Supervisor";
+                vacio = true;
+            }
+
+            if (vacio)
+            {
+                MessageBox.Show("Hay campos(s) vacío(s): " + combosVacios + "" +
+                    "\n Los cuales son necesarios para poder agregar colaboradores." +
+                    "\nNo puede agregar colaboradores sin datos en los campos arriba mencionados.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Dispose();
+            }
+
+
         }
 
         /// <summary>
@@ -133,7 +176,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 this.txtApellido1.Clear();
                 this.txtApellido1.BackColor = Color.White;
-                
+
                 this.txtApellido2.Clear();
                 this.txtApellido2.BackColor = Color.White;
 
@@ -161,6 +204,8 @@ namespace PayrollPal.UI.Mantenimientos
                 this.mktCuentaIBAN.BackColor = Color.White;
 
                 this.pctFoto.Image = PayrollPal.Properties.Resources.Colaborador_Generico;
+
+                this.rdbActivo.Checked = true;
 
                 InhabilitarControles();
 
@@ -209,10 +254,13 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbUsuario.Enabled = false;
                 this.cmbPuesto.Enabled = false;
                 this.cmbRol.Enabled = false;
-
+                this.cmbSupervisor.Enabled = false;
 
 
                 this.pctFoto.Enabled = false;
+
+                this.rdbActivo.Enabled = false;
+                this.rdbInactivo.Enabled = false;
             }
             catch (Exception msg)
             {
@@ -333,21 +381,37 @@ namespace PayrollPal.UI.Mantenimientos
                         this.cmbRol.Enabled = true;
                         this.cmbSupervisor.Enabled = true;
                         this.pctFoto.Enabled = true;
+                        this.rdbActivo.Enabled = true;
+                        this.rdbInactivo.Enabled = true;
 
-                       
+
                         break;
 
                     case 'U':
-                        //habiitar los botones de limpiar, 
-                        //y salir
-                        this.btnSalir.Enabled = true;
 
-                        //habilitar los controles de texto (txtBox)
+                        //habilitar los controles de texto, comboboxes
+                        //pictureBox 
 
                         this.mktID.ReadOnly = true;
                         this.txtNombre.Enabled = true;
-                        //this.txtContrasenna.Enabled = true;
-                        //this.txtConfirmarContrasenna.Enabled = true;
+                        this.txtApellido1.Enabled = true;
+                        this.txtApellido2.Enabled = true;
+                        this.dtpFechaNacimiento.Enabled = true;
+                        this.dtpFechaNacimiento.Value = this.dtpFechaNacimiento.MinDate;
+                        this.txtDireccion.Enabled = true;
+                        this.dtpFechaIngreso.Enabled = true;
+                        this.dtpFechaIngreso.Value = DateTime.Today;
+                        this.cmbDepartamento.Enabled = true;
+                        this.mktSalarioHora.Enabled = true;
+                        this.txtCorreoElectronico.Enabled = true;
+                        this.mktCuentaIBAN.Enabled = true;
+                        this.cmbUsuario.Enabled = true;
+                        this.cmbPuesto.Enabled = true;
+                        this.cmbRol.Enabled = true;
+                        this.cmbSupervisor.Enabled = true;
+                        this.pctFoto.Enabled = true;
+                        this.rdbActivo.Enabled = true;
+                        this.rdbInactivo.Enabled = true;
                         break;
 
 
@@ -560,6 +624,15 @@ namespace PayrollPal.UI.Mantenimientos
                     return false;
                 }
 
+                //Validar pictureBox de Foto
+
+                if (this.pctFoto.Tag == null)
+                {
+                    MessageBox.Show("¡La fotografía es requerida!", "Error", MessageBoxButtons.OK,
+                          MessageBoxIcon.Error);
+                    btnCargarFoto_Click(this, EventArgs.Empty);
+                    return false;
+                }
             }
             catch (Exception msg)
             {
@@ -583,7 +656,7 @@ namespace PayrollPal.UI.Mantenimientos
         {
             //Crear la instancia de Colaborador
             Colaborador oColaborador = new Colaborador();
-            char[] reemplazarCaracteresSalario = new char []{ ',', '.' };
+            char[] reemplazarCaracteresSalario = new char[] { ',', '.' };
             decimal Salario = 0;
             Supervisor supervisor = new Supervisor();
 
@@ -594,7 +667,7 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.Apellido2 = this.txtApellido2.Text;
             oColaborador.FechaNacimiento = this.dtpFechaNacimiento.Value;
             oColaborador.Direccion = this.txtDireccion.Text;
-            oColaborador.FechaIngreso = this.dtpFechaNacimiento.Value;
+            oColaborador.FechaIngreso = this.dtpFechaIngreso.Value;
             oColaborador.IDDepartamento = (Departamento)this.cmbDepartamento.SelectedItem;
             foreach (char c in reemplazarCaracteresSalario)
             {
@@ -602,8 +675,16 @@ namespace PayrollPal.UI.Mantenimientos
             }
             oColaborador.SalarioHora = Salario;
             oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
-            oColaborador.CuentaIBAN = this.lblCR + this.mktCuentaIBAN.Text;
+            oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
             oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
+
+            //Si el usuario va a cambiarse
+            //debe cambiarse el estado del usuario 
+            //que estaba anteriormente asignado
+
+            oColaborador.IDUsuario.Asignado = true;
+            BLLUsuario.Update(oColaborador.IDUsuario);
+            oColaborador.IDUsuario.Asignado = true;
             oColaborador.CodigoPuesto = (Puesto)this.cmbPuesto.SelectedItem;
             oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
 
@@ -611,6 +692,7 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 case 1:
                 case 2:
+                    supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
                     oColaborador.IDSupervisor = supervisor;
                     break;
                 case 3:
@@ -619,6 +701,11 @@ namespace PayrollPal.UI.Mantenimientos
             }
             oColaborador.Foto = (byte[])pctFoto.Tag;
 
+            if (this.rdbActivo.Checked)
+                oColaborador.Estado = true;
+            if (this.rdbInactivo.Checked)
+                oColaborador.Estado = false;
+
             //Se llama al método Create del Colaborador 
             //que se encarga de revisar si el colaborador existe primero
             //antes de agregar al colaborador
@@ -626,7 +713,11 @@ namespace PayrollPal.UI.Mantenimientos
             string idColaborador = this.mktID.Text.Replace("-", "");
             if (BLLColaborador.SelectById(idColaborador) != null)
             {
-
+                if (oColaborador.IDUsuario != BLLColaborador.SelectById(idColaborador).IDUsuario)
+                {
+                    BLLColaborador.SelectById(idColaborador).IDUsuario.Asignado = false;
+                    BLLUsuario.Update(BLLColaborador.SelectById(idColaborador).IDUsuario);
+                }
                 BLLColaborador.Update(oColaborador);
             }
             else
@@ -664,7 +755,7 @@ namespace PayrollPal.UI.Mantenimientos
                 ofd.Title = "Seleccione la imagen";
                 ofd.SupportMultiDottedExtensions = true;
                 ofd.DefaultExt = "*.jpg";
-                ofd.Filter = "Archivos de Imagenes (*.jpg)|*.jpg| All files (*.*)|*.*";
+                ofd.Filter = "Archivos de Imagenes (*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF)|*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF";
                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 ofd.FileName = "";
 
@@ -878,7 +969,8 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (BLLRol.EsColaborador((Rol)this.cmbRol.SelectedItem))
+            if (this.cmbRol.SelectedIndex > 0
+                && BLLRol.EsColaborador((Rol)this.cmbRol.SelectedItem))
             {
                 this.cmbSupervisor.Visible = true;
                 this.lblSupervisor.Visible = true;
@@ -889,5 +981,148 @@ namespace PayrollPal.UI.Mantenimientos
                 this.lblSupervisor.Visible = false;
             }
         }
+
+        /// <summary>
+        /// Metodo que se encarga de formatear la columna que contiene el valor de estado
+        /// del colaborador y lo reemplaza a texto amigable
+        /// para el usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvColaboradores_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.ColumnIndex == 16 && e.Value != null)
+            {
+                if (e.Value.ToString() == "True")
+                    e.Value = "Activo";
+                if (e.Value.ToString() == "False")
+                    e.Value = "Inactivo";
+            }
+
+            if (e.ColumnIndex == 15 && e.Value != null)
+            {
+                if (e.Value.ToString().Contains("Nulo"))
+                    e.Value = "Sin supervisor";
+            }
+
+
+        }
+
+        /// <summary>
+        /// Evento que se encarga de seleccionar 
+        /// el objeto colaborador en el datagrid view 
+        /// y cargarlo en los campos respectivos
+        /// del form (para editar o borrar o simplemente ver)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvColaboradores_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //Habilitar botones de Editar
+                //Eliminar y Editar
+                //tambien deshabilita el boton de Agregar
+
+                this.btnAgregar.Enabled = false;
+                this.btnEditar.Enabled = true;
+                this.btnEliminar.Enabled = true;
+                this.btnLimpiar.Enabled = true;
+
+                if (this.dgvColaboradores.SelectedRows.Count == 1)
+                {
+                    //Creamos instancia de colaborador
+                    Colaborador oColaborador = new Colaborador();
+                    oColaborador = this.dgvColaboradores.SelectedRows[0].DataBoundItem as Colaborador;  //Asignamos el valor seleccionado
+                    //Asignamos los valores a cada control
+                    this.mktID.Text = oColaborador.IDColaborador.ToString();
+                    this.txtNombre.Text = oColaborador.Nombre.ToString();
+                    this.txtApellido1.Text = oColaborador.Apellido1.ToString();
+                    this.txtApellido2.Text = oColaborador.Apellido2.ToString();
+                    this.dtpFechaNacimiento.Value = oColaborador.FechaNacimiento;
+                    this.txtDireccion.Text = oColaborador.Direccion.ToString();
+                    this.dtpFechaIngreso.Value = oColaborador.FechaIngreso;
+                    this.cmbDepartamento.Text = oColaborador.IDDepartamento.ToString();
+                    this.mktSalarioHora.Text = oColaborador.SalarioHora.ToString();
+                    this.txtCorreoElectronico.Text = oColaborador.CorreoElectronico.ToString();
+                    this.mktCuentaIBAN.Text = oColaborador.CuentaIBAN.ToString();
+                    this.cmbUsuario.Text = oColaborador.IDUsuario.ToString();
+                    this.cmbPuesto.Text = oColaborador.CodigoPuesto.ToString();
+                    this.cmbRol.Text = oColaborador.IDRol.ToString();
+                    this.cmbSupervisor.Text = oColaborador.IDSupervisor.ToString();
+                    this.cmbSupervisor.Text = oColaborador.IDSupervisor.ToString();
+
+                    if (oColaborador.Estado == true)
+                        this.rdbActivo.Checked = true;
+                    if (oColaborador.Estado == false)
+                        this.rdbInactivo.Checked = true;
+
+                    if (oColaborador.Foto != null)
+                    {
+                        this.pctFoto.Image = new Bitmap(new MemoryStream(oColaborador.Foto));
+                        this.pctFoto.Tag = oColaborador.Foto;
+                        this.pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                }
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        /// <summary>
+        /// Evento del botón Limpiar para limpiar los campos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarControles();
+        }
+
+        /// <summary>
+        /// Evento del botón Editar para editar al 
+        /// usuario exitosamente en la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            ResetearForm('U');
+            this.btnConfirmar.Visible = true;
+        }
+
+        /// <summary>
+        /// Evento del botón Eliminar para eliminar al 
+        /// colaborador exitosamente en la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            string idColaborador = this.mktID.Text.Replace("-", "");
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el colaborador?", "Aviso",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                BLLColaborador.Delete(idColaborador);
+                CargarLista();
+                LimpiarControles();
+            }
+
+
+        }
     }
+
 }

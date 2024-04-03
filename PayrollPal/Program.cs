@@ -1,4 +1,5 @@
 ﻿using PayrollPal.Layers.UI.Mantenimientos;
+using PayrollPal.UI;
 using PayrollPal.UI.Consultas;
 using PayrollPal.UI.Mantenimientos;
 using System;
@@ -19,7 +20,7 @@ namespace PayrollPal
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMantenimientoColaboradores());
+            Application.Run(new frmPrincipal());
         }
     }
 }
