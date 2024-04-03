@@ -47,7 +47,7 @@ namespace PayrollPal.Layers.DAL
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se cargó la lista de usuarios");
+                _MyLogControlEventos.Info("Se cargó la lista de supervisores");
 
                 return lista;
             }
@@ -66,28 +66,28 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Usuario SelectById(string Id)
+        public static Supervisor SelectById(string Id)
         {
             try
             {
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_SELECT_Usuario_ByID");
-                    command.Parameters.AddWithValue("@IDUsuario", Id);
+                    var command = new SqlCommand("usp_SELECT_Supervisor_ByID");
+                    command.Parameters.AddWithValue("@IDSupervisor", Id);
                     command.CommandType = CommandType.StoredProcedure;
-                    ds = db.ExecuteReader(command, "Usuario");
+                    ds = db.ExecuteReader(command, "Supervisor");
                 }
 
                 //Se crea el dataTable
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     DataTable dt = ds.Tables[0];
-                    Usuario oUsuario = new Usuario();
-                    oUsuario.IDUsuario = dt.Rows[0]["IDUsuario"].ToString();
-                    oUsuario.NombreUsuario = dt.Rows[0]["NombreUsuario"].ToString();
-                    oUsuario.Contrasenna = dt.Rows[0]["Contrasenna"].ToString();
-                    return oUsuario;
+                    Supervisor oSupervisor = new Supervisor();
+                    oSupervisor.IDSupervisor = dt.Rows[0]["IDSupervisor"].ToString();
+                    oSupervisor.IDRol = BLL.BLLRol.SelectById(int.Parse(dt.Rows[0]["NombreUsuario"].ToString()));
+                    oSupervisor.Descripcion = dt.Rows[0]["Descripcion"].ToString();
+                    return oSupervisor;
                 }
                 return null;
             }
@@ -107,16 +107,16 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Usuario pUsuario)
+        public static void CREATE(Supervisor pSupervisor)
         {
             try
             {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_INSERT_Usuario");
-                    command.Parameters.AddWithValue("@IDUsuario", pUsuario.IDUsuario);
-                    command.Parameters.AddWithValue("@NombreUsuario", pUsuario.NombreUsuario);
-                    command.Parameters.AddWithValue("@Contrasenna", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+                    var command = new SqlCommand("usp_INSERT_Supervisor");
+                    command.Parameters.AddWithValue("@IDSupervisor", pSupervisor.IDSupervisor);
+                    command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol);
+                    command.Parameters.AddWithValue("@Descripcion", pSupervisor.Descripcion);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -124,8 +124,8 @@ namespace PayrollPal.Layers.DAL
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se agregó el usuario: " + pUsuario.ToString()
-                    + " a la base de datos (Tabla Usuario)");
+                _MyLogControlEventos.Info("Se agregó el supervisor: " + pSupervisor.ToString()
+                    + " a la base de datos (Tabla Supervisor)");
             }
             catch (Exception msg)
             {
@@ -141,16 +141,16 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Usuario pUsuario)
+        public static void UPDATE(Supervisor pSupervisor)
         {
             try
             {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_UPDATE_Usuario");
-                    command.Parameters.AddWithValue("@IDUsuario", pUsuario.IDUsuario);
-                    command.Parameters.AddWithValue("@NombreUsuario", pUsuario.NombreUsuario);
-                    command.Parameters.AddWithValue("@Contrasenna", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+                    var command = new SqlCommand("usp_UPDATE_Supervisor");
+                    command.Parameters.AddWithValue("@IDUsuario", pSupervisor.IDSupervisor);
+                    command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol);
+                    command.Parameters.AddWithValue("@Descripcion", pSupervisor.Descripcion);
 
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
@@ -158,8 +158,8 @@ namespace PayrollPal.Layers.DAL
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se modificó el usuario: " + pUsuario.ToString()
-                    + "en la base de datos (Tabla Usuario)");
+                _MyLogControlEventos.Info("Se modificó el supervisor: " + pSupervisor.ToString()
+                    + "en la base de datos (Tabla Supervisor)");
             }
             catch (Exception msg)
             {
@@ -177,22 +177,22 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pIdUsuario)
+        public static void DELETE(string pIdSupervisor)
         {
             try
             {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_DELETE_Usuario_ByID");
-                    command.Parameters.AddWithValue("@IDUsuario", pIdUsuario);
+                    var command = new SqlCommand("usp_DELETE_Supervisor_ByID");
+                    command.Parameters.AddWithValue("@IDSupervisor", pIdSupervisor);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
                 }
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se eliminó el usuario con el ID: " + pIdUsuario
-                    + " en la base de datos (Tabla Usuario)");
+                _MyLogControlEventos.Info("Se eliminó el supervisor con el ID: " + pIdSupervisor
+                    + " en la base de datos (Tabla Supervisor)");
             }
             catch (Exception msg)
             {

@@ -30,8 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoColaboradores));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblColon = new System.Windows.Forms.Label();
+            this.mktSalarioHora = new System.Windows.Forms.MaskedTextBox();
             this.lblCR = new System.Windows.Forms.Label();
             this.cmbUsuario = new System.Windows.Forms.ComboBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
@@ -74,8 +76,6 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvColaboradores = new System.Windows.Forms.DataGridView();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.mktSalarioHora = new System.Windows.Forms.MaskedTextBox();
-            this.lblColon = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -142,6 +142,24 @@
             this.splitContainer1.SplitterDistance = 564;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // lblColon
+            // 
+            this.lblColon.AutoSize = true;
+            this.lblColon.Location = new System.Drawing.Point(124, 410);
+            this.lblColon.Name = "lblColon";
+            this.lblColon.Size = new System.Drawing.Size(19, 21);
+            this.lblColon.TabIndex = 66;
+            this.lblColon.Text = "₡";
+            // 
+            // mktSalarioHora
+            // 
+            this.mktSalarioHora.Location = new System.Drawing.Point(143, 407);
+            this.mktSalarioHora.Mask = "000,000.000";
+            this.mktSalarioHora.Name = "mktSalarioHora";
+            this.mktSalarioHora.Size = new System.Drawing.Size(160, 29);
+            this.mktSalarioHora.TabIndex = 65;
+            this.mktSalarioHora.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktSalarioHora_KeyUp);
             // 
             // lblCR
             // 
@@ -258,6 +276,7 @@
             this.cmbRol.Name = "cmbRol";
             this.cmbRol.Size = new System.Drawing.Size(255, 29);
             this.cmbRol.TabIndex = 49;
+            this.cmbRol.SelectedValueChanged += new System.EventHandler(this.cmbRol_SelectedValueChanged);
             // 
             // lblRol
             // 
@@ -577,12 +596,12 @@
             // 
             this.dgvColaboradores.AllowUserToAddRows = false;
             this.dgvColaboradores.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvColaboradores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvColaboradores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvColaboradores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvColaboradores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvColaboradores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -601,24 +620,6 @@
             // errProv1
             // 
             this.errProv1.ContainerControl = this;
-            // 
-            // mktSalarioHora
-            // 
-            this.mktSalarioHora.Location = new System.Drawing.Point(143, 407);
-            this.mktSalarioHora.Mask = "000,000.000";
-            this.mktSalarioHora.Name = "mktSalarioHora";
-            this.mktSalarioHora.Size = new System.Drawing.Size(160, 29);
-            this.mktSalarioHora.TabIndex = 65;
-            this.mktSalarioHora.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktSalarioHora_KeyUp);
-            // 
-            // lblColon
-            // 
-            this.lblColon.AutoSize = true;
-            this.lblColon.Location = new System.Drawing.Point(124, 410);
-            this.lblColon.Name = "lblColon";
-            this.lblColon.Size = new System.Drawing.Size(19, 21);
-            this.lblColon.TabIndex = 66;
-            this.lblColon.Text = "₡";
             // 
             // frmMantenimientoColaboradores
             // 

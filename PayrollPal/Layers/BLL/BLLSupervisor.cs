@@ -18,14 +18,14 @@ namespace PayrollPal.Layers.BLL
         public static List<Supervisor> SelectAll()
         {
 
-            return DAL.DALUsuario.SelectAll();
+            return DAL.DALSupervisor.SelectAll();
         }
         #endregion
 
         #region SELECT BY ID
         public static Supervisor SelectById(string Id)
         {
-            return DAL.DALUsuario.SelectById(Id);
+            return DAL.DALSupervisor.SelectById(Id);
         }
         #endregion
 
@@ -34,20 +34,20 @@ namespace PayrollPal.Layers.BLL
         {
             DialogResult resultado = new DialogResult();
 
-            if (ChequearUsuario(pUsuario.IDUsuario))
+            if (ChequearSupervisor(pSupervisor.IDSupervisor))
             {
-                MessageBox.Show("El usuario con ID: " + pUsuario.IDUsuario + " ya existe" +
+                MessageBox.Show("El supervisor con ID: " + pSupervisor.IDSupervisor + " ya existe" +
                     "¿Desea actualizarlo?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALUsuario.UPDATE(pUsuario);
+                    DAL.DALSupervisor.UPDATE(pSupervisor);
                 }
 
             }
             else
             {
-                DAL.DALUsuario.CREATE(pUsuario);
+                DAL.DALSupervisor.CREATE(pSupervisor);
             }
 
         }
@@ -56,14 +56,14 @@ namespace PayrollPal.Layers.BLL
         #region UPDATE
         public static void Update(Supervisor pSupervisor)
         {
-            DAL.DALUsuario.UPDATE(pUsuario);
+            DAL.DALSupervisor.UPDATE(pSupervisor);
         }
         #endregion
 
         #region DELETE
         public static void Delete(string pIdSupervisor)
         {
-            DAL.DALUsuario.DELETE(pIdUsuario);
+            DAL.DALSupervisor.DELETE(pIdSupervisor);
         }
         #endregion
 
@@ -72,7 +72,7 @@ namespace PayrollPal.Layers.BLL
         {
             bool existe = false;
 
-            if (SelectById(pIDUsuario) != null)
+            if (SelectById(pIdSupervisor) != null)
             {
                 existe = true;
             }

@@ -29,19 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoSupervisores));
             this.toolTipSupervisor = new System.Windows.Forms.ToolTip(this.components);
             this.mktID = new System.Windows.Forms.MaskedTextBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtRol = new System.Windows.Forms.TextBox();
             this.lblRol = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
-            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.dgvSupervisores = new System.Windows.Forms.DataGridView();
+            this.IDSupervisor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripMantSupervisor = new System.Windows.Forms.ToolStrip();
             this.btnAgregar = new System.Windows.Forms.ToolStripButton();
@@ -50,14 +53,13 @@
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lstColaboradoresALL = new System.Windows.Forms.ListBox();
-            this.lstColaboradoresSup = new System.Windows.Forms.ListBox();
-            this.btnAgregarCol = new System.Windows.Forms.Button();
+            this.lblListaColaboradoresSup = new System.Windows.Forms.Label();
+            this.lblListaColaboradoresALL = new System.Windows.Forms.Label();
             this.btnQuitarColab = new System.Windows.Forms.Button();
-            this.IDSupervisor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IDRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
+            this.btnAgregarCol = new System.Windows.Forms.Button();
+            this.lstColaboradoresSup = new System.Windows.Forms.ListBox();
+            this.lstColaboradoresALL = new System.Windows.Forms.ListBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSupervisores)).BeginInit();
             this.toolStripMantSupervisor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -75,6 +77,7 @@
             this.mktID.Size = new System.Drawing.Size(150, 29);
             this.mktID.TabIndex = 59;
             this.toolTipSupervisor.SetToolTip(this.mktID, "El ID de Supervisor debe tener el formato: sup0000 (4 dígitos)");
+            this.mktID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktID_KeyUp);
             // 
             // btnConfirmar
             // 
@@ -85,25 +88,26 @@
             this.btnConfirmar.TabIndex = 60;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescripcion.Location = new System.Drawing.Point(165, 127);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.PasswordChar = '*';
             this.txtDescripcion.Size = new System.Drawing.Size(150, 29);
             this.txtDescripcion.TabIndex = 57;
+            this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
-            // txtNombre
+            // txtRol
             // 
-            this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(165, 82);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(1);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.ReadOnly = true;
-            this.txtNombre.Size = new System.Drawing.Size(150, 29);
-            this.txtNombre.TabIndex = 54;
+            this.txtRol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRol.Location = new System.Drawing.Point(165, 82);
+            this.txtRol.Margin = new System.Windows.Forms.Padding(1);
+            this.txtRol.Name = "txtRol";
+            this.txtRol.ReadOnly = true;
+            this.txtRol.Size = new System.Drawing.Size(150, 29);
+            this.txtRol.TabIndex = 54;
             // 
             // lblRol
             // 
@@ -138,50 +142,71 @@
             this.lblID.TabIndex = 44;
             this.lblID.Text = "ID";
             // 
-            // dgvUsuarios
+            // dgvSupervisores
             // 
-            this.dgvUsuarios.AllowUserToAddRows = false;
-            this.dgvUsuarios.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvUsuarios.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvSupervisores.AllowUserToAddRows = false;
+            this.dgvSupervisores.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvSupervisores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvSupervisores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSupervisores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSupervisores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvSupervisores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSupervisores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDSupervisor,
             this.IDRol,
             this.Descripcion});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvUsuarios.Location = new System.Drawing.Point(0, 0);
-            this.dgvUsuarios.Margin = new System.Windows.Forms.Padding(1);
-            this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.ReadOnly = true;
-            this.dgvUsuarios.RowHeadersVisible = false;
-            this.dgvUsuarios.RowHeadersWidth = 102;
-            this.dgvUsuarios.RowTemplate.Height = 40;
-            this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(1132, 405);
-            this.dgvUsuarios.TabIndex = 4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSupervisores.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvSupervisores.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSupervisores.Location = new System.Drawing.Point(0, 0);
+            this.dgvSupervisores.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvSupervisores.Name = "dgvSupervisores";
+            this.dgvSupervisores.ReadOnly = true;
+            this.dgvSupervisores.RowHeadersVisible = false;
+            this.dgvSupervisores.RowHeadersWidth = 102;
+            this.dgvSupervisores.RowTemplate.Height = 40;
+            this.dgvSupervisores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSupervisores.Size = new System.Drawing.Size(1132, 406);
+            this.dgvSupervisores.TabIndex = 4;
+            // 
+            // IDSupervisor
+            // 
+            this.IDSupervisor.DataPropertyName = "IDSupervisor";
+            this.IDSupervisor.HeaderText = "ID Supervisor";
+            this.IDSupervisor.Name = "IDSupervisor";
+            this.IDSupervisor.ReadOnly = true;
+            // 
+            // IDRol
+            // 
+            this.IDRol.DataPropertyName = "IDRol";
+            this.IDRol.HeaderText = "Rol";
+            this.IDRol.Name = "IDRol";
+            this.IDRol.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
             // 
             // btnSalir
             // 
@@ -191,6 +216,7 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(45, 25);
             this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // toolStripMantSupervisor
             // 
@@ -217,6 +243,7 @@
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(70, 25);
             this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnEditar
             // 
@@ -244,6 +271,7 @@
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(67, 25);
             this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // errProv1
             // 
@@ -259,6 +287,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblListaColaboradoresSup);
+            this.splitContainer1.Panel1.Controls.Add(this.lblListaColaboradoresALL);
             this.splitContainer1.Panel1.Controls.Add(this.btnQuitarColab);
             this.splitContainer1.Panel1.Controls.Add(this.btnAgregarCol);
             this.splitContainer1.Panel1.Controls.Add(this.lstColaboradoresSup);
@@ -266,7 +296,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
             this.splitContainer1.Panel1.Controls.Add(this.mktID);
             this.splitContainer1.Panel1.Controls.Add(this.txtDescripcion);
-            this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
+            this.splitContainer1.Panel1.Controls.Add(this.txtRol);
             this.splitContainer1.Panel1.Controls.Add(this.lblRol);
             this.splitContainer1.Panel1.Controls.Add(this.lblDescripcion);
             this.splitContainer1.Panel1.Controls.Add(this.lblID);
@@ -274,41 +304,31 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgvUsuarios);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvSupervisores);
             this.splitContainer1.Size = new System.Drawing.Size(1132, 775);
-            this.splitContainer1.SplitterDistance = 368;
+            this.splitContainer1.SplitterDistance = 367;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 1;
             // 
-            // lstColaboradoresALL
+            // lblListaColaboradoresSup
             // 
-            this.lstColaboradoresALL.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstColaboradoresALL.FormattingEnabled = true;
-            this.lstColaboradoresALL.ItemHeight = 21;
-            this.lstColaboradoresALL.Location = new System.Drawing.Point(353, 7);
-            this.lstColaboradoresALL.Name = "lstColaboradoresALL";
-            this.lstColaboradoresALL.Size = new System.Drawing.Size(220, 319);
-            this.lstColaboradoresALL.TabIndex = 61;
+            this.lblListaColaboradoresSup.AutoSize = true;
+            this.lblListaColaboradoresSup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListaColaboradoresSup.Location = new System.Drawing.Point(665, 9);
+            this.lblListaColaboradoresSup.Name = "lblListaColaboradoresSup";
+            this.lblListaColaboradoresSup.Size = new System.Drawing.Size(285, 21);
+            this.lblListaColaboradoresSup.TabIndex = 66;
+            this.lblListaColaboradoresSup.Text = "Lista de Colaboradores (Por Supervisor)";
             // 
-            // lstColaboradoresSup
+            // lblListaColaboradoresALL
             // 
-            this.lstColaboradoresSup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstColaboradoresSup.FormattingEnabled = true;
-            this.lstColaboradoresSup.ItemHeight = 21;
-            this.lstColaboradoresSup.Location = new System.Drawing.Point(669, 7);
-            this.lstColaboradoresSup.Name = "lstColaboradoresSup";
-            this.lstColaboradoresSup.Size = new System.Drawing.Size(219, 319);
-            this.lstColaboradoresSup.TabIndex = 62;
-            // 
-            // btnAgregarCol
-            // 
-            this.btnAgregarCol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarCol.Location = new System.Drawing.Point(579, 86);
-            this.btnAgregarCol.Name = "btnAgregarCol";
-            this.btnAgregarCol.Size = new System.Drawing.Size(84, 35);
-            this.btnAgregarCol.TabIndex = 63;
-            this.btnAgregarCol.Text = "Agregar";
-            this.btnAgregarCol.UseVisualStyleBackColor = true;
+            this.lblListaColaboradoresALL.AutoSize = true;
+            this.lblListaColaboradoresALL.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListaColaboradoresALL.Location = new System.Drawing.Point(349, 9);
+            this.lblListaColaboradoresALL.Name = "lblListaColaboradoresALL";
+            this.lblListaColaboradoresALL.Size = new System.Drawing.Size(215, 21);
+            this.lblListaColaboradoresALL.TabIndex = 65;
+            this.lblListaColaboradoresALL.Text = "Lista de Colaboradores (Total)";
             // 
             // btnQuitarColab
             // 
@@ -320,26 +340,36 @@
             this.btnQuitarColab.Text = "Quitar";
             this.btnQuitarColab.UseVisualStyleBackColor = true;
             // 
-            // IDSupervisor
+            // btnAgregarCol
             // 
-            this.IDSupervisor.DataPropertyName = "IDSupervisor";
-            this.IDSupervisor.HeaderText = "ID Supervisor";
-            this.IDSupervisor.Name = "IDSupervisor";
-            this.IDSupervisor.ReadOnly = true;
+            this.btnAgregarCol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarCol.Location = new System.Drawing.Point(579, 86);
+            this.btnAgregarCol.Name = "btnAgregarCol";
+            this.btnAgregarCol.Size = new System.Drawing.Size(84, 35);
+            this.btnAgregarCol.TabIndex = 63;
+            this.btnAgregarCol.Text = "Agregar";
+            this.btnAgregarCol.UseVisualStyleBackColor = true;
+            this.btnAgregarCol.Click += new System.EventHandler(this.btnAgregarCol_Click);
             // 
-            // IDRol
+            // lstColaboradoresSup
             // 
-            this.IDRol.DataPropertyName = "IDRol";
-            this.IDRol.HeaderText = "Rol";
-            this.IDRol.Name = "IDRol";
-            this.IDRol.ReadOnly = true;
+            this.lstColaboradoresSup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstColaboradoresSup.FormattingEnabled = true;
+            this.lstColaboradoresSup.ItemHeight = 21;
+            this.lstColaboradoresSup.Location = new System.Drawing.Point(669, 45);
+            this.lstColaboradoresSup.Name = "lstColaboradoresSup";
+            this.lstColaboradoresSup.Size = new System.Drawing.Size(219, 319);
+            this.lstColaboradoresSup.TabIndex = 62;
             // 
-            // Descripcion
+            // lstColaboradoresALL
             // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
+            this.lstColaboradoresALL.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstColaboradoresALL.FormattingEnabled = true;
+            this.lstColaboradoresALL.ItemHeight = 21;
+            this.lstColaboradoresALL.Location = new System.Drawing.Point(353, 45);
+            this.lstColaboradoresALL.Name = "lstColaboradoresALL";
+            this.lstColaboradoresALL.Size = new System.Drawing.Size(220, 319);
+            this.lstColaboradoresALL.TabIndex = 61;
             // 
             // frmMantenimientoSupervisores
             // 
@@ -351,7 +381,7 @@
             this.Name = "frmMantenimientoSupervisores";
             this.Text = "Mantenimiento de Supervisores";
             this.Load += new System.EventHandler(this.frmMantenimientoSupervisores_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSupervisores)).EndInit();
             this.toolStripMantSupervisor.ResumeLayout(false);
             this.toolStripMantSupervisor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
@@ -370,11 +400,11 @@
         private System.Windows.Forms.MaskedTextBox mktID;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.TextBox txtDescripcion;
-        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtRol;
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.DataGridView dgvUsuarios;
+        private System.Windows.Forms.DataGridView dgvSupervisores;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.ToolStrip toolStripMantSupervisor;
         private System.Windows.Forms.ToolStripButton btnAgregar;
@@ -390,5 +420,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDSupervisor;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDRol;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.Label lblListaColaboradoresSup;
+        private System.Windows.Forms.Label lblListaColaboradoresALL;
     }
 }

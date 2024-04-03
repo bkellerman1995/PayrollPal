@@ -143,6 +143,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
+
         public static void UPDATE(Usuario pUsuario)
         {
             try

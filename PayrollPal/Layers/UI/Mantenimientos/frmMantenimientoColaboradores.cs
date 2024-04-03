@@ -154,7 +154,8 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbUsuario.SelectedIndex = -1;
                 this.cmbPuesto.SelectedIndex = -1;
                 this.cmbRol.SelectedIndex = -1;
-                this.cmbSupervisor.SelectedIndex = -1;
+                this.lblSupervisor.Visible = false;
+                this.cmbSupervisor.Visible = false;
 
                 this.mktCuentaIBAN.Clear();
                 this.mktCuentaIBAN.BackColor = Color.White;
@@ -548,7 +549,8 @@ namespace PayrollPal.UI.Mantenimientos
 
                 //Validar combo Supervisor
 
-                if (this.cmbSupervisor.SelectedItem != null)
+                if (this.cmbSupervisor.SelectedItem != null ||
+                    !this.cmbSupervisor.Visible)
                 {
                     this.errProv1.SetError(this.cmbSupervisor, string.Empty);
                 }
@@ -583,6 +585,7 @@ namespace PayrollPal.UI.Mantenimientos
             Colaborador oColaborador = new Colaborador();
             char[] reemplazarCaracteresSalario = new char []{ ',', '.' };
             decimal Salario = 0;
+            Supervisor supervisor = new Supervisor();
 
             oColaborador.IDColaborador = this.mktID.Text;
             oColaborador.Nombre = this.txtNombre.Text;
@@ -604,7 +607,16 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.CodigoPuesto = (Puesto)this.cmbPuesto.SelectedItem;
             oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
 
-            oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
+            switch (oColaborador.IDRol.IDRol)
+            {
+                case 1:
+                case 2:
+                    oColaborador.IDSupervisor = supervisor;
+                    break;
+                case 3:
+                    oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
+                    break;
+            }
             oColaborador.Foto = (byte[])pctFoto.Tag;
 
             //Se llama al método Create del Colaborador 
@@ -857,5 +869,25 @@ namespace PayrollPal.UI.Mantenimientos
             }
         }
 
+        /// <summary>
+        /// Método para habilitar el comboBox de Supervisor y el 
+        /// label si el objeto seleccionado en el comboBox de Rol
+        /// es colaborador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (BLLRol.EsColaborador((Rol)this.cmbRol.SelectedItem))
+            {
+                this.cmbSupervisor.Visible = true;
+                this.lblSupervisor.Visible = true;
+            }
+            else
+            {
+                this.cmbSupervisor.Visible = false;
+                this.lblSupervisor.Visible = false;
+            }
+        }
     }
 }
