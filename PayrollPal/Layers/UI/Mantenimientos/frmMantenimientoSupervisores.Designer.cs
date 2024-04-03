@@ -82,7 +82,7 @@
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(909, 330);
+            this.btnConfirmar.Location = new System.Drawing.Point(14, 329);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(100, 35);
             this.btnConfirmar.TabIndex = 60;
@@ -186,6 +186,7 @@
             this.dgvSupervisores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSupervisores.Size = new System.Drawing.Size(1132, 406);
             this.dgvSupervisores.TabIndex = 4;
+            this.dgvSupervisores.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupervisores_CellContentDoubleClick);
             // 
             // IDSupervisor
             // 
@@ -262,6 +263,7 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(71, 25);
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnLimpiar
             // 

@@ -115,7 +115,7 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_INSERT_Supervisor");
                     command.Parameters.AddWithValue("@IDSupervisor", pSupervisor.IDSupervisor);
-                    command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol);
+                    command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol.IDRol);
                     command.Parameters.AddWithValue("@Descripcion", pSupervisor.Descripcion);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);

@@ -17,6 +17,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 {
     public partial class frmMantenimientoSupervisores : Form
     {
+        Rol rol;
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
@@ -45,8 +46,13 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 //Programar el textBox de ROL con el ROL 2 (Supervisore) 
                 //automáticamente
 
-                this.txtRol.Text = (int)Enumeraciones.Rol.Supervisor + "";
-                this.txtRol.Text += " - " + Enumeraciones.Rol.Supervisor.ToString();
+                rol = new Rol
+                {
+                    IDRol = 2,
+                    Descripcion = "Supervisor"
+                };
+
+                this.txtRol.Text = rol.ToString();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
@@ -249,7 +255,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         this.btnQuitarColab.Enabled = true;
                         VerificarHayColaboradores();
                         break;
-
 
                 }
             }
@@ -463,7 +468,10 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
 
             oSupervisor.IDSupervisor = this.mktID.Text;
+
+            oSupervisor.IDRol = rol;
             oSupervisor.Descripcion = this.txtDescripcion.Text;
+
 
             //Se llama al método Create del Supervisor 
             //que se encarga de revisar si el supervisor existe primero
@@ -524,9 +532,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     oSupervisor = this.dgvSupervisores.SelectedRows[0].DataBoundItem as Supervisor;
                     //Asignar a cada control los datos del supervisor
                     this.mktID.Text = oSupervisor.IDSupervisor.ToString();
-                    this.txtNombre.Text = oSupervisor.ToString();
-                    this.txtContrasenna.Text = oUsuario.Contrasenna.ToString();
-                    this.txtConfirmarContrasenna.Text = oUsuario.Contrasenna.ToString();
+                    this.txtDescripcion.Text = oSupervisor.Descripcion.ToString();
                 }
             }
             catch (Exception msg)
@@ -541,6 +547,40 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
             }
+        }
+
+        /// <summary>
+        /// Evento del botón Editar para editar al 
+        /// supervisor exitosamente en la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            ResetearForm('U');
+            this.btnConfirmar.Visible = true;
+        }
+
+        /// <summary>
+        /// Evento del botón Eliminar para eliminar al 
+        /// supervisor exitosamente en la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            string idSupervisor = this.mktID.Text;
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el supervisor?", "Aviso",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                BLLSupervisor.Delete(idSupervisor);
+                CargarListas();
+                LimpiarControles();
+            }
+
+
         }
     }
 }

@@ -19,7 +19,7 @@ namespace PayrollPal
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMantenimientoSupervisores());
+            Application.Run(new frmMantenimientoColaboradores());
         }
     }
 }

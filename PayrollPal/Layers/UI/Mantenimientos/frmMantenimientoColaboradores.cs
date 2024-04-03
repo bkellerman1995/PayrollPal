@@ -114,7 +114,7 @@ namespace PayrollPal.UI.Mantenimientos
             this.cmbUsuario.DataSource = BLLUsuario.SelectAll();
             this.cmbPuesto.DataSource = BLLPuesto.SelectAll();
             this.cmbRol.DataSource = BLLRol.SelectAll();
-            //this.cmbSupervisor.DataSource = BLLSupervisor.SelectAll();
+            this.cmbSupervisor.DataSource = BLLSupervisor.SelectAll();
         }
 
         /// <summary>
