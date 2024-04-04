@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCargarArchivoJson = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnMostrarListaMarcas = new System.Windows.Forms.Button();
@@ -46,9 +46,10 @@
             // 
             // btnCargarArchivoJson
             // 
+            this.btnCargarArchivoJson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargarArchivoJson.Location = new System.Drawing.Point(12, 35);
             this.btnCargarArchivoJson.Name = "btnCargarArchivoJson";
-            this.btnCargarArchivoJson.Size = new System.Drawing.Size(119, 28);
+            this.btnCargarArchivoJson.Size = new System.Drawing.Size(119, 37);
             this.btnCargarArchivoJson.TabIndex = 1;
             this.btnCargarArchivoJson.Text = "Cargar JSON";
             this.btnCargarArchivoJson.UseVisualStyleBackColor = true;
@@ -78,6 +79,7 @@
             // 
             // btnMostrarListaMarcas
             // 
+            this.btnMostrarListaMarcas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMostrarListaMarcas.Location = new System.Drawing.Point(341, 146);
             this.btnMostrarListaMarcas.Name = "btnMostrarListaMarcas";
             this.btnMostrarListaMarcas.Size = new System.Drawing.Size(119, 28);
@@ -98,9 +100,10 @@
             // lblRutaArchivoJSON
             // 
             this.lblRutaArchivoJSON.AutoSize = true;
+            this.lblRutaArchivoJSON.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRutaArchivoJSON.Location = new System.Drawing.Point(20, 102);
             this.lblRutaArchivoJSON.Name = "lblRutaArchivoJSON";
-            this.lblRutaArchivoJSON.Size = new System.Drawing.Size(117, 13);
+            this.lblRutaArchivoJSON.Size = new System.Drawing.Size(167, 21);
             this.lblRutaArchivoJSON.TabIndex = 4;
             this.lblRutaArchivoJSON.Text = "Ruta del Archivo JSON";
             // 
@@ -117,9 +120,9 @@
             // 
             this.dgvListaMarcas.AllowUserToAddRows = false;
             this.dgvListaMarcas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvListaMarcas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListaMarcas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvListaMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

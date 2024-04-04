@@ -549,9 +549,9 @@ namespace PayrollPal.UI.Mantenimientos
             if (e.ColumnIndex == 2 && e.Value != null)
             {
                 if (e.Value.ToString() == "True")
-                    e.Value = "Activo";
+                    e.Value = "Activa";
                 if (e.Value.ToString() == "False")
-                    e.Value = "Inactivo";
+                    e.Value = "Inactiva";
             }
 
         }

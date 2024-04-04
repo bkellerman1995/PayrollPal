@@ -1,4 +1,5 @@
 ﻿using PayrollPal.Layers.UI.Mantenimientos;
+using PayrollPal.UI.Consultas;
 using PayrollPal.UI.Mantenimientos;
 using System;
 using System.Collections.Generic;
@@ -93,6 +94,24 @@ namespace PayrollPal.UI
         private void supervisorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMantenimientoSupervisores frm = new frmMantenimientoSupervisores();
+            frm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Método para abrir el form de consulta de 
+        /// marcas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultaMarcas frm = new frmConsultaMarcas();
+            frm.ShowDialog();
+        }
+
+        private void planillasDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMantenimientoPlanillas frm = new frmMantenimientoPlanillas();
             frm.ShowDialog();
         }
     }

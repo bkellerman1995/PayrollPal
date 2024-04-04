@@ -422,8 +422,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             //Insertar el rol a la base de datos
             //por medio del BLLRol (método CREATE)
 
-
-
             //Refrescar la lista
             CargarLista();
 

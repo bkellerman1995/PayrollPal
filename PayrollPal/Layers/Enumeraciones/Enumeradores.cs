@@ -28,4 +28,12 @@ namespace PayrollPal.Enumeraciones
         Supervisor = 2,
         Colaborador = 3
     }
+
+    public enum PlanillaEstado
+    {
+        Activa,
+        Inactiva,
+        Enviada,
+        PorEnviar
+    }
 }

@@ -88,6 +88,7 @@
     <Compile Include="Layers\BLL\BLLColaborador.cs" />
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
     <Compile Include="Layers\BLL\BLLDepartamento.cs" />
+    <Compile Include="Layers\BLL\BLLPlanillaPago.cs" />
     <Compile Include="Layers\BLL\BLLPuesto.cs" />
     <Compile Include="Layers\BLL\BLLRol.cs" />
     <Compile Include="Layers\BLL\BLLSupervisor.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Layers\DAL\DALColaborador.cs" />
     <Compile Include="Layers\DAL\DALControlDeMarcas.cs" />
     <Compile Include="Layers\DAL\DALDepartamento.cs" />
+    <Compile Include="Layers\DAL\DALPlanillaPago.cs" />
     <Compile Include="Layers\DAL\DALPuesto.cs" />
     <Compile Include="Layers\DAL\DALRol.cs" />
     <Compile Include="Layers\DAL\DALSupervisor.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Layers\Entities\Colaborador.cs" />
     <Compile Include="Layers\Entities\ControlDeMarcas.cs" />
     <Compile Include="Layers\Entities\Departamento.cs" />
+    <Compile Include="Layers\Entities\PlanillaPago.cs" />
     <Compile Include="Layers\Entities\Puesto.cs" />
     <Compile Include="Layers\Entities\Rol.cs" />
     <Compile Include="Layers\Entities\Supervisor.cs" />

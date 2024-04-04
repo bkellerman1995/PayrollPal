@@ -283,7 +283,7 @@
             this.rdbInactivo.Size = new System.Drawing.Size(82, 25);
             this.rdbInactivo.TabIndex = 62;
             this.rdbInactivo.TabStop = true;
-            this.rdbInactivo.Text = "Inactivo";
+            this.rdbInactivo.Text = "Inactiva";
             this.rdbInactivo.UseVisualStyleBackColor = true;
             // 
             // rdbActivo
@@ -295,7 +295,7 @@
             this.rdbActivo.Size = new System.Drawing.Size(71, 25);
             this.rdbActivo.TabIndex = 61;
             this.rdbActivo.TabStop = true;
-            this.rdbActivo.Text = "Activo";
+            this.rdbActivo.Text = "Activa";
             this.rdbActivo.UseVisualStyleBackColor = true;
             // 
             // CodigoPuesto

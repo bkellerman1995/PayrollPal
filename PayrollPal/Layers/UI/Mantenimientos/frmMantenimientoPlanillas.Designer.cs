@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoPlanillas));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -71,41 +75,50 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdbPorEnviar = new System.Windows.Forms.RadioButton();
+            this.rdbActiva = new System.Windows.Forms.RadioButton();
+            this.rdbEnviada = new System.Windows.Forms.RadioButton();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.rdbInactiva = new System.Windows.Forms.RadioButton();
+            this.mktCodigo = new System.Windows.Forms.MaskedTextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblFechaHasta = new System.Windows.Forms.Label();
+            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaPago = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaDesde = new System.Windows.Forms.Label();
+            this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaPago = new System.Windows.Forms.Label();
+            this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.rdbInactiva = new System.Windows.Forms.RadioButton();
-            this.rdbActiva = new System.Windows.Forms.RadioButton();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.lblLogo = new System.Windows.Forms.Label();
-            this.lblEstado = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEliminar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSalir = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMantPlanilla = new System.Windows.Forms.ToolStrip();
+            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
+            this.btnEditar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvPlanillas = new System.Windows.Forms.DataGridView();
-            this.lblFechaDesde = new System.Windows.Forms.Label();
-            this.lblFechaHasta = new System.Windows.Forms.Label();
-            this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.toolStripMantEmpresa.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.toolStripMantPlanilla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanillas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpFechaNacimiento
             // 
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(0, 0);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 38);
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
             this.dtpFechaNacimiento.TabIndex = 0;
             // 
             // lblFechaNacimiento
@@ -140,7 +153,7 @@
             // 
             this.cmbSupervisor.Location = new System.Drawing.Point(0, 0);
             this.cmbSupervisor.Name = "cmbSupervisor";
-            this.cmbSupervisor.Size = new System.Drawing.Size(121, 40);
+            this.cmbSupervisor.Size = new System.Drawing.Size(121, 21);
             this.cmbSupervisor.TabIndex = 0;
             // 
             // lblSupervisor
@@ -154,7 +167,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 38);
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 0;
             // 
             // lblUsuario
@@ -168,7 +181,7 @@
             // 
             this.txtCuentaIBAN.Location = new System.Drawing.Point(0, 0);
             this.txtCuentaIBAN.Name = "txtCuentaIBAN";
-            this.txtCuentaIBAN.Size = new System.Drawing.Size(100, 38);
+            this.txtCuentaIBAN.Size = new System.Drawing.Size(100, 20);
             this.txtCuentaIBAN.TabIndex = 0;
             // 
             // lblCuentaIBAN
@@ -182,7 +195,7 @@
             // 
             this.cmbRol.Location = new System.Drawing.Point(0, 0);
             this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(121, 40);
+            this.cmbRol.Size = new System.Drawing.Size(121, 21);
             this.cmbRol.TabIndex = 0;
             // 
             // lblRol
@@ -196,7 +209,7 @@
             // 
             this.cmbPuesto.Location = new System.Drawing.Point(0, 0);
             this.cmbPuesto.Name = "cmbPuesto";
-            this.cmbPuesto.Size = new System.Drawing.Size(121, 40);
+            this.cmbPuesto.Size = new System.Drawing.Size(121, 21);
             this.cmbPuesto.TabIndex = 0;
             // 
             // lblPuesto
@@ -210,7 +223,7 @@
             // 
             this.txtCorreoElectronico.Location = new System.Drawing.Point(0, 0);
             this.txtCorreoElectronico.Name = "txtCorreoElectronico";
-            this.txtCorreoElectronico.Size = new System.Drawing.Size(100, 38);
+            this.txtCorreoElectronico.Size = new System.Drawing.Size(100, 20);
             this.txtCorreoElectronico.TabIndex = 0;
             // 
             // lblCorreoElectronico
@@ -224,7 +237,7 @@
             // 
             this.txtSalarioHora.Location = new System.Drawing.Point(0, 0);
             this.txtSalarioHora.Name = "txtSalarioHora";
-            this.txtSalarioHora.Size = new System.Drawing.Size(100, 38);
+            this.txtSalarioHora.Size = new System.Drawing.Size(100, 20);
             this.txtSalarioHora.TabIndex = 0;
             // 
             // lblSalarioHora
@@ -238,7 +251,7 @@
             // 
             this.cmbDepartamento.Location = new System.Drawing.Point(0, 0);
             this.cmbDepartamento.Name = "cmbDepartamento";
-            this.cmbDepartamento.Size = new System.Drawing.Size(121, 40);
+            this.cmbDepartamento.Size = new System.Drawing.Size(121, 21);
             this.cmbDepartamento.TabIndex = 0;
             // 
             // lblDepartamento
@@ -252,7 +265,7 @@
             // 
             this.dtpFechaIngreso.Location = new System.Drawing.Point(0, 0);
             this.dtpFechaIngreso.Name = "dtpFechaIngreso";
-            this.dtpFechaIngreso.Size = new System.Drawing.Size(200, 38);
+            this.dtpFechaIngreso.Size = new System.Drawing.Size(200, 20);
             this.dtpFechaIngreso.TabIndex = 0;
             // 
             // lblFechaIngreso
@@ -266,7 +279,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(0, 0);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 38);
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 0;
             // 
             // lblSegundoApellido
@@ -280,7 +293,7 @@
             // 
             this.txtApellido1.Location = new System.Drawing.Point(0, 0);
             this.txtApellido1.Name = "txtApellido1";
-            this.txtApellido1.Size = new System.Drawing.Size(100, 38);
+            this.txtApellido1.Size = new System.Drawing.Size(100, 20);
             this.txtApellido1.TabIndex = 0;
             // 
             // lblPrimerApellido
@@ -294,21 +307,21 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(0, 0);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 38);
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 0;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(0, 0);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 38);
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
             this.textBox4.TabIndex = 0;
             // 
             // txtBoxId
             // 
             this.txtBoxId.Location = new System.Drawing.Point(0, 0);
             this.txtBoxId.Name = "txtBoxId";
-            this.txtBoxId.Size = new System.Drawing.Size(100, 38);
+            this.txtBoxId.Size = new System.Drawing.Size(100, 20);
             this.txtBoxId.TabIndex = 0;
             // 
             // lblFoto
@@ -384,245 +397,388 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dtpFechaHasta);
-            this.splitContainer1.Panel1.Controls.Add(this.dtpFechaDesde);
-            this.splitContainer1.Panel1.Controls.Add(this.lblFechaHasta);
-            this.splitContainer1.Panel1.Controls.Add(this.lblFechaDesde);
-            this.splitContainer1.Panel1.Controls.Add(this.txtCodigo);
+            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.mktCodigo);
+            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
             this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
             this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
-            this.splitContainer1.Panel1.Controls.Add(this.rdbInactiva);
-            this.splitContainer1.Panel1.Controls.Add(this.rdbActiva);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox5);
             this.splitContainer1.Panel1.Controls.Add(this.lblLogo);
-            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
             this.splitContainer1.Panel1.Controls.Add(this.lblCodigo);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantEmpresa);
+            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantPlanilla);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvPlanillas);
-            this.splitContainer1.Size = new System.Drawing.Size(1354, 1364);
-            this.splitContainer1.SplitterDistance = 537;
+            this.splitContainer1.Size = new System.Drawing.Size(785, 818);
+            this.splitContainer1.SplitterDistance = 331;
+            this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 34;
             // 
-            // txtCodigo
+            // panel1
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(369, 148);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(392, 38);
-            this.txtCodigo.TabIndex = 49;
+            this.panel1.Controls.Add(this.rdbPorEnviar);
+            this.panel1.Controls.Add(this.rdbActiva);
+            this.panel1.Controls.Add(this.rdbEnviada);
+            this.panel1.Controls.Add(this.lblEstado);
+            this.panel1.Controls.Add(this.rdbInactiva);
+            this.panel1.Location = new System.Drawing.Point(560, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(167, 167);
+            this.panel1.TabIndex = 3;
             // 
-            // txtNombre
+            // rdbPorEnviar
             // 
-            this.txtNombre.Location = new System.Drawing.Point(369, 224);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(392, 38);
-            this.txtNombre.TabIndex = 44;
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(25, 230);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(114, 32);
-            this.lblNombre.TabIndex = 37;
-            this.lblNombre.Text = "Nombre";
-            // 
-            // rdbInactiva
-            // 
-            this.rdbInactiva.AutoSize = true;
-            this.rdbInactiva.Location = new System.Drawing.Point(1023, 189);
-            this.rdbInactiva.Name = "rdbInactiva";
-            this.rdbInactiva.Size = new System.Drawing.Size(149, 36);
-            this.rdbInactiva.TabIndex = 48;
-            this.rdbInactiva.TabStop = true;
-            this.rdbInactiva.Text = "Inactiva";
-            this.rdbInactiva.UseVisualStyleBackColor = true;
+            this.rdbPorEnviar.AutoSize = true;
+            this.rdbPorEnviar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbPorEnviar.Location = new System.Drawing.Point(46, 137);
+            this.rdbPorEnviar.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbPorEnviar.Name = "rdbPorEnviar";
+            this.rdbPorEnviar.Size = new System.Drawing.Size(98, 25);
+            this.rdbPorEnviar.TabIndex = 67;
+            this.rdbPorEnviar.TabStop = true;
+            this.rdbPorEnviar.Text = "Por Enviar";
+            this.rdbPorEnviar.UseVisualStyleBackColor = true;
             // 
             // rdbActiva
             // 
             this.rdbActiva.AutoSize = true;
-            this.rdbActiva.Location = new System.Drawing.Point(1043, 97);
+            this.rdbActiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbActiva.Location = new System.Drawing.Point(46, 17);
+            this.rdbActiva.Margin = new System.Windows.Forms.Padding(1);
             this.rdbActiva.Name = "rdbActiva";
-            this.rdbActiva.Size = new System.Drawing.Size(129, 36);
+            this.rdbActiva.Size = new System.Drawing.Size(70, 25);
             this.rdbActiva.TabIndex = 47;
             this.rdbActiva.TabStop = true;
             this.rdbActiva.Text = "Activa";
             this.rdbActiva.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // rdbEnviada
             // 
-            this.textBox5.Location = new System.Drawing.Point(369, -28);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(392, 38);
-            this.textBox5.TabIndex = 43;
-            // 
-            // lblLogo
-            // 
-            this.lblLogo.AutoSize = true;
-            this.lblLogo.Location = new System.Drawing.Point(1377, -112);
-            this.lblLogo.Name = "lblLogo";
-            this.lblLogo.Size = new System.Drawing.Size(78, 32);
-            this.lblLogo.TabIndex = 42;
-            this.lblLogo.Text = "Logo";
+            this.rdbEnviada.AutoSize = true;
+            this.rdbEnviada.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbEnviada.Location = new System.Drawing.Point(46, 97);
+            this.rdbEnviada.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbEnviada.Name = "rdbEnviada";
+            this.rdbEnviada.Size = new System.Drawing.Size(82, 25);
+            this.rdbEnviada.TabIndex = 66;
+            this.rdbEnviada.TabStop = true;
+            this.rdbEnviada.Text = "Enviada";
+            this.rdbEnviada.UseVisualStyleBackColor = true;
             // 
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(849, 138);
+            this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.Location = new System.Drawing.Point(-4, -5);
+            this.lblEstado.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(103, 32);
+            this.lblEstado.Size = new System.Drawing.Size(56, 21);
             this.lblEstado.TabIndex = 40;
             this.lblEstado.Text = "Estado";
+            // 
+            // rdbInactiva
+            // 
+            this.rdbInactiva.AutoSize = true;
+            this.rdbInactiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbInactiva.Location = new System.Drawing.Point(46, 56);
+            this.rdbInactiva.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbInactiva.Name = "rdbInactiva";
+            this.rdbInactiva.Size = new System.Drawing.Size(81, 25);
+            this.rdbInactiva.TabIndex = 48;
+            this.rdbInactiva.TabStop = true;
+            this.rdbInactiva.Text = "Inactiva";
+            this.rdbInactiva.UseVisualStyleBackColor = true;
+            // 
+            // mktCodigo
+            // 
+            this.mktCodigo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mktCodigo.Location = new System.Drawing.Point(138, 60);
+            this.mktCodigo.Mask = "pl000000";
+            this.mktCodigo.Name = "mktCodigo";
+            this.mktCodigo.Size = new System.Drawing.Size(150, 29);
+            this.mktCodigo.TabIndex = 65;
+            this.mktCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktCodigo_KeyUp);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.lblFechaHasta, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dtpFechaHasta, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dtpFechaPago, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblFechaDesde, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dtpFechaDesde, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblFechaPago, 0, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 144);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(530, 134);
+            this.tableLayoutPanel1.TabIndex = 64;
+            // 
+            // lblFechaHasta
+            // 
+            this.lblFechaHasta.AutoSize = true;
+            this.lblFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaHasta.Location = new System.Drawing.Point(1, 36);
+            this.lblFechaHasta.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblFechaHasta.Name = "lblFechaHasta";
+            this.lblFechaHasta.Size = new System.Drawing.Size(93, 21);
+            this.lblFechaHasta.TabIndex = 51;
+            this.lblFechaHasta.Text = "Fecha Hasta";
+            // 
+            // dtpFechaHasta
+            // 
+            this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaHasta.Location = new System.Drawing.Point(266, 37);
+            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpFechaHasta.Name = "dtpFechaHasta";
+            this.dtpFechaHasta.Size = new System.Drawing.Size(248, 29);
+            this.dtpFechaHasta.TabIndex = 52;
+            // 
+            // dtpFechaPago
+            // 
+            this.dtpFechaPago.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaPago.Location = new System.Drawing.Point(266, 73);
+            this.dtpFechaPago.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpFechaPago.Name = "dtpFechaPago";
+            this.dtpFechaPago.Size = new System.Drawing.Size(248, 29);
+            this.dtpFechaPago.TabIndex = 53;
+            // 
+            // lblFechaDesde
+            // 
+            this.lblFechaDesde.AutoSize = true;
+            this.lblFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaDesde.Location = new System.Drawing.Point(1, 0);
+            this.lblFechaDesde.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblFechaDesde.Name = "lblFechaDesde";
+            this.lblFechaDesde.Size = new System.Drawing.Size(97, 21);
+            this.lblFechaDesde.TabIndex = 50;
+            this.lblFechaDesde.Text = "Fecha Desde";
+            // 
+            // dtpFechaDesde
+            // 
+            this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaDesde.Location = new System.Drawing.Point(266, 1);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpFechaDesde.Name = "dtpFechaDesde";
+            this.dtpFechaDesde.Size = new System.Drawing.Size(248, 29);
+            this.dtpFechaDesde.TabIndex = 55;
+            // 
+            // lblFechaPago
+            // 
+            this.lblFechaPago.AutoSize = true;
+            this.lblFechaPago.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaPago.Location = new System.Drawing.Point(1, 72);
+            this.lblFechaPago.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblFechaPago.Name = "lblFechaPago";
+            this.lblFechaPago.Size = new System.Drawing.Size(109, 21);
+            this.lblFechaPago.TabIndex = 54;
+            this.lblFechaPago.Text = "Fecha de Pago";
+            // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmar.Location = new System.Drawing.Point(6, 284);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(100, 35);
+            this.btnConfirmar.TabIndex = 63;
+            this.btnConfirmar.Text = "Confirmar";
+            this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.Location = new System.Drawing.Point(138, 94);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(1);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(290, 29);
+            this.txtNombre.TabIndex = 44;
+            this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Location = new System.Drawing.Point(9, 96);
+            this.lblNombre.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(68, 21);
+            this.lblNombre.TabIndex = 37;
+            this.lblNombre.Text = "Nombre";
+            // 
+            // lblLogo
+            // 
+            this.lblLogo.AutoSize = true;
+            this.lblLogo.Location = new System.Drawing.Point(516, -47);
+            this.lblLogo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblLogo.Name = "lblLogo";
+            this.lblLogo.Size = new System.Drawing.Size(31, 13);
+            this.lblLogo.TabIndex = 42;
+            this.lblLogo.Text = "Logo";
             // 
             // lblCodigo
             // 
             this.lblCodigo.AutoSize = true;
-            this.lblCodigo.Location = new System.Drawing.Point(25, 151);
+            this.lblCodigo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigo.Location = new System.Drawing.Point(9, 63);
+            this.lblCodigo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(284, 32);
+            this.lblCodigo.Size = new System.Drawing.Size(60, 21);
             this.lblCodigo.TabIndex = 36;
-            this.lblCodigo.Text = "Tipo de Identificación";
+            this.lblCodigo.Text = "Código";
             // 
-            // label4
+            // toolStripMantPlanilla
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, -28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(182, 32);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "Identificacion";
+            this.toolStripMantPlanilla.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMantPlanilla.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStripMantPlanilla.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAgregar,
+            this.btnEditar,
+            this.btnEliminar,
+            this.btnLimpiar,
+            this.btnSalir});
+            this.toolStripMantPlanilla.Location = new System.Drawing.Point(0, 0);
+            this.toolStripMantPlanilla.Name = "toolStripMantPlanilla";
+            this.toolStripMantPlanilla.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStripMantPlanilla.Size = new System.Drawing.Size(785, 28);
+            this.toolStripMantPlanilla.TabIndex = 34;
+            this.toolStripMantPlanilla.Text = "toolStrip1";
             // 
-            // toolStripMantEmpresa
+            // btnAgregar
             // 
-            this.toolStripMantEmpresa.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStripMantEmpresa.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonAgregar,
-            this.toolStripButtonEditar,
-            this.toolStripButtonEliminar,
-            this.toolStripButtonLimpiar,
-            this.toolStripButtonSalir});
-            this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
-            this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(1354, 52);
-            this.toolStripMantEmpresa.TabIndex = 34;
-            this.toolStripMantEmpresa.Text = "toolStrip1";
+            this.btnAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(70, 25);
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // toolStripButtonAgregar
+            // btnEditar
             // 
-            this.toolStripButtonAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonAgregar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAgregar.Image")));
-            this.toolStripButtonAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAgregar.Name = "toolStripButtonAgregar";
-            this.toolStripButtonAgregar.Size = new System.Drawing.Size(128, 45);
-            this.toolStripButtonAgregar.Text = "Agregar";
+            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(54, 25);
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
-            // toolStripButtonEditar
+            // btnEliminar
             // 
-            this.toolStripButtonEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonEditar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEditar.Image")));
-            this.toolStripButtonEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEditar.Name = "toolStripButtonEditar";
-            this.toolStripButtonEditar.Size = new System.Drawing.Size(97, 45);
-            this.toolStripButtonEditar.Text = "Editar";
+            this.btnEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(71, 25);
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // toolStripButtonEliminar
+            // btnLimpiar
             // 
-            this.toolStripButtonEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonEliminar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEliminar.Image")));
-            this.toolStripButtonEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEliminar.Name = "toolStripButtonEliminar";
-            this.toolStripButtonEliminar.Size = new System.Drawing.Size(126, 45);
-            this.toolStripButtonEliminar.Text = "Eliminar";
+            this.btnLimpiar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(67, 25);
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // toolStripButtonLimpiar
+            // btnSalir
             // 
-            this.toolStripButtonLimpiar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLimpiar.Image")));
-            this.toolStripButtonLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonLimpiar.Name = "toolStripButtonLimpiar";
-            this.toolStripButtonLimpiar.Size = new System.Drawing.Size(119, 45);
-            this.toolStripButtonLimpiar.Text = "Limpiar";
-            // 
-            // toolStripButtonSalir
-            // 
-            this.toolStripButtonSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonSalir.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSalir.Image")));
-            this.toolStripButtonSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSalir.Name = "toolStripButtonSalir";
-            this.toolStripButtonSalir.Size = new System.Drawing.Size(77, 45);
-            this.toolStripButtonSalir.Text = "Salir";
+            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(45, 25);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // dgvPlanillas
             // 
             this.dgvPlanillas.AllowUserToAddRows = false;
             this.dgvPlanillas.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPlanillas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPlanillas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPlanillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPlanillas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPlanillas.Location = new System.Drawing.Point(0, 0);
+            this.dgvPlanillas.Margin = new System.Windows.Forms.Padding(1);
             this.dgvPlanillas.Name = "dgvPlanillas";
             this.dgvPlanillas.ReadOnly = true;
+            this.dgvPlanillas.RowHeadersVisible = false;
             this.dgvPlanillas.RowHeadersWidth = 102;
             this.dgvPlanillas.RowTemplate.Height = 40;
-            this.dgvPlanillas.Size = new System.Drawing.Size(1354, 823);
-            this.dgvPlanillas.TabIndex = 2;
+            this.dgvPlanillas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPlanillas.Size = new System.Drawing.Size(785, 485);
+            this.dgvPlanillas.TabIndex = 5;
+            this.dgvPlanillas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColaboradores_CellContentDoubleClick);
             // 
-            // lblFechaDesde
+            // errProv1
             // 
-            this.lblFechaDesde.AutoSize = true;
-            this.lblFechaDesde.Location = new System.Drawing.Point(25, 331);
-            this.lblFechaDesde.Name = "lblFechaDesde";
-            this.lblFechaDesde.Size = new System.Drawing.Size(182, 32);
-            this.lblFechaDesde.TabIndex = 50;
-            this.lblFechaDesde.Text = "Fecha Desde";
-            // 
-            // lblFechaHasta
-            // 
-            this.lblFechaHasta.AutoSize = true;
-            this.lblFechaHasta.Location = new System.Drawing.Point(25, 406);
-            this.lblFechaHasta.Name = "lblFechaHasta";
-            this.lblFechaHasta.Size = new System.Drawing.Size(174, 32);
-            this.lblFechaHasta.TabIndex = 51;
-            this.lblFechaHasta.Text = "Fecha Hasta";
-            // 
-            // dtpFechaDesde
-            // 
-            this.dtpFechaDesde.Location = new System.Drawing.Point(369, 331);
-            this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(455, 38);
-            this.dtpFechaDesde.TabIndex = 52;
-            // 
-            // dtpFechaHasta
-            // 
-            this.dtpFechaHasta.Location = new System.Drawing.Point(369, 400);
-            this.dtpFechaHasta.Name = "dtpFechaHasta";
-            this.dtpFechaHasta.Size = new System.Drawing.Size(436, 38);
-            this.dtpFechaHasta.TabIndex = 53;
+            this.errProv1.ContainerControl = this;
             // 
             // frmMantenimientoPlanillas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1354, 1364);
+            this.ClientSize = new System.Drawing.Size(785, 818);
             this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "frmMantenimientoPlanillas";
             this.Text = "Mantenimiento de Planillas de Pago";
+            this.Load += new System.EventHandler(this.frmMantenimientoPlanillas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.toolStripMantEmpresa.ResumeLayout(false);
-            this.toolStripMantEmpresa.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.toolStripMantPlanilla.ResumeLayout(false);
+            this.toolStripMantPlanilla.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanillas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -674,22 +830,28 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.RadioButton rdbInactiva;
         private System.Windows.Forms.RadioButton rdbActiva;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label lblLogo;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Label lblCodigo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ToolStrip toolStripMantEmpresa;
-        private System.Windows.Forms.ToolStripButton toolStripButtonAgregar;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEditar;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEliminar;
-        private System.Windows.Forms.ToolStripButton toolStripButtonLimpiar;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSalir;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.DataGridView dgvPlanillas;
+        private System.Windows.Forms.ToolStrip toolStripMantPlanilla;
+        private System.Windows.Forms.ToolStripButton btnAgregar;
+        private System.Windows.Forms.ToolStripButton btnEditar;
+        private System.Windows.Forms.ToolStripButton btnEliminar;
+        private System.Windows.Forms.ToolStripButton btnLimpiar;
+        private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.Label lblFechaHasta;
         private System.Windows.Forms.Label lblFechaDesde;
+        private System.Windows.Forms.DateTimePicker dtpFechaPago;
         private System.Windows.Forms.DateTimePicker dtpFechaHasta;
         private System.Windows.Forms.DateTimePicker dtpFechaDesde;
+        private System.Windows.Forms.Label lblFechaPago;
+        private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.MaskedTextBox mktCodigo;
+        private System.Windows.Forms.RadioButton rdbPorEnviar;
+        private System.Windows.Forms.RadioButton rdbEnviada;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ErrorProvider errProv1;
+        private System.Windows.Forms.DataGridView dgvPlanillas;
     }
 }
