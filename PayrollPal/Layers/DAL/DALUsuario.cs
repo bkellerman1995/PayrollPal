@@ -170,7 +170,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@IDUsuario", pUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@NombreUsuario", pUsuario.NombreUsuario);
                     command.Parameters.AddWithValue("@Contrasenna", Criptografia.EncrypthAES(pUsuario.Contrasenna));
-                    command.Parameters.AddWithValue("@Asignado", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+                    command.Parameters.AddWithValue("@Asignado", pUsuario.Asignado);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -206,7 +206,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@IDUsuario", pUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@NombreUsuario", pUsuario.NombreUsuario);
                     command.Parameters.AddWithValue("@Contrasenna", Criptografia.EncrypthAES(pUsuario.Contrasenna));
-                    command.Parameters.AddWithValue("@Asignado", Criptografia.EncrypthAES(pUsuario.Contrasenna));
+                    command.Parameters.AddWithValue("@Asignado", pUsuario.Asignado);
 
 
                     command.CommandType = CommandType.StoredProcedure;

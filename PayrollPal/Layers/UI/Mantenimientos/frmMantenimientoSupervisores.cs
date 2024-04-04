@@ -374,12 +374,14 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnQuitarColab_Click(object sender, EventArgs e)
         {
+            Supervisor oSupervisor = new Supervisor();
             if (this.lstColaboradoresSup.SelectedItem != null)
             {
                 Colaborador oColaborador = this.lstColaboradoresSup.SelectedItem as Colaborador;
                 listaColaboradoresALL.Add(oColaborador);
                 listaColaboradoresSupervisor.Remove(oColaborador);
-
+                oColaborador.IDSupervisor = oSupervisor;
+                BLL.BLLColaborador.Update(oColaborador);
 
                 RefrescarListaColaboradoresPorSup();
                 RefrescarListaColaboradoresALL();
@@ -575,10 +577,15 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             oSupervisor.IDRol = rol;
             oSupervisor.Descripcion = this.txtDescripcion.Text;
 
-            foreach (var item in listaColaboradoresSupervisor)
+            if (listaColaboradoresSupervisor.Count > 0)
             {
-                item.IDSupervisor = oSupervisor;
+                foreach (var item in listaColaboradoresSupervisor)
+                {
+                    item.IDSupervisor = oSupervisor;
+                    BLLColaborador.Update(item);
+                }
             }
+ 
 
 
             //Se llama al método Create del Supervisor 

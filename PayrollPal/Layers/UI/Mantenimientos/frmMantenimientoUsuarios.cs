@@ -411,6 +411,7 @@ namespace PayrollPal.UI.Mantenimientos
             oUsuario.IDUsuario = this.mktID.Text;
             oUsuario.NombreUsuario = this.txtNombre.Text;
             oUsuario.Contrasenna = this.txtContrasenna.Text;
+            oUsuario.Asignado = false;
 
             //Se llama al método Create del Usuario 
             //que se encarga de revisar si el usuario existe primero
@@ -600,6 +601,14 @@ namespace PayrollPal.UI.Mantenimientos
         {
             if (e.ColumnIndex == 2 && e.Value != null)
                 e.Value = new String('*', e.Value.ToString().Length);
+
+            if (e.ColumnIndex == 3 && e.Value != null)
+            {
+                if (e.Value.ToString() == "True")
+                    e.Value = "Sí";
+                if (e.Value.ToString() == "False")
+                    e.Value = "No";
+            }
         }
     }
 }

@@ -113,7 +113,12 @@ namespace PayrollPal.UI.Mantenimientos
             string combosVacios = "";
             bool vacio = false;
             this.cmbDepartamento.DataSource = BLLDepartamento.SelectAll();
-            this.cmbUsuario.DataSource = BLLUsuario.SelectAllNoAsignado();
+
+            List<Usuario> listaUsuariosNoAsignados = BLLUsuario.SelectAllNoAsignado();
+            foreach (var item in listaUsuariosNoAsignados)
+            {
+                this.cmbUsuario.Items.Add(item);
+            }
             this.cmbPuesto.DataSource = BLLPuesto.SelectAll();
             this.cmbRol.DataSource = BLLRol.SelectAll();
             this.cmbSupervisor.DataSource = BLLSupervisor.SelectAll();
@@ -684,7 +689,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             oColaborador.IDUsuario.Asignado = true;
             BLLUsuario.Update(oColaborador.IDUsuario);
-            oColaborador.IDUsuario.Asignado = true;
+
             oColaborador.CodigoPuesto = (Puesto)this.cmbPuesto.SelectedItem;
             oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
 
@@ -711,12 +716,16 @@ namespace PayrollPal.UI.Mantenimientos
             //antes de agregar al colaborador
 
             string idColaborador = this.mktID.Text.Replace("-", "");
+            Usuario oUsuarioADeshabilitar = new Usuario();
             if (BLLColaborador.SelectById(idColaborador) != null)
             {
                 if (oColaborador.IDUsuario != BLLColaborador.SelectById(idColaborador).IDUsuario)
                 {
-                    BLLColaborador.SelectById(idColaborador).IDUsuario.Asignado = false;
-                    BLLUsuario.Update(BLLColaborador.SelectById(idColaborador).IDUsuario);
+                    oUsuarioADeshabilitar = BLLColaborador.SelectById(idColaborador).IDUsuario;
+                    oUsuarioADeshabilitar.Asignado = false;
+                    oUsuarioADeshabilitar.Contrasenna = Criptografia.DecrypthAES(oUsuarioADeshabilitar.Contrasenna);
+
+                    BLLUsuario.Update(oUsuarioADeshabilitar);
                 }
                 BLLColaborador.Update(oColaborador);
             }
@@ -1047,10 +1056,10 @@ namespace PayrollPal.UI.Mantenimientos
                     this.mktSalarioHora.Text = oColaborador.SalarioHora.ToString();
                     this.txtCorreoElectronico.Text = oColaborador.CorreoElectronico.ToString();
                     this.mktCuentaIBAN.Text = oColaborador.CuentaIBAN.ToString();
+                    this.cmbUsuario.Items.Add(oColaborador.IDUsuario);
                     this.cmbUsuario.Text = oColaborador.IDUsuario.ToString();
                     this.cmbPuesto.Text = oColaborador.CodigoPuesto.ToString();
                     this.cmbRol.Text = oColaborador.IDRol.ToString();
-                    this.cmbSupervisor.Text = oColaborador.IDSupervisor.ToString();
                     this.cmbSupervisor.Text = oColaborador.IDSupervisor.ToString();
 
                     if (oColaborador.Estado == true)
@@ -1124,5 +1133,4 @@ namespace PayrollPal.UI.Mantenimientos
 
         }
     }
-
 }
