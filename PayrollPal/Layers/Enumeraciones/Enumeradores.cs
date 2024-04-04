@@ -10,8 +10,8 @@ namespace PayrollPal.Enumeraciones
 {
     public enum Estado
     {
-        Activo = 'A',
-        Inactivo = 'I'
+        Activo,
+        Inactivo
     }
 
     public enum CRUD
@@ -35,5 +35,24 @@ namespace PayrollPal.Enumeraciones
         Inactiva,
         Enviada,
         PorEnviar
+    }
+
+    public enum TipoPercepcionDeduccion
+    {
+        Percepcion,
+        Deduccion
+    }
+
+    public enum TipoPorcAbs
+    {
+        Porcentaje,
+        Absoluto
+    }
+
+    public enum PrioridadDeduccionPercepcion
+    {
+        Alta,
+        Media,
+        Baja
     }
 }
