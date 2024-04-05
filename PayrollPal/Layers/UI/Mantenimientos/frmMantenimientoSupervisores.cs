@@ -46,7 +46,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 CargarListasColaboradoresALLySupervisores();
 
-                //Programar el textBox de ROL con el ROL 2 (Supervisore) 
+                //Programar el textBox de ROL con el ROL 2 (Supervisor) 
                 //automáticamente
 
                 rol = new Rol

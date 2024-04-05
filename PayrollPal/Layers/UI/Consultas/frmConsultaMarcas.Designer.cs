@@ -90,18 +90,18 @@
             // 
             // txtRutaArchivoJSON
             // 
-            this.txtRutaArchivoJSON.Location = new System.Drawing.Point(149, 99);
+            this.txtRutaArchivoJSON.Location = new System.Drawing.Point(176, 99);
             this.txtRutaArchivoJSON.Multiline = true;
             this.txtRutaArchivoJSON.Name = "txtRutaArchivoJSON";
             this.txtRutaArchivoJSON.ReadOnly = true;
-            this.txtRutaArchivoJSON.Size = new System.Drawing.Size(654, 41);
+            this.txtRutaArchivoJSON.Size = new System.Drawing.Size(627, 41);
             this.txtRutaArchivoJSON.TabIndex = 5;
             // 
             // lblRutaArchivoJSON
             // 
             this.lblRutaArchivoJSON.AutoSize = true;
             this.lblRutaArchivoJSON.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRutaArchivoJSON.Location = new System.Drawing.Point(20, 102);
+            this.lblRutaArchivoJSON.Location = new System.Drawing.Point(3, 108);
             this.lblRutaArchivoJSON.Name = "lblRutaArchivoJSON";
             this.lblRutaArchivoJSON.Size = new System.Drawing.Size(167, 21);
             this.lblRutaArchivoJSON.TabIndex = 4;

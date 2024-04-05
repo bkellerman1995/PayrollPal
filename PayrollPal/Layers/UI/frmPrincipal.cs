@@ -120,6 +120,12 @@ namespace PayrollPal.UI
             frmMantenimientoDeduccionesPercepciones frm = new frmMantenimientoDeduccionesPercepciones();
             frm.ShowDialog();
         }
+
+        private void deduccionesYPercepcionesPorColaboradorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMantenimientoDeduccionesPercepcionesColaborador frm = new frmMantenimientoDeduccionesPercepcionesColaborador();
+            frm.ShowDialog();
+        }
     }
 
 

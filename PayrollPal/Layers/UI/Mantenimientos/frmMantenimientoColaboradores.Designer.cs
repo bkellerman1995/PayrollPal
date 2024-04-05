@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoColaboradores));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.cmbPuestos = new System.Windows.Forms.ComboBox();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
             this.rdbActivo = new System.Windows.Forms.RadioButton();
             this.lblEstado = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.lblCuentaIBAN = new System.Windows.Forms.Label();
             this.cmbRol = new System.Windows.Forms.ComboBox();
             this.lblRol = new System.Windows.Forms.Label();
-            this.cmbPuesto = new System.Windows.Forms.ComboBox();
             this.lblPuesto = new System.Windows.Forms.Label();
             this.txtCorreoElectronico = new System.Windows.Forms.TextBox();
             this.lblCorreoElectronico = new System.Windows.Forms.Label();
@@ -117,6 +117,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.cmbPuestos);
             this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
             this.splitContainer1.Panel1.Controls.Add(this.rdbActivo);
             this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
@@ -134,7 +135,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.lblCuentaIBAN);
             this.splitContainer1.Panel1.Controls.Add(this.cmbRol);
             this.splitContainer1.Panel1.Controls.Add(this.lblRol);
-            this.splitContainer1.Panel1.Controls.Add(this.cmbPuesto);
             this.splitContainer1.Panel1.Controls.Add(this.lblPuesto);
             this.splitContainer1.Panel1.Controls.Add(this.txtCorreoElectronico);
             this.splitContainer1.Panel1.Controls.Add(this.lblCorreoElectronico);
@@ -166,12 +166,21 @@
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
             // 
+            // cmbPuestos
+            // 
+            this.cmbPuestos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPuestos.FormattingEnabled = true;
+            this.cmbPuestos.Location = new System.Drawing.Point(632, 399);
+            this.cmbPuestos.Name = "cmbPuestos";
+            this.cmbPuestos.Size = new System.Drawing.Size(255, 29);
+            this.cmbPuestos.TabIndex = 70;
+            // 
             // rdbInactivo
             // 
             this.rdbInactivo.AutoSize = true;
             this.rdbInactivo.Location = new System.Drawing.Point(632, 571);
             this.rdbInactivo.Name = "rdbInactivo";
-            this.rdbInactivo.Size = new System.Drawing.Size(82, 25);
+            this.rdbInactivo.Size = new System.Drawing.Size(81, 25);
             this.rdbInactivo.TabIndex = 69;
             this.rdbInactivo.TabStop = true;
             this.rdbInactivo.Text = "Inactiva";
@@ -182,7 +191,7 @@
             this.rdbActivo.AutoSize = true;
             this.rdbActivo.Location = new System.Drawing.Point(632, 521);
             this.rdbActivo.Name = "rdbActivo";
-            this.rdbActivo.Size = new System.Drawing.Size(71, 25);
+            this.rdbActivo.Size = new System.Drawing.Size(70, 25);
             this.rdbActivo.TabIndex = 68;
             this.rdbActivo.TabStop = true;
             this.rdbActivo.Text = "Activa";
@@ -342,17 +351,6 @@
             this.lblRol.Size = new System.Drawing.Size(33, 21);
             this.lblRol.TabIndex = 48;
             this.lblRol.Text = "Rol";
-            // 
-            // cmbPuesto
-            // 
-            this.cmbPuesto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPuesto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPuesto.FormattingEnabled = true;
-            this.cmbPuesto.Location = new System.Drawing.Point(633, 396);
-            this.cmbPuesto.Margin = new System.Windows.Forms.Padding(1);
-            this.cmbPuesto.Name = "cmbPuesto";
-            this.cmbPuesto.Size = new System.Drawing.Size(254, 29);
-            this.cmbPuesto.TabIndex = 47;
             // 
             // lblPuesto
             // 
@@ -892,7 +890,6 @@
         private System.Windows.Forms.TextBox txtCorreoElectronico;
         private System.Windows.Forms.Label lblCorreoElectronico;
         private System.Windows.Forms.Label lblPuesto;
-        private System.Windows.Forms.ComboBox cmbPuesto;
         private System.Windows.Forms.ComboBox cmbRol;
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.Label lblCuentaIBAN;
@@ -930,5 +927,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDSupervisor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewImageColumn Fotografia;
+        private System.Windows.Forms.ComboBox cmbPuestos;
     }
 }

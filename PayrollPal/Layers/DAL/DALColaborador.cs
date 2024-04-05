@@ -195,7 +195,7 @@ namespace PayrollPal.Layers.DAL {
                 DataSet ds = null;  // Crear Dataset
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_SELECT_Colaborador_SoloColaboradores");
+                    var command = new SqlCommand("usp_SELECT_Colaborador_All");
                     command.CommandType = CommandType.StoredProcedure;
                     ds = db.ExecuteReader(command, "Colaborador");
                 }

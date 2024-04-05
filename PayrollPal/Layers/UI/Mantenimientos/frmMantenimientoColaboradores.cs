@@ -60,6 +60,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 //Limpiar los controles del form 
                 LimpiarControles();
+                RevisarCombosVacios();
             }
             catch (Exception msg)
             {
@@ -76,6 +77,55 @@ namespace PayrollPal.UI.Mantenimientos
 
 
 
+        }
+
+        private void RevisarCombosVacios()
+        {
+            string combosVacios = "";
+            bool vacio = false;
+
+            if (BLLDepartamento.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Departamento";
+                vacio = true;
+            }
+
+            if (BLLUsuario.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Usuario";
+                vacio = true;
+            }
+
+            if (BLLPuesto.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Puesto";
+                vacio = true;
+            }
+
+            if (BLLRol.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Rol";
+                vacio = true;
+            }
+
+            if (BLLSupervisor.SelectAll().Count == 0)
+            {
+                combosVacios += "\n- Supervisor";
+                vacio = true;
+            }
+
+            if (vacio)
+            {
+
+                MessageBox.Show("Hay campos(s) vacío(s): " + combosVacios + "" +
+        "\n\nEstos campos son necesarios para poder agregar colaboradores." +
+        "\n" +
+        "\nNo puede agregar colaboradores sin datos en los campos arriba mencionados." +
+        "\n" +
+        "\nDebe agregar los campos faltantes en el mantenimiento respectivo",
+        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Dispose();
+            }
         }
 
         /// <summary>
@@ -110,8 +160,7 @@ namespace PayrollPal.UI.Mantenimientos
         /// </summary>
         private void CargarCombos()
         {
-            string combosVacios = "";
-            bool vacio = false;
+
             this.cmbDepartamento.DataSource = BLLDepartamento.SelectAll();
 
             List<Usuario> listaUsuariosNoAsignados = BLLUsuario.SelectAllNoAsignado();
@@ -119,47 +168,14 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 this.cmbUsuario.Items.Add(item);
             }
-            this.cmbPuesto.DataSource = BLLPuesto.SelectAll();
+
+
             this.cmbRol.DataSource = BLLRol.SelectAll();
             this.cmbSupervisor.DataSource = BLLSupervisor.SelectAll();
 
-            if (BLLDepartamento.SelectAll().Count == 0)
+            foreach (var item in BLLPuesto.SelectAll())
             {
-                combosVacios += "\n- Departamento";
-                vacio = true;
-            }
-
-            if (BLLUsuario.SelectAll().Count == 0)
-            {
-                combosVacios += "\n- Usuario";
-                vacio = true;
-            }
-
-            if (BLLPuesto.SelectAll().Count == 0)
-            {
-                combosVacios += "\n- Puesto";
-                vacio = true;
-            }
-
-            if (BLLRol.SelectAll().Count == 0)
-            {
-                combosVacios += "\n- Rol";
-                vacio = true;
-            }
-
-            if (BLLSupervisor.SelectAll().Count == 0)
-            {
-                combosVacios += "\n- Supervisor";
-                vacio = true;
-            }
-
-            if (vacio)
-            {
-                MessageBox.Show("Hay campos(s) vacío(s): " + combosVacios + "" +
-                    "\n Los cuales son necesarios para poder agregar colaboradores." +
-                    "\nNo puede agregar colaboradores sin datos en los campos arriba mencionados.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Dispose();
+                this.cmbPuestos.Items.Add(item);
             }
 
 
@@ -200,7 +216,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 this.cmbDepartamento.SelectedIndex = -1;
                 this.cmbUsuario.SelectedIndex = -1;
-                this.cmbPuesto.SelectedIndex = -1;
+                this.cmbPuestos.SelectedIndex = -1;
                 this.cmbRol.SelectedIndex = -1;
                 this.lblSupervisor.Visible = false;
                 this.cmbSupervisor.Visible = false;
@@ -257,7 +273,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 this.cmbDepartamento.Enabled = false;
                 this.cmbUsuario.Enabled = false;
-                this.cmbPuesto.Enabled = false;
+                this.cmbPuestos.Enabled = false;
                 this.cmbRol.Enabled = false;
                 this.cmbSupervisor.Enabled = false;
 
@@ -382,10 +398,11 @@ namespace PayrollPal.UI.Mantenimientos
                         this.txtCorreoElectronico.Enabled = true;
                         this.mktCuentaIBAN.Enabled = true;
                         this.cmbUsuario.Enabled = true;
-                        this.cmbPuesto.Enabled = true;
+                        this.cmbPuestos.Enabled = true;
                         this.cmbRol.Enabled = true;
                         this.cmbSupervisor.Enabled = true;
                         this.pctFoto.Enabled = true;
+                        this.btnCargarFoto.Enabled = true;
                         this.rdbActivo.Enabled = true;
                         this.rdbInactivo.Enabled = true;
 
@@ -411,10 +428,11 @@ namespace PayrollPal.UI.Mantenimientos
                         this.txtCorreoElectronico.Enabled = true;
                         this.mktCuentaIBAN.Enabled = true;
                         this.cmbUsuario.Enabled = true;
-                        this.cmbPuesto.Enabled = true;
+                        this.cmbPuestos.Enabled = true;
                         this.cmbRol.Enabled = true;
                         this.cmbSupervisor.Enabled = true;
                         this.pctFoto.Enabled = true;
+                        this.btnCargarFoto.Enabled = true;
                         this.rdbActivo.Enabled = true;
                         this.rdbInactivo.Enabled = true;
                         break;
@@ -594,13 +612,13 @@ namespace PayrollPal.UI.Mantenimientos
 
                 //Validar combo Puesto
 
-                if (this.cmbPuesto.SelectedItem != null)
+                if (this.cmbPuestos.SelectedItem != null)
                 {
-                    this.errProv1.SetError(this.cmbPuesto, string.Empty);
+                    this.errProv1.SetError(this.cmbPuestos, string.Empty);
                 }
                 else
                 {
-                    this.errProv1.SetError(this.cmbPuesto, "Campo puesto no es correcto");
+                    this.errProv1.SetError(this.cmbPuestos, "Campo puesto no es correcto");
                     return false;
                 }
 
@@ -664,8 +682,11 @@ namespace PayrollPal.UI.Mantenimientos
             char[] reemplazarCaracteresSalario = new char[] { ',', '.' };
             decimal Salario = 0;
             Supervisor supervisor = new Supervisor();
+            string idColaborador = "";
+            Usuario oUsuarioADeshabilitar = new Usuario();
 
-            oColaborador.IDColaborador = this.mktID.Text;
+            oColaborador.IDColaborador = this.mktID.Text.Replace("-", "");
+            idColaborador = oColaborador.IDColaborador;
             oColaborador.Nombre = this.txtNombre.Text;
             oColaborador.Apellido1 = this.txtApellido1.Text;
             oColaborador.Apellido2 = this.txtApellido2.Text;
@@ -682,6 +703,10 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
             oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
             oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
+            if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+            {
+                oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
+            }
 
             //Si el usuario va a cambiarse
             //debe cambiarse el estado del usuario 
@@ -690,7 +715,7 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.IDUsuario.Asignado = true;
             BLLUsuario.Update(oColaborador.IDUsuario);
 
-            oColaborador.CodigoPuesto = (Puesto)this.cmbPuesto.SelectedItem;
+            oColaborador.CodigoPuesto = (Puesto)this.cmbPuestos.SelectedItem;
             oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
 
             switch (oColaborador.IDRol.IDRol)
@@ -714,12 +739,9 @@ namespace PayrollPal.UI.Mantenimientos
             //Se llama al método Create del Colaborador 
             //que se encarga de revisar si el colaborador existe primero
             //antes de agregar al colaborador
-
-            string idColaborador = this.mktID.Text.Replace("-", "");
-            Usuario oUsuarioADeshabilitar = new Usuario();
             if (BLLColaborador.SelectById(idColaborador) != null)
             {
-                if (oColaborador.IDUsuario != BLLColaborador.SelectById(idColaborador).IDUsuario)
+                if (oColaborador.IDUsuario.ToString() != BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
                 {
                     oUsuarioADeshabilitar = BLLColaborador.SelectById(idColaborador).IDUsuario;
                     oUsuarioADeshabilitar.Asignado = false;
@@ -1056,9 +1078,10 @@ namespace PayrollPal.UI.Mantenimientos
                     this.mktSalarioHora.Text = oColaborador.SalarioHora.ToString();
                     this.txtCorreoElectronico.Text = oColaborador.CorreoElectronico.ToString();
                     this.mktCuentaIBAN.Text = oColaborador.CuentaIBAN.ToString();
+                    refrescarComboUsuario();
                     this.cmbUsuario.Items.Add(oColaborador.IDUsuario);
-                    this.cmbUsuario.Text = oColaborador.IDUsuario.ToString();
-                    this.cmbPuesto.Text = oColaborador.CodigoPuesto.ToString();
+                    this.cmbUsuario.SelectedItem = (Usuario)oColaborador.IDUsuario;
+                    this.cmbPuestos.Text = oColaborador.CodigoPuesto.ToString();
                     this.cmbRol.Text = oColaborador.IDRol.ToString();
                     this.cmbSupervisor.Text = oColaborador.IDSupervisor.ToString();
 
@@ -1086,6 +1109,16 @@ namespace PayrollPal.UI.Mantenimientos
                 //Mostrar mensaje al usuario
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
+            }
+        }
+
+        private void refrescarComboUsuario()
+        {
+            this.cmbUsuario.Items.Clear();
+            List<Usuario> listaUsuariosNoAsignados = BLLUsuario.SelectAllNoAsignado();
+            foreach (var item in listaUsuariosNoAsignados)
+            {
+                this.cmbUsuario.Items.Add(item);
             }
         }
 

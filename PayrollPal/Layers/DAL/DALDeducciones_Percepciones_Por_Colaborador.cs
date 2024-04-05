@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayrollPal.Layers.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -7,48 +8,45 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using log4net;
-using PayrollPal.Layers.Entities;
-using PayrollPal.Layers.Util;
+using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.Layers.DAL
 {
-    public class DALPuesto
+    public class DALDeducciones_Percepciones_Por_Colaborador
     {
         private static readonly log4net.ILog _MyLogControlEventos =
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                     log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Puesto> SelectAll()
+        public static List<Deducciones_Percepciones_Por_Colaborador> SelectAll()
         {
             try
             {
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_SELECT_Puesto_All");
+                    var command = new SqlCommand("usp_SELECT_Deducciones_Percepciones_Por_Colaborador_All");
                     command.CommandType = CommandType.StoredProcedure;
-                    ds = db.ExecuteReader(command, "Puesto");
+                    ds = db.ExecuteReader(command, "Deducciones_Percepciones_Por_Colaborador");
                 }
 
-                List<Puesto> lista = new List<Puesto>();
+                List<Deducciones_Percepciones_Por_Colaborador> lista = new List<Deducciones_Percepciones_Por_Colaborador>();
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
 
-                        Puesto puesto = new Puesto();
-                        puesto.CodigoPuesto = int.Parse(dr["CodigoPuesto"].ToString().Trim());
-                        puesto.Nombre = dr["Nombre"].ToString();
-                        puesto.Estado = bool.Parse(dr["Estado"].ToString());
-
-                        lista.Add(puesto);
+                        Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
+                        dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
+                        dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
+                        dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
+                        lista.Add(dedPercColab);
                     }
                 }
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se cargó la lista de puestos");
+                _MyLogControlEventos.Info("Se cargó la lista de deducciones y percepcions por colaborador");
 
                 return lista;
             }
@@ -67,28 +65,28 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Puesto SelectById(int Id)
+        public static Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion)
         {
             try
             {
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_SELECT_Puesto_ByID");
-                    command.Parameters.AddWithValue("@CodigoPuesto", Id);
+                    var command = new SqlCommand("usp_DELETE_Deducciones_Percepciones_Por_Colaborador_ByCodigoDeduccionPercepcion");
+                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", CodigoDeduccionPercepcion);
                     command.CommandType = CommandType.StoredProcedure;
-                    ds = db.ExecuteReader(command, "Puesto");
+                    ds = db.ExecuteReader(command, "Deducciones_Percepciones_Por_Colaborador");
                 }
 
                 //Se crea el dataTable
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     DataTable dt = ds.Tables[0];
-                    Puesto oPuesto = new Puesto();
-                    oPuesto.CodigoPuesto = int.Parse(dt.Rows[0]["CodigoPuesto"].ToString());
-                    oPuesto.Nombre = dt.Rows[0]["Nombre"].ToString();
-                    oPuesto.Estado = bool.Parse(dt.Rows[0]["Estado"].ToString());
-                    return oPuesto;
+                    Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
+                    dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dt.Rows[0]["CodigoDeduccionPercepcion"].ToString());
+                    dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dt.Rows[0]["IdColaborador"].ToString());
+                    dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dt.Rows[0]["Prioridad"].ToString()));
+                    return dedPercColab;
                 }
                 return null;
             }
@@ -108,16 +106,16 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Puesto pPuesto)
+        public static void CREATE(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
         {
             try
             {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_INSERT_Puesto");
-                    command.Parameters.AddWithValue("@CodigoPuesto", pPuesto.CodigoPuesto);
-                    command.Parameters.AddWithValue("@Nombre", pPuesto.Nombre);
-                    command.Parameters.AddWithValue("@Estado",pPuesto.Estado);
+                    var command = new SqlCommand("usp_INSERT_Deducciones_Percepciones_Por_Colaborador");
+                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion);
+                    command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador);
+                    command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -125,8 +123,9 @@ namespace PayrollPal.Layers.DAL
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se agregó el puesto: " + pPuesto.ToString()
-                    + " a la base de datos (Tabla Puesto)");
+                _MyLogControlEventos.Info("Se agregó la deducción/percepción " + pDedPercColab.ToString()
+                    +" con prioridad: " + pDedPercColab.Prioridad.ToString()
+                    + " a la base de datos (Tabla Deducciones_Percepciones_Por_Colaborador)");
             }
             catch (Exception msg)
             {
@@ -142,16 +141,16 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Puesto pPuesto)
+        public static void UPDATE(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
         {
             try
             {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_UPDATE_Puesto");
-                    command.Parameters.AddWithValue("@CodigoPuesto", pPuesto.CodigoPuesto);
-                    command.Parameters.AddWithValue("@Nombre", pPuesto.Nombre);
-                    command.Parameters.AddWithValue("@Estado", pPuesto.Estado);
+                    var command = new SqlCommand("usp_UPDATE_Deducciones_Percepciones_Por_Colaborador");
+                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion);
+                    command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador);
+                    command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad);
 
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
@@ -159,8 +158,9 @@ namespace PayrollPal.Layers.DAL
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se modificó el puesto: " + pPuesto.ToString()
-                    + "en la base de datos (Tabla Puesto)");
+                _MyLogControlEventos.Info("Se modificó la deducción/percepción " + pDedPercColab.ToString()
+                     + " con prioridad: " + pDedPercColab.IdColaborador.ToString()
+                     + " en la base de datos (Tabla Deducciones_Percepciones_Por_Colaborador)");
             }
             catch (Exception msg)
             {
@@ -178,22 +178,22 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(int pCodigoPuesto)
+        public static void DELETE(string pCodigoDeduccionPercepcion)
         {
             try
             {
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_DELETE_Puesto_ByID");
-                    command.Parameters.AddWithValue("@CodigoPuesto", pCodigoPuesto);
+                    var command = new SqlCommand("usp_DELETE_Deducciones_Percepciones_Por_Colaborador_ByCodigoDeduccionPercepcion");
+                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pCodigoDeduccionPercepcion);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
                 }
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se eliminó el puesto con el código: " + pCodigoPuesto
-                    + " en la base de datos (Tabla Puesto)");
+                _MyLogControlEventos.Info("Se eliminó la deducción/percepción con el código: " + pCodigoDeduccionPercepcion
+                    + " en la base de datos (Tabla Deducciones_Percepciones_Por_Colaborador)");
             }
             catch (Exception msg)
             {

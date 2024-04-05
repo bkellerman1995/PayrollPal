@@ -14,6 +14,12 @@ namespace PayrollPal.Layers.Entities
         public TipoPercepcionDeduccion Tipo { set; get; }
         public double Valor { set; get; }
         public TipoPorcAbs TipoValor { set; get; }
+
+        public override string ToString()
+        {
+            return CodigoDeduccionPercepcion + " - " + Nombre +
+                " - " + Valor + "- " + TipoValor;
+        }
     }
 
 }

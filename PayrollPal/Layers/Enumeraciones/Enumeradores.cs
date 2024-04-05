@@ -55,4 +55,10 @@ namespace PayrollPal.Enumeraciones
         Media,
         Baja
     }
+
+    public enum ObservacionSolicVacaciones
+    {
+        Aprobada,
+        Rechazada,
+    }
 }
