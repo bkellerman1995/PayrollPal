@@ -89,7 +89,7 @@ namespace PayrollPal.Layers.DAL
                     DataTable dt = ds.Tables[0];
                     Deducciones_Percepciones oDeduccionesPercepciones = new Deducciones_Percepciones();
                     oDeduccionesPercepciones.CodigoDeduccionPercepcion = dt.Rows[0]["CodigoDeduccionPercepcion"].ToString();
-                    oDeduccionesPercepciones.Nombre = dt.Rows[0]["NombreUsuario"].ToString();
+                    oDeduccionesPercepciones.Nombre = dt.Rows[0]["Nombre"].ToString();
                     oDeduccionesPercepciones.Tipo = (TipoPercepcionDeduccion)Enum.Parse(typeof(PlanillaEstado), (dt.Rows[0]["Tipo"].ToString()));
                     oDeduccionesPercepciones.Valor = double.Parse(dt.Rows[0]["Valor"].ToString());
                     oDeduccionesPercepciones.TipoValor = (TipoPorcAbs)Enum.Parse(typeof(TipoPorcAbs), (dt.Rows[0]["Tipo"].ToString()));

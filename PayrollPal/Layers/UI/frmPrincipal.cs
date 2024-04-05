@@ -114,6 +114,12 @@ namespace PayrollPal.UI
             frmMantenimientoPlanillas frm = new frmMantenimientoPlanillas();
             frm.ShowDialog();
         }
+
+        private void deduccionesYPercepcionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMantenimientoDeduccionesPercepciones frm = new frmMantenimientoDeduccionesPercepciones();
+            frm.ShowDialog();
+        }
     }
 
 

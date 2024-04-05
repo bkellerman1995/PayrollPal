@@ -39,12 +39,13 @@
             this.puestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supervisorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colaboradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planillasDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planillasDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deduccionesYPercepcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -109,7 +110,8 @@
             this.puestoToolStripMenuItem,
             this.supervisorToolStripMenuItem,
             this.colaboradoresToolStripMenuItem,
-            this.planillasDePagoToolStripMenuItem});
+            this.planillasDePagoToolStripMenuItem,
+            this.deduccionesYPercepcionesToolStripMenuItem});
             this.mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
             this.mantenimientosToolStripMenuItem.Size = new System.Drawing.Size(135, 25);
             this.mantenimientosToolStripMenuItem.Text = "&Mantenimientos";
@@ -117,37 +119,44 @@
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // rolToolStripMenuItem
             // 
             this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
-            this.rolToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.rolToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
             this.rolToolStripMenuItem.Text = "Rol";
             this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
             // 
             // puestoToolStripMenuItem
             // 
             this.puestoToolStripMenuItem.Name = "puestoToolStripMenuItem";
-            this.puestoToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.puestoToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
             this.puestoToolStripMenuItem.Text = "Puesto";
             this.puestoToolStripMenuItem.Click += new System.EventHandler(this.puestoToolStripMenuItem_Click);
             // 
             // supervisorToolStripMenuItem
             // 
             this.supervisorToolStripMenuItem.Name = "supervisorToolStripMenuItem";
-            this.supervisorToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.supervisorToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
             this.supervisorToolStripMenuItem.Text = "Supervisor";
             this.supervisorToolStripMenuItem.Click += new System.EventHandler(this.supervisorToolStripMenuItem_Click);
             // 
             // colaboradoresToolStripMenuItem
             // 
             this.colaboradoresToolStripMenuItem.Name = "colaboradoresToolStripMenuItem";
-            this.colaboradoresToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.colaboradoresToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
             this.colaboradoresToolStripMenuItem.Text = "Colaboradores";
             this.colaboradoresToolStripMenuItem.Click += new System.EventHandler(this.colaboradoresToolStripMenuItem_Click);
+            // 
+            // planillasDePagoToolStripMenuItem
+            // 
+            this.planillasDePagoToolStripMenuItem.Name = "planillasDePagoToolStripMenuItem";
+            this.planillasDePagoToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
+            this.planillasDePagoToolStripMenuItem.Text = "Planillas de Pago";
+            this.planillasDePagoToolStripMenuItem.Click += new System.EventHandler(this.planillasDePagoToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
@@ -182,12 +191,12 @@
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(66, 25);
             this.ayudaToolStripMenuItem.Text = "A&yuda";
             // 
-            // planillasDePagoToolStripMenuItem
+            // deduccionesYPercepcionesToolStripMenuItem
             // 
-            this.planillasDePagoToolStripMenuItem.Name = "planillasDePagoToolStripMenuItem";
-            this.planillasDePagoToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
-            this.planillasDePagoToolStripMenuItem.Text = "Planillas de Pago";
-            this.planillasDePagoToolStripMenuItem.Click += new System.EventHandler(this.planillasDePagoToolStripMenuItem_Click);
+            this.deduccionesYPercepcionesToolStripMenuItem.Name = "deduccionesYPercepcionesToolStripMenuItem";
+            this.deduccionesYPercepcionesToolStripMenuItem.Size = new System.Drawing.Size(274, 26);
+            this.deduccionesYPercepcionesToolStripMenuItem.Text = "Deducciones y Percepciones";
+            this.deduccionesYPercepcionesToolStripMenuItem.Click += new System.EventHandler(this.deduccionesYPercepcionesToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -234,5 +243,6 @@
         private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marcasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem planillasDePagoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deduccionesYPercepcionesToolStripMenuItem;
     }
 }
