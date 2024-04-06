@@ -37,7 +37,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 CargarListaColaboradoresyDataGridView();
                 CargarCombos();
-                RevisarCombosVacios();
+                RevisarCombosListasVacios();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
@@ -102,9 +102,15 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             try
             {
 
+
                 foreach (PrioridadDeduccionPercepcion tipo in Enum.GetValues(typeof(PrioridadDeduccionPercepcion)))
                 {
                     this.cmbPrioridad.Items.Add(tipo);
+                }
+
+                foreach (var item in BLLDeduccionesPercepciones.SelectAll())
+                {
+                    this.cmbDedPercCol.Items.Add(item);
                 }
 
             }
@@ -122,22 +128,26 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             }
         }
 
-        private void RevisarCombosVacios()
+        private void RevisarCombosListasVacios()
         {
-            string combosVacios = "";
+            string camposVacios = "";
             bool vacio = false;
 
             if (BLLDeduccionesPercepciones.SelectAll().Count == 0)
             {
-                combosVacios += "\n- Deducción / Percepción";
+                camposVacios += "\n- Deducción / Percepción";
                 vacio = true;
             }
 
-            this.cmbDedPercCol.DataSource = BLLDeduccionesPercepciones.SelectAll();
+            if (BLLColaborador.SelectSoloColaboradores().Count == 0)
+            {
+                camposVacios += "\n- Colaboradores";
+                vacio = true;
+            }
 
             if (vacio)
             {
-                MessageBox.Show("Hay campos(s) vacío(s): " + combosVacios + "" +
+                MessageBox.Show("Hay campos(s) vacío(s): " + camposVacios + "" +
             "\n\nEstos campos son necesarios para poder agregar deducciones/percepciones por colaborador." +
             "\n" +
             "\nNo puede agregar deducciones/percepciones por colaborador sin datos en los campos arriba mencionados." +
@@ -314,27 +324,34 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// </summary>
         private void CrearActualizarDeduccionPercepcionPorColaborador()
         {
-            //Crear la instancia de Supervisor
-            Deducciones_Percepciones_Por_Colaborador oDedPercCol = new Deducciones_Percepciones_Por_Colaborador();
 
+            List<Deducciones_Percepciones_Por_Colaborador> lista = new List<Deducciones_Percepciones_Por_Colaborador>();
 
-            oDedPercCol.CodigoDeduccionPercepcion = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
-            oDedPercCol.IdColaborador = this.lstDedPercPorColab.SelectedItem as Colaborador;
+            Deducciones_Percepciones_Por_Colaborador oDedPercCol;
+            foreach (var item in lstDedPercPorColab.Items)
+            {
+                //Crear la instancia de Supervisor
 
+                oDedPercCol = new Deducciones_Percepciones_Por_Colaborador();
+                oDedPercCol.CodigoDeduccionPercepcion = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
+                oDedPercCol.IdColaborador = item as Colaborador;
+                oDedPercCol.Prioridad = (PrioridadDeduccionPercepcion)this.cmbPrioridad.SelectedItem;
+
+                if (BLLDeducciones_Percepciones_Por_Colaborador.SelectById(oDedPercCol.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion, oDedPercCol.IdColaborador.IDColaborador) != null)
+                {
+
+                    BLLDeducciones_Percepciones_Por_Colaborador.Update(oDedPercCol);
+                }
+                else
+                {
+                    BLLDeducciones_Percepciones_Por_Colaborador.Create(oDedPercCol);
+                }
+
+            }
 
             //Se llama al método Create del Supervisor 
             //que se encarga de revisar si el supervisor existe primero
             //antes de agregar al supervisor
-
-            if (BLLDeducciones_Percepciones_Por_Colaborador.SelectById(oDedPercCol.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion) != null)
-            {
-
-                BLLDeducciones_Percepciones_Por_Colaborador.Update(oDedPercCol);
-            }
-            else
-            {
-                BLLDeducciones_Percepciones_Por_Colaborador.Create(oDedPercCol);
-            }
 
             //Insertar el usuario a la base de datos
             //por medio del BLLSupervisor (método CREATE)
@@ -387,6 +404,19 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 else
                 {
                     this.errProv1.SetError(this.cmbPrioridad, "Campo Prioridad no es correcto");
+                    return false;
+                }
+
+                //Validar colaboradores en la lista 
+
+                if (this.lstDedPercPorColab.Items.Count != 0)
+                {
+                    this.errProv1.SetError(this.cmbPrioridad, string.Empty);
+
+                }
+                else
+                {
+                    this.errProv1.SetError(this.lstDedPercPorColab, "¡No hay colaboradores para agregar. Debe agregarlos a la lista de la derecha.");
                     return false;
                 }
             }
@@ -515,7 +545,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void VerificarHayColaboradores()
         {
 
-            //Validar los listbox de lista de supervisores y lista all colaboradores
+            //Validar si la lista all colaboradores está vacía
 
             if (this.lstColaboradoresALL.Items.Count == 0)
             {
@@ -523,11 +553,13 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     " en mantenimiento de Colaboradores");
                 this.btnAgregarCol.Enabled = false;
                 this.btnQuitarColab.Enabled = false;
+                return;
             }
             else
             {
                 this.btnAgregarCol.Enabled = true;
                 this.btnQuitarColab.Enabled = true;
+                return;
             }
         }
 
@@ -680,6 +712,16 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        
+        /// <summary>
+        /// Evento del botón Limpiar para limpiar los campos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarControles();
         }
     }
 }

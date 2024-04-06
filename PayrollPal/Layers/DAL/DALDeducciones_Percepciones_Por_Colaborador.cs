@@ -65,15 +65,16 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion)
+        public static Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion, string idColaborador)
         {
             try
             {
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_DELETE_Deducciones_Percepciones_Por_Colaborador_ByCodigoDeduccionPercepcion");
+                    var command = new SqlCommand("usp_SELECT_Deducciones_Percepciones_Por_Colaborador_ByCodigoDeduccionPercepcion");
                     command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", CodigoDeduccionPercepcion);
+                    command.Parameters.AddWithValue("@IdColaborador", idColaborador);
                     command.CommandType = CommandType.StoredProcedure;
                     ds = db.ExecuteReader(command, "Deducciones_Percepciones_Por_Colaborador");
                 }
@@ -113,9 +114,9 @@ namespace PayrollPal.Layers.DAL
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_INSERT_Deducciones_Percepciones_Por_Colaborador");
-                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion);
-                    command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador);
-                    command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad);
+                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                    command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador.IDColaborador);
+                    command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad.ToString());
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 

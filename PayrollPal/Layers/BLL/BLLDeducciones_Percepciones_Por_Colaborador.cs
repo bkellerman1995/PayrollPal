@@ -26,9 +26,9 @@ namespace PayrollPal.Layers.BLL
         #endregion
 
         #region SELECT BY ID
-        public static Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion)
+        public static Deducciones_Percepciones_Por_Colaborador SelectById(string codigoDeduccionPercepcion, string idColaborador)
         {
-            return DAL.DALDeducciones_Percepciones_Por_Colaborador.SelectById(CodigoDeduccionPercepcion);
+            return DAL.DALDeducciones_Percepciones_Por_Colaborador.SelectById(codigoDeduccionPercepcion, idColaborador);
         }
         #endregion
 
@@ -37,9 +37,9 @@ namespace PayrollPal.Layers.BLL
         {
             DialogResult resultado = new DialogResult();
 
-            if (ChequearpDedPercColab(pDedPercColab.CodigoDeduccionPercepcion.ToString()))
+            if (ChequearpDedPercColab(pDedPercColab.CodigoDeduccionPercepcion.ToString(), pDedPercColab.IdColaborador.ToString()))
             {
-                MessageBox.Show("La deducción/percepción con código: " + pDedPercColab.CodigoDeduccionPercepcion.ToString() + " ya existe" +
+                MessageBox.Show("La deducción/percepción para el colaborador: " + pDedPercColab.CodigoDeduccionPercepcion.ToString() + " ya existe" +
                     "¿Desea actualizarla?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resultado == DialogResult.Yes)
@@ -71,11 +71,11 @@ namespace PayrollPal.Layers.BLL
         #endregion
 
         #region EXISTE
-        public static bool ChequearpDedPercColab(string pDedPercColab)
+        public static bool ChequearpDedPercColab(string pCodigoDeduccionPercepcion, string pIDColaborador)
         {
             bool existe = false;
 
-            if (SelectById(pDedPercColab) != null)
+            if (SelectById(pCodigoDeduccionPercepcion, pIDColaborador) != null)
             {
                 existe = true;
             }

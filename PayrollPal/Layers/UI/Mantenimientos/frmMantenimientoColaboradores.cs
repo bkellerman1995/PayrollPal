@@ -703,10 +703,14 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
             oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
             oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
-            if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+            if (BLLColaborador.SelectById(idColaborador) != null)
             {
-                oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
+                if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+                {
+                    oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
+                }
             }
+
 
             //Si el usuario va a cambiarse
             //debe cambiarse el estado del usuario 
