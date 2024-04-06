@@ -590,7 +590,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void btnEliminar_Click(object sender, EventArgs e)
         {
 
-            string codigoDeduccionPercepcion = this.cmbDedPercCol.Text;
+            Deducciones_Percepciones dedPerc = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
+            string codigoDedPerc = dedPerc.CodigoDeduccionPercepcion;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el supervisor?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -600,7 +601,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 {
                     //Crear la instancia de Supervisor
 
-                    BLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDeduccionPercepcion, item.IDColaborador);
+                    BLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDedPerc, item.IDColaborador);
 
                 }
                 this.cmbDedPercCol.Text = "";
