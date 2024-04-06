@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoDeduccionesPercepcionesColaborador));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblListaColaboradoresALL = new System.Windows.Forms.Label();
             this.btnQuitarColab = new System.Windows.Forms.Button();
             this.btnAgregarCol = new System.Windows.Forms.Button();
@@ -54,9 +54,6 @@
             this.cmbDedPercCol = new System.Windows.Forms.ComboBox();
             this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.toolTipPercDedColaborador = new System.Windows.Forms.ToolTip(this.components);
-            this.CodigoDeduccionPercepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantDedPercColab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDedPercColab)).BeginInit();
@@ -103,7 +100,7 @@
             this.lstDedPercPorColab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstDedPercPorColab.FormattingEnabled = true;
             this.lstDedPercPorColab.ItemHeight = 21;
-            this.lstDedPercPorColab.Location = new System.Drawing.Point(859, 47);
+            this.lstDedPercPorColab.Location = new System.Drawing.Point(857, 43);
             this.lstDedPercPorColab.Name = "lstDedPercPorColab";
             this.lstDedPercPorColab.Size = new System.Drawing.Size(277, 319);
             this.lstDedPercPorColab.TabIndex = 62;
@@ -228,6 +225,7 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(71, 25);
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // errProv1
             // 
@@ -237,35 +235,31 @@
             // 
             this.dgvDedPercColab.AllowUserToAddRows = false;
             this.dgvDedPercColab.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvDedPercColab.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvDedPercColab.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDedPercColab.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDedPercColab.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDedPercColab.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDedPercColab.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDedPercColab.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDedPercColab.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CodigoDeduccionPercepcion,
-            this.IdColaborador,
-            this.Descripcion});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDedPercColab.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDedPercColab.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDedPercColab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDedPercColab.Location = new System.Drawing.Point(0, 0);
             this.dgvDedPercColab.Margin = new System.Windows.Forms.Padding(1);
@@ -315,9 +309,9 @@
             this.cmbDedPercCol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDedPercCol.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDedPercCol.FormattingEnabled = true;
-            this.cmbDedPercCol.Location = new System.Drawing.Point(186, 46);
+            this.cmbDedPercCol.Location = new System.Drawing.Point(186, 51);
             this.cmbDedPercCol.Name = "cmbDedPercCol";
-            this.cmbDedPercCol.Size = new System.Drawing.Size(260, 25);
+            this.cmbDedPercCol.Size = new System.Drawing.Size(266, 25);
             this.cmbDedPercCol.TabIndex = 69;
             // 
             // cmbPrioridad
@@ -329,27 +323,6 @@
             this.cmbPrioridad.Name = "cmbPrioridad";
             this.cmbPrioridad.Size = new System.Drawing.Size(175, 29);
             this.cmbPrioridad.TabIndex = 68;
-            // 
-            // CodigoDeduccionPercepcion
-            // 
-            this.CodigoDeduccionPercepcion.DataPropertyName = "CodigoDeduccionPercepcion";
-            this.CodigoDeduccionPercepcion.HeaderText = "Deducción / Percepción";
-            this.CodigoDeduccionPercepcion.Name = "CodigoDeduccionPercepcion";
-            this.CodigoDeduccionPercepcion.ReadOnly = true;
-            // 
-            // IdColaborador
-            // 
-            this.IdColaborador.DataPropertyName = "IdColaborador";
-            this.IdColaborador.HeaderText = "Colaborador";
-            this.IdColaborador.Name = "IdColaborador";
-            this.IdColaborador.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Prioridad";
-            this.Descripcion.HeaderText = "Prioridad";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
             // 
             // frmMantenimientoDeduccionesPercepcionesColaborador
             // 
@@ -398,8 +371,5 @@
         private System.Windows.Forms.ComboBox cmbPrioridad;
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ComboBox cmbDedPercCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoDeduccionPercepcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdColaborador;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
     }
 }

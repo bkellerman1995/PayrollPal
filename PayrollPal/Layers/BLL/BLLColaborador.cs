@@ -37,6 +37,23 @@ namespace PayrollPal.Layers.BLL
         }
         #endregion
 
+        #region SELECT Colaboradores con la misma Deduccion/Percepcion asignada
+        public static List<Colaborador> SELECTColaboradoresmismaDeduccionPercepcion()
+        {
+
+            return DAL.DALColaborador.SELECTColaboradoresmismaDeduccionPercepcion();
+        }
+        #endregion
+
+
+        #region SELECT Solo Colaboradores Sin Deducciones Percepciones Asignadas
+        public static List<Colaborador> SelectSoloSoloColaboradoresSinDedPerc()
+        {
+
+            return DAL.DALColaborador.SelectSoloSoloColaboradoresSinDedPerc();
+        }
+        #endregion
+
         #region SELECT Colaborador BY ID Supervisor
         public static List<Colaborador> SelectColaboradorIdSupervisor(string Id)
         {

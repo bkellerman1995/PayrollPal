@@ -235,6 +235,101 @@ namespace PayrollPal.Layers.DAL {
 
         #endregion
 
+        #region SELECT Colaboradores con la misma Deduccion/Percepcion asignada
+        public static List<Colaborador> SELECTColaboradoresmismaDeduccionPercepcion()
+        {
+            try
+            {
+                DataSet ds = null;  // Crear Dataset
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_SELECT_Colaboradores_ConMismasDeduccionesPercepciones_Asignadas_ALL");
+                    command.CommandType = CommandType.StoredProcedure;
+                    ds = db.ExecuteReader(command, "Colaborador");
+                }
+                List<Colaborador> lista = new List<Colaborador>();  // Crear Lista
+                if (ds.Tables[0].Rows.Count > 0)   // Cargar Lista con objetos segun tabla del dataset
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        Colaborador colaborador = new Colaborador();
+                        colaborador.IDColaborador = dr["IdColaborador"].ToString();
+                        colaborador.Nombre = dr["Nombre"].ToString();
+                        colaborador.Apellido1 = dr["Apellido1"].ToString();
+                        colaborador.Apellido2 = dr["Apellido2"].ToString();
+                        colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
+                        colaborador.Direccion = dr["Direccion"].ToString();
+                        colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
+                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
+                        colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
+                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.Foto = (byte[])dr["Foto"];
+                        colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        lista.Add(colaborador);  // Agregar el objeto a la lista
+                    }
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region SELECT Solo Colaboradores Sin Deducciones Percepciones Asignadas
+        public static List<Colaborador> SelectSoloSoloColaboradoresSinDedPerc()
+        {
+
+            try
+            {
+                DataSet ds = null;  // Crear Dataset
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_SELECT_Colaboradores_SinDeduccionesPercepciones_Asignadas_ALL");
+                    command.CommandType = CommandType.StoredProcedure;
+                    ds = db.ExecuteReader(command, "Colaborador");
+                }
+                List<Colaborador> lista = new List<Colaborador>();  // Crear Lista
+                if (ds.Tables[0].Rows.Count > 0)   // Cargar Lista con objetos segun tabla del dataset
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        Colaborador colaborador = new Colaborador();
+                        colaborador.IDColaborador = dr["IdColaborador"].ToString();
+                        colaborador.Nombre = dr["Nombre"].ToString();
+                        colaborador.Apellido1 = dr["Apellido1"].ToString();
+                        colaborador.Apellido2 = dr["Apellido2"].ToString();
+                        colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
+                        colaborador.Direccion = dr["Direccion"].ToString();
+                        colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
+                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
+                        colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
+                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.Foto = (byte[])dr["Foto"];
+                        colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        lista.Add(colaborador);  // Agregar el objeto a la lista
+                    }
+                }
+                return lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
         #region CREATE
         public static void CREATE(Colaborador pColaborador)
         {

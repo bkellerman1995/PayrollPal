@@ -64,9 +64,9 @@ namespace PayrollPal.Layers.BLL
         #endregion
 
         #region DELETE
-        public static void Delete(string pCodigoDeduccionPercepcion)
+        public static void Delete(string pCodigoDeduccionPercepcion, string pIdColaborador)
         {
-            DAL.DALDeducciones_Percepciones_Por_Colaborador.DELETE(pCodigoDeduccionPercepcion);
+            DAL.DALDeducciones_Percepciones_Por_Colaborador.DELETE(pCodigoDeduccionPercepcion, pIdColaborador);
         }
         #endregion
 

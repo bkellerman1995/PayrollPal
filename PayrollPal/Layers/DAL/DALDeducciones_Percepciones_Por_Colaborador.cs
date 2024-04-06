@@ -38,7 +38,7 @@ namespace PayrollPal.Layers.DAL
 
                         Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
                         dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
-                        dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
+                        //dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
                         dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
                         lista.Add(dedPercColab);
                     }
@@ -149,9 +149,9 @@ namespace PayrollPal.Layers.DAL
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_UPDATE_Deducciones_Percepciones_Por_Colaborador");
-                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion);
-                    command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador);
-                    command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad);
+                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                    command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador.IDColaborador);
+                    command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad.ToString());
 
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
@@ -179,7 +179,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pCodigoDeduccionPercepcion)
+        public static void DELETE(string pCodigoDeduccionPercepcion, string pIdColaborador)
         {
             try
             {
@@ -187,14 +187,15 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_DELETE_Deducciones_Percepciones_Por_Colaborador_ByCodigoDeduccionPercepcion");
                     command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pCodigoDeduccionPercepcion);
+                    command.Parameters.AddWithValue("@IDColaborador", pIdColaborador);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
                 }
 
                 //Salvar un mensaje de info en la tabla Bitacora_Log4Net
                 //de la base de datos
-                _MyLogControlEventos.Info("Se eliminó la deducción/percepción con el código: " + pCodigoDeduccionPercepcion
-                    + " en la base de datos (Tabla Deducciones_Percepciones_Por_Colaborador)");
+                _MyLogControlEventos.Info("Se eliminó la deducción/percepción: " + pCodigoDeduccionPercepcion +
+                   " - " + pIdColaborador + " en la base de datos (Tabla Deducciones_Percepciones_Por_Colaborador)");
             }
             catch (Exception msg)
             {
