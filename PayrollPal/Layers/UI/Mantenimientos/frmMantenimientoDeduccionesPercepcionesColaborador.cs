@@ -40,7 +40,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 RevisarCombosListasVacios();
 
                 //Limpiar los controles del form 
-                LimpiarControles();
+                LimpiarControlesyListas();
             }
             catch (Exception msg)
             {
@@ -65,7 +65,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             {
                 
                 RefrescarListaColaboradoresALL();
-                RefrescarListaAgregarDeduccionPercepcionColaborador();
 
                 this.dgvDedPercColab.DataSource = BLLDeducciones_Percepciones_Por_Colaborador.SelectAll();
                 this.dgvDedPercColab.Columns["IdColaborador"].Visible = false;
@@ -187,11 +186,13 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
         private void RefrescarListaAgregarDeduccionPercepcionColaborador()
         {
+
             this.lstDedPercPorColab.Items.Clear();
             foreach (var item in listaAgregarDeduccionPercepcionColaborador)
             {
                 this.lstDedPercPorColab.Items.Add(item);
             }
+
             this.errProv1.SetError(this.lstDedPercPorColab, string.Empty);
         }
 
@@ -220,8 +221,10 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 oColaborador = this.lstDedPercPorColab.SelectedItem as Colaborador;
                 listaColaboradoresALL.Add(oColaborador);
                 listaAgregarDeduccionPercepcionColaborador.Remove(oColaborador);
+                Deducciones_Percepciones dedPerc = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
+                string codigoDedPerc = dedPerc.CodigoDeduccionPercepcion;
 
-                BLLDeducciones_Percepciones_Por_Colaborador.Delete(this.cmbDedPercCol.Text, oColaborador.IDColaborador);
+                BLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDedPerc, oColaborador.IDColaborador);
 
                 RefrescarListaAgregarDeduccionPercepcionColaborador();
                 RefrescarListaColaboradoresALL();
@@ -251,6 +254,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
+                listaAgregarDeduccionPercepcionColaborador.Clear();
+
                 //Habilitar botones de Editar
                 //Eliminar y Editar
                 //tambien deshabilita el boton de Agregar
@@ -275,8 +280,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     this.cmbDedPercCol.Enabled = false;
 
                     this.cmbPrioridad.Text = oDecPercCola.Prioridad.ToString();
-
-                    this.lstDedPercPorColab.Items.Clear();
 
                     foreach (var item in BLL.BLLColaborador.SELECTColaboradoresmismaDeduccionPercepcion())
                     {
@@ -316,7 +319,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             //Llamar al método que crea y actualiza los usuarios
             CrearActualizarDeduccionPercepcionPorColaborador();
-            LimpiarControles();
+            LimpiarControlesyListas();
         }
 
         /// <summary>
@@ -335,7 +338,10 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 oDedPercCol.IdColaborador = item as Colaborador;
                 oDedPercCol.Prioridad = (PrioridadDeduccionPercepcion)this.cmbPrioridad.SelectedItem;
 
-                if (BLLDeducciones_Percepciones_Por_Colaborador.SelectById(oDedPercCol.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion, oDedPercCol.IdColaborador.IDColaborador) != null)
+                string codigoDedPerc = oDedPercCol.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion;
+                string idColaborador = oDedPercCol.IdColaborador.IDColaborador;
+
+                if (BLLDeducciones_Percepciones_Por_Colaborador.SelectById(codigoDedPerc, idColaborador) != null)
                 {
 
                     BLLDeducciones_Percepciones_Por_Colaborador.Update(oDedPercCol);
@@ -355,13 +361,17 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             //por medio del BLLSupervisor (método CREATE)
 
             //Refrescar las listas
+
+            RefrescarListaColaboradoresALL();
+            RefrescarListaAgregarDeduccionPercepcionColaborador();
+
             CargarListaColaboradoresyDataGridView();
 
             //Ocultar el boton de confirmar
             this.btnConfirmar.Visible = false;
 
-            //Limpiar los controles
-            LimpiarControles();
+            //Limpiar los controles y listas
+            LimpiarControlesyListas();
 
         }
 
@@ -595,7 +605,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 }
                 this.cmbDedPercCol.Text = "";
                 CargarListaColaboradoresyDataGridView();
-                LimpiarControles();
+                LimpiarControlesyListas();
             }
 
 
@@ -605,7 +615,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// Método para limpiar todos los controles 
         /// cuando se carga el form por primera vez (mediante el load)
         /// </summary>
-        private void LimpiarControles()
+        private void LimpiarControlesyListas()
         {
             try
             {
@@ -621,6 +631,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 this.lstDedPercPorColab.Items.Clear();
                 this.lstColaboradoresALL.BackColor = Color.White;
+
+                //listaColaboradoresALL.Clear();  
+                listaAgregarDeduccionPercepcionColaborador.Clear();
 
                 InhabilitarControles();
 
@@ -725,7 +738,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            LimpiarControles();
+            LimpiarControlesyListas();
         }
     }
 }
