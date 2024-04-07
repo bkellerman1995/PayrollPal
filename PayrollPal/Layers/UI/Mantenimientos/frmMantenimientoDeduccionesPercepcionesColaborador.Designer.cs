@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoDeduccionesPercepcionesColaborador));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblListaColaboradoresALL = new System.Windows.Forms.Label();
             this.btnQuitarColab = new System.Windows.Forms.Button();
             this.btnAgregarCol = new System.Windows.Forms.Button();
@@ -51,9 +51,16 @@
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvDedPercColab = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.rdbInactiva = new System.Windows.Forms.RadioButton();
+            this.rdbActiva = new System.Windows.Forms.RadioButton();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.cmbDedPercCol = new System.Windows.Forms.ComboBox();
             this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.toolTipPercDedColaborador = new System.Windows.Forms.ToolTip(this.components);
+            this.CodigoDeduccionPercepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prioridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantDedPercColab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDedPercColab)).BeginInit();
@@ -235,31 +242,36 @@
             // 
             this.dgvDedPercColab.AllowUserToAddRows = false;
             this.dgvDedPercColab.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvDedPercColab.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvDedPercColab.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDedPercColab.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDedPercColab.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDedPercColab.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDedPercColab.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDedPercColab.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDedPercColab.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvDedPercColab.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CodigoDeduccionPercepcion,
+            this.IdColaborador,
+            this.Prioridad,
+            this.Estado});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDedPercColab.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDedPercColab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDedPercColab.Location = new System.Drawing.Point(0, 0);
             this.dgvDedPercColab.Margin = new System.Windows.Forms.Padding(1);
@@ -272,6 +284,7 @@
             this.dgvDedPercColab.Size = new System.Drawing.Size(1193, 422);
             this.dgvDedPercColab.TabIndex = 4;
             this.dgvDedPercColab.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDedPercColab_CellContentDoubleClick);
+            this.dgvDedPercColab.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDedPercColab_CellFormatting);
             // 
             // splitContainer1
             // 
@@ -283,6 +296,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.rdbInactiva);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbActiva);
+            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
             this.splitContainer1.Panel1.Controls.Add(this.cmbDedPercCol);
             this.splitContainer1.Panel1.Controls.Add(this.cmbPrioridad);
             this.splitContainer1.Panel1.Controls.Add(this.lblListaDedPercAsignadas);
@@ -304,6 +320,40 @@
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 2;
             // 
+            // rdbInactiva
+            // 
+            this.rdbInactiva.AutoSize = true;
+            this.rdbInactiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbInactiva.Location = new System.Drawing.Point(165, 263);
+            this.rdbInactiva.Name = "rdbInactiva";
+            this.rdbInactiva.Size = new System.Drawing.Size(81, 25);
+            this.rdbInactiva.TabIndex = 72;
+            this.rdbInactiva.TabStop = true;
+            this.rdbInactiva.Text = "Inactiva";
+            this.rdbInactiva.UseVisualStyleBackColor = true;
+            // 
+            // rdbActiva
+            // 
+            this.rdbActiva.AutoSize = true;
+            this.rdbActiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbActiva.Location = new System.Drawing.Point(165, 221);
+            this.rdbActiva.Name = "rdbActiva";
+            this.rdbActiva.Size = new System.Drawing.Size(70, 25);
+            this.rdbActiva.TabIndex = 71;
+            this.rdbActiva.TabStop = true;
+            this.rdbActiva.Text = "Activa";
+            this.rdbActiva.UseVisualStyleBackColor = true;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.Location = new System.Drawing.Point(12, 223);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(56, 21);
+            this.lblEstado.TabIndex = 70;
+            this.lblEstado.Text = "Estado";
+            // 
             // cmbDedPercCol
             // 
             this.cmbDedPercCol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -323,6 +373,34 @@
             this.cmbPrioridad.Name = "cmbPrioridad";
             this.cmbPrioridad.Size = new System.Drawing.Size(175, 29);
             this.cmbPrioridad.TabIndex = 68;
+            // 
+            // CodigoDeduccionPercepcion
+            // 
+            this.CodigoDeduccionPercepcion.DataPropertyName = "CodigoDeduccionPercepcion";
+            this.CodigoDeduccionPercepcion.HeaderText = "Deducción Percepción";
+            this.CodigoDeduccionPercepcion.Name = "CodigoDeduccionPercepcion";
+            this.CodigoDeduccionPercepcion.ReadOnly = true;
+            // 
+            // IdColaborador
+            // 
+            this.IdColaborador.DataPropertyName = "IdColaborador";
+            this.IdColaborador.HeaderText = "IdColaborador";
+            this.IdColaborador.Name = "IdColaborador";
+            this.IdColaborador.ReadOnly = true;
+            // 
+            // Prioridad
+            // 
+            this.Prioridad.DataPropertyName = "Prioridad";
+            this.Prioridad.HeaderText = "Prioridad";
+            this.Prioridad.Name = "Prioridad";
+            this.Prioridad.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // frmMantenimientoDeduccionesPercepcionesColaborador
             // 
@@ -371,5 +449,12 @@
         private System.Windows.Forms.ComboBox cmbPrioridad;
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ComboBox cmbDedPercCol;
+        private System.Windows.Forms.RadioButton rdbInactiva;
+        private System.Windows.Forms.RadioButton rdbActiva;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoDeduccionPercepcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdColaborador;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prioridad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }

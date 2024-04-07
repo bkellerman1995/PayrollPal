@@ -63,7 +63,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
-                
+
                 RefrescarListaColaboradoresALL();
 
                 this.dgvDedPercColab.DataSource = BLLDeducciones_Percepciones_Por_Colaborador.SelectAll();
@@ -281,6 +281,12 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                     this.cmbPrioridad.Text = oDecPercCola.Prioridad.ToString();
 
+                    if (oDecPercCola.Estado == true)
+                        this.rdbActiva.Checked = true;
+
+                    if (oDecPercCola.Estado == false)
+                        this.rdbInactiva.Checked = true;
+
                     foreach (var item in BLL.BLLColaborador.SELECTColaboradoresmismaDeduccionPercepcion())
                     {
                         listaAgregarDeduccionPercepcionColaborador.Add(item);
@@ -337,6 +343,12 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 oDedPercCol.CodigoDeduccionPercepcion = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
                 oDedPercCol.IdColaborador = item as Colaborador;
                 oDedPercCol.Prioridad = (PrioridadDeduccionPercepcion)this.cmbPrioridad.SelectedItem;
+
+                if (this.rdbActiva.Checked)
+                    oDedPercCol.Estado = true;
+
+                if (this.rdbInactiva.Checked)
+                    oDedPercCol.Estado = false;
 
                 string codigoDedPerc = oDedPercCol.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion;
                 string idColaborador = oDedPercCol.IdColaborador.IDColaborador;
@@ -508,6 +520,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         VerificarHayColaboradores();
                         this.lstColaboradoresALL.Enabled = true;
                         this.lstDedPercPorColab.Enabled = true;
+
+                        this.rdbActiva.Enabled = true;
+                        this.rdbInactiva.Enabled = true;
                         break;
 
                     case 'U':
@@ -525,6 +540,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         VerificarHayColaboradores();
                         this.lstColaboradoresALL.Enabled = true;
                         this.lstDedPercPorColab.Enabled = true;
+                        this.rdbActiva.Enabled = true;
+                        this.rdbInactiva.Enabled = true;
+
                         break;
 
                 }
@@ -633,6 +651,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 this.lstDedPercPorColab.Items.Clear();
                 this.lstColaboradoresALL.BackColor = Color.White;
 
+                this.rdbActiva.Checked = true;
+
                 //listaColaboradoresALL.Clear();  
                 listaAgregarDeduccionPercepcionColaborador.Clear();
 
@@ -672,6 +692,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 this.cmbDedPercCol.Enabled = false;
                 this.cmbPrioridad.Enabled = false;
+
+                this.rdbActiva.Enabled = false;
+                this.rdbInactiva.Enabled = false;
 
             }
             catch (Exception msg)
@@ -740,6 +763,23 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarControlesyListas();
+        }
+
+        /// <summary>
+        /// Evento para ocultar la contraseña del usuario en el datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvDedPercColab_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.ColumnIndex == 3 && e.Value != null)
+            {
+                if (e.Value.ToString() == "True")
+                    e.Value = "Activa";
+                if (e.Value.ToString() == "False")
+                    e.Value = "Inactiva";
+            }
         }
     }
 }

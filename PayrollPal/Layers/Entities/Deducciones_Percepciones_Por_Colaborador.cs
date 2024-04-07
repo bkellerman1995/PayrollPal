@@ -12,6 +12,8 @@ namespace PayrollPal.Layers.Entities
         public Deducciones_Percepciones CodigoDeduccionPercepcion { set; get; }
         public Colaborador IdColaborador { set; get; }
         public PrioridadDeduccionPercepcion Prioridad { set; get; }
+
+        public bool Estado {  set; get; }
     }
 
 }

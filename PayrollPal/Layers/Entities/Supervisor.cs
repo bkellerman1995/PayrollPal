@@ -12,11 +12,9 @@ namespace PayrollPal.Layers.Entities
         public Rol IDRol { set; get; }
         public string Descripcion { set; get; }
 
-        public List<Colaborador> colaboradores { set; get;}
 
         public Supervisor()
         {
-            colaboradores = new List<Colaborador>();
             IDSupervisor = "0";
             IDRol = null;
             Descripcion = Enumeraciones.Rol.Supervisor.ToString();

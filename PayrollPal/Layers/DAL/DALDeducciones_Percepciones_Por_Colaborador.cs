@@ -38,8 +38,8 @@ namespace PayrollPal.Layers.DAL
 
                         Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
                         dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
-                        //dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
                         dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
+                        dedPercColab.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(dedPercColab);
                     }
                 }
@@ -117,6 +117,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
                     command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador.IDColaborador);
                     command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad.ToString());
+                    command.Parameters.AddWithValue("@Estado", pDedPercColab.Estado.ToString());
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -152,6 +153,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pDedPercColab.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
                     command.Parameters.AddWithValue("@IdColaborador", pDedPercColab.IdColaborador.IDColaborador);
                     command.Parameters.AddWithValue("@Prioridad", pDedPercColab.Prioridad.ToString());
+                    command.Parameters.AddWithValue("@Estado", pDedPercColab.Estado.ToString());
 
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
