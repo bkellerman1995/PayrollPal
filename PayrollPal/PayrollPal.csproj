@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layers\BLLSolicitudVacaciones.cs" />
     <Compile Include="Layers\BLL\BLLColaborador.cs" />
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
     <Compile Include="Layers\BLL\BLLDeduccionesPercepciones.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Layers\DAL\DALPlanillaPago.cs" />
     <Compile Include="Layers\DAL\DALPuesto.cs" />
     <Compile Include="Layers\DAL\DALRol.cs" />
+    <Compile Include="Layers\DAL\DALSolicitudVacaciones.cs" />
     <Compile Include="Layers\DAL\DALSupervisor.cs" />
     <Compile Include="Layers\DAL\DALUsuario.cs" />
     <Compile Include="Layers\Entities\Colaborador.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Layers\Entities\PlanillaPago.cs" />
     <Compile Include="Layers\Entities\Puesto.cs" />
     <Compile Include="Layers\Entities\Rol.cs" />
+    <Compile Include="Layers\Entities\SolicitudVacaciones.cs" />
     <Compile Include="Layers\Entities\Supervisor.cs" />
     <Compile Include="Layers\Entities\Usuario.cs" />
     <Compile Include="Layers\Enumeraciones\Enumeradores.cs" />

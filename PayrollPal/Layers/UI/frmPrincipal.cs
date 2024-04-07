@@ -126,6 +126,12 @@ namespace PayrollPal.UI
             frmMantenimientoDeduccionesPercepcionesColaborador frm = new frmMantenimientoDeduccionesPercepcionesColaborador();
             frm.ShowDialog();
         }
+
+        private void solicitudesDeVacacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMantenimientoSolicitudVacaciones frm = new frmMantenimientoSolicitudVacaciones();
+            frm.ShowDialog();
+        }
     }
 
 

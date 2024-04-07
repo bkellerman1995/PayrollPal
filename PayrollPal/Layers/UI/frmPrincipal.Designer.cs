@@ -41,12 +41,13 @@
             this.colaboradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planillasDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deduccionesYPercepcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solicitudesDeVacacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -113,7 +114,8 @@
             this.colaboradoresToolStripMenuItem,
             this.planillasDePagoToolStripMenuItem,
             this.deduccionesYPercepcionesToolStripMenuItem,
-            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem});
+            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem,
+            this.solicitudesDeVacacionesToolStripMenuItem});
             this.mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
             this.mantenimientosToolStripMenuItem.Size = new System.Drawing.Size(135, 25);
             this.mantenimientosToolStripMenuItem.Text = "&Mantenimientos";
@@ -167,6 +169,13 @@
             this.deduccionesYPercepcionesToolStripMenuItem.Text = "Deducciones y Percepciones";
             this.deduccionesYPercepcionesToolStripMenuItem.Click += new System.EventHandler(this.deduccionesYPercepcionesToolStripMenuItem_Click);
             // 
+            // deduccionesYPercepcionesPorColaboradorToolStripMenuItem
+            // 
+            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Name = "deduccionesYPercepcionesPorColaboradorToolStripMenuItem";
+            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Size = new System.Drawing.Size(402, 26);
+            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Text = "Deducciones y Percepciones (Por Colaborador)";
+            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Click += new System.EventHandler(this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem_Click);
+            // 
             // procesosToolStripMenuItem
             // 
             this.procesosToolStripMenuItem.Name = "procesosToolStripMenuItem";
@@ -200,12 +209,12 @@
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(66, 25);
             this.ayudaToolStripMenuItem.Text = "A&yuda";
             // 
-            // deduccionesYPercepcionesPorColaboradorToolStripMenuItem
+            // solicitudesDeVacacionesToolStripMenuItem
             // 
-            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Name = "deduccionesYPercepcionesPorColaboradorToolStripMenuItem";
-            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Size = new System.Drawing.Size(402, 26);
-            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Text = "Deducciones y Percepciones (Por Colaborador)";
-            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Click += new System.EventHandler(this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem_Click);
+            this.solicitudesDeVacacionesToolStripMenuItem.Name = "solicitudesDeVacacionesToolStripMenuItem";
+            this.solicitudesDeVacacionesToolStripMenuItem.Size = new System.Drawing.Size(402, 26);
+            this.solicitudesDeVacacionesToolStripMenuItem.Text = "Solicitudes de Vacaciones";
+            this.solicitudesDeVacacionesToolStripMenuItem.Click += new System.EventHandler(this.solicitudesDeVacacionesToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -254,5 +263,6 @@
         private System.Windows.Forms.ToolStripMenuItem planillasDePagoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deduccionesYPercepcionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deduccionesYPercepcionesPorColaboradorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem solicitudesDeVacacionesToolStripMenuItem;
     }
 }
