@@ -41,6 +41,9 @@
             this.lblEstado = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.dgvPuestos = new System.Windows.Forms.DataGridView();
+            this.CodigoPuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Contrasenna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripMantPuesto = new System.Windows.Forms.ToolStrip();
             this.btnAgregar = new System.Windows.Forms.ToolStripButton();
@@ -51,9 +54,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
             this.rdbActivo = new System.Windows.Forms.RadioButton();
-            this.CodigoPuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contrasenna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPuestos)).BeginInit();
             this.toolStripMantPuesto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
@@ -175,6 +175,27 @@
             this.dgvPuestos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPuestos_CellContentDoubleClick);
             this.dgvPuestos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPuestos_CellFormatting);
             // 
+            // CodigoPuesto
+            // 
+            this.CodigoPuesto.DataPropertyName = "CodigoPuesto";
+            this.CodigoPuesto.HeaderText = "Código de Puesto";
+            this.CodigoPuesto.Name = "CodigoPuesto";
+            this.CodigoPuesto.ReadOnly = true;
+            // 
+            // NombreUsuario
+            // 
+            this.NombreUsuario.DataPropertyName = "Nombre";
+            this.NombreUsuario.HeaderText = "Nombre";
+            this.NombreUsuario.Name = "NombreUsuario";
+            this.NombreUsuario.ReadOnly = true;
+            // 
+            // Contrasenna
+            // 
+            this.Contrasenna.DataPropertyName = "Estado";
+            this.Contrasenna.HeaderText = "Estado";
+            this.Contrasenna.Name = "Contrasenna";
+            this.Contrasenna.ReadOnly = true;
+            // 
             // btnSalir
             // 
             this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -280,7 +301,7 @@
             this.rdbInactivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbInactivo.Location = new System.Drawing.Point(214, 164);
             this.rdbInactivo.Name = "rdbInactivo";
-            this.rdbInactivo.Size = new System.Drawing.Size(82, 25);
+            this.rdbInactivo.Size = new System.Drawing.Size(81, 25);
             this.rdbInactivo.TabIndex = 62;
             this.rdbInactivo.TabStop = true;
             this.rdbInactivo.Text = "Inactiva";
@@ -292,32 +313,11 @@
             this.rdbActivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbActivo.Location = new System.Drawing.Point(214, 134);
             this.rdbActivo.Name = "rdbActivo";
-            this.rdbActivo.Size = new System.Drawing.Size(71, 25);
+            this.rdbActivo.Size = new System.Drawing.Size(70, 25);
             this.rdbActivo.TabIndex = 61;
             this.rdbActivo.TabStop = true;
             this.rdbActivo.Text = "Activa";
             this.rdbActivo.UseVisualStyleBackColor = true;
-            // 
-            // CodigoPuesto
-            // 
-            this.CodigoPuesto.DataPropertyName = "CodigoPuesto";
-            this.CodigoPuesto.HeaderText = "Código de Puesto";
-            this.CodigoPuesto.Name = "CodigoPuesto";
-            this.CodigoPuesto.ReadOnly = true;
-            // 
-            // NombreUsuario
-            // 
-            this.NombreUsuario.DataPropertyName = "Nombre";
-            this.NombreUsuario.HeaderText = "Nombre";
-            this.NombreUsuario.Name = "NombreUsuario";
-            this.NombreUsuario.ReadOnly = true;
-            // 
-            // Contrasenna
-            // 
-            this.Contrasenna.DataPropertyName = "Estado";
-            this.Contrasenna.HeaderText = "Estado";
-            this.Contrasenna.Name = "Contrasenna";
-            this.Contrasenna.ReadOnly = true;
             // 
             // frmMantenimientoPuestos
             // 
@@ -328,6 +328,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "frmMantenimientoPuestos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Puestos";
             this.Load += new System.EventHandler(this.frmMantenimientoPuestos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPuestos)).EndInit();

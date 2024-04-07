@@ -118,9 +118,11 @@ namespace PayrollPal.UI.Mantenimientos
                 ConfigurarDateTimePickerFechaDesde();
                 ConfigurarDateTimePickerFechaHasta();
 
-                this.txtCantDias.Text = "";
+                CalcularCantidadDeDias();
 
                 this.txtObservaciones.Text = "";
+
+                this.rdbActiva.Checked = true;
 
                 this.cmbObservacionesFinales.SelectedIndex = -1;
 
@@ -161,7 +163,10 @@ namespace PayrollPal.UI.Mantenimientos
                 this.dtpFechaHasta.Enabled = false;
                 this.txtCantDias.Enabled = false;
                 this.txtObservaciones.Enabled = false;
+                this.rdbActiva.Enabled = false;
+                this.rdbInactiva.Enabled = false;
                 this.cmbObservacionesFinales.Enabled = false;
+
 
             }
             catch (Exception msg)
@@ -179,73 +184,38 @@ namespace PayrollPal.UI.Mantenimientos
 
         }
 
-        /// <summary>
-        /// Método para configurar el datetimepicker de "fecha desde" 
-        /// para que la fecha mínima sea hoy al igual que la fecha máxima
-        /// </summary>
         private void ConfigurarDateTimePickerFechaSolicitud()
         {
-            this.dtpFechaSolicitud.MinDate = DateTime.Today;
-            this.dtpFechaSolicitud.MaxDate = this.dtpFechaSolicitud.MinDate;
-            this.dtpFechaHasta.Value = this.dtpFechaSolicitud.MinDate;
-            this.dtpFechaSolicitud.CustomFormat = "dd/MM/yyyy";
-
+            this.dtpFechaSolicitud.MinDate = EliminarSabadoDomingo(DateTime.Today);
+            this.dtpFechaSolicitud.MaxDate = EliminarSabadoDomingo(DateTime.Today);
+            this.dtpFechaSolicitud.Value = EliminarSabadoDomingo(dtpFechaSolicitud.MinDate);
         }
-
-        /// <summary>
-        /// Método para configurar el datetimepicker de "fecha desde" 
-        /// para que la fecha mínima sea el día siguiente
-        /// </summary>
         private void ConfigurarDateTimePickerFechaDesde()
         {
-
-            this.dtpFechaDesde.MinDate = DateTime.Today.AddDays(1);
-            this.dtpFechaHasta.Value = DateTime.Today;
-            this.dtpFechaDesde.CustomFormat = "dd/MM/yyyy";
-
+            this.dtpFechaDesde.MinDate = EliminarSabadoDomingo(dtpFechaSolicitud.MinDate.AddDays(1));
+            this.dtpFechaDesde.Value = EliminarSabadoDomingo(dtpFechaDesde.MinDate);
         }
-
-        /// <summary>
-        /// Método para configurar el datetimepicker de "fecha hasta" 
-        /// para que la fecha mínima sea el día siguiente (+ 23h:59m:59s)
-        /// </summary>
         private void ConfigurarDateTimePickerFechaHasta()
         {
-
-            this.dtpFechaHasta.MinDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59).AddSeconds(59);
-            this.dtpFechaHasta.Value = this.dtpFechaHasta.MinDate;
-            this.dtpFechaHasta.CustomFormat = "dd/MM/yyyy";
-
-        }
-
-
-        private void dtpFechaSolicitud_ValueChanged(object sender, EventArgs e)
-        {
-            DateTime fechaSeleccionada = this.dtpFechaSolicitud.Value;
-            this.dtpFechaSolicitud.MaxDate = EliminarSabadoDomingo(fechaSeleccionada);
-            this.dtpFechaSolicitud.MinDate = EliminarSabadoDomingo(fechaSeleccionada);
-            this.dtpFechaSolicitud.Value = EliminarSabadoDomingo(fechaSeleccionada);
-
+            this.dtpFechaHasta.MinDate = EliminarSabadoDomingo(dtpFechaDesde.Value);
+            this.dtpFechaHasta.Value = EliminarSabadoDomingo(dtpFechaHasta.MinDate);
         }
 
 
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)
         {
             DateTime fechaSeleccionada = this.dtpFechaDesde.Value;
-            this.dtpFechaDesde.MaxDate = EliminarSabadoDomingo(fechaSeleccionada);
             this.dtpFechaDesde.MinDate = EliminarSabadoDomingo(fechaSeleccionada);
             this.dtpFechaDesde.Value = EliminarSabadoDomingo(fechaSeleccionada);
+            CalcularCantidadDeDias();
+            ConfigurarDateTimePickerFechaHasta();
 
         }
 
 
         private void dtpFechaHasta_ValueChanged(object sender, EventArgs e)
         {
-            DateTime fechaSeleccionada = this.dtpFechaHasta.Value;
-            this.dtpFechaHasta.MaxDate = EliminarSabadoDomingo(fechaSeleccionada);
-            this.dtpFechaHasta.MinDate = EliminarSabadoDomingo(fechaSeleccionada);
-            this.dtpFechaHasta.Value = EliminarSabadoDomingo(fechaSeleccionada);
-
+            CalcularCantidadDeDias();
         }
 
 
@@ -279,7 +249,7 @@ namespace PayrollPal.UI.Mantenimientos
             }
             else
             {
-                cantDias = this.dtpFechaHasta.Value.Day - this.dtpFechaDesde.Value.Day;
+                cantDias = (this.dtpFechaHasta.Value.Day - this.dtpFechaDesde.Value.Day) + 1;
             }
 
             this.txtCantDias.Text = cantDias.ToString();
@@ -315,7 +285,7 @@ namespace PayrollPal.UI.Mantenimientos
                     //Asignar a cada control los datos de la solicitudDeVacaciones
                     this.mktID.Text = oSolicitud.IDSolicitudVacas.ToString();
                     this.cmbColaborador.Text = oSolicitud.IDColaborador.ToString();
-                    this.dtpFechaSolicitud.Value = oSolicitud.FechaSolicitud;
+                    this.dtpFechaSolicitud.Text = oSolicitud.FechaSolicitud.ToString();
                     this.dtpFechaDesde.Value = oSolicitud.FechaSolicitarDesde;
                     this.dtpFechaHasta.Value = oSolicitud.FechaSolicitarHasta;
                     this.txtCantDias.Text = oSolicitud.CantidadDias.ToString();
@@ -532,7 +502,7 @@ namespace PayrollPal.UI.Mantenimientos
             }
             else
             {
-                this.errProv1.SetError(this.mktID, "Campo observaciones de solicitud no es correcto");
+                this.errProv1.SetError(this.txtObservaciones, "Campo observaciones de solicitud no es correcto");
                 this.txtObservaciones.BackColor = Color.MistyRose;
             }
         }
@@ -690,7 +660,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLUsuario.Delete(idSolicitud);
+                BLLSolicitudVacaciones.Delete(idSolicitud);
                 CargarListas();
                 LimpiarControles();
             }
@@ -718,5 +688,6 @@ namespace PayrollPal.UI.Mantenimientos
         {
             this.Close();
         }
+
     }
 }

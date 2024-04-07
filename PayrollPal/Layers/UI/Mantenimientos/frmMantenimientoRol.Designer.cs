@@ -263,6 +263,7 @@
             this.ClientSize = new System.Drawing.Size(589, 443);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmMantenimientoRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Roles";
             this.Load += new System.EventHandler(this.frmMantenimientoRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).EndInit();

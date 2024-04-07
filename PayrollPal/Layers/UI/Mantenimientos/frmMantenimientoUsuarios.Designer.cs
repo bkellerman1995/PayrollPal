@@ -50,12 +50,12 @@
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.toolTipUsuario = new System.Windows.Forms.ToolTip(this.components);
             this.IDUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Contrasenna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asignado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTipUsuario = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -305,10 +305,6 @@
             this.dgvUsuarios.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentDoubleClick);
             this.dgvUsuarios.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvUsuarios_CellFormatting);
             // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
-            // 
             // IDUsuario
             // 
             this.IDUsuario.DataPropertyName = "IDUsuario";
@@ -337,6 +333,10 @@
             this.Asignado.Name = "Asignado";
             this.Asignado.ReadOnly = true;
             // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
             // frmMantenimientoUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,6 +345,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "frmMantenimientoUsuarios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Usuarios";
             this.Load += new System.EventHandler(this.frmMantenimientoUsuarios_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

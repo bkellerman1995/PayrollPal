@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoSolicitudVacaciones));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rdbInactiva = new System.Windows.Forms.RadioButton();
             this.rdbActiva = new System.Windows.Forms.RadioButton();
@@ -61,8 +61,6 @@
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvSolicitud = new System.Windows.Forms.DataGridView();
-            this.dgvSolicitudesVacaciones = new System.Windows.Forms.DataGridView();
-            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.IDSolicitud = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaSolicitud = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +70,8 @@
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones_Final = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSolicitudesVacaciones = new System.Windows.Forms.DataGridView();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -118,7 +118,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvSolicitud);
             this.splitContainer1.Panel2.Controls.Add(this.dgvSolicitudesVacaciones);
-            this.splitContainer1.Size = new System.Drawing.Size(952, 769);
+            this.splitContainer1.Size = new System.Drawing.Size(1212, 769);
             this.splitContainer1.SplitterDistance = 453;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
@@ -166,7 +166,6 @@
             this.dtpFechaSolicitud.Name = "dtpFechaSolicitud";
             this.dtpFechaSolicitud.Size = new System.Drawing.Size(288, 29);
             this.dtpFechaSolicitud.TabIndex = 68;
-            this.dtpFechaSolicitud.ValueChanged += new System.EventHandler(this.dtpFechaSolicitud_ValueChanged);
             // 
             // lblFechaSolicitud
             // 
@@ -182,7 +181,7 @@
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(840, 399);
+            this.btnConfirmar.Location = new System.Drawing.Point(1100, 399);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(100, 35);
             this.btnConfirmar.TabIndex = 66;
@@ -241,6 +240,7 @@
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.Size = new System.Drawing.Size(342, 92);
             this.txtObservaciones.TabIndex = 61;
+            this.txtObservaciones.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtObservaciones_KeyUp);
             // 
             // lblObservaciones
             // 
@@ -354,7 +354,7 @@
             this.toolStripMantSolicitudVacaciones.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantSolicitudVacaciones.Name = "toolStripMantSolicitudVacaciones";
             this.toolStripMantSolicitudVacaciones.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantSolicitudVacaciones.Size = new System.Drawing.Size(952, 28);
+            this.toolStripMantSolicitudVacaciones.Size = new System.Drawing.Size(1212, 28);
             this.toolStripMantSolicitudVacaciones.TabIndex = 35;
             this.toolStripMantSolicitudVacaciones.Text = "toolStrip1";
             // 
@@ -412,22 +412,22 @@
             // 
             this.dgvSolicitud.AllowUserToAddRows = false;
             this.dgvSolicitud.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvSolicitud.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvSolicitud.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSolicitud.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSolicitud.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSolicitud.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSolicitud.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSolicitud.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSolicitud.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDSolicitud,
@@ -439,14 +439,14 @@
             this.Observaciones,
             this.Estado,
             this.Observaciones_Final});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSolicitud.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSolicitud.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSolicitud.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSolicitud.Location = new System.Drawing.Point(0, 0);
             this.dgvSolicitud.Margin = new System.Windows.Forms.Padding(1);
@@ -456,30 +456,10 @@
             this.dgvSolicitud.RowHeadersWidth = 102;
             this.dgvSolicitud.RowTemplate.Height = 40;
             this.dgvSolicitud.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSolicitud.Size = new System.Drawing.Size(952, 314);
+            this.dgvSolicitud.Size = new System.Drawing.Size(1212, 314);
             this.dgvSolicitud.TabIndex = 5;
             this.dgvSolicitud.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolicitud_CellContentDoubleClick);
             this.dgvSolicitud.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSolicitud_CellFormatting);
-            this.dgvSolicitud.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtObservaciones_KeyUp);
-            // 
-            // dgvSolicitudesVacaciones
-            // 
-            this.dgvSolicitudesVacaciones.AllowUserToAddRows = false;
-            this.dgvSolicitudesVacaciones.AllowUserToDeleteRows = false;
-            this.dgvSolicitudesVacaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSolicitudesVacaciones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSolicitudesVacaciones.Location = new System.Drawing.Point(0, 0);
-            this.dgvSolicitudesVacaciones.Margin = new System.Windows.Forms.Padding(1);
-            this.dgvSolicitudesVacaciones.Name = "dgvSolicitudesVacaciones";
-            this.dgvSolicitudesVacaciones.ReadOnly = true;
-            this.dgvSolicitudesVacaciones.RowHeadersWidth = 102;
-            this.dgvSolicitudesVacaciones.RowTemplate.Height = 40;
-            this.dgvSolicitudesVacaciones.Size = new System.Drawing.Size(952, 314);
-            this.dgvSolicitudesVacaciones.TabIndex = 4;
-            // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
             // 
             // IDSolicitud
             // 
@@ -544,14 +524,34 @@
             this.Observaciones_Final.Name = "Observaciones_Final";
             this.Observaciones_Final.ReadOnly = true;
             // 
+            // dgvSolicitudesVacaciones
+            // 
+            this.dgvSolicitudesVacaciones.AllowUserToAddRows = false;
+            this.dgvSolicitudesVacaciones.AllowUserToDeleteRows = false;
+            this.dgvSolicitudesVacaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSolicitudesVacaciones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSolicitudesVacaciones.Location = new System.Drawing.Point(0, 0);
+            this.dgvSolicitudesVacaciones.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvSolicitudesVacaciones.Name = "dgvSolicitudesVacaciones";
+            this.dgvSolicitudesVacaciones.ReadOnly = true;
+            this.dgvSolicitudesVacaciones.RowHeadersWidth = 102;
+            this.dgvSolicitudesVacaciones.RowTemplate.Height = 40;
+            this.dgvSolicitudesVacaciones.Size = new System.Drawing.Size(1212, 314);
+            this.dgvSolicitudesVacaciones.TabIndex = 4;
+            // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
             // frmMantenimientoSolicitudVacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 769);
+            this.ClientSize = new System.Drawing.Size(1212, 769);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "frmMantenimientoSolicitudVacaciones";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento Solicitud de Vacaciones";
             this.Load += new System.EventHandler(this.frmMantenimientoSolicitudVacaciones_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

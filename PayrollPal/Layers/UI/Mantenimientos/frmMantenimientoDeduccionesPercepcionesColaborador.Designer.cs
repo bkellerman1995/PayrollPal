@@ -50,6 +50,10 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvDedPercColab = new System.Windows.Forms.DataGridView();
+            this.CodigoDeduccionPercepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prioridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rdbInactiva = new System.Windows.Forms.RadioButton();
             this.rdbActiva = new System.Windows.Forms.RadioButton();
@@ -57,10 +61,6 @@
             this.cmbDedPercCol = new System.Windows.Forms.ComboBox();
             this.cmbPrioridad = new System.Windows.Forms.ComboBox();
             this.toolTipPercDedColaborador = new System.Windows.Forms.ToolTip(this.components);
-            this.CodigoDeduccionPercepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prioridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantDedPercColab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDedPercColab)).BeginInit();
@@ -286,6 +286,34 @@
             this.dgvDedPercColab.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDedPercColab_CellContentDoubleClick);
             this.dgvDedPercColab.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDedPercColab_CellFormatting);
             // 
+            // CodigoDeduccionPercepcion
+            // 
+            this.CodigoDeduccionPercepcion.DataPropertyName = "CodigoDeduccionPercepcion";
+            this.CodigoDeduccionPercepcion.HeaderText = "Deducción Percepción";
+            this.CodigoDeduccionPercepcion.Name = "CodigoDeduccionPercepcion";
+            this.CodigoDeduccionPercepcion.ReadOnly = true;
+            // 
+            // IdColaborador
+            // 
+            this.IdColaborador.DataPropertyName = "IdColaborador";
+            this.IdColaborador.HeaderText = "IdColaborador";
+            this.IdColaborador.Name = "IdColaborador";
+            this.IdColaborador.ReadOnly = true;
+            // 
+            // Prioridad
+            // 
+            this.Prioridad.DataPropertyName = "Prioridad";
+            this.Prioridad.HeaderText = "Prioridad";
+            this.Prioridad.Name = "Prioridad";
+            this.Prioridad.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -374,34 +402,6 @@
             this.cmbPrioridad.Size = new System.Drawing.Size(175, 29);
             this.cmbPrioridad.TabIndex = 68;
             // 
-            // CodigoDeduccionPercepcion
-            // 
-            this.CodigoDeduccionPercepcion.DataPropertyName = "CodigoDeduccionPercepcion";
-            this.CodigoDeduccionPercepcion.HeaderText = "Deducción Percepción";
-            this.CodigoDeduccionPercepcion.Name = "CodigoDeduccionPercepcion";
-            this.CodigoDeduccionPercepcion.ReadOnly = true;
-            // 
-            // IdColaborador
-            // 
-            this.IdColaborador.DataPropertyName = "IdColaborador";
-            this.IdColaborador.HeaderText = "IdColaborador";
-            this.IdColaborador.Name = "IdColaborador";
-            this.IdColaborador.ReadOnly = true;
-            // 
-            // Prioridad
-            // 
-            this.Prioridad.DataPropertyName = "Prioridad";
-            this.Prioridad.HeaderText = "Prioridad";
-            this.Prioridad.Name = "Prioridad";
-            this.Prioridad.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "Estado";
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
             // frmMantenimientoDeduccionesPercepcionesColaborador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -412,6 +412,7 @@
             this.Name = "frmMantenimientoDeduccionesPercepcionesColaborador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Deducciones y Percepciones por Colaborador";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMantenimientoDeduccionesPercepcionesColaborador_Load);
             this.toolStripMantDedPercColab.ResumeLayout(false);
             this.toolStripMantDedPercColab.PerformLayout();

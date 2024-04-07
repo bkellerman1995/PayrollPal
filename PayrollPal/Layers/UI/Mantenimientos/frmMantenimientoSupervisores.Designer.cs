@@ -386,6 +386,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmMantenimientoSupervisores";
             this.Text = "Mantenimiento de Supervisores";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMantenimientoSupervisores_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupervisores)).EndInit();
             this.toolStripMantSupervisor.ResumeLayout(false);

@@ -131,7 +131,7 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_INSERT_SolicitudVacaciones");
                     command.Parameters.AddWithValue("@IDSolicitudVacas", pSolicitud.IDSolicitudVacas);
-                    command.Parameters.AddWithValue("@IDColaborador", pSolicitud.IDColaborador);
+                    command.Parameters.AddWithValue("@IDColaborador", pSolicitud.IDColaborador.IDColaborador);
                     command.Parameters.AddWithValue("@FechaSolicitud",pSolicitud.FechaSolicitud);
                     command.Parameters.AddWithValue("@FechaSolicitarDesde", pSolicitud.FechaSolicitarDesde);
                     command.Parameters.AddWithValue("@FechaSolicitarHasta", pSolicitud.FechaSolicitarHasta);
@@ -172,7 +172,7 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_UPDATE_SolicitudVacaciones");
                     command.Parameters.AddWithValue("@IDSolicitudVacas", pSolicitud.IDSolicitudVacas);
-                    command.Parameters.AddWithValue("@IDColaborador", pSolicitud.IDColaborador);
+                    command.Parameters.AddWithValue("@IDColaborador", pSolicitud.IDColaborador.IDColaborador);
                     command.Parameters.AddWithValue("@FechaSolicitud", pSolicitud.FechaSolicitud);
                     command.Parameters.AddWithValue("@FechaSolicitarDesde", pSolicitud.FechaSolicitarDesde);
                     command.Parameters.AddWithValue("@FechaSolicitarHasta", pSolicitud.FechaSolicitarHasta);

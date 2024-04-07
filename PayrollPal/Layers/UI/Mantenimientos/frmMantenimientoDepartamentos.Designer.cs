@@ -40,16 +40,16 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.dgvDepartamentos = new System.Windows.Forms.DataGridView();
+            this.IDDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantDepartamento = new System.Windows.Forms.ToolStrip();
-            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnAgregar = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.IDDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreDepartamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamentos)).BeginInit();
             this.toolStripMantDepartamento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
@@ -158,6 +158,20 @@
             this.dgvDepartamentos.TabIndex = 4;
             this.dgvDepartamentos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDepartamentos_CellContentDoubleClick);
             // 
+            // IDDepartamento
+            // 
+            this.IDDepartamento.DataPropertyName = "IDDepartamento";
+            this.IDDepartamento.HeaderText = "ID Departamento";
+            this.IDDepartamento.Name = "IDDepartamento";
+            this.IDDepartamento.ReadOnly = true;
+            // 
+            // NombreDepartamento
+            // 
+            this.NombreDepartamento.DataPropertyName = "Descripcion";
+            this.NombreDepartamento.HeaderText = "Nombre";
+            this.NombreDepartamento.Name = "NombreDepartamento";
+            this.NombreDepartamento.ReadOnly = true;
+            // 
             // toolStripMantDepartamento
             // 
             this.toolStripMantDepartamento.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -174,35 +188,6 @@
             this.toolStripMantDepartamento.Size = new System.Drawing.Size(501, 28);
             this.toolStripMantDepartamento.TabIndex = 43;
             this.toolStripMantDepartamento.Text = "toolStrip1";
-            // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
-            this.splitContainer1.Panel1.Controls.Add(this.mktID);
-            this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
-            this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
-            this.splitContainer1.Panel1.Controls.Add(this.lblID);
-            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantDepartamento);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgvDepartamentos);
-            this.splitContainer1.Size = new System.Drawing.Size(501, 450);
-            this.splitContainer1.SplitterDistance = 214;
-            this.splitContainer1.SplitterWidth = 2;
-            this.splitContainer1.TabIndex = 1;
             // 
             // btnAgregar
             // 
@@ -254,19 +239,34 @@
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // IDDepartamento
+            // errProv1
             // 
-            this.IDDepartamento.DataPropertyName = "IDDepartamento";
-            this.IDDepartamento.HeaderText = "ID Departamento";
-            this.IDDepartamento.Name = "IDDepartamento";
-            this.IDDepartamento.ReadOnly = true;
+            this.errProv1.ContainerControl = this;
             // 
-            // NombreDepartamento
+            // splitContainer1
             // 
-            this.NombreDepartamento.DataPropertyName = "Descripcion";
-            this.NombreDepartamento.HeaderText = "Nombre";
-            this.NombreDepartamento.Name = "NombreDepartamento";
-            this.NombreDepartamento.ReadOnly = true;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
+            this.splitContainer1.Panel1.Controls.Add(this.mktID);
+            this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
+            this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
+            this.splitContainer1.Panel1.Controls.Add(this.lblID);
+            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantDepartamento);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgvDepartamentos);
+            this.splitContainer1.Size = new System.Drawing.Size(501, 450);
+            this.splitContainer1.SplitterDistance = 214;
+            this.splitContainer1.SplitterWidth = 2;
+            this.splitContainer1.TabIndex = 1;
             // 
             // frmMantenimientoDepartamentos
             // 
@@ -276,6 +276,7 @@
             this.ClientSize = new System.Drawing.Size(501, 450);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmMantenimientoDepartamentos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Departamentos";
             this.Load += new System.EventHandler(this.frmMantenimientoDepartamentos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamentos)).EndInit();
