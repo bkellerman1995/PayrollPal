@@ -448,23 +448,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             }
         }
 
-        /// <summary>
-        /// Método para verificar si hay colaboradores disponibles en 
-        /// el listbox de colaboradores de Supervisor para quitarlos 
-        /// de un supervisor
-        /// </summary>
-        /// <returns></returns>
-        private void VerificarHayColaboradoresPorSupervisor()
-        {
-            if (BLL.BLLColaborador.SelectAll().Count > 0)
-            {
-                this.btnAgregarCol.Enabled = true;
-            }
-            else
-            {
-                this.btnAgregarCol.Enabled = false;
-            }
-        }
 
         /// <summary>
         /// Evento para cerrar el form de Mantenimiento de 

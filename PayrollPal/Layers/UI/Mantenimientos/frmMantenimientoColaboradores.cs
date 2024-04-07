@@ -48,9 +48,6 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                //Método para configurar los valores de los datetimepicker
-                ConfigurarDateTimePickerFechaNacimiento();
-                ConfigurarDateTimePickerFechaIngreso();
 
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALColaborador
@@ -201,12 +198,13 @@ namespace PayrollPal.UI.Mantenimientos
                 this.txtApellido2.Clear();
                 this.txtApellido2.BackColor = Color.White;
 
-                this.dtpFechaNacimiento.Value = this.dtpFechaNacimiento.MinDate;
+                //Método para configurar los valores de los datetimepicker
+                ConfigurarDateTimePickerFechaNacimiento();
+                ConfigurarDateTimePickerFechaIngreso();
 
                 this.txtDireccion.Clear();
                 this.txtDireccion.BackColor = Color.White;
 
-                this.dtpFechaIngreso.Value = DateTime.Today;
 
                 this.mktSalarioHora.Clear();
                 this.mktSalarioHora.BackColor = Color.White;
@@ -307,6 +305,7 @@ namespace PayrollPal.UI.Mantenimientos
         {
             this.dtpFechaNacimiento.MinDate = DateTime.Today.AddYears(-65);
             this.dtpFechaNacimiento.MaxDate = DateTime.Today.AddYears(-18);
+            this.dtpFechaNacimiento.Value = this.dtpFechaNacimiento.MinDate;
             this.dtpFechaNacimiento.CustomFormat = "dd/MM/yyyy";
         }
 
@@ -319,6 +318,7 @@ namespace PayrollPal.UI.Mantenimientos
         {
             this.dtpFechaIngreso.MinDate = DateTime.Today.AddYears(-10);
             this.dtpFechaIngreso.MaxDate = DateTime.Today;
+            this.dtpFechaIngreso.Value = DateTime.Today;
             this.dtpFechaIngreso.CustomFormat = "dd/MM/yyyy";
 
         }
@@ -388,11 +388,10 @@ namespace PayrollPal.UI.Mantenimientos
                         this.txtNombre.Enabled = true;
                         this.txtApellido1.Enabled = true;
                         this.txtApellido2.Enabled = true;
-                        this.dtpFechaNacimiento.Enabled = true;
-                        this.dtpFechaNacimiento.Value = this.dtpFechaNacimiento.MinDate;
+                        ConfigurarDateTimePickerFechaIngreso();
+                        ConfigurarDateTimePickerFechaNacimiento();
                         this.txtDireccion.Enabled = true;
                         this.dtpFechaIngreso.Enabled = true;
-                        this.dtpFechaIngreso.Value = DateTime.Today;
                         this.cmbDepartamento.Enabled = true;
                         this.mktSalarioHora.Enabled = true;
                         this.txtCorreoElectronico.Enabled = true;
@@ -419,10 +418,10 @@ namespace PayrollPal.UI.Mantenimientos
                         this.txtApellido1.Enabled = true;
                         this.txtApellido2.Enabled = true;
                         this.dtpFechaNacimiento.Enabled = true;
-                        this.dtpFechaNacimiento.Value = this.dtpFechaNacimiento.MinDate;
+                        ConfigurarDateTimePickerFechaIngreso();
+                        ConfigurarDateTimePickerFechaNacimiento();
                         this.txtDireccion.Enabled = true;
                         this.dtpFechaIngreso.Enabled = true;
-                        this.dtpFechaIngreso.Value = DateTime.Today;
                         this.cmbDepartamento.Enabled = true;
                         this.mktSalarioHora.Enabled = true;
                         this.txtCorreoElectronico.Enabled = true;
@@ -1075,8 +1074,10 @@ namespace PayrollPal.UI.Mantenimientos
                     this.txtNombre.Text = oColaborador.Nombre.ToString();
                     this.txtApellido1.Text = oColaborador.Apellido1.ToString();
                     this.txtApellido2.Text = oColaborador.Apellido2.ToString();
+                    this.dtpFechaNacimiento.MinDate = oColaborador.FechaNacimiento;
                     this.dtpFechaNacimiento.Value = oColaborador.FechaNacimiento;
                     this.txtDireccion.Text = oColaborador.Direccion.ToString();
+                    this.dtpFechaIngreso.MinDate = oColaborador.FechaIngreso;
                     this.dtpFechaIngreso.Value = oColaborador.FechaIngreso;
                     this.cmbDepartamento.Text = oColaborador.IDDepartamento.ToString();
                     this.mktSalarioHora.Text = oColaborador.SalarioHora.ToString();

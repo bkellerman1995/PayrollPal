@@ -508,12 +508,10 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <param name="e"></param>
         private void cmbIdRol_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (this.cmbIdRol.Enabled == false || this.cmbIdRol.SelectedItem != null)
+            if ((this.cmbIdRol.Enabled == false && this.cmbIdRol.SelectedItem != null)
+                || (this.cmbIdRol.Enabled == true && this.cmbIdRol.SelectedItem != null))
             {
                 this.txtNombre.Text = ((Enumeraciones.Rol)this.cmbIdRol.SelectedItem).ToString();
-            }
-            else
-            {
                 return;
             }
 
