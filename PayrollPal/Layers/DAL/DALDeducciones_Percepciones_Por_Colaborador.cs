@@ -17,6 +17,7 @@ namespace PayrollPal.Layers.DAL
         private static readonly log4net.ILog _MyLogControlEventos =
                      log4net.LogManager.GetLogger("MyControlEventos");
 
+
         #region SELECT ALL
         public static List<Deducciones_Percepciones_Por_Colaborador> SelectAll()
         {

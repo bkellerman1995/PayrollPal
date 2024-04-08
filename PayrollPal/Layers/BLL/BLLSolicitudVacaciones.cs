@@ -1,4 +1,5 @@
-﻿using PayrollPal.Layers.Entities;
+﻿using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,15 @@ namespace PayrollPal.Layers
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        #region SecuenciadorSolicitudVacaciones
+
+        public static string SecuenciadorSolicitudVacaciones()
+        {
+            return DALSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
+        }
+
+        #endregion
 
         #region SELECT ALL
         public static List<SolicitudVacaciones> SelectAll()

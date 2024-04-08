@@ -81,6 +81,38 @@ namespace PayrollPal.Layers.DAL {
         }
         #endregion
 
+
+        #region SecuenciadorColaborador
+
+        public static string SecuenciadorColaboradorumentar()
+        {
+            try
+            {
+                String secuencia = "";
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_Secuenciador_Colaborador");
+                    command.CommandType = CommandType.StoredProcedure;
+                    secuencia = db.ExecuteScalar(command).ToString();
+
+                }
+                return secuencia;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+
+        #endregion
+
         #region SELECT BY ID
         public static Colaborador SelectById(string Id)
         {

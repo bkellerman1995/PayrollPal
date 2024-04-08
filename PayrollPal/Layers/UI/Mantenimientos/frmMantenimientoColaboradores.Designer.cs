@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoColaboradores));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cmbPuestos = new System.Windows.Forms.ComboBox();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
@@ -43,7 +43,6 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.mktCuentaIBAN = new System.Windows.Forms.MaskedTextBox();
             this.btnCargarFoto = new System.Windows.Forms.Button();
-            this.mktID = new System.Windows.Forms.MaskedTextBox();
             this.cmbSupervisor = new System.Windows.Forms.ComboBox();
             this.lblSupervisor = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
@@ -96,6 +95,7 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fotografia = new System.Windows.Forms.DataGridViewImageColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -117,6 +117,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtID);
             this.splitContainer1.Panel1.Controls.Add(this.cmbPuestos);
             this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
             this.splitContainer1.Panel1.Controls.Add(this.rdbActivo);
@@ -128,7 +129,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
             this.splitContainer1.Panel1.Controls.Add(this.mktCuentaIBAN);
             this.splitContainer1.Panel1.Controls.Add(this.btnCargarFoto);
-            this.splitContainer1.Panel1.Controls.Add(this.mktID);
             this.splitContainer1.Panel1.Controls.Add(this.cmbSupervisor);
             this.splitContainer1.Panel1.Controls.Add(this.lblSupervisor);
             this.splitContainer1.Panel1.Controls.Add(this.lblUsuario);
@@ -180,10 +180,10 @@
             this.rdbInactivo.AutoSize = true;
             this.rdbInactivo.Location = new System.Drawing.Point(632, 571);
             this.rdbInactivo.Name = "rdbInactivo";
-            this.rdbInactivo.Size = new System.Drawing.Size(81, 25);
+            this.rdbInactivo.Size = new System.Drawing.Size(82, 25);
             this.rdbInactivo.TabIndex = 69;
             this.rdbInactivo.TabStop = true;
-            this.rdbInactivo.Text = "Inactiva";
+            this.rdbInactivo.Text = "Inactivo";
             this.rdbInactivo.UseVisualStyleBackColor = true;
             // 
             // rdbActivo
@@ -191,10 +191,10 @@
             this.rdbActivo.AutoSize = true;
             this.rdbActivo.Location = new System.Drawing.Point(632, 521);
             this.rdbActivo.Name = "rdbActivo";
-            this.rdbActivo.Size = new System.Drawing.Size(70, 25);
+            this.rdbActivo.Size = new System.Drawing.Size(71, 25);
             this.rdbActivo.TabIndex = 68;
             this.rdbActivo.TabStop = true;
-            this.rdbActivo.Text = "Activa";
+            this.rdbActivo.Text = "Activo";
             this.rdbActivo.UseVisualStyleBackColor = true;
             // 
             // lblEstado
@@ -218,7 +218,7 @@
             // mktSalarioHora
             // 
             this.mktSalarioHora.Location = new System.Drawing.Point(143, 407);
-            this.mktSalarioHora.Mask = "000,000.000";
+            this.mktSalarioHora.Mask = "0000";
             this.mktSalarioHora.Name = "mktSalarioHora";
             this.mktSalarioHora.Size = new System.Drawing.Size(160, 29);
             this.mktSalarioHora.TabIndex = 65;
@@ -274,16 +274,6 @@
             this.btnCargarFoto.Text = "Cargar";
             this.btnCargarFoto.UseVisualStyleBackColor = true;
             this.btnCargarFoto.Click += new System.EventHandler(this.btnCargarFoto_Click);
-            // 
-            // mktID
-            // 
-            this.mktID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mktID.Location = new System.Drawing.Point(184, 36);
-            this.mktID.Mask = "0-0000-0000";
-            this.mktID.Name = "mktID";
-            this.mktID.Size = new System.Drawing.Size(158, 29);
-            this.mktID.TabIndex = 59;
-            this.mktID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktID_KeyUp);
             // 
             // cmbSupervisor
             // 
@@ -651,12 +641,12 @@
             // 
             this.dgvColaboradores.AllowUserToAddRows = false;
             this.dgvColaboradores.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvColaboradores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvColaboradores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvColaboradores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvColaboradores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvColaboradores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -834,6 +824,17 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
+            // txtID
+            // 
+            this.txtID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtID.Location = new System.Drawing.Point(184, 34);
+            this.txtID.Margin = new System.Windows.Forms.Padding(1);
+            this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
+            this.txtID.Size = new System.Drawing.Size(159, 29);
+            this.txtID.TabIndex = 71;
+            this.txtID.Text = "col";
+            // 
             // frmMantenimientoColaboradores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -896,7 +897,6 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.ComboBox cmbSupervisor;
         private System.Windows.Forms.Label lblSupervisor;
-        private System.Windows.Forms.MaskedTextBox mktID;
         private System.Windows.Forms.Button btnCargarFoto;
         private System.Windows.Forms.MaskedTextBox mktCuentaIBAN;
         private System.Windows.Forms.Button btnConfirmar;
@@ -909,7 +909,6 @@
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.RadioButton rdbInactivo;
         private System.Windows.Forms.RadioButton rdbActivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Foto;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido1;
@@ -928,5 +927,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewImageColumn Fotografia;
         private System.Windows.Forms.ComboBox cmbPuestos;
+        private System.Windows.Forms.TextBox txtID;
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using PayrollPal.Layers.DAL;
 
 namespace PayrollPal.Layers.BLL
 {
@@ -13,6 +14,15 @@ namespace PayrollPal.Layers.BLL
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        #region SecuenciadorDeduccionesPercepciones
+
+        public static string SecuenciadorDeduccionesPercepciones()
+        {
+            return DALDeduccionesPercepciones.SecuenciadorDeduccionesPercepciones();
+        }
+
+        #endregion
 
         #region SELECT ALL
         public static List<Deducciones_Percepciones> SelectAll()

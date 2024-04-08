@@ -37,7 +37,6 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.mktValor = new System.Windows.Forms.MaskedTextBox();
             this.lblTipoValor = new System.Windows.Forms.Label();
-            this.mktCodigo = new System.Windows.Forms.MaskedTextBox();
             this.lblTipo = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -58,6 +57,7 @@
             this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtCod = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,10 +77,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtCod);
             this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
             this.splitContainer1.Panel1.Controls.Add(this.mktValor);
             this.splitContainer1.Panel1.Controls.Add(this.lblTipoValor);
-            this.splitContainer1.Panel1.Controls.Add(this.mktCodigo);
             this.splitContainer1.Panel1.Controls.Add(this.lblTipo);
             this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
             this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
@@ -130,16 +130,6 @@
             this.lblTipoValor.Size = new System.Drawing.Size(76, 21);
             this.lblTipoValor.TabIndex = 44;
             this.lblTipoValor.Text = "TipoValor";
-            // 
-            // mktCodigo
-            // 
-            this.mktCodigo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mktCodigo.Location = new System.Drawing.Point(147, 45);
-            this.mktCodigo.Mask = "dedYperc000";
-            this.mktCodigo.Name = "mktCodigo";
-            this.mktCodigo.Size = new System.Drawing.Size(143, 29);
-            this.mktCodigo.TabIndex = 43;
-            this.mktCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktCodigo_KeyUp);
             // 
             // lblTipo
             // 
@@ -371,6 +361,17 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
+            // txtCod
+            // 
+            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCod.Location = new System.Drawing.Point(147, 45);
+            this.txtCod.Margin = new System.Windows.Forms.Padding(1);
+            this.txtCod.Name = "txtCod";
+            this.txtCod.ReadOnly = true;
+            this.txtCod.Size = new System.Drawing.Size(159, 29);
+            this.txtCod.TabIndex = 62;
+            this.txtCod.Text = "dedPerc";
+            // 
             // frmMantenimientoDeduccionesPercepciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -412,7 +413,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.ComboBox cmbTipo;
-        private System.Windows.Forms.MaskedTextBox mktCodigo;
         private System.Windows.Forms.Label lblTipoValor;
         private System.Windows.Forms.MaskedTextBox mktValor;
         private System.Windows.Forms.Button btnConfirmar;
@@ -423,5 +423,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoValor;
+        private System.Windows.Forms.TextBox txtCod;
     }
 }

@@ -19,6 +19,36 @@ namespace PayrollPal.Layers.DAL
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        #region SecuenciadorDeduccionesPercepciones
+
+        public static string SecuenciadorDeduccionesPercepciones()
+        {
+            try
+            {
+                String secuencia = "";
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_Secuenciador_SecuenciadorDeduccionesPercepciones");
+                    command.CommandType = CommandType.StoredProcedure;
+                    secuencia = db.ExecuteScalar(command).ToString();
+
+                }
+                return secuencia;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+        #endregion
+
         #region SELECT ALL
         public static List<Deducciones_Percepciones> SelectAll()
         {

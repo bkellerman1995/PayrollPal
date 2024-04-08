@@ -186,8 +186,14 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.mktID.Clear();
-                this.mktID.BackColor = Color.White;
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
+
+                this.txtID.Text = "col";
+                this.txtID.BackColor = Color.White;
 
                 this.txtNombre.Clear();
                 this.txtNombre.BackColor = Color.White;
@@ -257,7 +263,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.btnConfirmar.Visible = false;
                 this.btnCargarFoto.Enabled = false;
 
-                this.mktID.Enabled = false;
+                this.txtID.Enabled = false;
                 this.txtNombre.Enabled = false;
                 this.txtApellido1.Enabled = false;
                 this.txtApellido2.Enabled = false;
@@ -377,14 +383,15 @@ namespace PayrollPal.UI.Mantenimientos
                     case 'C':
                         //habiitar los botones de limpiar, 
                         //agregar y salir
-                        this.btnAgregar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtID.Text = this.txtID.Text + BLLColaborador.SecuenciadorColaborador();
 
                         //habilitar los controles de texto, comboboxes
                         //pictureBox 
 
-                        this.mktID.Enabled = true;
+                        this.txtID.Enabled = true;
                         this.txtNombre.Enabled = true;
                         this.txtApellido1.Enabled = true;
                         this.txtApellido2.Enabled = true;
@@ -413,7 +420,7 @@ namespace PayrollPal.UI.Mantenimientos
                         //habilitar los controles de texto, comboboxes
                         //pictureBox 
 
-                        this.mktID.ReadOnly = true;
+                        this.txtID.ReadOnly = true;
                         this.txtNombre.Enabled = true;
                         this.txtApellido1.Enabled = true;
                         this.txtApellido2.Enabled = true;
@@ -490,17 +497,6 @@ namespace PayrollPal.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                //ValidarID del colaborador
-                if (this.mktID.MaskCompleted)
-                {
-                    this.errProv1.SetError(this.mktID, string.Empty);
-
-                }
-                else
-                {
-                    this.errProv1.SetError(this.mktID, "Campo ID de colaborador no es correcto");
-                    return false;
-                }
 
                 // Validar Nombre
                 if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
@@ -684,7 +680,7 @@ namespace PayrollPal.UI.Mantenimientos
             string idColaborador = "";
             Usuario oUsuarioADeshabilitar = new Usuario();
 
-            oColaborador.IDColaborador = this.mktID.Text.Replace("-", "");
+            oColaborador.IDColaborador = this.txtID.Text;
             idColaborador = oColaborador.IDColaborador;
             oColaborador.Nombre = this.txtNombre.Text;
             oColaborador.Apellido1 = this.txtApellido1.Text;
@@ -694,6 +690,7 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.Direccion = this.txtDireccion.Text;
             oColaborador.FechaIngreso = this.dtpFechaIngreso.Value;
             oColaborador.IDDepartamento = (Departamento)this.cmbDepartamento.SelectedItem;
+            oColaborador.SalarioHora = decimal.Parse(this.mktSalarioHora.Text);
             foreach (char c in reemplazarCaracteresSalario)
             {
                 Salario = decimal.Parse(this.mktSalarioHora.Text.Replace(c.ToString(), ""));
@@ -833,25 +830,6 @@ namespace PayrollPal.UI.Mantenimientos
             }
         }
 
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// ID es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktID_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktID.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktID, string.Empty);
-                this.mktID.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktID, "Campo ID de usuario no es correcto");
-                this.mktID.BackColor = Color.MistyRose;
-            }
-        }
 
         /// <summary>
         /// Evento para revisar si el campo del
@@ -941,15 +919,15 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void mktSalarioHora_KeyUp(object sender, KeyEventArgs e)
         {
-            if ((this.mktID.MaskCompleted))
+            if ((this.mktSalarioHora.MaskCompleted))
             {
                 this.errProv1.SetError(this.mktSalarioHora, string.Empty);
                 this.mktSalarioHora.BackColor = Color.Honeydew;
             }
             else
             {
-                this.errProv1.SetError(this.txtDireccion, "Campo salario/hora de colaborador no es correcto");
-                this.txtDireccion.BackColor = Color.MistyRose;
+                this.errProv1.SetError(this.mktSalarioHora, "Campo salario/hora de colaborador no es correcto");
+                this.mktSalarioHora.BackColor = Color.MistyRose;
             }
         }
 
@@ -1070,7 +1048,7 @@ namespace PayrollPal.UI.Mantenimientos
                     Colaborador oColaborador = new Colaborador();
                     oColaborador = this.dgvColaboradores.SelectedRows[0].DataBoundItem as Colaborador;  //Asignamos el valor seleccionado
                     //Asignamos los valores a cada control
-                    this.mktID.Text = oColaborador.IDColaborador.ToString();
+                    this.txtID.Text = oColaborador.IDColaborador.ToString();
                     this.txtNombre.Text = oColaborador.Nombre.ToString();
                     this.txtApellido1.Text = oColaborador.Apellido1.ToString();
                     this.txtApellido2.Text = oColaborador.Apellido2.ToString();
@@ -1157,12 +1135,16 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string idColaborador = this.mktID.Text.Replace("-", "");
+            string idColaborador = this.txtID.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el colaborador?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
+                Usuario oUsuario = BLLColaborador.SelectById(idColaborador).IDUsuario;
+                oUsuario.Contrasenna = Criptografia.DecrypthAES(oUsuario.Contrasenna);
+                oUsuario.Asignado = false;
+                BLLUsuario.Update(oUsuario);
                 BLLColaborador.Delete(idColaborador);
                 CargarLista();
                 LimpiarControles();

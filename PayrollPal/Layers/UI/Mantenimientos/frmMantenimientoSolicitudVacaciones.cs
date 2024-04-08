@@ -108,8 +108,8 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.mktID.Clear();
-                this.mktID.BackColor = Color.White;
+                this.txtID.Text = "sol";
+                this.txtID.BackColor = Color.White;
 
                 this.cmbColaborador.SelectedIndex = -1;
 
@@ -156,7 +156,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
 
-                this.mktID.Enabled = false;
+                this.txtID.Enabled = false;
                 this.cmbColaborador.Enabled = false;
                 this.dtpFechaSolicitud.Enabled = false;
                 this.dtpFechaDesde.Enabled = false;
@@ -283,7 +283,7 @@ namespace PayrollPal.UI.Mantenimientos
                     //Asignar la fila seleccionada del datagridview al objeto solicitudVacaciones
                     oSolicitud = this.dgvSolicitud.SelectedRows[0].DataBoundItem as SolicitudVacaciones;
                     //Asignar a cada control los datos de la solicitudDeVacaciones
-                    this.mktID.Text = oSolicitud.IDSolicitudVacas.ToString();
+                    this.txtID.Text = oSolicitud.IDSolicitudVacas.ToString();
                     this.cmbColaborador.Text = oSolicitud.IDColaborador.ToString();
                     this.dtpFechaSolicitud.Text = oSolicitud.FechaSolicitud.ToString();
                     this.dtpFechaDesde.Value = oSolicitud.FechaSolicitarDesde;
@@ -350,17 +350,6 @@ namespace PayrollPal.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                //ValidarID de la solicitud Vacaciones
-                if (this.mktID.MaskCompleted)
-                {
-                    this.errProv1.SetError(this.mktID, string.Empty);
-
-                }
-                else
-                {
-                    this.errProv1.SetError(this.mktID, "Campo ID de solicitud de vacaciones no es correcto");
-                    return false;
-                }
 
                 // Validar Colaborador
 
@@ -424,7 +413,7 @@ namespace PayrollPal.UI.Mantenimientos
             SolicitudVacaciones oSolicitud = new SolicitudVacaciones();
 
 
-            oSolicitud.IDSolicitudVacas = this.mktID.Text;
+            oSolicitud.IDSolicitudVacas = this.txtID.Text;
             oSolicitud.IDColaborador = this.cmbColaborador.SelectedItem as Colaborador;
             oSolicitud.FechaSolicitud = this.dtpFechaSolicitud.Value;
             oSolicitud.FechaSolicitarDesde = this.dtpFechaDesde.Value;
@@ -443,7 +432,7 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si el usuario existe primero
             //antes de agregar al usuario
 
-            if (BLLSolicitudVacaciones.SelectById(this.mktID.Text) != null)
+            if (BLLSolicitudVacaciones.SelectById(this.txtID.Text) != null)
             {
 
                 BLLSolicitudVacaciones.Update(oSolicitud);
@@ -467,25 +456,6 @@ namespace PayrollPal.UI.Mantenimientos
 
         }
 
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// ID es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktID_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktID.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktID, string.Empty);
-                this.mktID.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktID, "Campo ID de solicitud no es correcto");
-                this.mktID.BackColor = Color.MistyRose;
-            }
-        }
 
         /// <summary>
         /// Evento para revisar si el campo del
@@ -542,13 +512,14 @@ namespace PayrollPal.UI.Mantenimientos
                     case 'C':
                         //habiitar los botones de limpiar, 
                         //agregar y salir
-                        this.btnAgregar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtID.Text = this.txtID.Text + BLLSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
 
                         //habilitar los controles de texto (txtBox)
 
-                        this.mktID.Enabled = true;
+                        this.txtID.Enabled = true;
                         this.cmbColaborador.Enabled = true;
                         this.dtpFechaSolicitud.Enabled = true;
                         this.dtpFechaDesde.Enabled = true;
@@ -568,7 +539,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                         //habilitar los controles de texto (txtBox)
 
-                        this.mktID.ReadOnly = true;
+                        this.txtID.ReadOnly = true;
                         this.cmbColaborador.Enabled = true;
                         this.dtpFechaSolicitud.Enabled = true;
                         this.dtpFechaDesde.Enabled = true;
@@ -654,7 +625,7 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string idSolicitud = this.mktID.Text;
+            string idSolicitud = this.txtID.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la solicitud de Vacaciones?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 

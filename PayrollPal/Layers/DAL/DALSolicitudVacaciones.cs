@@ -19,6 +19,37 @@ namespace PayrollPal.Layers.DAL
         private static readonly log4net.ILog _MyLogControlEventos =
                           log4net.LogManager.GetLogger("MyControlEventos");
 
+        #region SecuenciadorSolicitudVacaciones
+
+        public static string SecuenciadorSolicitudVacaciones()
+        {
+            try
+            {
+                String secuencia = "";
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_Secuenciador_SecuenciadorSolicitudVacaciones");
+                    command.CommandType = CommandType.StoredProcedure;
+                    secuencia = db.ExecuteScalar(command).ToString();
+
+                }
+                return secuencia;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+
+        #endregion
+
         #region SELECT ALL
         public static List<SolicitudVacaciones> SelectAll()
         {

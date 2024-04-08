@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using PayrollPal.Enumeraciones;
+using PayrollPal.Layers;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
 
@@ -122,8 +123,8 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.mktCodigo.Clear();
-                this.mktCodigo.BackColor = Color.White;
+                this.txtCod.Text = "dedPerc";
+                this.txtCod.BackColor = Color.White;
 
                 this.txtNombre.Clear();
                 this.txtNombre.BackColor = Color.White;
@@ -165,7 +166,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
 
-                this.mktCodigo.Enabled = false;
+                this.txtCod.Enabled = false;
                 this.txtNombre.Enabled = false;
                 this.cmbTipo.Enabled = false;
                 this.mktValor.Enabled = false;
@@ -214,7 +215,7 @@ namespace PayrollPal.UI.Mantenimientos
                     //Asignar la fila seleccionada del datagridview al objeto deduccionesPercepciones
                     odeduccionesPercepciones = this.dgvDeduccionesPercepciones.SelectedRows[0].DataBoundItem as Deducciones_Percepciones;
                     //Asignar a cada control los datos de deduccion/percepcion
-                    this.mktCodigo.Text = odeduccionesPercepciones.CodigoDeduccionPercepcion.ToString();
+                    this.txtCod.Text = odeduccionesPercepciones.CodigoDeduccionPercepcion.ToString();
                     this.txtNombre.Text = odeduccionesPercepciones.Nombre.ToString();
                     this.cmbTipo.Text = odeduccionesPercepciones.Tipo.ToString();
                     this.mktValor.Text = odeduccionesPercepciones.Valor.ToString();
@@ -291,7 +292,7 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string codigoDeduccionPercepcion = this.mktCodigo.Text;
+            string codigoDeduccionPercepcion = this.txtCod.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la " +
                 "deducción/percepción?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -324,13 +325,14 @@ namespace PayrollPal.UI.Mantenimientos
                     case 'C':
                         //habiitar los botones de limpiar, 
                         //agregar y salir
-                        this.btnAgregar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtCod.Text = this.txtCod.Text + BLLDeduccionesPercepciones.SecuenciadorDeduccionesPercepciones();
 
                         //habilitar los controles de texto (txtBox)
 
-                        this.mktCodigo.Enabled = true;
+                        this.txtCod.Enabled = true;
                         this.txtNombre.Enabled = true;
                         this.cmbTipo.Enabled = true;
                         this.mktValor.Enabled = true;
@@ -344,7 +346,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                         //habilitar los controles de texto (txtBox)
 
-                        this.mktCodigo.ReadOnly = true;
+                        this.txtCod.ReadOnly = true;
                         this.txtNombre.Enabled = true;
                         this.cmbTipo.Enabled = true;
                         this.mktValor.Enabled = true;
@@ -407,17 +409,6 @@ namespace PayrollPal.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                //Validar código de deducción y percepción
-                if (this.mktCodigo.MaskCompleted)
-                {
-                    this.errProv1.SetError(this.mktCodigo, string.Empty);
-
-                }
-                else
-                {
-                    this.errProv1.SetError(this.mktCodigo, "Campo código de deducción/percepción no es correcto");
-                    return false;
-                }
 
                 // Validar Nombre
                 if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
@@ -513,7 +504,7 @@ namespace PayrollPal.UI.Mantenimientos
             Deducciones_Percepciones oDeduccionesPercepciones = new Deducciones_Percepciones();
 
 
-            oDeduccionesPercepciones.CodigoDeduccionPercepcion = this.mktCodigo.Text;
+            oDeduccionesPercepciones.CodigoDeduccionPercepcion = this.txtCod.Text;
             oDeduccionesPercepciones.Nombre = this.txtNombre.Text;
             oDeduccionesPercepciones.Tipo = (TipoPercepcionDeduccion)this.cmbTipo.SelectedItem;
             oDeduccionesPercepciones.Valor = double.Parse(this.mktValor.Text);
@@ -523,7 +514,7 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si la deducción/percepción existe primero
             //antes de agregar la deducción/percepción
 
-            if (BLLDeduccionesPercepciones.SelectById(this.mktCodigo.Text) != null)
+            if (BLLDeduccionesPercepciones.SelectById(this.txtCod.Text) != null)
             {
 
                 BLLDeduccionesPercepciones.Update(oDeduccionesPercepciones);
@@ -549,25 +540,6 @@ namespace PayrollPal.UI.Mantenimientos
 
         }
 
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// código es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktCodigo_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktCodigo.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktCodigo, string.Empty);
-                this.mktCodigo.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktCodigo, "Campo código de deducción/percepción no es correcto");
-                this.mktCodigo.BackColor = Color.MistyRose;
-            }
-        }
 
         /// <summary>
         /// Evento para revisar si el campo del

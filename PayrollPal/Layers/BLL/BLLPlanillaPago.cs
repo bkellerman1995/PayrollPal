@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using PayrollPal.Layers.DAL;
 using PayrollPal.Layers.Entities;
 
 namespace PayrollPal.Layers.BLL
@@ -13,6 +14,14 @@ namespace PayrollPal.Layers.BLL
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        #region SecuenciadorPlanillasPago
+
+        public static string SecuenciadorPlanillasPago()
+        {
+            return DALPlanillaPago.SecuenciadorPlanillaPago();
+        }
+        #endregion
 
         #region SELECT ALL
         public static List<PlanillaPago> SelectAll()

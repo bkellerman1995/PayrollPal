@@ -85,7 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Layers\BLLSolicitudVacaciones.cs" />
+    <Compile Include="Layers\BLL\BLLSolicitudVacaciones.cs" />
     <Compile Include="Layers\BLL\BLLColaborador.cs" />
     <Compile Include="Layers\BLL\BLLControlDeMarcas.cs" />
     <Compile Include="Layers\BLL\BLLDeduccionesPercepciones.cs" />

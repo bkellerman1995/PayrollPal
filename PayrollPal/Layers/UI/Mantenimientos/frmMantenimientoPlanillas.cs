@@ -71,8 +71,14 @@ namespace PayrollPal
         {
             try
             {
-                this.mktCodigo.Clear();
-                this.mktCodigo.BackColor = Color.White;
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
+
+                this.txtCod.Text = "pl";
+                this.txtCod.BackColor = Color.White;
 
                 this.txtNombre.Clear();
                 this.txtNombre.BackColor = Color.White;
@@ -109,7 +115,7 @@ namespace PayrollPal
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
 
-                this.mktCodigo.Enabled = false;
+                this.txtCod.Enabled = false;
                 this.txtNombre.Enabled = false;
                 this.rdbActiva.Enabled = false;
 
@@ -344,15 +350,16 @@ namespace PayrollPal
                     case 'C':
                         //habiitar los botones de limpiar, 
                         //agregar y salir
-                        this.btnAgregar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtCod.Text = this.txtCod.Text + BLLPlanillaPago.SecuenciadorPlanillasPago();
 
                         //habilitar los controles de texto, datetimepickers
                         //y radiobuttons
 
-                        this.mktCodigo.Enabled = true;
-                        this.mktCodigo.ReadOnly = false;
+                        this.txtCod.Enabled = true;
+                        this.txtCod.ReadOnly = false;
                         this.txtNombre.Enabled = true;
                         this.dtpFechaDesde.Enabled = true;
                         this.dtpFechaHasta.Enabled = true;
@@ -367,7 +374,7 @@ namespace PayrollPal
                         //habilitar los controles de texto, datetimepickers
                         //y radiobuttons
 
-                        this.mktCodigo.ReadOnly = true;
+                        this.txtCod.ReadOnly = true;
                         this.rdbActiva.Enabled = true;
                         this.rdbInactiva.Enabled = true;
                         this.rdbPorEnviar.Enabled = true;
@@ -429,17 +436,6 @@ namespace PayrollPal
                     this.errProv1.Clear();
                 }
 
-                //ValidarID código de la planilla de pago
-                if (this.mktCodigo.MaskCompleted)
-                {
-                    this.errProv1.SetError(this.mktCodigo, string.Empty);
-
-                }
-                else
-                {
-                    this.errProv1.SetError(this.mktCodigo, "Campo código de planilla de pago no es correcto");
-                    return false;
-                }
 
                 // Validar Nombre
                 if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
@@ -523,7 +519,7 @@ namespace PayrollPal
             //Crear la instancia de planilla de pago
             PlanillaPago oPlanillaPago = new PlanillaPago();
 
-            oPlanillaPago.Codigo = this.mktCodigo.Text;
+            oPlanillaPago.Codigo = this.txtCod.Text;
             oPlanillaPago.Nombre = this.txtNombre.Text;
 
             if (this.rdbActiva.Checked)
@@ -545,7 +541,7 @@ namespace PayrollPal
             //Insertar la planilla de pago a la base de datos
             //por medio del BLLPlanillaPago (método CREATE)
 
-            if (BLLPlanillaPago.SelectById(this.mktCodigo.Text) != null)
+            if (BLLPlanillaPago.SelectById(this.txtCod.Text) != null)
             {
 
                 BLLPlanillaPago.Update(oPlanillaPago);
@@ -584,7 +580,7 @@ namespace PayrollPal
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string codigoPlanilla = this.mktCodigo.Text;
+            string codigoPlanilla = this.txtCod.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la planilla de pago?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -621,25 +617,6 @@ namespace PayrollPal
             this.Close();
         }
 
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// ID es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktCodigo_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktCodigo.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktCodigo, string.Empty);
-                this.mktCodigo.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktCodigo, "Campo código de planilla de pago no es correcto");
-                this.mktCodigo.BackColor = Color.MistyRose;
-            }
-        }
 
         /// <summary>
         /// Evento para revisar si el campo del
@@ -688,7 +665,7 @@ namespace PayrollPal
                     PlanillaPago oPlanillaPago = new PlanillaPago();
                     oPlanillaPago = this.dgvPlanillas.SelectedRows[0].DataBoundItem as PlanillaPago;  //Asignamos el valor seleccionado
                     //Asignamos los valores a cada control
-                    this.mktCodigo.Text = oPlanillaPago.Codigo.ToString();
+                    this.txtCod.Text = oPlanillaPago.Codigo.ToString();
                     this.txtNombre.Text = oPlanillaPago.Nombre.ToString();
                     this.dtpFechaDesde.Text = oPlanillaPago.FechaDesde.ToString();
                     this.dtpFechaHasta.Text = oPlanillaPago.FechaHasta.ToString();
