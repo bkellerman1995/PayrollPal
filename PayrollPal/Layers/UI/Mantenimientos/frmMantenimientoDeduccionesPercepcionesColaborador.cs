@@ -37,10 +37,12 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 CargarListaColaboradoresyDataGridView();
                 CargarCombos();
-                RevisarCombosListasVacios();
+
 
                 //Limpiar los controles del form 
                 LimpiarControlesyListas();
+
+                RevisarCombosListasVacios();
             }
             catch (Exception msg)
             {
@@ -123,31 +125,24 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
         private void RevisarCombosListasVacios()
         {
-            string camposVacios = "";
-            bool vacio = false;
 
-            if (BLLDeduccionesPercepciones.SelectAll().Count == 0)
+            if (BLLDeduccionesPercepciones.SelectAll().Count != 0)
             {
-                camposVacios += "\n- Deducción / Percepción";
-                vacio = true;
+                this.errProv1.SetError(this.cmbDedPercCol, string.Empty);
+            }
+            else
+            {
+                this.errProv1.SetError(this.cmbDedPercCol, "No puede agregar deducciones/percepciones por colaborador sin deducciones/percepciones");
+
             }
 
-            if (BLLColaborador.SelectSoloColaboradoresSinDedPerc().Count == 0)
+            if (BLLColaborador.SelectSoloColaboradoresSinDedPerc().Count != 0)
             {
-                camposVacios += "\n- Colaboradores";
-                vacio = true;
+                this.errProv1.SetError(this.lstColaboradoresALL, string.Empty);
             }
-
-            if (vacio)
+            else
             {
-                MessageBox.Show("Hay campos(s) vacío(s): " + "\n" + camposVacios + "" +
-            "\n\nEstos campos son necesarios para poder agregar deducciones/percepciones por colaborador." +
-            "\n" +
-            "\nNo puede agregar deducciones/percepciones por colaborador sin datos en los campos arriba mencionados." +
-            "\n" +
-            "\nDebe agregar los campos faltantes en el mantenimiento respectivo.",
-            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Dispose();
+                this.errProv1.SetError(this.lstColaboradoresALL, "No puede agregar deducciones/percepciones por colaborador sin colaboradores");
 
             }
         }

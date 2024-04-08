@@ -20,6 +20,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        private List<int> listaRolesCargados = new List<int>();
         public frmMantenimientoRol()
         {
             InitializeComponent();
@@ -50,8 +51,10 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 //del DALRol
 
                 CargarLista();
+
+                HabilitarDeshabilitarBotonAgregar();
+
                 CargarCombo();
-                this.cmbIdRol.Focus();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
@@ -81,6 +84,12 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             {
                 this.dgvRoles.DataSource = BLLRol.SelectAll();
                 this.dgvRoles.ClearSelection();
+
+                foreach (var rol in BLLRol.SelectAll())
+                {
+                    listaRolesCargados.Add(1);
+                }
+
             }
             catch (Exception msg)
             {
@@ -93,6 +102,18 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 //Mostrar mensaje al usuario
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
+            }
+        }
+
+        private void HabilitarDeshabilitarBotonAgregar()
+        {
+            if (listaRolesCargados.Count == 3)
+            {
+                this.btnAgregar.Enabled = false;
+            }
+            else
+            {
+                this.btnAgregar.Enabled = true;
             }
         }
 
@@ -194,7 +215,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
-                this.btnAgregar.Enabled = true;
                 this.btnEliminar.Enabled = false;
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
@@ -464,6 +484,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 CargarLista();
                 LimpiarControles();
             }
+
+            HabilitarDeshabilitarBotonAgregar();
 
 
         }

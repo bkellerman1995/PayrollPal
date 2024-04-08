@@ -78,56 +78,45 @@ namespace PayrollPal.UI.Mantenimientos
 
         private void RevisarCombosVacios()
         {
-            string combosVacios = "";
-            bool vacio = false;
 
-            if (BLLDepartamento.SelectAll().Count == 0)
+            if (BLLDepartamento.SelectAll().Count != 0)
             {
-                combosVacios += "\n- Departamento";
-                vacio = true;
+                this.errProv1.SetError(this.cmbDepartamento, string.Empty);
+            }
+            else
+            {
+                this.errProv1.SetError(this.cmbDepartamento, "No puede agregar colaboradores sin departamento");
+
             }
 
-            if (BLLUsuario.SelectAll().Count == 0)
+            if (BLLUsuario.SelectAllNoAsignado().Count != 0)
             {
-                combosVacios += "\n- Usuario";
-                vacio = true;
+                this.errProv1.SetError(this.cmbUsuario, string.Empty);
+            }
+            else
+            {
+                this.errProv1.SetError(this.cmbUsuario, "No puede agregar colaboradores sin usuario");
+
             }
 
-            if (BLLPuesto.SelectAll().Count == 0)
+            if (BLLPuesto.SelectAll().Where(puesto => puesto.Estado==true).ToList().Count != 0)
             {
-                combosVacios += "\n- Puesto";
-                vacio = true;
+                this.errProv1.SetError(this.cmbPuestos, string.Empty);
+            }
+            else
+            {
+                this.errProv1.SetError(this.cmbPuestos, "No puede agregar colaboradores sin puesto");
+
             }
 
-            if (BLLRol.SelectAll().Count == 0)
+            if (BLLRol.SelectAll().Count != 0)
             {
-                combosVacios += "\n- Rol";
-                vacio = true;
+                this.errProv1.SetError(this.cmbRol, string.Empty);
             }
-
-            if (BLLSupervisor.SelectAll().Count == 0)
+            else
             {
-                combosVacios += "\n- Supervisor";
-                vacio = true;
-            }
+                this.errProv1.SetError(this.cmbRol, "No puede agregar colaboradores sin rol");
 
-            if (BLLUsuario.SelectAllNoAsignado().Count == 0)
-            {
-                combosVacios += "\n- Usuario";
-                vacio = true;
-            }
-
-            if (vacio)
-            {
-
-                MessageBox.Show("Hay campos(s) vacío(s): " + "\n" + combosVacios + "" +
-        "\n\nEstos campos son necesarios para poder agregar colaboradores." +
-        "\n" +
-        "\nNo puede agregar colaboradores sin datos en los campos arriba mencionados." +
-        "\n" +
-        "\nDebe agregar los campos faltantes en el mantenimiento respectivo",
-        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Dispose();
             }
         }
 
@@ -992,6 +981,17 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 this.cmbSupervisor.Visible = true;
                 this.lblSupervisor.Visible = true;
+
+                if (BLLSupervisor.SelectAll().Count != 0)
+                {
+                    this.errProv1.SetError(this.cmbSupervisor, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.cmbSupervisor, "No puede agregar colaboradores sin supervisor");
+
+                }
+
             }
             else
             {
@@ -1042,6 +1042,12 @@ namespace PayrollPal.UI.Mantenimientos
                 //Habilitar botones de Editar
                 //Eliminar y Editar
                 //tambien deshabilita el boton de Agregar
+
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
 
                 this.btnAgregar.Enabled = false;
                 this.btnEditar.Enabled = true;
