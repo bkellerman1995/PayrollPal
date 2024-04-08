@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtCod = new System.Windows.Forms.TextBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.mktValor = new System.Windows.Forms.MaskedTextBox();
             this.lblTipoValor = new System.Windows.Forms.Label();
@@ -57,7 +58,7 @@
             this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtCod = new System.Windows.Forms.TextBox();
+            this.lblPorc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,6 +78,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblPorc);
             this.splitContainer1.Panel1.Controls.Add(this.txtCod);
             this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
             this.splitContainer1.Panel1.Controls.Add(this.mktValor);
@@ -98,6 +100,17 @@
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
             // 
+            // txtCod
+            // 
+            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCod.Location = new System.Drawing.Point(147, 45);
+            this.txtCod.Margin = new System.Windows.Forms.Padding(1);
+            this.txtCod.Name = "txtCod";
+            this.txtCod.ReadOnly = true;
+            this.txtCod.Size = new System.Drawing.Size(159, 29);
+            this.txtCod.TabIndex = 62;
+            this.txtCod.Text = "dedPerc";
+            // 
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -112,10 +125,10 @@
             // mktValor
             // 
             this.mktValor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mktValor.Location = new System.Drawing.Point(147, 165);
+            this.mktValor.Location = new System.Drawing.Point(148, 203);
             this.mktValor.Mask = "00000";
             this.mktValor.Name = "mktValor";
-            this.mktValor.Size = new System.Drawing.Size(143, 29);
+            this.mktValor.Size = new System.Drawing.Size(61, 29);
             this.mktValor.TabIndex = 45;
             this.mktValor.ValidatingType = typeof(int);
             this.mktValor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktValor_KeyUp);
@@ -124,7 +137,7 @@
             // 
             this.lblTipoValor.AutoSize = true;
             this.lblTipoValor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoValor.Location = new System.Drawing.Point(9, 207);
+            this.lblTipoValor.Location = new System.Drawing.Point(10, 169);
             this.lblTipoValor.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblTipoValor.Name = "lblTipoValor";
             this.lblTipoValor.Size = new System.Drawing.Size(76, 21);
@@ -168,11 +181,12 @@
             this.cmbTipoValor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoValor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipoValor.FormattingEnabled = true;
-            this.cmbTipoValor.Location = new System.Drawing.Point(147, 204);
+            this.cmbTipoValor.Location = new System.Drawing.Point(148, 166);
             this.cmbTipoValor.Margin = new System.Windows.Forms.Padding(1);
             this.cmbTipoValor.Name = "cmbTipoValor";
             this.cmbTipoValor.Size = new System.Drawing.Size(135, 29);
             this.cmbTipoValor.TabIndex = 34;
+            this.cmbTipoValor.SelectedValueChanged += new System.EventHandler(this.cmbTipoValor_SelectedValueChanged);
             // 
             // cmbTipo
             // 
@@ -189,7 +203,7 @@
             // 
             this.lblValor.AutoSize = true;
             this.lblValor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValor.Location = new System.Drawing.Point(9, 165);
+            this.lblValor.Location = new System.Drawing.Point(9, 206);
             this.lblValor.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblValor.Name = "lblValor";
             this.lblValor.Size = new System.Drawing.Size(46, 21);
@@ -321,6 +335,7 @@
             this.dgvDeduccionesPercepciones.Size = new System.Drawing.Size(760, 363);
             this.dgvDeduccionesPercepciones.TabIndex = 5;
             this.dgvDeduccionesPercepciones.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeduccionesPercepcione_CellContentDoubleClick);
+            this.dgvDeduccionesPercepciones.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDeduccionesPercepciones_CellFormatting);
             // 
             // Codigo
             // 
@@ -361,16 +376,16 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // txtCod
+            // lblPorc
             // 
-            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCod.Location = new System.Drawing.Point(147, 45);
-            this.txtCod.Margin = new System.Windows.Forms.Padding(1);
-            this.txtCod.Name = "txtCod";
-            this.txtCod.ReadOnly = true;
-            this.txtCod.Size = new System.Drawing.Size(159, 29);
-            this.txtCod.TabIndex = 62;
-            this.txtCod.Text = "dedPerc";
+            this.lblPorc.AutoSize = true;
+            this.lblPorc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorc.Location = new System.Drawing.Point(215, 206);
+            this.lblPorc.Name = "lblPorc";
+            this.lblPorc.Size = new System.Drawing.Size(23, 21);
+            this.lblPorc.TabIndex = 63;
+            this.lblPorc.Text = "%";
+            this.lblPorc.Visible = false;
             // 
             // frmMantenimientoDeduccionesPercepciones
             // 
@@ -424,5 +439,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoValor;
         private System.Windows.Forms.TextBox txtCod;
+        private System.Windows.Forms.Label lblPorc;
     }
 }

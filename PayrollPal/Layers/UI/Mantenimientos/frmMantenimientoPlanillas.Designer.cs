@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoPlanillas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -75,6 +75,7 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtCod = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdbPorEnviar = new System.Windows.Forms.RadioButton();
             this.rdbActiva = new System.Windows.Forms.RadioButton();
@@ -100,8 +101,13 @@
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvPlanillas = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaDesde = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaHasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtCod = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -397,7 +403,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -416,10 +422,21 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvPlanillas);
-            this.splitContainer1.Size = new System.Drawing.Size(785, 818);
+            this.splitContainer1.Size = new System.Drawing.Size(785, 819);
             this.splitContainer1.SplitterDistance = 331;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 34;
+            // 
+            // txtCod
+            // 
+            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCod.Location = new System.Drawing.Point(138, 60);
+            this.txtCod.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.txtCod.Name = "txtCod";
+            this.txtCod.ReadOnly = true;
+            this.txtCod.Size = new System.Drawing.Size(133, 29);
+            this.txtCod.TabIndex = 68;
+            this.txtCod.Text = "pl";
             // 
             // panel1
             // 
@@ -438,7 +455,7 @@
             this.rdbPorEnviar.AutoSize = true;
             this.rdbPorEnviar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbPorEnviar.Location = new System.Drawing.Point(46, 137);
-            this.rdbPorEnviar.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbPorEnviar.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.rdbPorEnviar.Name = "rdbPorEnviar";
             this.rdbPorEnviar.Size = new System.Drawing.Size(98, 25);
             this.rdbPorEnviar.TabIndex = 67;
@@ -451,7 +468,7 @@
             this.rdbActiva.AutoSize = true;
             this.rdbActiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbActiva.Location = new System.Drawing.Point(46, 17);
-            this.rdbActiva.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbActiva.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.rdbActiva.Name = "rdbActiva";
             this.rdbActiva.Size = new System.Drawing.Size(70, 25);
             this.rdbActiva.TabIndex = 47;
@@ -464,7 +481,7 @@
             this.rdbEnviada.AutoSize = true;
             this.rdbEnviada.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbEnviada.Location = new System.Drawing.Point(46, 97);
-            this.rdbEnviada.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbEnviada.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.rdbEnviada.Name = "rdbEnviada";
             this.rdbEnviada.Size = new System.Drawing.Size(82, 25);
             this.rdbEnviada.TabIndex = 66;
@@ -488,7 +505,7 @@
             this.rdbInactiva.AutoSize = true;
             this.rdbInactiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbInactiva.Location = new System.Drawing.Point(46, 56);
-            this.rdbInactiva.Margin = new System.Windows.Forms.Padding(1);
+            this.rdbInactiva.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.rdbInactiva.Name = "rdbInactiva";
             this.rdbInactiva.Size = new System.Drawing.Size(81, 25);
             this.rdbInactiva.TabIndex = 48;
@@ -532,7 +549,7 @@
             this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaHasta.Location = new System.Drawing.Point(266, 37);
-            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(248, 29);
             this.dtpFechaHasta.TabIndex = 52;
@@ -542,7 +559,7 @@
             this.dtpFechaPago.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaPago.Location = new System.Drawing.Point(266, 73);
-            this.dtpFechaPago.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpFechaPago.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.dtpFechaPago.Name = "dtpFechaPago";
             this.dtpFechaPago.Size = new System.Drawing.Size(248, 29);
             this.dtpFechaPago.TabIndex = 53;
@@ -563,7 +580,7 @@
             this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaDesde.Location = new System.Drawing.Point(266, 1);
-            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(1);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(248, 29);
             this.dtpFechaDesde.TabIndex = 55;
@@ -594,7 +611,7 @@
             // 
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(138, 94);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(1);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(290, 29);
             this.txtNombre.TabIndex = 44;
@@ -703,66 +720,110 @@
             // 
             this.dgvPlanillas.AllowUserToAddRows = false;
             this.dgvPlanillas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPlanillas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPlanillas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPlanillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvPlanillas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Nombre,
+            this.FechaDesde,
+            this.FechaHasta,
+            this.FechaPago,
+            this.Estado});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPlanillas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPlanillas.Location = new System.Drawing.Point(0, 0);
-            this.dgvPlanillas.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvPlanillas.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.dgvPlanillas.Name = "dgvPlanillas";
             this.dgvPlanillas.ReadOnly = true;
             this.dgvPlanillas.RowHeadersVisible = false;
             this.dgvPlanillas.RowHeadersWidth = 102;
             this.dgvPlanillas.RowTemplate.Height = 40;
             this.dgvPlanillas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPlanillas.Size = new System.Drawing.Size(785, 485);
+            this.dgvPlanillas.Size = new System.Drawing.Size(785, 486);
             this.dgvPlanillas.TabIndex = 5;
             this.dgvPlanillas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColaboradores_CellContentDoubleClick);
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Código";
+            this.Codigo.MinimumWidth = 12;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.MinimumWidth = 12;
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // FechaDesde
+            // 
+            this.FechaDesde.DataPropertyName = "FechaDesde";
+            this.FechaDesde.HeaderText = "Desde";
+            this.FechaDesde.MinimumWidth = 12;
+            this.FechaDesde.Name = "FechaDesde";
+            this.FechaDesde.ReadOnly = true;
+            // 
+            // FechaHasta
+            // 
+            this.FechaHasta.DataPropertyName = "FechaHasta";
+            this.FechaHasta.HeaderText = "Hasta";
+            this.FechaHasta.MinimumWidth = 12;
+            this.FechaHasta.Name = "FechaHasta";
+            this.FechaHasta.ReadOnly = true;
+            // 
+            // FechaPago
+            // 
+            this.FechaPago.DataPropertyName = "FechaPago";
+            this.FechaPago.HeaderText = "Fecha de pago";
+            this.FechaPago.MinimumWidth = 12;
+            this.FechaPago.Name = "FechaPago";
+            this.FechaPago.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.MinimumWidth = 12;
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // errProv1
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // txtCod
-            // 
-            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCod.Location = new System.Drawing.Point(138, 60);
-            this.txtCod.Margin = new System.Windows.Forms.Padding(1);
-            this.txtCod.Name = "txtCod";
-            this.txtCod.ReadOnly = true;
-            this.txtCod.Size = new System.Drawing.Size(133, 29);
-            this.txtCod.TabIndex = 68;
-            this.txtCod.Text = "pl";
-            // 
             // frmMantenimientoPlanillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 818);
+            this.ClientSize = new System.Drawing.Size(785, 819);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(1);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "frmMantenimientoPlanillas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Planillas de Pago";
@@ -855,5 +916,11 @@
         private System.Windows.Forms.ErrorProvider errProv1;
         private System.Windows.Forms.DataGridView dgvPlanillas;
         private System.Windows.Forms.TextBox txtCod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaDesde;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaHasta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaPago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }

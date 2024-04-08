@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using Newtonsoft.Json.Linq;
 using PayrollPal.Enumeraciones;
 using PayrollPal.Layers;
 using PayrollPal.Layers.BLL;
@@ -435,7 +436,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 //Validar Campo Valor
 
-                if (this.mktValor.MaskCompleted)
+                if (!String.IsNullOrEmpty(this.mktValor.Text.Trim()))
                 {
                     this.errProv1.SetError(this.mktValor, string.Empty);
 
@@ -569,15 +570,49 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void mktValor_KeyUp(object sender, KeyEventArgs e)
         {
-            if (this.mktValor.MaskCompleted)
+            if (!String.IsNullOrEmpty(this.mktValor.Text.Trim()))
             {
                 this.errProv1.SetError(this.mktValor, string.Empty);
                 this.mktValor.BackColor = Color.Honeydew;
             }
+
             else
             {
                 this.errProv1.SetError(this.mktValor, "Campo valor de deducción/percepción no es correcto");
                 this.mktValor.BackColor = Color.MistyRose;
+            }
+        }
+
+        private void cmbTipoValor_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            if (this.cmbTipoValor.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            if ((TipoPorcAbs)this.cmbTipoValor.SelectedItem == TipoPorcAbs.Porcentaje)
+            {
+                this.mktValor.Mask = "000";
+                this.lblPorc.Visible = true;
+            }
+
+            if ((TipoPorcAbs)this.cmbTipoValor.SelectedItem == TipoPorcAbs.Absoluto)
+            {
+                this.mktValor.Mask = "000000";
+                this.lblPorc.Visible = false;
+            }
+
+
+        }
+
+        private void dgvDeduccionesPercepciones_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.ColumnIndex == 4 && e.Value != null)
+            {
+                if (e.Value.ToString() == "Porcentaje")
+                    e.Value += " (%)";
             }
         }
     }
