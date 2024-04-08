@@ -1,4 +1,5 @@
 ﻿using PayrollPal.Entities;
+using PayrollPal.Layers.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,6 +19,13 @@ namespace PayrollPal.Layers.BLL
             DAL.DALControlDeMarcas.CREATE(control);
 
         }
+
+        #region UPDATE
+        public static void Update(ControlDeMarcas control)
+        {
+            DAL.DALControlDeMarcas.UPDATE(control);
+        }
+        #endregion
 
         #endregion
         #region SELECT ALL

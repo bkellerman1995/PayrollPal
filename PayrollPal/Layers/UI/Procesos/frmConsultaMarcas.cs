@@ -93,6 +93,7 @@ namespace PayrollPal.UI.Consultas
                 ControlDeMarcas control = new ControlDeMarcas();
                 BLLControlDeMarcas.DELETE();
                 control.ObtenerMarcasJSON(this.txtRutaArchivoJSON.Text);
+                VerificarRegistrosDeMarcaIncompletos();
                 this.dgvListaMarcas.DataSource = BLLControlDeMarcas.SelectAll();
                 RevisarSiHayMarcas();
                 this.dgvListaMarcas.ClearSelection();
@@ -101,6 +102,39 @@ namespace PayrollPal.UI.Consultas
             catch (Exception er)
             {
                 MessageBox.Show("Ocurrió un error al cargar las marcas en la tabla: " + er.Message);
+            }
+        }
+
+        private void VerificarRegistrosDeMarcaIncompletos()
+        {
+            List<ControlDeMarcas> listaRegistrosIncompletos = BLLControlDeMarcas.SelectAll().Where(marca => marca.HoraEntrada == ""||
+                marca.HoraSalida == "").ToList();
+
+            int contadorRegistrosIncompletos = BLLControlDeMarcas.SelectAll().Where(marca => marca.HoraEntrada == "" ||
+                marca.HoraSalida == "").ToList().Count;
+
+            if (contadorRegistrosIncompletos > 0)
+            {
+                foreach (var marca in listaRegistrosIncompletos)
+                {
+                    if ((!String.Equals(marca.HoraEntrada, "") && (String.Equals(marca.HoraSalida,""))))
+                    {
+                        marca.HoraSalida = "17:00";
+                        BLLControlDeMarcas.Update(marca);
+                    }
+                    else if ((String.Equals(marca.HoraEntrada, "") && (!String.Equals(marca.HoraSalida, ""))))
+                    {
+                        marca.HoraEntrada = "7:00";
+                        BLLControlDeMarcas.Update(marca);
+                    }
+                    else
+                    {
+                        marca.HoraEntrada = "00:00";
+                        marca.HoraSalida = "00:00";
+                        BLLControlDeMarcas.Update(marca);
+
+                    }
+                }
             }
         }
 

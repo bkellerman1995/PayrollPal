@@ -1,4 +1,5 @@
 ﻿using PayrollPal.Layers.BLL;
+using PayrollPal.Layers.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -51,6 +52,11 @@ namespace PayrollPal.Entities
                 lector.Close();
             }
 
+        }
+
+        public override string ToString()
+        {
+            return idMarca + " - " + IdColaborador;
         }
     }
 }
