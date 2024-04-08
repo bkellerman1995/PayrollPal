@@ -111,10 +111,16 @@ namespace PayrollPal.UI.Mantenimientos
                 vacio = true;
             }
 
+            if (BLLUsuario.SelectAllNoAsignado().Count == 0)
+            {
+                combosVacios += "\n- Usuario";
+                vacio = true;
+            }
+
             if (vacio)
             {
 
-                MessageBox.Show("Hay campos(s) vacío(s): " + combosVacios + "" +
+                MessageBox.Show("Hay campos(s) vacío(s): " + "\n" + combosVacios + "" +
         "\n\nEstos campos son necesarios para poder agregar colaboradores." +
         "\n" +
         "\nNo puede agregar colaboradores sin datos en los campos arriba mencionados." +

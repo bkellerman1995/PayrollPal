@@ -584,6 +584,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
+                listaColaboradoresSupervisor.Clear();
+
                 //Habilitar botones de Editar
                 //Eliminar y Editar
                 //tambien deshabilita el boton de Agregar
@@ -607,8 +609,11 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                     foreach (var item in BLL.BLLColaborador.SelectColaboradorIdSupervisor(oSupervisor.IDSupervisor))
                     {
-                        this.lstColaboradoresSup.Items.Add(item);
+                        listaColaboradoresSupervisor.Add(item);
                     }
+
+                    RefrescarListaColaboradoresPorSup();
+
                 }
             }
             catch (Exception msg)

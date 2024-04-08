@@ -57,10 +57,10 @@ namespace PayrollPal.Layers.BLL
 
 
         #region SELECT Solo Colaboradores Sin Deducciones Percepciones Asignadas
-        public static List<Colaborador> SelectSoloSoloColaboradoresSinDedPerc()
+        public static List<Colaborador> SelectSoloColaboradoresSinDedPerc()
         {
 
-            return DAL.DALColaborador.SelectSoloSoloColaboradoresSinDedPerc();
+            return DAL.DALColaborador.SelectSoloColaboradoresSinDedPerc();
         }
         #endregion
 

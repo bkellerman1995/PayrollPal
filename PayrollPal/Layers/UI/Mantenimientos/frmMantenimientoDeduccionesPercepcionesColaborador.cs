@@ -21,7 +21,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         List<Colaborador> listaAgregarDeduccionPercepcionColaborador = new List<Colaborador>();
-        List<Colaborador> listaColaboradoresALL = BLLColaborador.SelectSoloSoloColaboradoresSinDedPerc();
+        List<Colaborador> listaColaboradoresALL = BLLColaborador.SelectSoloColaboradoresSinDedPerc();
         Colaborador oColaborador = new Colaborador();
         public frmMantenimientoDeduccionesPercepcionesColaborador()
         {
@@ -132,7 +132,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 vacio = true;
             }
 
-            if (BLLColaborador.SelectSoloColaboradores().Count == 0)
+            if (BLLColaborador.SelectSoloColaboradoresSinDedPerc().Count == 0)
             {
                 camposVacios += "\n- Colaboradores";
                 vacio = true;
@@ -140,7 +140,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             if (vacio)
             {
-                MessageBox.Show("Hay campos(s) vacío(s): " + camposVacios + "" +
+                MessageBox.Show("Hay campos(s) vacío(s): " + "\n" + camposVacios + "" +
             "\n\nEstos campos son necesarios para poder agregar deducciones/percepciones por colaborador." +
             "\n" +
             "\nNo puede agregar deducciones/percepciones por colaborador sin datos en los campos arriba mencionados." +

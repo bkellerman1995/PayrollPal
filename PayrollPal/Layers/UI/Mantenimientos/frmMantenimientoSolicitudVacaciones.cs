@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Enumeraciones;
+using PayrollPal.Layers.DAL;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -42,6 +43,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 CargarListas();
                 CargarCombos();
+                RevisarCombosListasVacios();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
@@ -88,7 +90,7 @@ namespace PayrollPal.UI.Mantenimientos
 
         private void CargarCombos()
         {
-            List<Colaborador> listaColab = BLLColaborador.SelectSoloColaboradores();
+            List<Colaborador> listaColab = BLLColaborador.SelectAll();
             foreach (var colab in listaColab)
             {
                 this.cmbColaborador.Items.Add(colab);
@@ -97,6 +99,31 @@ namespace PayrollPal.UI.Mantenimientos
             foreach (ObservacionSolicVacaciones obs in Enum.GetValues(typeof(ObservacionSolicVacaciones)))
             {
                 this.cmbObservacionesFinales.Items.Add(obs);
+            }
+        }
+
+        private void RevisarCombosListasVacios()
+        {
+            string camposVacios = "";
+            bool vacio = false;
+
+            if (BLLColaborador.SelectAll().Count == 0)
+            {
+                camposVacios += "\n- Colaboradores";
+                vacio = true;
+            }
+
+            if (vacio)
+            {
+                MessageBox.Show("Hay campos(s) vacío(s): " + "\n" + camposVacios + "" +
+            "\n\nEstos campos son necesarios para poder agregar solicitudes de vacaciones por colaborador." +
+            "\n" +
+            "\nNo puede agregar solicitudes de vacaciones por colaborador sin datos en los campos arriba mencionados." +
+            "\n" +
+            "\nDebe agregar los campos faltantes en el mantenimiento respectivo.",
+            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Dispose();
+
             }
         }
 
