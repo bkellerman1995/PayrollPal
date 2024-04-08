@@ -11,7 +11,7 @@ namespace PayrollPal.Entities
     public class ControlDeMarcas
     {
         public int idMarca { get; set; }
-        public int IdColaborador { get; set; }
+        public string IdColaborador { get; set; }
         public string HoraEntrada { get; set; }
         public string HoraSalida { get; set; }
         public string Fecha { get; set; }
@@ -29,23 +29,28 @@ namespace PayrollPal.Entities
             string jsonDatos = "";
             jsonDatos = File.ReadAllText(ruta);
 
-            listaMarcas = JSONGenericObject <List<ControlDeMarcas>>.JSonToObject (jsonDatos);
-
-            foreach (var item in listaMarcas)
+            using (StreamReader lector = new StreamReader(ruta))
             {
-                ControlDeMarcas controlMarca = new ControlDeMarcas();
-                controlMarca.idMarca = item.idMarca;
-                controlMarca.IdColaborador = item.IdColaborador;
-                controlMarca.HoraEntrada = item.HoraEntrada;
-                controlMarca.HoraSalida = item.HoraSalida;
-                controlMarca.Fecha = item.Fecha;
+                listaMarcas = JSONGenericObject<List<ControlDeMarcas>>.JSonToObject(jsonDatos);
 
-                double horasTrabajadas = Math.Abs(Math.Round(item.HorasTrabajadas,1));
+                foreach (var item in listaMarcas)
+                {
+                    ControlDeMarcas controlMarca = new ControlDeMarcas();
+                    controlMarca.idMarca = item.idMarca;
+                    controlMarca.IdColaborador = item.IdColaborador;
+                    controlMarca.HoraEntrada = item.HoraEntrada;
+                    controlMarca.HoraSalida = item.HoraSalida;
+                    controlMarca.Fecha = item.Fecha;
 
-                controlMarca.HorasTrabajadas = horasTrabajadas;
+                    double horasTrabajadas = Math.Abs(Math.Round(item.HorasTrabajadas, 1));
 
-                BLLControlDeMarcas.CREATE(controlMarca);
+                    controlMarca.HorasTrabajadas = horasTrabajadas;
+
+                    BLLControlDeMarcas.CREATE(controlMarca);
+                }
+                lector.Close();
             }
+
         }
     }
 }

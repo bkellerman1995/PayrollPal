@@ -14,6 +14,7 @@ namespace PayrollPal.UI.Consultas
 {
     public partial class frmConsultaMarcas : Form
     {
+        private bool click_Agregar;
         public frmConsultaMarcas()
         {
             InitializeComponent();
@@ -46,7 +47,9 @@ namespace PayrollPal.UI.Consultas
                     {
                         this.txtRutaArchivoJSON.Text = ofd.FileName;
                         this.pctCargarJSON.Image = PayrollPal.Properties.Resources.Json_conCheck;
+                        this.errProv1.Clear();
                         HabilitarBotonMostrarLista();
+                        ofd.Dispose();
                     }
                     catch (Exception er)
                     {
@@ -71,6 +74,7 @@ namespace PayrollPal.UI.Consultas
         {
             CargarEstadoBotones();
             this.pctCargarJSON.Image = PayrollPal.Properties.Resources.Json_sinCheck;
+            click_Agregar = false;
         }
 
         private void CargarEstadoBotones()
@@ -84,10 +88,13 @@ namespace PayrollPal.UI.Consultas
         {
             try
             {
+                click_Agregar = true;
+                this.errProv1.Clear();
                 ControlDeMarcas control = new ControlDeMarcas();
                 BLLControlDeMarcas.DELETE();
                 control.ObtenerMarcasJSON(this.txtRutaArchivoJSON.Text);
                 this.dgvListaMarcas.DataSource = BLLControlDeMarcas.SelectAll();
+                RevisarSiHayMarcas();
                 this.dgvListaMarcas.ClearSelection();
 
             }
@@ -95,6 +102,37 @@ namespace PayrollPal.UI.Consultas
             {
                 MessageBox.Show("Ocurrió un error al cargar las marcas en la tabla: " + er.Message);
             }
+        }
+
+        private void RevisarSiHayMarcas()
+        {
+            if (BLLControlDeMarcas.SelectAll().Count == 0)
+            {
+                MessageBox.Show("¡No se puede proceder sin marcas en el sistema!",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Application.Exit();
+            }
+        }
+        private void frmConsultaMarcas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ImageConverter convertidor = new ImageConverter();
+            var arreglo1 = (byte[])convertidor.ConvertTo(this.pctCargarJSON.Image, typeof(byte[]));
+            var arreglo2 = (byte[])convertidor.ConvertTo(PayrollPal.Properties.Resources.Json_sinCheck, typeof(byte[]));
+           
+            if (arreglo1.Length == arreglo2.Length)
+            {
+                e.Cancel = true;
+                this.errProv1.SetError(this.pctCargarJSON, "¡No se puede proceder sin un archivo válido JSON que contenga las marcas!");
+
+            }
+
+            if (this.btnCargarArchivoJson.Enabled && click_Agregar == false)
+            {
+                e.Cancel = true;
+                this.errProv1.SetError(this.btnMostrarListaMarcas, "Debe darle click al botón Mostrar primero");
+            }
+
+
         }
     }
 }

@@ -61,7 +61,7 @@ namespace PayrollPal.Layers.DAL
 
                         ControlDeMarcas controlDeMarcas = new ControlDeMarcas();
                         controlDeMarcas.idMarca = int.Parse(dr["idMarca"].ToString());
-                        controlDeMarcas.IdColaborador = int.Parse(dr["IdColaborador"].ToString());
+                        controlDeMarcas.IdColaborador = dr["IdColaborador"].ToString();
                         controlDeMarcas.HoraEntrada = (dr["HoraEntrada"].ToString());
                         controlDeMarcas.HoraSalida = (dr["HoraSalida"].ToString());
                         controlDeMarcas.Fecha = (dr["Fecha"].ToString());

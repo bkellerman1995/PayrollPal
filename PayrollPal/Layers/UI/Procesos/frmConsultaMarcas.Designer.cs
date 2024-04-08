@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCargarArchivoJson = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnMostrarListaMarcas = new System.Windows.Forms.Button();
@@ -36,12 +39,14 @@
             this.lblRutaArchivoJSON = new System.Windows.Forms.Label();
             this.pctCargarJSON = new System.Windows.Forms.PictureBox();
             this.dgvListaMarcas = new System.Windows.Forms.DataGridView();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCargarArchivoJson
@@ -90,6 +95,7 @@
             // 
             // txtRutaArchivoJSON
             // 
+            this.txtRutaArchivoJSON.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRutaArchivoJSON.Location = new System.Drawing.Point(176, 99);
             this.txtRutaArchivoJSON.Multiline = true;
             this.txtRutaArchivoJSON.Name = "txtRutaArchivoJSON";
@@ -120,20 +126,46 @@
             // 
             this.dgvListaMarcas.AllowUserToAddRows = false;
             this.dgvListaMarcas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvListaMarcas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListaMarcas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvListaMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvListaMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvListaMarcas.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvListaMarcas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListaMarcas.Location = new System.Drawing.Point(0, 0);
+            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(1);
             this.dgvListaMarcas.Name = "dgvListaMarcas";
             this.dgvListaMarcas.ReadOnly = true;
             this.dgvListaMarcas.RowHeadersVisible = false;
             this.dgvListaMarcas.RowHeadersWidth = 102;
+            this.dgvListaMarcas.RowTemplate.Height = 40;
+            this.dgvListaMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListaMarcas.Size = new System.Drawing.Size(826, 327);
-            this.dgvListaMarcas.TabIndex = 0;
+            this.dgvListaMarcas.TabIndex = 5;
+            // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
             // 
             // frmConsultaMarcas
             // 
@@ -143,7 +175,9 @@
             this.ClientSize = new System.Drawing.Size(826, 516);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmConsultaMarcas";
-            this.Text = "Consulta de Marcas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Carga de Marcas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConsultaMarcas_FormClosing);
             this.Load += new System.EventHandler(this.frmConsultaMarcas_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -152,6 +186,7 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -162,7 +197,8 @@
         private System.Windows.Forms.PictureBox pctCargarJSON;
         private System.Windows.Forms.Label lblRutaArchivoJSON;
         private System.Windows.Forms.TextBox txtRutaArchivoJSON;
-        private System.Windows.Forms.DataGridView dgvListaMarcas;
         private System.Windows.Forms.Button btnMostrarListaMarcas;
+        private System.Windows.Forms.DataGridView dgvListaMarcas;
+        private System.Windows.Forms.ErrorProvider errProv1;
     }
 }

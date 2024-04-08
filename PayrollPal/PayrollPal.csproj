@@ -123,10 +123,10 @@
     <Compile Include="Layers\Persistencia\FactoryConexion.cs" />
     <Compile Include="Layers\Persistencia\FactoryDataBase.cs" />
     <Compile Include="Layers\Persistencia\IDataBase.cs" />
-    <Compile Include="Layers\UI\Consultas\frmConsultaMarcas.cs">
+    <Compile Include="Layers\UI\Procesos\frmConsultaMarcas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Layers\UI\Consultas\frmConsultaMarcas.Designer.cs">
+    <Compile Include="Layers\UI\Procesos\frmConsultaMarcas.Designer.cs">
       <DependentUpon>frmConsultaMarcas.cs</DependentUpon>
     </Compile>
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.cs">
@@ -219,7 +219,7 @@
     <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.Designer.cs">
       <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Layers\UI\Consultas\frmConsultaMarcas.resx">
+    <EmbeddedResource Include="Layers\UI\Procesos\frmConsultaMarcas.resx">
       <DependentUpon>frmConsultaMarcas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoDeduccionesPercepciones.resx">
@@ -287,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Layers\Patrones\" />
+    <Folder Include="Layers\UI\Consultas\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Layers\Imagenes\Logo.png" />
