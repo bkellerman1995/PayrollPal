@@ -111,14 +111,15 @@ namespace PayrollPal.UI.Mantenimientos
                     case 'C':
                         //habiitar los botones de limpiar, 
                         //agregar y salir
-                        this.btnAgregar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtCod.Text = this.txtCod.Text + BLLPuesto.SecuenciadorPuesto();
 
                         //habilitar los controles de texto (txtBox)
                         //y los radio button (activo e inactivo)
 
-                        this.mktCodigo.Enabled = true;
+                        this.txtCod.Enabled = true;
                         this.txtNombre.Enabled = true;
                         this.rdbActivo.Enabled = true;
                         this.rdbActivo.Checked = true;
@@ -134,7 +135,7 @@ namespace PayrollPal.UI.Mantenimientos
                         //habilitar los controles de texto (txtBox)
                         //y los radiobuttons
 
-                        this.mktCodigo.ReadOnly = true;
+                        this.txtCod.ReadOnly = true;
                         this.txtNombre.Enabled = true;
                         this.rdbActivo.Enabled = true;
                         this.rdbInactivo.Enabled = true;
@@ -171,7 +172,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
 
-                this.mktCodigo.Enabled = false;
+                this.txtCod.Enabled = false;
                 this.txtNombre.Enabled = false;
                 this.rdbActivo.Enabled = false;
                 this.rdbActivo.Checked = false;
@@ -202,8 +203,8 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.mktCodigo.Clear();
-                this.mktCodigo.BackColor = Color.White;
+                this.txtCod.Text = "pto";
+                this.txtCod.BackColor = Color.White;
 
                 this.txtNombre.Clear();
                 this.txtNombre.BackColor = Color.White;
@@ -253,7 +254,7 @@ namespace PayrollPal.UI.Mantenimientos
                     //Asignar la fila seleccionada del datagridview al objeto puesto
                     oPuesto = this.dgvPuestos.SelectedRows[0].DataBoundItem as Puesto;
                     //Asignar a cada control los datos del puesto
-                    this.mktCodigo.Text = oPuesto.CodigoPuesto.ToString();
+                    this.txtCod.Text = oPuesto.CodigoPuesto.ToString();
                     this.txtNombre.Text = oPuesto.Nombre.ToString();
 
                     if (oPuesto.Estado)
@@ -333,17 +334,6 @@ namespace PayrollPal.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                //ValidarID del usuario
-                if (this.mktCodigo.MaskCompleted)
-                {
-                    this.errProv1.SetError(this.mktCodigo, string.Empty);
-
-                }
-                else
-                {
-                    this.errProv1.SetError(this.mktCodigo, "Campo Código de puesto no es correcto");
-                    return false;
-                }
 
                 // Validar Nombre
                 if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
@@ -395,7 +385,7 @@ namespace PayrollPal.UI.Mantenimientos
             Puesto oPuesto = new Puesto();
 
 
-            oPuesto.CodigoPuesto = int.Parse(this.mktCodigo.Text);
+            oPuesto.CodigoPuesto = this.txtCod.Text;
             oPuesto.Nombre = this.txtNombre.Text;
 
             if (this.rdbActivo.Checked)
@@ -408,7 +398,7 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si el puesto existe primero
             //antes de agregar al puesto
 
-            if (BLLPuesto.SelectById(int.Parse(this.mktCodigo.Text)) != null)
+            if (BLLPuesto.SelectById(this.txtCod.Text) != null)
             {
 
                 BLLPuesto.Update(oPuesto);
@@ -454,38 +444,19 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int idUsuario = int.Parse(this.mktCodigo.Text);
+            string idPuesto = this.txtCod.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el puesto?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-                BLLPuesto.Delete(idUsuario);
+                BLLPuesto.Delete(idPuesto);
                 CargarLista();
                 LimpiarControles();
             }
 
 
-        }
 
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// Código es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktCodigo_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktCodigo.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktCodigo, string.Empty);
-                this.mktCodigo.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktCodigo, "Campo Código de puesto no es correcto");
-                this.mktCodigo.BackColor = Color.MistyRose;
-            }
         }
 
         /// <summary>
@@ -549,9 +520,9 @@ namespace PayrollPal.UI.Mantenimientos
             if (e.ColumnIndex == 2 && e.Value != null)
             {
                 if (e.Value.ToString() == "True")
-                    e.Value = "Activa";
+                    e.Value = "Activo";
                 if (e.Value.ToString() == "False")
-                    e.Value = "Inactiva";
+                    e.Value = "Inactivo";
             }
 
         }

@@ -48,7 +48,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
                         colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
                         colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
@@ -110,7 +110,7 @@ namespace PayrollPal.Layers.DAL {
                     oColaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dt.Rows[0]["IDDepartamento"].ToString());
                     oColaborador.SalarioHora = decimal.Parse(dt.Rows[0]["SalarioHora"].ToString());
                     oColaborador.CorreoElectronico = dt.Rows[0]["CorreoElectronico"].ToString();
-                    oColaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dt.Rows[0]["CodigoPuesto"].ToString()));
+                    oColaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dt.Rows[0]["CodigoPuesto"].ToString());
                     oColaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
                     oColaborador.CuentaIBAN = dt.Rows[0]["CuentaIBAN"].ToString();
                     oColaborador.IDUsuario = BLL.BLLUsuario.SelectById(dt.Rows[0]["IDUsuario"].ToString());
@@ -166,7 +166,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
                         colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
                         colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
@@ -195,7 +195,7 @@ namespace PayrollPal.Layers.DAL {
                 DataSet ds = null;  // Crear Dataset
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
-                    var command = new SqlCommand("usp_SELECT_Colaborador_All");
+                    var command = new SqlCommand("usp_SELECT_Colaborador_SoloColaboradores");
                     command.CommandType = CommandType.StoredProcedure;
                     ds = db.ExecuteReader(command, "Colaborador");
                 }
@@ -215,7 +215,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
                         colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
                         colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
@@ -263,7 +263,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
                         colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
                         colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
@@ -311,7 +311,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(int.Parse(dr["CodigoPuesto"].ToString()));
+                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
                         colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
                         colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());

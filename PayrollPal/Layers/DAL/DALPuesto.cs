@@ -1,15 +1,11 @@
-﻿using System;
+﻿using PayrollPal.Layers.Entities;
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
+using System.Data.SqlClient;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using log4net;
-using PayrollPal.Layers.Entities;
-using PayrollPal.Layers.Util;
 
 namespace PayrollPal.Layers.DAL
 {
@@ -17,6 +13,38 @@ namespace PayrollPal.Layers.DAL
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        #region SecuenciadorPuestoA
+
+        public static string SecuenciadorPuestoAumentar()
+        {
+            try
+            {
+                String secuencia = "";
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_Secuenciador_Puesto");
+                    command.CommandType = CommandType.StoredProcedure;
+                    secuencia = db.ExecuteScalar(command).ToString();
+
+                }
+                return secuencia;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+
+        #endregion
+
 
         #region SELECT ALL
         public static List<Puesto> SelectAll()
@@ -29,6 +57,7 @@ namespace PayrollPal.Layers.DAL
                     var command = new SqlCommand("usp_SELECT_Puesto_All");
                     command.CommandType = CommandType.StoredProcedure;
                     ds = db.ExecuteReader(command, "Puesto");
+                    
                 }
 
                 List<Puesto> lista = new List<Puesto>();
@@ -38,7 +67,7 @@ namespace PayrollPal.Layers.DAL
                     {
 
                         Puesto puesto = new Puesto();
-                        puesto.CodigoPuesto = int.Parse(dr["CodigoPuesto"].ToString().Trim());
+                        puesto.CodigoPuesto = dr["CodigoPuesto"].ToString().Trim();
                         puesto.Nombre = dr["Nombre"].ToString();
                         puesto.Estado = bool.Parse(dr["Estado"].ToString());
 
@@ -67,7 +96,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Puesto SelectById(int Id)
+        public static Puesto SelectById(string Id)
         {
             try
             {
@@ -85,7 +114,7 @@ namespace PayrollPal.Layers.DAL
                 {
                     DataTable dt = ds.Tables[0];
                     Puesto oPuesto = new Puesto();
-                    oPuesto.CodigoPuesto = int.Parse(dt.Rows[0]["CodigoPuesto"].ToString());
+                    oPuesto.CodigoPuesto = dt.Rows[0]["CodigoPuesto"].ToString().Trim();
                     oPuesto.Nombre = dt.Rows[0]["Nombre"].ToString();
                     oPuesto.Estado = bool.Parse(dt.Rows[0]["Estado"].ToString());
                     return oPuesto;
@@ -115,9 +144,9 @@ namespace PayrollPal.Layers.DAL
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_INSERT_Puesto");
-                    command.Parameters.AddWithValue("@CodigoPuesto", pPuesto.CodigoPuesto);
+                    command.Parameters.AddWithValue("@CodigoPuesto", pPuesto.CodigoPuesto.Trim());
                     command.Parameters.AddWithValue("@Nombre", pPuesto.Nombre);
-                    command.Parameters.AddWithValue("@Estado",pPuesto.Estado);
+                    command.Parameters.AddWithValue("@Estado", pPuesto.Estado);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -149,7 +178,7 @@ namespace PayrollPal.Layers.DAL
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
                     var command = new SqlCommand("usp_UPDATE_Puesto");
-                    command.Parameters.AddWithValue("@CodigoPuesto", pPuesto.CodigoPuesto);
+                    command.Parameters.AddWithValue("@CodigoPuesto", pPuesto.CodigoPuesto.Trim());
                     command.Parameters.AddWithValue("@Nombre", pPuesto.Nombre);
                     command.Parameters.AddWithValue("@Estado", pPuesto.Estado);
 
@@ -178,7 +207,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(int pCodigoPuesto)
+        public static void DELETE(string pCodigoPuesto)
         {
             try
             {

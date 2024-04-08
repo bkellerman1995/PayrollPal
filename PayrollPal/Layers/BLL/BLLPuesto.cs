@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.DAL;
 
 namespace PayrollPal.Layers.BLL
 {
@@ -22,8 +26,21 @@ namespace PayrollPal.Layers.BLL
         }
         #endregion
 
+        #region SecuenciadorPuesto
+
+        public static string SecuenciadorPuesto()
+        {
+            return DALPuesto.SecuenciadorPuestoAumentar();
+        }
+
+        #endregion
+
+        #region SecuenciadorPuesto
+
+        #endregion
+
         #region SELECT BY ID
-        public static Puesto SelectById(int Id)
+        public static Puesto SelectById(string Id)
         {
             return DAL.DALPuesto.SelectById(Id);
         }
@@ -61,14 +78,14 @@ namespace PayrollPal.Layers.BLL
         #endregion
 
         #region DELETE
-        public static void Delete(int pCodigoPuesto)
+        public static void Delete(string pCodigoPuesto)
         {
             DAL.DALPuesto.DELETE(pCodigoPuesto);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearPuesto(int pCodigoPuesto)
+        public static bool ChequearPuesto(string pCodigoPuesto)
         {
             bool existe = false;
 

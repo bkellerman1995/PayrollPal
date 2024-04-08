@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoPuestos));
             this.toolTipPuesto = new System.Windows.Forms.ToolTip(this.components);
-            this.mktCodigo = new System.Windows.Forms.MaskedTextBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -54,6 +53,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
             this.rdbActivo = new System.Windows.Forms.RadioButton();
+            this.txtCod = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPuestos)).BeginInit();
             this.toolStripMantPuesto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
@@ -62,17 +62,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mktCodigo
-            // 
-            this.mktCodigo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mktCodigo.Location = new System.Drawing.Point(214, 49);
-            this.mktCodigo.Mask = "0000";
-            this.mktCodigo.Name = "mktCodigo";
-            this.mktCodigo.Size = new System.Drawing.Size(150, 29);
-            this.mktCodigo.TabIndex = 59;
-            this.toolTipPuesto.SetToolTip(this.mktCodigo, "El ID de Puesto debe tener el formato: pto0000 (4 dígitos)");
-            this.mktCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktCodigo_KeyUp);
             // 
             // btnConfirmar
             // 
@@ -113,9 +102,9 @@
             this.lblEstado.Location = new System.Drawing.Point(8, 130);
             this.lblEstado.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(89, 21);
+            this.lblEstado.Size = new System.Drawing.Size(56, 21);
             this.lblEstado.TabIndex = 45;
-            this.lblEstado.Text = "Contraseña";
+            this.lblEstado.Text = "Estado";
             // 
             // lblCodigo
             // 
@@ -124,43 +113,43 @@
             this.lblCodigo.Location = new System.Drawing.Point(10, 49);
             this.lblCodigo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(25, 21);
+            this.lblCodigo.Size = new System.Drawing.Size(60, 21);
             this.lblCodigo.TabIndex = 44;
-            this.lblCodigo.Text = "ID";
+            this.lblCodigo.Text = "Código";
             // 
             // dgvPuestos
             // 
             this.dgvPuestos.AllowUserToAddRows = false;
             this.dgvPuestos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPuestos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPuestos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvPuestos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPuestos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPuestos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPuestos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvPuestos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPuestos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CodigoPuesto,
             this.NombreUsuario,
             this.Contrasenna});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPuestos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPuestos.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvPuestos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPuestos.Location = new System.Drawing.Point(0, 0);
             this.dgvPuestos.Margin = new System.Windows.Forms.Padding(1);
@@ -277,10 +266,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtCod);
             this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
             this.splitContainer1.Panel1.Controls.Add(this.rdbActivo);
             this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
-            this.splitContainer1.Panel1.Controls.Add(this.mktCodigo);
             this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
             this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
             this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
@@ -301,10 +290,10 @@
             this.rdbInactivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbInactivo.Location = new System.Drawing.Point(214, 164);
             this.rdbInactivo.Name = "rdbInactivo";
-            this.rdbInactivo.Size = new System.Drawing.Size(81, 25);
+            this.rdbInactivo.Size = new System.Drawing.Size(82, 25);
             this.rdbInactivo.TabIndex = 62;
             this.rdbInactivo.TabStop = true;
-            this.rdbInactivo.Text = "Inactiva";
+            this.rdbInactivo.Text = "Inactivo";
             this.rdbInactivo.UseVisualStyleBackColor = true;
             // 
             // rdbActivo
@@ -313,11 +302,22 @@
             this.rdbActivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbActivo.Location = new System.Drawing.Point(214, 134);
             this.rdbActivo.Name = "rdbActivo";
-            this.rdbActivo.Size = new System.Drawing.Size(70, 25);
+            this.rdbActivo.Size = new System.Drawing.Size(71, 25);
             this.rdbActivo.TabIndex = 61;
             this.rdbActivo.TabStop = true;
-            this.rdbActivo.Text = "Activa";
+            this.rdbActivo.Text = "Activo";
             this.rdbActivo.UseVisualStyleBackColor = true;
+            // 
+            // txtCod
+            // 
+            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCod.Location = new System.Drawing.Point(214, 46);
+            this.txtCod.Margin = new System.Windows.Forms.Padding(1);
+            this.txtCod.Name = "txtCod";
+            this.txtCod.ReadOnly = true;
+            this.txtCod.Size = new System.Drawing.Size(150, 29);
+            this.txtCod.TabIndex = 63;
+            this.txtCod.Text = "pto";
             // 
             // frmMantenimientoPuestos
             // 
@@ -347,7 +347,6 @@
         #endregion
 
         private System.Windows.Forms.ToolTip toolTipPuesto;
-        private System.Windows.Forms.MaskedTextBox mktCodigo;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
@@ -367,5 +366,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CodigoPuesto;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Contrasenna;
+        private System.Windows.Forms.TextBox txtCod;
     }
 }

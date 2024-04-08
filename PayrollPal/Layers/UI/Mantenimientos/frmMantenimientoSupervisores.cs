@@ -674,12 +674,18 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            Supervisor supervisor = new Supervisor();
             string idSupervisor = this.mktID.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el supervisor?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
+                foreach (Colaborador colab in this.lstColaboradoresSup.Items)
+                {
+                    colab.IDSupervisor = supervisor;
+                    BLLColaborador.Update(colab);
+                }
                 BLLSupervisor.Delete(idSupervisor);
                 CargarListasColaboradoresALLySupervisores();
                 LimpiarControles();
