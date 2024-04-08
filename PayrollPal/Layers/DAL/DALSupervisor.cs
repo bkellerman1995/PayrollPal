@@ -65,6 +65,37 @@ namespace PayrollPal.Layers.DAL
         }
         #endregion
 
+        #region SecuenciadorSupervisor
+
+        public static string SecuenciadorPuestoAumentar()
+        {
+            try
+            {
+                String secuencia = "";
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_Secuenciador_Supervisor");
+                    command.CommandType = CommandType.StoredProcedure;
+                    secuencia = db.ExecuteScalar(command).ToString();
+
+                }
+                return secuencia;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+
+        #endregion
+
         #region SELECT BY ID
         public static Supervisor SelectById(string Id)
         {

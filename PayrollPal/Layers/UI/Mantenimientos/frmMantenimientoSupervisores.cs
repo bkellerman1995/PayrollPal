@@ -125,8 +125,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                this.mktID.Clear();
-                this.mktID.BackColor = Color.White;
+                this.txtID.Text = "sup";
+                this.txtID.BackColor = Color.White;
 
                 this.txtDescripcion.Clear();
                 this.txtDescripcion.BackColor = Color.White;
@@ -168,7 +168,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 this.lstColaboradoresALL.Enabled = false;
                 this.lstColaboradoresSup.Enabled = false;
 
-                this.mktID.Enabled = false;
+                this.txtID.Enabled = false;
                 this.txtRol.Enabled = false;
                 this.txtDescripcion.Enabled = false;
             }
@@ -241,14 +241,15 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     case 'C':
                         //habiitar los botones de limpiar, 
                         //agregar y salir
-                        this.btnAgregar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtID.Text = this.txtID.Text + BLLSupervisor.SecuenciadorPuesto();
 
                         //habilitar los controles de texto (txtBox)
                         //y los botones para agregar y quitar en la lista
 
-                        this.mktID.Enabled = true;
+                        this.txtID.Enabled = true;
                         this.txtRol.Enabled = true;
                         this.txtDescripcion.Enabled = true;
                         this.btnQuitarColab.Enabled = true;
@@ -266,7 +267,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         //habilitar los controles de texto (txtBox)
                         //y los botones para agregar y quitar en la lista
 
-                        this.mktID.ReadOnly = true;
+                        this.txtID.ReadOnly = true;
                         this.txtRol.Enabled = true;
                         this.txtDescripcion.Enabled = true;
                         this.btnAgregarCol.Enabled = true;
@@ -293,25 +294,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
         }
 
-        /// <summary>
-        /// Evento para revisar si el campo del
-        /// ID es correcto mientras se va escribiendo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mktID_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (this.mktID.MaskCompleted)
-            {
-                this.errProv1.SetError(this.mktID, string.Empty);
-                this.mktID.BackColor = Color.Honeydew;
-            }
-            else
-            {
-                this.errProv1.SetError(this.mktID, "Campo ID de supervisor no es correcto");
-                this.mktID.BackColor = Color.MistyRose;
-            }
-        }
 
         /// <summary>
         /// Evento para revisar si el campo del
@@ -508,17 +490,6 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     this.errProv1.Clear();
                 }
 
-                //ValidarID del supervisor
-                if (this.mktID.MaskCompleted)
-                {
-                    this.errProv1.SetError(this.mktID, string.Empty);
-
-                }
-                else
-                {
-                    this.errProv1.SetError(this.mktID, "Campo ID de supervisor no es correcto");
-                    return false;
-                }
 
                 // Validar Descripcion
                 if (!String.IsNullOrEmpty(this.txtDescripcion.Text.Trim()))
@@ -555,7 +526,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             Supervisor oSupervisor = new Supervisor();
 
 
-            oSupervisor.IDSupervisor = this.mktID.Text;
+            oSupervisor.IDSupervisor = this.txtID.Text;
 
             oSupervisor.IDRol = rol;
             oSupervisor.Descripcion = this.txtDescripcion.Text;
@@ -575,7 +546,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             //que se encarga de revisar si el supervisor existe primero
             //antes de agregar al supervisor
 
-            if (BLLSupervisor.SelectById(this.mktID.Text) != null)
+            if (BLLSupervisor.SelectById(this.txtID.Text) != null)
             {
 
                 BLLSupervisor.Update(oSupervisor);
@@ -629,7 +600,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     //Asignar la fila seleccionada del datagridview al objeto supervisor
                     oSupervisor = this.dgvSupervisores.SelectedRows[0].DataBoundItem as Supervisor;
                     //Asignar a cada control los datos del supervisor
-                    this.mktID.Text = oSupervisor.IDSupervisor.ToString();
+                    this.txtID.Text = oSupervisor.IDSupervisor.ToString();
                     this.txtDescripcion.Text = oSupervisor.Descripcion.ToString();
 
                     this.lstColaboradoresSup.Items.Clear();
@@ -675,7 +646,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Supervisor supervisor = new Supervisor();
-            string idSupervisor = this.mktID.Text;
+            string idSupervisor = this.txtID.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el supervisor?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using PayrollPal.Layers.DAL;
 
 namespace PayrollPal.Layers.BLL
 {
@@ -20,6 +21,15 @@ namespace PayrollPal.Layers.BLL
 
             return DAL.DALSupervisor.SelectAll();
         }
+        #endregion
+
+        #region SecuenciadorSupervisor
+
+        public static string SecuenciadorPuesto()
+        {
+            return DALSupervisor.SecuenciadorPuestoAumentar();
+        }
+
         #endregion
 
         #region SELECT BY ID

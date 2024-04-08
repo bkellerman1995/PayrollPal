@@ -35,10 +35,6 @@ namespace PayrollPal.Layers.BLL
 
         #endregion
 
-        #region SecuenciadorPuesto
-
-        #endregion
-
         #region SELECT BY ID
         public static Puesto SelectById(string Id)
         {

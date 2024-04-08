@@ -34,7 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoSupervisores));
             this.toolTipSupervisor = new System.Windows.Forms.ToolTip(this.components);
-            this.mktID = new System.Windows.Forms.MaskedTextBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtRol = new System.Windows.Forms.TextBox();
@@ -59,6 +58,7 @@
             this.btnAgregarCol = new System.Windows.Forms.Button();
             this.lstColaboradoresSup = new System.Windows.Forms.ListBox();
             this.lstColaboradoresALL = new System.Windows.Forms.ListBox();
+            this.txtID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupervisores)).BeginInit();
             this.toolStripMantSupervisor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
@@ -67,17 +67,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mktID
-            // 
-            this.mktID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mktID.Location = new System.Drawing.Point(165, 46);
-            this.mktID.Mask = "sup0000";
-            this.mktID.Name = "mktID";
-            this.mktID.Size = new System.Drawing.Size(150, 29);
-            this.mktID.TabIndex = 59;
-            this.toolTipSupervisor.SetToolTip(this.mktID, "El ID de Supervisor debe tener el formato: sup0000 (4 dígitos)");
-            this.mktID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mktID_KeyUp);
             // 
             // btnConfirmar
             // 
@@ -290,6 +279,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtID);
             this.splitContainer1.Panel1.Controls.Add(this.lblListaColaboradoresSup);
             this.splitContainer1.Panel1.Controls.Add(this.lblListaColaboradoresALL);
             this.splitContainer1.Panel1.Controls.Add(this.btnQuitarColab);
@@ -297,7 +287,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.lstColaboradoresSup);
             this.splitContainer1.Panel1.Controls.Add(this.lstColaboradoresALL);
             this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
-            this.splitContainer1.Panel1.Controls.Add(this.mktID);
             this.splitContainer1.Panel1.Controls.Add(this.txtDescripcion);
             this.splitContainer1.Panel1.Controls.Add(this.txtRol);
             this.splitContainer1.Panel1.Controls.Add(this.lblRol);
@@ -377,6 +366,16 @@
             this.lstColaboradoresALL.TabIndex = 61;
             this.lstColaboradoresALL.SelectedValueChanged += new System.EventHandler(this.lstColaboradoresALL_SelectedValueChanged);
             // 
+            // txtID
+            // 
+            this.txtID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtID.Location = new System.Drawing.Point(165, 46);
+            this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
+            this.txtID.Size = new System.Drawing.Size(150, 29);
+            this.txtID.TabIndex = 67;
+            this.txtID.Text = "sup";
+            // 
             // frmMantenimientoSupervisores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -404,7 +403,6 @@
         #endregion
 
         private System.Windows.Forms.ToolTip toolTipSupervisor;
-        private System.Windows.Forms.MaskedTextBox mktID;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.TextBox txtRol;
@@ -429,5 +427,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.Label lblListaColaboradoresSup;
         private System.Windows.Forms.Label lblListaColaboradoresALL;
+        private System.Windows.Forms.TextBox txtID;
     }
 }
