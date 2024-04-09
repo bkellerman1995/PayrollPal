@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProcesoCalcularPlanilla));
             this.btnGenerarColilla = new System.Windows.Forms.Button();
             this.lblFechaDesde = new System.Windows.Forms.Label();
@@ -64,6 +64,7 @@
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.HorasOrdinarias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasExtraordinarias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblTipoCambio2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -83,12 +84,13 @@
             this.btnGenerarColilla.TabIndex = 19;
             this.btnGenerarColilla.Text = "Generar Colilla";
             this.btnGenerarColilla.UseVisualStyleBackColor = true;
+            this.btnGenerarColilla.Click += new System.EventHandler(this.btnGenerarColilla_Click);
             // 
             // lblFechaDesde
             // 
             this.lblFechaDesde.AutoSize = true;
             this.lblFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaDesde.Location = new System.Drawing.Point(12, 196);
+            this.lblFechaDesde.Location = new System.Drawing.Point(12, 165);
             this.lblFechaDesde.Name = "lblFechaDesde";
             this.lblFechaDesde.Size = new System.Drawing.Size(97, 21);
             this.lblFechaDesde.TabIndex = 22;
@@ -98,7 +100,7 @@
             // 
             this.lblFechaHasta.AutoSize = true;
             this.lblFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaHasta.Location = new System.Drawing.Point(12, 233);
+            this.lblFechaHasta.Location = new System.Drawing.Point(12, 223);
             this.lblFechaHasta.Name = "lblFechaHasta";
             this.lblFechaHasta.Size = new System.Drawing.Size(93, 21);
             this.lblFechaHasta.TabIndex = 25;
@@ -108,7 +110,7 @@
             // 
             this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(117, 196);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(117, 165);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(219, 29);
             this.dtpFechaDesde.TabIndex = 26;
@@ -117,7 +119,7 @@
             // 
             this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHasta.Location = new System.Drawing.Point(117, 233);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(117, 223);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(219, 29);
             this.dtpFechaHasta.TabIndex = 27;
@@ -167,16 +169,16 @@
             // 
             this.lblTipoCambio.AutoSize = true;
             this.lblTipoCambio.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoCambio.Location = new System.Drawing.Point(370, 28);
+            this.lblTipoCambio.Location = new System.Drawing.Point(465, 7);
             this.lblTipoCambio.Name = "lblTipoCambio";
-            this.lblTipoCambio.Size = new System.Drawing.Size(318, 21);
+            this.lblTipoCambio.Size = new System.Drawing.Size(188, 21);
             this.lblTipoCambio.TabIndex = 35;
-            this.lblTipoCambio.Text = "Tipo de Cambio del dólar para hoy (venta)  ₡";
+            this.lblTipoCambio.Text = "Tipo de Cambio del dólar ";
             // 
             // txtTipoCambio
             // 
             this.txtTipoCambio.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoCambio.Location = new System.Drawing.Point(684, 25);
+            this.txtTipoCambio.Location = new System.Drawing.Point(668, 30);
             this.txtTipoCambio.Name = "txtTipoCambio";
             this.txtTipoCambio.ReadOnly = true;
             this.txtTipoCambio.Size = new System.Drawing.Size(136, 29);
@@ -231,6 +233,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblTipoCambio2);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.dgvHorOrdvsExt);
             this.splitContainer1.Panel1.Controls.Add(this.dgvListaMarcas);
@@ -272,12 +275,12 @@
             // 
             this.dgvHorOrdvsExt.AllowUserToAddRows = false;
             this.dgvHorOrdvsExt.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvHorOrdvsExt.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvHorOrdvsExt.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvHorOrdvsExt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvHorOrdvsExt.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvHorOrdvsExt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -299,12 +302,12 @@
             // 
             this.dgvListaMarcas.AllowUserToAddRows = false;
             this.dgvListaMarcas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvListaMarcas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListaMarcas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvListaMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -430,6 +433,16 @@
             this.HorasExtraordinarias.Name = "HorasExtraordinarias";
             this.HorasExtraordinarias.ReadOnly = true;
             // 
+            // lblTipoCambio2
+            // 
+            this.lblTipoCambio2.AutoSize = true;
+            this.lblTipoCambio2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoCambio2.Location = new System.Drawing.Point(504, 33);
+            this.lblTipoCambio2.Name = "lblTipoCambio2";
+            this.lblTipoCambio2.Size = new System.Drawing.Size(164, 21);
+            this.lblTipoCambio2.TabIndex = 44;
+            this.lblTipoCambio2.Text = "para hoy (venta)        ₡";
+            // 
             // frmProcesoCalcularPlanilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,5 +502,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasTrabajadas;
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasOrdinarias;
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasExtraordinarias;
+        private System.Windows.Forms.Label lblTipoCambio2;
     }
 }
