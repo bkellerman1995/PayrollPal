@@ -9,19 +9,23 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.BLL;
+
 
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALSupervisor
+    public class DALSupervisor : IDALSupervisor
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Supervisor> SelectAll()
+        public List<Supervisor> SelectAll()
         {
             try
             {
+                IBLLRol _BLLRol = new BLLRol();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -38,7 +42,7 @@ namespace PayrollPal.Layers.DAL
 
                         Supervisor supervisor = new Supervisor();
                         supervisor.IDSupervisor = dr["IDSupervisor"].ToString();
-                        supervisor.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        supervisor.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         supervisor.Descripcion = dr["Descripcion"].ToString();
 
                         lista.Add(supervisor);
@@ -67,7 +71,7 @@ namespace PayrollPal.Layers.DAL
 
         #region SecuenciadorSupervisor
 
-        public static string SecuenciadorPuestoAumentar()
+        public string SecuenciadorPuestoAumentar()
         {
             try
             {
@@ -97,10 +101,11 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Supervisor SelectById(string Id)
+        public Supervisor SelectById(string Id)
         {
             try
             {
+                IBLLRol _BLLRol = new BLLRol();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -116,7 +121,7 @@ namespace PayrollPal.Layers.DAL
                     DataTable dt = ds.Tables[0];
                     Supervisor oSupervisor = new Supervisor();
                     oSupervisor.IDSupervisor = dt.Rows[0]["IDSupervisor"].ToString();
-                    oSupervisor.IDRol = BLL.BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
+                    oSupervisor.IDRol = _BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
                     oSupervisor.Descripcion = dt.Rows[0]["Descripcion"].ToString();
                     return oSupervisor;
                 }
@@ -138,7 +143,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Supervisor pSupervisor)
+        public void CREATE(Supervisor pSupervisor)
         {
             try
             {
@@ -172,7 +177,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Supervisor pSupervisor)
+        public void UPDATE(Supervisor pSupervisor)
         {
             try
             {
@@ -208,7 +213,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pIdSupervisor)
+        public void DELETE(string pIdSupervisor)
         {
             try
             {

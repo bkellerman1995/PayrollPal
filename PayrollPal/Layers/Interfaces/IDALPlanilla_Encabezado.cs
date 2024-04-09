@@ -13,10 +13,10 @@ using PayrollPal.Layers.Util;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALPlanilla_Encabezado
+    public interface IDALPlanilla_Encabezado
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SecuenciadorPlanEncabezado
 

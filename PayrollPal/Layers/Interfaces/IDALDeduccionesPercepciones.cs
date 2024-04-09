@@ -14,10 +14,10 @@ using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALDeduccionesPercepciones
+    public interface IDALDeduccionesPercepciones
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SecuenciadorDeduccionesPercepciones
 

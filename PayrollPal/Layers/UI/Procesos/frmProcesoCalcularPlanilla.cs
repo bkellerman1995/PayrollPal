@@ -14,6 +14,7 @@ using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.Util;
 using PayrollPal.Layers;
 using PayrollPal.Enumeraciones;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.UI.Procesos
 {
@@ -26,6 +27,15 @@ namespace PayrollPal.UI.Procesos
         private ServicioBCCR servicioBCCR = new ServicioBCCR();
 
         private Planilla_Detalle planDet = new Planilla_Detalle();
+
+        IBLLPlanilla_Encabezado bLLPlanilla_Encabezado = new BLLPlanilla_Encabezado();
+        IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
+        IBLLColaborador bLLColaborador = new BLLColaborador();
+        IBLLPlanillaPago bLLPlanillaPago = new BLLPlanillaPago();
+        IBLLPlanilla_Detalle bLLPlanilla_Detalle = new BLLPlanilla_Detalle();
+        IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
+        IBLLDeduccionesPercepciones bLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+        IBLLSolicitudVacaciones bLLSolicitudVacaciones = new BLLSolicitudVacaciones();
 
         public frmProcesoCalcularPlanilla()
         {
@@ -45,7 +55,7 @@ namespace PayrollPal.UI.Procesos
             try
             {
 
-                this.txtIdEncPlan.Text = "Enc" + DateTime.Now.ToString("yyyyMMdd") + BLLPlanilla_Encabezado.SecuenciadorPlanEnc();
+                this.txtIdEncPlan.Text = "Enc" + DateTime.Now.ToString("yyyyMMdd") + bLLPlanilla_Encabezado.SecuenciadorPlanEnc();
 
                 CargartxtTipoCambio();
                 CargarCombos();
@@ -101,7 +111,7 @@ namespace PayrollPal.UI.Procesos
                     && (this.cmbPlanillas.SelectedItem != null && this.cmbPlanillas.SelectedIndex != 0))
                 {
                     Colaborador oColaborador = (Colaborador)this.cmbColaborador.SelectedItem;
-                    this.dgvListaMarcas.DataSource = BLLControlDeMarcas.SelectAll().Where(marc => marc.HorasTrabajadas >= 10
+                    this.dgvListaMarcas.DataSource = bLLControlDeMarcas.SelectAll().Where(marc => marc.HorasTrabajadas >= 10
                     && marc.IdColaborador == oColaborador.IDColaborador).ToList();
                     this.dgvListaMarcas.ClearSelection();
                 }
@@ -135,7 +145,7 @@ namespace PayrollPal.UI.Procesos
                     planDet.NombreColaborador = oColab.Nombre;
                     List<Planilla_Detalle> lista = new List<Planilla_Detalle>();
 
-                    BLLColaborador.CalcularHorasOrdExt(oColab, oPago, planDet);
+                    bLLColaborador.CalcularHorasOrdExt(oColab, oPago, planDet);
 
                     lista.Add(planDet);
 
@@ -172,7 +182,7 @@ namespace PayrollPal.UI.Procesos
 
         private void CargarCombos()
         {
-            List<PlanillaPago> listaPlanillas = BLLPlanillaPago.SelectAll().Where(planilla
+            List<PlanillaPago> listaPlanillas = bLLPlanillaPago.SelectAll().Where(planilla
                 => planilla.Estado == Enumeraciones.PlanillaEstado.Activa).ToList();
 
             this.cmbPlanillas.Items.Add(" ====SELECCIONE====");
@@ -182,7 +192,7 @@ namespace PayrollPal.UI.Procesos
                 this.cmbPlanillas.Items.Add(colab);
             }
 
-            List<Colaborador> listaColaboradores = BLLColaborador.SelectAll().Where(colab
+            List<Colaborador> listaColaboradores = bLLColaborador.SelectAll().Where(colab
                 => colab.IDRol.IDRol == 3 && colab.IDSupervisor.IDSupervisor != "0").ToList();
 
 
@@ -227,7 +237,7 @@ namespace PayrollPal.UI.Procesos
         {
             try
             {
-                if (BLLPlanillaPago.SelectAll().Where(planilla => planilla.Estado
+                if (bLLPlanillaPago.SelectAll().Where(planilla => planilla.Estado
                 == Enumeraciones.PlanillaEstado.Activa).ToList().Count != 0)
                 {
                     this.errProv1.SetError(this.cmbPlanillas, string.Empty);
@@ -238,7 +248,7 @@ namespace PayrollPal.UI.Procesos
 
                 }
 
-                if (BLLColaborador.SelectAll().Where(col => col.IDSupervisor.IDSupervisor != "0" && col.IDRol.IDRol == 3).Count() != 0)
+                if (bLLColaborador.SelectAll().Where(col => col.IDSupervisor.IDSupervisor != "0" && col.IDRol.IDRol == 3).Count() != 0)
                 {
                     this.errProv1.SetError(this.cmbColaborador, string.Empty);
                 }
@@ -443,17 +453,17 @@ namespace PayrollPal.UI.Procesos
             //Crear la instancia de PlanillaDetalle
 
             oColaborador = this.cmbColaborador.SelectedItem as Colaborador;
-            planDet.IdDetalle = BLLPlanilla_Detalle.SecuenciadorPlanDetalle();
+            planDet.IdDetalle = bLLPlanilla_Detalle.SecuenciadorPlanDetalle();
             planDet.IdColaborador = oColaborador;
             planDet.NombreColaborador = oColaborador.Nombre + " " + oColaborador.Apellido1 + " " + oColaborador.Apellido2;
             planDet.hrsTrabajadas = planDet.hrsTrabajadas;
             planDet.hrsExtras = planDet.hrsExtras;
             planDet.MontoHora = oColaborador.SalarioHora;
-            planDet.SalarioBruto = BLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
-            planDet.deducciones_Percepciones_Por_Colaborador = BLLDeducciones_Percepciones_Por_Colaborador.SelectTodo().Where(dedPerc
+            planDet.SalarioBruto = bLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
+            planDet.deducciones_Percepciones_Por_Colaborador = bLLDeducciones_Percepciones_Por_Colaborador.SelectTodo().Where(dedPerc
                 => dedPerc.Estado = true && dedPerc.IdColaborador.IDColaborador == oColaborador.IDColaborador).ToList();
 
-            planDet.SalarioNeto = BLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            planDet.SalarioNeto = bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
 
             //Crear la instancia de PlanillaEncabezado
             Planilla_Encabezado planEnc = new Planilla_Encabezado();
@@ -461,9 +471,9 @@ namespace PayrollPal.UI.Procesos
             planEnc.IdEncabezado = this.txtIdEncPlan.Text;
             planEnc.Codigo = (PlanillaPago)this.cmbPlanillas.SelectedItem;
             planEnc.TipoCambio = Double.Parse(this.txtTipoCambio.Text);
-            planEnc.TotalIngresos = (double)BLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
-            planEnc.TotalGastos = (double)BLLPlanilla_Detalle.CalcularSalarioBruto(planDet) - (double)BLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
-            planEnc.TotalPagar = (double)BLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            planEnc.TotalIngresos = (double)bLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
+            planEnc.TotalGastos = (double)bLLPlanilla_Detalle.CalcularSalarioBruto(planDet) - (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            planEnc.TotalPagar = (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
 
             impresion.AppendLine("ENVIO DE PLANILLA:  " + planEnc.IdEncabezado);
             impresion.AppendLine("");
@@ -492,7 +502,7 @@ namespace PayrollPal.UI.Procesos
 
             foreach (var item in planDet.deducciones_Percepciones_Por_Colaborador)
             {
-                Deducciones_Percepciones odedPerc = BLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                Deducciones_Percepciones odedPerc = bLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
                 if (odedPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Deduccion)
                 {
                     impresion.AppendLine("-- " + odedPerc.ToString());
@@ -511,7 +521,7 @@ namespace PayrollPal.UI.Procesos
 
             foreach (var item in planDet.deducciones_Percepciones_Por_Colaborador)
             {
-                Deducciones_Percepciones odedPerc = BLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                Deducciones_Percepciones odedPerc = bLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
                 if (odedPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Percepcion)
                 {
                     impresion.AppendLine("-- " + odedPerc.ToString());
@@ -521,7 +531,7 @@ namespace PayrollPal.UI.Procesos
             impresion.AppendLine("Vacaciones disfutadas");
             impresion.AppendLine("-------------------------");
 
-            List<SolicitudVacaciones> solicitudVacaciones = BLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
+            List<SolicitudVacaciones> solicitudVacaciones = bLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
             >= planEnc.Codigo.FechaDesde && sol.FechaSolicitarHasta <= planEnc.Codigo.FechaHasta && sol.IDColaborador.IDColaborador == planDet.IdColaborador.IDColaborador
             && sol.Observaciones_Final == ObservacionSolicVacaciones.Aprobada && sol.Estado == true).ToList();
 
@@ -541,17 +551,17 @@ namespace PayrollPal.UI.Procesos
 
             decimal dolar = decimal.Parse(this.txtTipoCambio.Text);
 
-            impresion.AppendLine("TOTAL A PAGAR: $" + BLLPlanilla_Detalle.CalcularSalarioDolares(planDet, dolar));
+            impresion.AppendLine("TOTAL A PAGAR: $" + bLLPlanilla_Detalle.CalcularSalarioDolares(planDet, dolar));
 
             this.txtImprimir.Text = impresion.ToString();
 
             planEnc.Codigo.Estado = PlanillaEstado.PorEnviar;
             planDet.IdEncabezado = planEnc;
 
-            BLLPlanillaPago.Update(planEnc.Codigo);
+            bLLPlanillaPago.Update(planEnc.Codigo);
 
-            BLLPlanilla_Encabezado.Create(planEnc);
-            BLLPlanilla_Detalle.Create(planDet);
+            bLLPlanilla_Encabezado.Create(planEnc);
+            bLLPlanilla_Detalle.Create(planDet);
 
 
 

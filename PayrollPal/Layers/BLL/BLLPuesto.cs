@@ -10,40 +10,43 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.IBLL;
 
-namespace PayrollPal.Layers.BLL
+namespace PayrollPal.Layers.BLL 
 {
-    public class BLLPuesto
+    public class BLLPuesto : IBLLPuesto
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                      log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Puesto> SelectAll()
+        public List<Puesto> SelectAll()
         {
-
-            return DAL.DALPuesto.SelectAll();
+            IDALPuesto dALPuesto = new DALPuesto();
+            return dALPuesto.SelectAll();
         }
         #endregion
 
         #region SecuenciadorPuesto
 
-        public static string SecuenciadorPuesto()
+        public string SecuenciadorPuesto()
         {
-            return DALPuesto.SecuenciadorPuestoAumentar();
+            IDALPuesto dALPuesto = new DALPuesto();
+            return dALPuesto.SecuenciadorPuestoAumentar();
         }
 
         #endregion
 
         #region SELECT BY ID
-        public static Puesto SelectById(string Id)
+        public Puesto SelectById(string Id)
         {
-            return DAL.DALPuesto.SelectById(Id);
+            IDALPuesto dALPuesto = new DALPuesto();
+            return dALPuesto.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Puesto pPuesto)
+        public void Create(Puesto pPuesto)
         {
             DialogResult resultado = new DialogResult();
 
@@ -54,34 +57,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALPuesto.UPDATE(pPuesto);
+                    IDALPuesto dALPuesto = new DALPuesto();
+                    dALPuesto.UPDATE(pPuesto);
                 }
 
             }
             else
             {
-                DAL.DALPuesto.CREATE(pPuesto);
+                IDALPuesto dALPuesto = new DALPuesto();
+                dALPuesto.CREATE(pPuesto);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Puesto pPuesto)
+        public void Update(Puesto pPuesto)
         {
-            DAL.DALPuesto.UPDATE(pPuesto);
+            IDALPuesto dALPuesto = new DALPuesto();
+            dALPuesto.UPDATE(pPuesto);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pCodigoPuesto)
+        public void Delete(string pCodigoPuesto)
         {
-            DAL.DALPuesto.DELETE(pCodigoPuesto);
+            IDALPuesto dALPuesto = new DALPuesto();
+            dALPuesto.DELETE(pCodigoPuesto);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearPuesto(string pCodigoPuesto)
+        public bool ChequearPuesto(string pCodigoPuesto)
         {
             bool existe = false;
 

@@ -7,40 +7,43 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLSupervisor
+    public class BLLSupervisor : IBLLSupervisor
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Supervisor> SelectAll()
+        public List<Supervisor> SelectAll()
         {
-
-            return DAL.DALSupervisor.SelectAll();
+            IDALSupervisor dALSupervisor = new DALSupervisor();
+            return dALSupervisor.SelectAll();
         }
         #endregion
 
         #region SecuenciadorSupervisor
 
-        public static string SecuenciadorPuesto()
+        public string SecuenciadorPuesto()
         {
-            return DALSupervisor.SecuenciadorPuestoAumentar();
+            IDALSupervisor dALSupervisor = new DALSupervisor();
+            return dALSupervisor.SecuenciadorPuestoAumentar();
         }
 
         #endregion
 
         #region SELECT BY ID
-        public static Supervisor SelectById(string Id)
+        public Supervisor SelectById(string Id)
         {
-            return DAL.DALSupervisor.SelectById(Id);
+            IDALSupervisor dALSupervisor = new DALSupervisor();
+            return dALSupervisor.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Supervisor pSupervisor)
+        public void Create(Supervisor pSupervisor)
         {
             DialogResult resultado = new DialogResult();
 
@@ -51,34 +54,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALSupervisor.UPDATE(pSupervisor);
+                    IDALSupervisor dALSupervisor = new DALSupervisor();
+                    dALSupervisor.UPDATE(pSupervisor);
                 }
 
             }
             else
             {
-                DAL.DALSupervisor.CREATE(pSupervisor);
+                IDALSupervisor dALSupervisor = new DALSupervisor();
+                dALSupervisor.CREATE(pSupervisor);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Supervisor pSupervisor)
+        public void Update(Supervisor pSupervisor)
         {
-            DAL.DALSupervisor.UPDATE(pSupervisor);
+            IDALSupervisor dALSupervisor = new DALSupervisor();
+            dALSupervisor.UPDATE(pSupervisor);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pIdSupervisor)
+        public void Delete(string pIdSupervisor)
         {
-            DAL.DALSupervisor.DELETE(pIdSupervisor);
+            IDALSupervisor dALSupervisor = new DALSupervisor();
+            dALSupervisor.DELETE(pIdSupervisor);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearSupervisor(string pIdSupervisor)
+        public bool ChequearSupervisor(string pIdSupervisor)
         {
             bool existe = false;
 

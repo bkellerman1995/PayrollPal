@@ -1,5 +1,6 @@
 ﻿using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,7 +48,8 @@ namespace PayrollPal.Entities
 
                     controlMarca.HorasTrabajadas = horasTrabajadas;
 
-                    BLLControlDeMarcas.CREATE(controlMarca);
+                    IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
+                    bLLControlDeMarcas.CREATE(controlMarca);
                 }
                 lector.Close();
             }

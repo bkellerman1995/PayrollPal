@@ -9,13 +9,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PayrollPal.Entities;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALSupervisor
+    public interface IDALSupervisor
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SELECT ALL
         List<Supervisor> SelectAll();

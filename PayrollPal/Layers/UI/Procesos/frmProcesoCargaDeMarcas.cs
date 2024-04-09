@@ -1,5 +1,6 @@
 ﻿using PayrollPal.Entities;
 using PayrollPal.Layers.BLL;
+using PayrollPal.Layers.IBLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace PayrollPal.UI.Consultas
     public partial class frmProcesoCargaDeMarcas : Form
     {
         private bool click_Agregar;
+
+        IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
         public frmProcesoCargaDeMarcas()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace PayrollPal.UI.Consultas
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
 
         private void btnCargarArchivoJson_Click(object sender, EventArgs e)
         {
@@ -91,10 +95,10 @@ namespace PayrollPal.UI.Consultas
                 click_Agregar = true;
                 this.errProv1.Clear();
                 ControlDeMarcas control = new ControlDeMarcas();
-                BLLControlDeMarcas.DELETE();
+                bLLControlDeMarcas.DELETE();
                 control.ObtenerMarcasJSON(this.txtRutaArchivoJSON.Text);
                 VerificarRegistrosDeMarcaIncompletos();
-                this.dgvListaMarcas.DataSource = BLLControlDeMarcas.SelectAll();
+                this.dgvListaMarcas.DataSource = bLLControlDeMarcas.SelectAll();
                 RevisarSiHayMarcas();
                 this.dgvListaMarcas.ClearSelection();
 
@@ -107,10 +111,10 @@ namespace PayrollPal.UI.Consultas
 
         private void VerificarRegistrosDeMarcaIncompletos()
         {
-            List<ControlDeMarcas> listaRegistrosIncompletos = BLLControlDeMarcas.SelectAll().Where(marca => marca.HoraEntrada == ""||
+            List<ControlDeMarcas> listaRegistrosIncompletos = bLLControlDeMarcas.SelectAll().Where(marca => marca.HoraEntrada == ""||
                 marca.HoraSalida == "").ToList();
 
-            int contadorRegistrosIncompletos = BLLControlDeMarcas.SelectAll().Where(marca => marca.HoraEntrada == "" ||
+            int contadorRegistrosIncompletos = bLLControlDeMarcas.SelectAll().Where(marca => marca.HoraEntrada == "" ||
                 marca.HoraSalida == "").ToList().Count;
 
             if (contadorRegistrosIncompletos > 0)
@@ -120,18 +124,18 @@ namespace PayrollPal.UI.Consultas
                     if ((!String.Equals(marca.HoraEntrada, "") && (String.Equals(marca.HoraSalida,""))))
                     {
                         marca.HoraSalida = "17:00";
-                        BLLControlDeMarcas.Update(marca);
+                        bLLControlDeMarcas.Update(marca);
                     }
                     else if ((String.Equals(marca.HoraEntrada, "") && (!String.Equals(marca.HoraSalida, ""))))
                     {
                         marca.HoraEntrada = "7:00";
-                        BLLControlDeMarcas.Update(marca);
+                        bLLControlDeMarcas.Update(marca);
                     }
                     else
                     {
                         marca.HoraEntrada = "00:00";
                         marca.HoraSalida = "00:00";
-                        BLLControlDeMarcas.Update(marca);
+                        bLLControlDeMarcas.Update(marca);
 
                     }
                 }
@@ -140,7 +144,7 @@ namespace PayrollPal.UI.Consultas
 
         private void RevisarSiHayMarcas()
         {
-            if (BLLControlDeMarcas.SelectAll().Count == 0)
+            if (bLLControlDeMarcas.SelectAll().Count == 0)
             {
                 MessageBox.Show("¡No se puede proceder sin marcas en el sistema!",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);

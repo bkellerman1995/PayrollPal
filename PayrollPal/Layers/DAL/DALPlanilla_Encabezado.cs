@@ -10,17 +10,20 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.Util;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.BLL;
+
 
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALPlanilla_Encabezado
+    public class DALPlanilla_Encabezado : IDALPlanilla_Encabezado
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorPlanEncabezado
 
-        public static string SecuenciadorPlanEnc()
+        public string SecuenciadorPlanEnc()
         {
             try
             {
@@ -50,10 +53,11 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT ALL
-        public static List<Planilla_Encabezado> SelectAll()
+        public List<Planilla_Encabezado> SelectAll()
         {
             try
             {
+                IBLLPlanillaPago _BLLPlanillaPago = new BLLPlanillaPago();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -70,7 +74,7 @@ namespace PayrollPal.Layers.DAL
 
                         Planilla_Encabezado planillaEnc = new Planilla_Encabezado();
                         planillaEnc.IdEncabezado = dr["IdEncabezado"].ToString();
-                        planillaEnc.Codigo = BLL.BLLPlanillaPago.SelectById(dr["Codigo"].ToString());
+                        planillaEnc.Codigo = _BLLPlanillaPago.SelectById(dr["Codigo"].ToString());
                         planillaEnc.TipoCambio = double.Parse(dr["TipoCambio"].ToString());
                         planillaEnc.TotalIngresos = double.Parse(dr["TotalIngresos"].ToString());
                         planillaEnc.TotalGastos = double.Parse(dr["TotalGastos"].ToString());
@@ -101,10 +105,11 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Planilla_Encabezado SelectById(string Id)
+        public Planilla_Encabezado SelectById(string Id)
         {
             try
             {
+                IBLLPlanillaPago _BLLPlanillaPago = new BLLPlanillaPago();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -120,7 +125,7 @@ namespace PayrollPal.Layers.DAL
                     DataTable dt = ds.Tables[0];
                     Planilla_Encabezado planillaEnc = new Planilla_Encabezado();
                     planillaEnc.IdEncabezado = dt.Rows[0]["IdEncabezado"].ToString();
-                    planillaEnc.Codigo = BLL.BLLPlanillaPago.SelectById(dt.Rows[0]["Codigo"].ToString());
+                    planillaEnc.Codigo = _BLLPlanillaPago.SelectById(dt.Rows[0]["Codigo"].ToString());
                     planillaEnc.TipoCambio = double.Parse(dt.Rows[0]["TipoCambio"].ToString());
                     planillaEnc.TotalIngresos = double.Parse(dt.Rows[0]["TotalIngresos"].ToString());
                     planillaEnc.TotalGastos = double.Parse(dt.Rows[0]["TotalGastos"].ToString());
@@ -145,7 +150,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Planilla_Encabezado pPlanillaEncabezado)
+        public void CREATE(Planilla_Encabezado pPlanillaEncabezado)
         {
             try
             {
@@ -183,7 +188,7 @@ namespace PayrollPal.Layers.DAL
 
         #region UPDATE
 
-        public static void UPDATE(Planilla_Encabezado pPlanillaEncabezado)
+        public void UPDATE(Planilla_Encabezado pPlanillaEncabezado)
         {
             try
             {
@@ -223,7 +228,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pIDPlanillaEnc)
+        public void DELETE(string pIDPlanillaEnc)
         {
             try
             {

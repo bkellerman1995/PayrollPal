@@ -7,16 +7,17 @@ using System.Data.SqlClient;
 using System.Reflection;
 using System.Windows.Forms;
 
+
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALPuesto
+    public class DALPuesto : IDALPuesto
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorPuesto
 
-        public static string SecuenciadorPuestoAumentar()
+        public string SecuenciadorPuestoAumentar()
         {
             try
             {
@@ -47,7 +48,7 @@ namespace PayrollPal.Layers.DAL
 
 
         #region SELECT ALL
-        public static List<Puesto> SelectAll()
+        public List<Puesto> SelectAll()
         {
             try
             {
@@ -96,7 +97,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Puesto SelectById(string Id)
+        public Puesto SelectById(string Id)
         {
             try
             {
@@ -137,7 +138,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Puesto pPuesto)
+        public void CREATE(Puesto pPuesto)
         {
             try
             {
@@ -171,7 +172,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Puesto pPuesto)
+        public void UPDATE(Puesto pPuesto)
         {
             try
             {
@@ -207,7 +208,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pCodigoPuesto)
+        public void DELETE(string pCodigoPuesto)
         {
             try
             {

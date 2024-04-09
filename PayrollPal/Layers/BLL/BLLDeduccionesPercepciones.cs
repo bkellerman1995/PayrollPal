@@ -7,40 +7,43 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLDeduccionesPercepciones
+    public class BLLDeduccionesPercepciones : IBLLDeduccionesPercepciones
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorDeduccionesPercepciones
 
-        public static string SecuenciadorDeduccionesPercepciones()
+        public string SecuenciadorDeduccionesPercepciones()
         {
-            return DALDeduccionesPercepciones.SecuenciadorDeduccionesPercepciones();
+            IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+            return dALDeduccionesPercepciones.SecuenciadorDeduccionesPercepciones();
         }
 
         #endregion
 
         #region SELECT ALL
-        public static List<Deducciones_Percepciones> SelectAll()
+        public List<Deducciones_Percepciones> SelectAll()
         {
-
-            return DAL.DALDeduccionesPercepciones.SelectAll();
+            IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+            return dALDeduccionesPercepciones.SelectAll();
         }
         #endregion
 
         #region SELECT BY ID
-        public static Deducciones_Percepciones SelectById(string codigo)
+        public Deducciones_Percepciones SelectById(string codigo)
         {
-            return DAL.DALDeduccionesPercepciones.SelectById(codigo);
+            IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+            return dALDeduccionesPercepciones.SelectById(codigo);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Deducciones_Percepciones pDeducciones_Percepciones)
+        public void Create(Deducciones_Percepciones pDeducciones_Percepciones)
         {
             DialogResult resultado = new DialogResult();
 
@@ -51,34 +54,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALDeduccionesPercepciones.UPDATE(pDeducciones_Percepciones);
+                    IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+                    dALDeduccionesPercepciones.UPDATE(pDeducciones_Percepciones);
                 }
 
             }
             else
             {
-                DAL.DALDeduccionesPercepciones.CREATE(pDeducciones_Percepciones);
+                IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+                dALDeduccionesPercepciones.CREATE(pDeducciones_Percepciones);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Deducciones_Percepciones pDeduccionesPercepciones)
+        public void Update(Deducciones_Percepciones pDeduccionesPercepciones)
         {
-            DAL.DALDeduccionesPercepciones.UPDATE(pDeduccionesPercepciones);
+            IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+            dALDeduccionesPercepciones.UPDATE(pDeduccionesPercepciones);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pCodigoDeduccionesPercepciones)
+        public void Delete(string pCodigoDeduccionesPercepciones)
         {
-            DAL.DALDeduccionesPercepciones.DELETE(pCodigoDeduccionesPercepciones);
+            IDALDeduccionesPercepciones dALDeduccionesPercepciones = new DALDeduccionesPercepciones();
+            dALDeduccionesPercepciones.DELETE(pCodigoDeduccionesPercepciones);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearDeducciones_Percepciones(string pCodigoDeduccionPercepcion)
+        public bool ChequearDeducciones_Percepciones(string pCodigoDeduccionPercepcion)
         {
             bool existe = false;
 

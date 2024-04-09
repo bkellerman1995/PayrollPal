@@ -7,39 +7,42 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.DAL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLPlanillaPago
+    public class BLLPlanillaPago : IBLLPlanillaPago
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorPlanillasPago
 
-        public static string SecuenciadorPlanillasPago()
+        public string SecuenciadorPlanillasPago()
         {
-            return DALPlanillaPago.SecuenciadorPlanillaPago();
+            IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+            return dALPlanillaPago.SecuenciadorPlanillaPago();
         }
         #endregion
 
         #region SELECT ALL
-        public static List<PlanillaPago> SelectAll()
+        public List<PlanillaPago> SelectAll()
         {
-
-            return DAL.DALPlanillaPago.SelectAll();
+            IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+            return dALPlanillaPago.SelectAll();
         }
         #endregion
 
         #region SELECT BY ID
-        public static PlanillaPago SelectById(string codigo)
+        public PlanillaPago SelectById(string codigo)
         {
-            return DAL.DALPlanillaPago.SelectById(codigo);
+            IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+            return dALPlanillaPago.SelectById(codigo);
         }
         #endregion
 
         #region CREATE
-        public static void Create(PlanillaPago pPlanillaPago)
+        public void Create(PlanillaPago pPlanillaPago)
         {
             DialogResult resultado = new DialogResult();
 
@@ -50,34 +53,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALPlanillaPago.UPDATE(pPlanillaPago);
+                    IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+                    dALPlanillaPago.UPDATE(pPlanillaPago);
                 }
 
             }
             else
             {
-                DAL.DALPlanillaPago.CREATE(pPlanillaPago);
+                IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+                dALPlanillaPago.CREATE(pPlanillaPago);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(PlanillaPago pPlanillaPago)
+        public void Update(PlanillaPago pPlanillaPago)
         {
-            DAL.DALPlanillaPago.UPDATE(pPlanillaPago);
+            IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+            dALPlanillaPago.UPDATE(pPlanillaPago);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pCodigoPlanillaPago)
+        public void Delete(string pCodigoPlanillaPago)
         {
-            DAL.DALPlanillaPago.DELETE(pCodigoPlanillaPago);
+            IDALPlanillaPago dALPlanillaPago = new DALPlanillaPago();
+            dALPlanillaPago.DELETE(pCodigoPlanillaPago);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearPlanillaPago(string pCodigoPlanillaPago)
+        public bool ChequearPlanillaPago(string pCodigoPlanillaPago)
         {
             bool existe = false;
 

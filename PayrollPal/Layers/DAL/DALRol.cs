@@ -11,15 +11,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 
+
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALRol
+    public class DALRol : IDALRol
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Rol> SelectAll()
+        public List<Rol> SelectAll()
         {
             try
             {
@@ -66,7 +67,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Rol SelectById(int Id)
+        public Rol SelectById(int Id)
         {
             try
             {
@@ -106,7 +107,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Rol pRol)
+        public void CREATE(Rol pRol)
         {
             try
             {
@@ -140,7 +141,7 @@ namespace PayrollPal.Layers.DAL
 
 
         #region DELETE
-        public static void DELETE(int pIDRol)
+        public void DELETE(int pIDRol)
         {
             try
             {

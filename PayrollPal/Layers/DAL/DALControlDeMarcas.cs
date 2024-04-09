@@ -11,14 +11,16 @@ using PayrollPal.Layers.Entities;
 using System.Reflection;
 using log4net;
 
+
+
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALControlDeMarcas
+    public class DALControlDeMarcas : IDALControlDeMarcas
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
         #region CREATE  
-        public static void CREATE (ControlDeMarcas control)
+        public void CREATE (ControlDeMarcas control)
         {
             try
             {
@@ -45,7 +47,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(ControlDeMarcas control)
+        public void UPDATE(ControlDeMarcas control)
         {
             try
             {
@@ -84,7 +86,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT ALL
-        public static List<ControlDeMarcas> SelectAll()
+        public List<ControlDeMarcas> SelectAll()
         {
             try
             {
@@ -125,7 +127,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE()
+        public void DELETE()
         {
             try
             {

@@ -6,25 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.DAL;
 
-namespace PayrollPal.Layers.BLL
+namespace PayrollPal.Layers.BLL 
 {
-    public class BLLRol
+    public class BLLRol : IBLLRol
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Rol> SelectAll()
+        public List<Rol> SelectAll()
         {
-
-            return DAL.DALRol.SelectAll();
+            IDALRol dALRol = new DALRol();
+            return dALRol.SelectAll();
         }
         #endregion
 
         #region AGREGAR o QUITAR IDs del combo
 
-        public static List<int> IDRolesCombo()
+        public List<int> IDRolesCombo()
         {
             List<int> roles = new List<int>();
             int contador = 3;
@@ -41,30 +43,33 @@ namespace PayrollPal.Layers.BLL
         #endregion
 
         #region SELECT BY ID
-        public static Rol SelectById(int Id)
+        public Rol SelectById(int Id)
         {
-            return DAL.DALRol.SelectById(Id);
+            IDALRol dALRol = new DALRol();
+            return dALRol.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Rol pRol)
+        public void Create(Rol pRol)
         {
-            DAL.DALRol.CREATE(pRol);
+            IDALRol dALRol = new DALRol();
+            dALRol.CREATE(pRol);
         }
 
         #endregion
 
         #region DELETE
-        public static void Delete(int pIDRol)
+        public void Delete(int pIDRol)
         {
-            DAL.DALRol.DELETE(pIDRol);
+            IDALRol dALRol = new DALRol();
+            dALRol.DELETE(pIDRol);
         }
         #endregion
 
         #region SELECCIONA ROL COLABORADOR
 
-        public static bool EsColaborador(Rol pRol)
+        public bool EsColaborador(Rol pRol)
         {
             if (pRol.IDRol == 3)
             {

@@ -1,5 +1,7 @@
 ﻿using PayrollPal.Entities;
+using PayrollPal.Layers.DAL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,35 +12,39 @@ using System.Windows.Forms;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLControlDeMarcas
+    public class BLLControlDeMarcas : IBLLControlDeMarcas
     {
         #region CREATE
 
-        public static void CREATE(ControlDeMarcas control)
+        public void CREATE(ControlDeMarcas control)
         {
-            DAL.DALControlDeMarcas.CREATE(control);
+            IDALControlDeMarcas dALControlDeMarcas = new DALControlDeMarcas();
+            dALControlDeMarcas.CREATE(control);
 
         }
 
         #region UPDATE
-        public static void Update(ControlDeMarcas control)
+        public void Update(ControlDeMarcas control)
         {
-            DAL.DALControlDeMarcas.UPDATE(control);
+            IDALControlDeMarcas dALControlDeMarcas = new DALControlDeMarcas();
+            dALControlDeMarcas.UPDATE(control);
         }
         #endregion
 
         #endregion
         #region SELECT ALL
-        public static List<ControlDeMarcas> SelectAll()
+        public List<ControlDeMarcas> SelectAll()
         {
-            return DAL.DALControlDeMarcas.SelectAll();
+            IDALControlDeMarcas dALControlDeMarcas = new DALControlDeMarcas();
+            return dALControlDeMarcas.SelectAll();
         }
         #endregion
 
         #region DELETE
-        public static void DELETE()
+        public void DELETE()
         {
-            DAL.DALControlDeMarcas.DELETE();
+            IDALControlDeMarcas dALControlDeMarcas = new DALControlDeMarcas();
+            dALControlDeMarcas.DELETE();
         }
         #endregion
     }

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 using PayrollPal.Layers.Util;
 
 namespace PayrollPal.UI.Mantenimientos
@@ -21,6 +22,12 @@ namespace PayrollPal.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        IBLLDepartamento bLLDepartamento = new BLLDepartamento();
+        IBLLUsuario bLLUsuario = new BLLUsuario();
+        IBLLPuesto bLLPuesto = new BLLPuesto();
+        IBLLRol bLLRol = new BLLRol();
+        IBLLColaborador bLLColaborador = new BLLColaborador();
+        IBLLSupervisor bLLSupervisor = new BLLSupervisor();
         public frmMantenimientoColaboradores()
         {
             InitializeComponent();
@@ -79,7 +86,7 @@ namespace PayrollPal.UI.Mantenimientos
         private void RevisarCombosVacios()
         {
 
-            if (BLLDepartamento.SelectAll().Count != 0)
+            if (bLLDepartamento.SelectAll().Count != 0)
             {
                 this.errProv1.SetError(this.cmbDepartamento, string.Empty);
             }
@@ -89,7 +96,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             }
 
-            if (BLLUsuario.SelectAllNoAsignado().Count != 0)
+            if (bLLUsuario.SelectAllNoAsignado().Count != 0)
             {
                 this.errProv1.SetError(this.cmbUsuario, string.Empty);
             }
@@ -99,7 +106,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             }
 
-            if (BLLPuesto.SelectAll().Where(puesto => puesto.Estado==true).ToList().Count != 0)
+            if (bLLPuesto.SelectAll().Where(puesto => puesto.Estado==true).ToList().Count != 0)
             {
                 this.errProv1.SetError(this.cmbPuestos, string.Empty);
             }
@@ -109,7 +116,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             }
 
-            if (BLLRol.SelectAll().Count != 0)
+            if (bLLRol.SelectAll().Count != 0)
             {
                 this.errProv1.SetError(this.cmbRol, string.Empty);
             }
@@ -130,7 +137,7 @@ namespace PayrollPal.UI.Mantenimientos
             try
             {
 
-                this.dgvColaboradores.DataSource = BLLColaborador.SelectAll();
+                this.dgvColaboradores.DataSource = bLLColaborador.SelectAll();
                 this.dgvColaboradores.ClearSelection();
             }
             catch (Exception msg)
@@ -153,19 +160,19 @@ namespace PayrollPal.UI.Mantenimientos
         private void CargarCombos()
         {
 
-            this.cmbDepartamento.DataSource = BLLDepartamento.SelectAll();
+            this.cmbDepartamento.DataSource = bLLDepartamento.SelectAll();
 
-            List<Usuario> listaUsuariosNoAsignados = BLLUsuario.SelectAllNoAsignado();
+            List<Usuario> listaUsuariosNoAsignados = bLLUsuario.SelectAllNoAsignado();
             foreach (var item in listaUsuariosNoAsignados)
             {
                 this.cmbUsuario.Items.Add(item);
             }
 
 
-            this.cmbRol.DataSource = BLLRol.SelectAll();
-            this.cmbSupervisor.DataSource = BLLSupervisor.SelectAll();
+            this.cmbRol.DataSource = bLLRol.SelectAll();
+            this.cmbSupervisor.DataSource = bLLSupervisor.SelectAll();
 
-            foreach (var item in BLLPuesto.SelectAll())
+            foreach (var item in bLLPuesto.SelectAll())
             {
                 this.cmbPuestos.Items.Add(item);
             }
@@ -381,7 +388,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-                        this.txtID.Text = this.txtID.Text + BLLColaborador.SecuenciadorColaborador();
+                        this.txtID.Text = this.txtID.Text + bLLColaborador.SecuenciadorColaborador();
 
                         //habilitar los controles de texto, comboboxes
                         //pictureBox 
@@ -694,9 +701,9 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
             oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
             oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
-            if (BLLColaborador.SelectById(idColaborador) != null)
+            if (bLLColaborador.SelectById(idColaborador) != null)
             {
-                if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+                if (oColaborador.IDUsuario.ToString() == bLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
                 {
                     oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
                 }
@@ -708,7 +715,7 @@ namespace PayrollPal.UI.Mantenimientos
             //que estaba anteriormente asignado
 
             oColaborador.IDUsuario.Asignado = true;
-            BLLUsuario.Update(oColaborador.IDUsuario);
+            bLLUsuario.Update(oColaborador.IDUsuario);
 
             oColaborador.CodigoPuesto = (Puesto)this.cmbPuestos.SelectedItem;
             oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
@@ -734,21 +741,21 @@ namespace PayrollPal.UI.Mantenimientos
             //Se llama al método Create del Colaborador 
             //que se encarga de revisar si el colaborador existe primero
             //antes de agregar al colaborador
-            if (BLLColaborador.SelectById(idColaborador) != null)
+            if (bLLColaborador.SelectById(idColaborador) != null)
             {
-                if (oColaborador.IDUsuario.ToString() != BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+                if (oColaborador.IDUsuario.ToString() != bLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
                 {
-                    oUsuarioADeshabilitar = BLLColaborador.SelectById(idColaborador).IDUsuario;
+                    oUsuarioADeshabilitar = bLLColaborador.SelectById(idColaborador).IDUsuario;
                     oUsuarioADeshabilitar.Asignado = false;
                     oUsuarioADeshabilitar.Contrasenna = Criptografia.DecrypthAES(oUsuarioADeshabilitar.Contrasenna);
 
-                    BLLUsuario.Update(oUsuarioADeshabilitar);
+                    bLLUsuario.Update(oUsuarioADeshabilitar);
                 }
-                BLLColaborador.Update(oColaborador);
+                bLLColaborador.Update(oColaborador);
             }
             else
             {
-                BLLColaborador.Create(oColaborador);
+                bLLColaborador.Create(oColaborador);
             }
 
             //Insertar el colaborador a la base de datos
@@ -977,12 +984,12 @@ namespace PayrollPal.UI.Mantenimientos
         private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
         {
             if (this.cmbRol.SelectedIndex > 0
-                && BLLRol.EsColaborador((Rol)this.cmbRol.SelectedItem))
+                && bLLRol.EsColaborador((Rol)this.cmbRol.SelectedItem))
             {
                 this.cmbSupervisor.Visible = true;
                 this.lblSupervisor.Visible = true;
 
-                if (BLLSupervisor.SelectAll().Count != 0)
+                if (bLLSupervisor.SelectAll().Count != 0)
                 {
                     this.errProv1.SetError(this.cmbSupervisor, string.Empty);
                 }
@@ -1110,7 +1117,7 @@ namespace PayrollPal.UI.Mantenimientos
         private void refrescarComboUsuario()
         {
             this.cmbUsuario.Items.Clear();
-            List<Usuario> listaUsuariosNoAsignados = BLLUsuario.SelectAllNoAsignado();
+            List<Usuario> listaUsuariosNoAsignados = bLLUsuario.SelectAllNoAsignado();
             foreach (var item in listaUsuariosNoAsignados)
             {
                 this.cmbUsuario.Items.Add(item);
@@ -1153,11 +1160,11 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                Usuario oUsuario = BLLColaborador.SelectById(idColaborador).IDUsuario;
+                Usuario oUsuario = bLLColaborador.SelectById(idColaborador).IDUsuario;
                 oUsuario.Contrasenna = Criptografia.DecrypthAES(oUsuario.Contrasenna);
                 oUsuario.Asignado = false;
-                BLLUsuario.Update(oUsuario);
-                BLLColaborador.Delete(idColaborador);
+                bLLUsuario.Update(oUsuario);
+                bLLColaborador.Delete(idColaborador);
                 CargarLista();
                 LimpiarControles();
             }

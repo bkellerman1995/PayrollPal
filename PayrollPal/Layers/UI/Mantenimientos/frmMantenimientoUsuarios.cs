@@ -15,6 +15,7 @@ using System.IO;
 using UTNLeccion8B;
 using PayrollPal.Layers.Util;
 using System.Diagnostics.Eventing.Reader;
+using PayrollPal.Layers.IBLL;
 
 
 namespace PayrollPal.UI.Mantenimientos
@@ -24,6 +25,7 @@ namespace PayrollPal.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                                      log4net.LogManager.GetLogger("MyControlEventos");
 
+        IBLLUsuario bLLUsuario = new BLLUsuario();
         public frmMantenimientoUsuarios()
         {
             InitializeComponent();
@@ -82,7 +84,7 @@ namespace PayrollPal.UI.Mantenimientos
             try
             {
 
-                this.dgvUsuarios.DataSource = BLLUsuario.SelectAll();
+                this.dgvUsuarios.DataSource = bLLUsuario.SelectAll();
                 this.dgvUsuarios.ClearSelection();
             }
             catch (Exception msg)
@@ -417,14 +419,14 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si el usuario existe primero
             //antes de agregar al usuario
 
-            if (BLLUsuario.SelectById(this.mktID.Text)!=null)
+            if (bLLUsuario.SelectById(this.mktID.Text)!=null)
             {
 
-                BLLUsuario.Update(oUsuario);
+                bLLUsuario.Update(oUsuario);
             }
             else
             {
-                BLLUsuario.Create(oUsuario);
+                bLLUsuario.Create(oUsuario);
             }
 
             //Insertar el usuario a la base de datos
@@ -469,7 +471,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLUsuario.Delete(idUsuario);
+                bLLUsuario.Delete(idUsuario);
                 CargarLista();
                 LimpiarControles();
             }

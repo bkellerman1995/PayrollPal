@@ -13,10 +13,9 @@ using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALDepartamento
+    public interface IDALDepartamento
     {
-        
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SELECT ALL
         List<Departamento> SelectAll();

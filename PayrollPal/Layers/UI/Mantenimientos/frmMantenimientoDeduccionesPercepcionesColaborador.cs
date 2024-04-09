@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Enumeraciones;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.UI.Mantenimientos
 {
@@ -20,8 +21,14 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        IBLLColaborador bLLColaborador = new BLLColaborador();
+        IBLLDeduccionesPercepciones bLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+        IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
+
         List<Colaborador> listaAgregarDeduccionPercepcionColaborador = new List<Colaborador>();
-        List<Colaborador> listaColaboradoresALL = BLLColaborador.SelectSoloColaboradoresSinDedPerc();
+        List<Colaborador> listaColaboradoresALL = new List<Colaborador>();
+
+
         Colaborador oColaborador = new Colaborador();
         public frmMantenimientoDeduccionesPercepcionesColaborador()
         {
@@ -34,6 +41,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             {
                 //Cargar el datagridview de deducciones/percepciones por colaborador con el SELECT_ALL 
                 //del DALDeduccionPercepcionPorColaborador
+
+
+                listaColaboradoresALL = bLLColaborador.SelectSoloColaboradoresSinDedPerc();
 
                 CargarListaColaboradoresyDataGridView();
                 CargarCombos();
@@ -68,7 +78,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 RefrescarListaColaboradoresALL();
 
-                this.dgvDedPercColab.DataSource = BLLDeducciones_Percepciones_Por_Colaborador.SelectAll();
+                this.dgvDedPercColab.DataSource = bLLDeducciones_Percepciones_Por_Colaborador.SelectAll();
                 this.dgvDedPercColab.Columns["IdColaborador"].Visible = false;
                 this.dgvDedPercColab.ClearSelection();
 
@@ -103,7 +113,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     this.cmbPrioridad.Items.Add(tipo);
                 }
 
-                foreach (var item in BLLDeduccionesPercepciones.SelectAll())
+                foreach (var item in bLLDeduccionesPercepciones.SelectAll())
                 {
                     this.cmbDedPercCol.Items.Add(item);
                 }
@@ -126,7 +136,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void RevisarCombosListasVacios()
         {
 
-            if (BLLDeduccionesPercepciones.SelectAll().Count != 0)
+            if (bLLDeduccionesPercepciones.SelectAll().Count != 0)
             {
                 this.errProv1.SetError(this.cmbDedPercCol, string.Empty);
             }
@@ -136,7 +146,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             }
 
-            if (BLLColaborador.SelectSoloColaboradoresSinDedPerc().Count != 0)
+            if (bLLColaborador.SelectSoloColaboradoresSinDedPerc().Count != 0)
             {
                 this.errProv1.SetError(this.lstColaboradoresALL, string.Empty);
             }
@@ -219,7 +229,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 Deducciones_Percepciones dedPerc = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
                 string codigoDedPerc = dedPerc.CodigoDeduccionPercepcion;
 
-                BLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDedPerc, oColaborador.IDColaborador);
+                bLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDedPerc, oColaborador.IDColaborador);
 
                 RefrescarListaAgregarDeduccionPercepcionColaborador();
                 RefrescarListaColaboradoresALL();
@@ -282,7 +292,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     if (oDecPercCola.Estado == false)
                         this.rdbInactiva.Checked = true;
 
-                    foreach (var item in BLL.BLLColaborador.SELECTColaboradoresmismaDeduccionPercepcion())
+                    foreach (var item in bLLColaborador.SELECTColaboradoresmismaDeduccionPercepcion())
                     {
                         listaAgregarDeduccionPercepcionColaborador.Add(item);
                     }
@@ -348,14 +358,14 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 string codigoDedPerc = oDedPercCol.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion;
                 string idColaborador = oDedPercCol.IdColaborador.IDColaborador;
 
-                if (BLLDeducciones_Percepciones_Por_Colaborador.SelectById(codigoDedPerc, idColaborador) != null)
+                if (bLLDeducciones_Percepciones_Por_Colaborador.SelectById(codigoDedPerc, idColaborador) != null)
                 {
 
-                    BLLDeducciones_Percepciones_Por_Colaborador.Update(oDedPercCol);
+                    bLLDeducciones_Percepciones_Por_Colaborador.Update(oDedPercCol);
                 }
                 else
                 {
-                    BLLDeducciones_Percepciones_Por_Colaborador.Create(oDedPercCol);
+                    bLLDeducciones_Percepciones_Por_Colaborador.Create(oDedPercCol);
                 }
 
             }
@@ -614,7 +624,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 {
                     //Crear la instancia de Supervisor
 
-                    BLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDedPerc, item.IDColaborador);
+                    bLLDeducciones_Percepciones_Por_Colaborador.Delete(codigoDedPerc, item.IDColaborador);
 
                 }
                 this.cmbDedPercCol.Text = "";

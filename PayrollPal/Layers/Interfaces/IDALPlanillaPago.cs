@@ -14,10 +14,10 @@ using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALPlanillaPago
+    public interface IDALPlanillaPago
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SELECT ALL
         List<PlanillaPago> SelectAll();

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PayrollPal.Layers.UI.Mantenimientos
@@ -20,6 +21,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         Rol rol;
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        IBLLColaborador bLLColaborador = new BLLColaborador();
+        IBLLSupervisor bLLSupervisor = new BLLSupervisor();
 
         List<Colaborador> listaColaboradoresSupervisor = new List<Colaborador>();
         List<Colaborador> listaColaboradoresALL = new List<Colaborador>();
@@ -83,7 +87,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             {
                 this.lstColaboradoresALL.Items.Clear();
                 this.lstColaboradoresSup.Items.Clear();
-                listaColaboradoresALL = BLLColaborador.SelectSoloColaboradores();
+                listaColaboradoresALL = bLLColaborador.SelectSoloColaboradores();
 
                 foreach (var item in listaColaboradoresALL)
                 {
@@ -92,7 +96,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                 this.lstColaboradoresALL.ClearSelected();
 
-                this.dgvSupervisores.DataSource = BLLSupervisor.SelectAll();
+                this.dgvSupervisores.DataSource = bLLSupervisor.SelectAll();
                 this.dgvSupervisores.ClearSelection();
 
 
@@ -244,7 +248,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-                        this.txtID.Text = this.txtID.Text + BLLSupervisor.SecuenciadorPuesto();
+                        this.txtID.Text = this.txtID.Text + bLLSupervisor.SecuenciadorPuesto();
 
                         //habilitar los controles de texto (txtBox)
                         //y los botones para agregar y quitar en la lista
@@ -363,7 +367,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 listaColaboradoresALL.Add(oColaborador);
                 listaColaboradoresSupervisor.Remove(oColaborador);
                 oColaborador.IDSupervisor = oSupervisor;
-                BLL.BLLColaborador.Update(oColaborador);
+                bLLColaborador.Update(oColaborador);
 
                 RefrescarListaColaboradoresPorSup();
                 RefrescarListaColaboradoresALL();
@@ -536,7 +540,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 foreach (var item in listaColaboradoresSupervisor)
                 {
                     item.IDSupervisor = oSupervisor;
-                    BLLColaborador.Update(item);
+                    bLLColaborador.Update(item);
                 }
             }
  
@@ -546,14 +550,14 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             //que se encarga de revisar si el supervisor existe primero
             //antes de agregar al supervisor
 
-            if (BLLSupervisor.SelectById(this.txtID.Text) != null)
+            if (bLLSupervisor.SelectById(this.txtID.Text) != null)
             {
 
-                BLLSupervisor.Update(oSupervisor);
+                bLLSupervisor.Update(oSupervisor);
             }
             else
             {
-                BLLSupervisor.Create(oSupervisor);
+                bLLSupervisor.Create(oSupervisor);
             }
 
             //Insertar el usuario a la base de datos
@@ -607,7 +611,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
                     this.lstColaboradoresSup.Items.Clear();
 
-                    foreach (var item in BLL.BLLColaborador.SelectColaboradorIdSupervisor(oSupervisor.IDSupervisor))
+                    foreach (var item in bLLColaborador.SelectColaboradorIdSupervisor(oSupervisor.IDSupervisor))
                     {
                         listaColaboradoresSupervisor.Add(item);
                     }
@@ -660,9 +664,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                 foreach (Colaborador colab in this.lstColaboradoresSup.Items)
                 {
                     colab.IDSupervisor = supervisor;
-                    BLLColaborador.Update(colab);
+                    bLLColaborador.Update(colab);
                 }
-                BLLSupervisor.Delete(idSupervisor);
+                bLLSupervisor.Delete(idSupervisor);
                 CargarListasColaboradoresALLySupervisores();
                 LimpiarControles();
             }

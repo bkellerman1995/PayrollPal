@@ -11,14 +11,13 @@ using PayrollPal.Entities;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.Util;
 using System.Reflection;
-using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
     public interface IDALUsuario
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SELECT ALL
         List<Usuario> SelectAll();

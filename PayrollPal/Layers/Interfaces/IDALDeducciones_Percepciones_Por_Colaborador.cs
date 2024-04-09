@@ -12,10 +12,10 @@ using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALDeducciones_Percepciones_Por_Colaborador
+    public interface IDALDeducciones_Percepciones_Por_Colaborador
     {
         
-                     log4net.LogManager.GetLogger("MyControlEventos");
+                     
 
 
         #region SELECT ALL

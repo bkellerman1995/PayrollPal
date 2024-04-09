@@ -11,40 +11,43 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Reflection;
 using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.BLL
 {
 
-    public class BLLPlanilla_Detalle
+    public class BLLPlanilla_Detalle : IBLLPlanilla_Detalle
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                      log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorPlanEncabezado
 
-        public static string SecuenciadorPlanDetalle()
+        public string SecuenciadorPlanDetalle()
         {
-            return DALPlanilla_Encabezado.SecuenciadorPlanEnc();
+            DALPlanilla_Encabezado dALPlanilla_Encabezado = new DALPlanilla_Encabezado();
+            return dALPlanilla_Encabezado.SecuenciadorPlanEnc();
         }
         #endregion
 
         #region SELECT ALL
-        public static List<Planilla_Detalle> SelectAll()
+        public List<Planilla_Detalle> SelectAll()
         {
-
-            return DAL.DALPlanilla_Detalle.SelectAll();
+            IDALPlanilla_Detalle dALPlanilla_Detalle = new DALPlanilla_Detalle();
+            return dALPlanilla_Detalle.SelectAll();
         }
         #endregion
 
         #region SELECT BY ID
-        public static Planilla_Detalle SelectById(string Id)
+        public Planilla_Detalle SelectById(string Id)
         {
-            return DAL.DALPlanilla_Detalle.SelectById(Id);
+            IDALPlanilla_Detalle dALPlanilla_Detalle = new DALPlanilla_Detalle();
+            return dALPlanilla_Detalle.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Planilla_Detalle pPlanillaDetalle)
+        public void Create(Planilla_Detalle pPlanillaDetalle)
         {
             DialogResult resultado = new DialogResult();
 
@@ -55,34 +58,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALPlanilla_Detalle.UPDATE(pPlanillaDetalle);
+                    IDALPlanilla_Detalle dALPlanilla_Detalle = new DALPlanilla_Detalle();
+                    dALPlanilla_Detalle.UPDATE(pPlanillaDetalle);
                 }
 
             }
             else
             {
-                DAL.DALPlanilla_Detalle.CREATE(pPlanillaDetalle);
+                IDALPlanilla_Detalle dALPlanilla_Detalle = new DALPlanilla_Detalle();
+                dALPlanilla_Detalle.CREATE(pPlanillaDetalle);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Planilla_Detalle pPlanillaDetalle)
+        public void Update(Planilla_Detalle pPlanillaDetalle)
         {
-            DAL.DALPlanilla_Detalle.UPDATE(pPlanillaDetalle);
+            IDALPlanilla_Detalle dALPlanilla_Detalle = new DALPlanilla_Detalle();
+            dALPlanilla_Detalle.UPDATE(pPlanillaDetalle);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pPlanillaDetalle)
+        public void Delete(string pPlanillaDetalle)
         {
-            DAL.DALPlanilla_Detalle.DELETE(pPlanillaDetalle);
+            IDALPlanilla_Detalle dALPlanilla_Detalle = new DALPlanilla_Detalle();
+            dALPlanilla_Detalle.DELETE(pPlanillaDetalle);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearPlanillaDetalle(string pIDPlanDet)
+        public bool ChequearPlanillaDetalle(string pIDPlanDet)
         {
             bool existe = false;
 
@@ -96,7 +103,7 @@ namespace PayrollPal.Layers.BLL
 
         #region CALCULAR SALARIO BRUTO
 
-        public static decimal CalcularSalarioBruto(Planilla_Detalle planillaDetalle)
+        public decimal CalcularSalarioBruto(Planilla_Detalle planillaDetalle)
         {
             decimal resultado = 0;
 
@@ -112,14 +119,15 @@ namespace PayrollPal.Layers.BLL
 
         #region CALCULAR SALARIO NETO
 
-        public static decimal CalcularSalarioNeto(Planilla_Detalle planillaDetalle)
+        public decimal CalcularSalarioNeto(Planilla_Detalle planillaDetalle)
         {
             decimal deducciones = 0;
             decimal percepciones = 0;
+            IBLLDeduccionesPercepciones bLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
 
             foreach (var item in planillaDetalle.deducciones_Percepciones_Por_Colaborador)
             {
-                Deducciones_Percepciones decPerc = BLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                Deducciones_Percepciones decPerc = bLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
                 if (decPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Deduccion)
                 {
                     if (item.Prioridad == Enumeraciones.PrioridadDeduccionPercepcion.Alta)
@@ -175,7 +183,7 @@ namespace PayrollPal.Layers.BLL
 
         #region CALCULAR SALARIO DÓLARES
 
-        public static decimal CalcularSalarioDolares(Planilla_Detalle planillaDetalle, decimal dolar)
+        public decimal CalcularSalarioDolares(Planilla_Detalle planillaDetalle, decimal dolar)
         {
             return Math.Round(CalcularSalarioNeto(planillaDetalle) / dolar,2);
         }

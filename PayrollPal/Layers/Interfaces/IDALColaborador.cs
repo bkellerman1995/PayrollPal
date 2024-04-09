@@ -13,10 +13,10 @@ using log4net;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace PayrollPal.Layers.DAL {
-    public interface DALColaborador
+    public interface IDALColaborador
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SELECT ALL
         List<Colaborador> SelectAll();

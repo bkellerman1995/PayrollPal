@@ -11,12 +11,13 @@ using PayrollPal.Layers.Entities;
 using System.Reflection;
 using log4net;
 
+
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALControlDeMarcas
+    public interface IDALControlDeMarcas
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
         #region CREATE  
         void CREATE(ControlDeMarcas control);
 

@@ -14,13 +14,13 @@ using System.Reflection;
 
 namespace PayrollPal.Layers.DAL
 {
-    public class DALUsuario
+    public class DALUsuario : IDALUsuario
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Usuario> SelectAll()
+        public List<Usuario> SelectAll()
         {
             try
             {
@@ -69,7 +69,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Usuario SelectById(string Id)
+        public Usuario SelectById(string Id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT ALL NO ASIGNADO
-        public static List<Usuario> SelectAllNoAsignado()
+        public List<Usuario> SelectAllNoAsignado()
         {
             try
             {
@@ -160,7 +160,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Usuario pUsuario)
+        public void CREATE(Usuario pUsuario)
         {
             try
             {
@@ -196,7 +196,7 @@ namespace PayrollPal.Layers.DAL
 
         #region UPDATE
 
-        public static void UPDATE(Usuario pUsuario)
+        public void UPDATE(Usuario pUsuario)
         {
             try
             {
@@ -234,7 +234,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pIdUsuario)
+        public void DELETE(string pIdUsuario)
         {
             try
             {

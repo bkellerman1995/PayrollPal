@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.UI.Mantenimientos
 {
@@ -18,6 +19,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        IBLLDepartamento bLLDepartamento = new BLLDepartamento();
         public frmMantenimientoDepartamentos()
         {
             InitializeComponent();
@@ -63,7 +66,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             try
             {
 
-                this.dgvDepartamentos.DataSource = BLLDepartamento.SelectAll();
+                this.dgvDepartamentos.DataSource = bLLDepartamento.SelectAll();
                 this.dgvDepartamentos.ClearSelection();
             }
             catch (Exception msg)
@@ -412,14 +415,14 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             //que se encarga de revisar si el usuario existe primero
             //antes de agregar al departamento
 
-            if (BLLDepartamento.SelectById(this.mktID.Text) != null)
+            if (bLLDepartamento.SelectById(this.mktID.Text) != null)
             {
 
-                BLLDepartamento.Update(oDepartamento);
+                bLLDepartamento.Update(oDepartamento);
             }
             else
             {
-                BLLDepartamento.Create(oDepartamento);
+                bLLDepartamento.Create(oDepartamento);
             }
 
             //Insertar el departamento a la base de datos
@@ -463,7 +466,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLDepartamento.Delete(idDepartamento);
+                bLLDepartamento.Delete(idDepartamento);
                 CargarLista();
                 LimpiarControles();
             }

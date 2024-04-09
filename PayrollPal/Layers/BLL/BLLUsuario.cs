@@ -8,39 +8,42 @@ using log4net;
 using PayrollPal.Layers.Entities;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.DAL;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLUsuario
+    public class BLLUsuario : IBLLUsuario
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Usuario> SelectAll()
+        public List<Usuario> SelectAll()
         {
-
-            return DAL.DALUsuario.SelectAll();
+            IDALUsuario _DALUsuario = new DALUsuario();
+            return _DALUsuario.SelectAll();
         }
         #endregion
 
         #region SELECT ALL NO ASIGNADO
-        public static List<Usuario> SelectAllNoAsignado()
+        public List<Usuario> SelectAllNoAsignado()
         {
-
-            return DAL.DALUsuario.SelectAllNoAsignado();
+            IDALUsuario _DALUsuario = new DALUsuario();
+            return _DALUsuario.SelectAllNoAsignado();
         }
         #endregion
 
         #region SELECT BY ID
-        public static Usuario SelectById(string Id)
+        public Usuario SelectById(string Id)
         {
-            return DAL.DALUsuario.SelectById(Id);
+            IDALUsuario _DALUsuario = new DALUsuario();
+            return _DALUsuario.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Usuario pUsuario)
+        public void Create(Usuario pUsuario)
         {
             DialogResult resultado = new DialogResult();
 
@@ -51,38 +54,44 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALUsuario.UPDATE(pUsuario);
+                    IDALUsuario _DALUsuario = new DALUsuario();
+                    _DALUsuario.UPDATE(pUsuario);
                 }
 
             }
             else
             {
-                DAL.DALUsuario.CREATE(pUsuario);
+                IDALUsuario _DALUsuario = new DALUsuario();
+                _DALUsuario.CREATE(pUsuario);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Usuario pUsuario)
+        public void Update(Usuario pUsuario)
         {
-            DAL.DALUsuario.UPDATE(pUsuario);
+            IDALUsuario _DALUsuario = new DALUsuario();
+            _DALUsuario.UPDATE(pUsuario);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pIdUsuario)
+        public void Delete(string pIdUsuario)
         {
-            DAL.DALUsuario.DELETE(pIdUsuario);
+            IDALUsuario _DALUsuario = new DALUsuario();
+            _DALUsuario.DELETE(pIdUsuario);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearUsuario(string pIDUsuario)
+        public bool ChequearUsuario(string pIDUsuario)
         {
             bool existe = false;
 
-            if (SelectById(pIDUsuario)!=null)
+            IDALUsuario _DALUsuario = new DALUsuario();
+
+            if (_DALUsuario.SelectById(pIDUsuario) != null)
             {
                 existe = true;
             }

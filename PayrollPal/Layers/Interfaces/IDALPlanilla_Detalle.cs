@@ -13,11 +13,9 @@ using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALPlanilla_Detalle
+    public interface IDALPlanilla_Detalle
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
-
         #region SecuenciadorPlanEncabezado
 
         string SecuenciadorPlanDetalle();

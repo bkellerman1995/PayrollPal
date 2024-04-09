@@ -12,16 +12,17 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Enumeraciones;
 
+
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALDeduccionesPercepciones
+    public class DALDeduccionesPercepciones : IDALDeduccionesPercepciones
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorDeduccionesPercepciones
 
-        public static string SecuenciadorDeduccionesPercepciones()
+        public string SecuenciadorDeduccionesPercepciones()
         {
             try
             {
@@ -50,7 +51,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT ALL
-        public static List<Deducciones_Percepciones> SelectAll()
+        public List<Deducciones_Percepciones> SelectAll()
         {
             try
             {
@@ -100,7 +101,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Deducciones_Percepciones SelectById(string codigo)
+        public Deducciones_Percepciones SelectById(string codigo)
         {
             try
             {
@@ -143,7 +144,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Deducciones_Percepciones pDeduccionesPercepciones)
+        public void CREATE(Deducciones_Percepciones pDeduccionesPercepciones)
         {
             try
             {
@@ -180,7 +181,7 @@ namespace PayrollPal.Layers.DAL
 
         #region UPDATE
 
-        public static void UPDATE(Deducciones_Percepciones pDeduccionesPercepciones)
+        public void UPDATE(Deducciones_Percepciones pDeduccionesPercepciones)
         {
             try
             {
@@ -219,7 +220,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pCodigoDeduccionesPercepciones)
+        public void DELETE(string pCodigoDeduccionesPercepciones)
         {
             try
             {

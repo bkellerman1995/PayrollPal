@@ -11,8 +11,6 @@ namespace PayrollPal.Layers
 {
     public interface IBLLSolicitudVacaciones
     {
-        
-                             log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorSolicitudVacaciones
 

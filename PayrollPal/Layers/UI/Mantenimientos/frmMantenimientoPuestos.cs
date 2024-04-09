@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -19,6 +20,7 @@ namespace PayrollPal.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        IBLLPuesto bLLPuesto = new BLLPuesto();
         public frmMantenimientoPuestos()
         {
             InitializeComponent();
@@ -76,7 +78,7 @@ namespace PayrollPal.UI.Mantenimientos
             try
             {
 
-                this.dgvPuestos.DataSource = BLLPuesto.SelectAll();
+                this.dgvPuestos.DataSource = bLLPuesto.SelectAll();
                 this.dgvPuestos.ClearSelection();
             }
             catch (Exception msg)
@@ -114,7 +116,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-                        this.txtCod.Text = this.txtCod.Text + BLLPuesto.SecuenciadorPuesto();
+                        this.txtCod.Text = this.txtCod.Text + bLLPuesto.SecuenciadorPuesto();
 
                         //habilitar los controles de texto (txtBox)
                         //y los radio button (activo e inactivo)
@@ -398,14 +400,14 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si el puesto existe primero
             //antes de agregar al puesto
 
-            if (BLLPuesto.SelectById(this.txtCod.Text) != null)
+            if (bLLPuesto.SelectById(this.txtCod.Text) != null)
             {
 
-                BLLPuesto.Update(oPuesto);
+                bLLPuesto.Update(oPuesto);
             }
             else
             {
-                BLLPuesto.Create(oPuesto);
+                bLLPuesto.Create(oPuesto);
             }
 
             //Insertar el puesto a la base de datos
@@ -450,7 +452,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLPuesto.Delete(idPuesto);
+                bLLPuesto.Delete(idPuesto);
                 CargarLista();
                 LimpiarControles();
             }

@@ -11,18 +11,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.BLL;
 
 namespace PayrollPal.Layers.DAL {
-    public class DALColaborador
+	
+    public class DALColaborador : IDALColaborador
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Colaborador> SelectAll()
+        public List<Colaborador> SelectAll()
         {
             try
             {
+                IBLLDepartamento _BLLDepartamento = new BLLDepartamento();
+                IBLLPuesto _BLLPuesto = new BLLPuesto();
+                IBLLRol _BLLRol = new BLLRol();
+                IBLLUsuario _BLLUsuario = new BLLUsuario();
+                IBLLSupervisor _BLLSupervisor = new BLLSupervisor();
+
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -45,14 +54,14 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
                         colaborador.Direccion = dr["Direccion"].ToString();
                         colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
-                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.IDDepartamento = _BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
-                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CodigoPuesto = _BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
+                        colaborador.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
-                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
-                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.IDUsuario = _BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
 
@@ -84,7 +93,7 @@ namespace PayrollPal.Layers.DAL {
 
         #region SecuenciadorColaborador
 
-        public static string SecuenciadorColaboradorumentar()
+        public string SecuenciadorColaboradorumentar()
         {
             try
             {
@@ -114,10 +123,16 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region SELECT BY ID
-        public static Colaborador SelectById(string Id)
+        public Colaborador SelectById(string Id)
         {
             try
             {
+                IBLLDepartamento _BLLDepartamento = new BLLDepartamento();
+                IBLLPuesto _BLLPuesto = new BLLPuesto();
+                IBLLRol _BLLRol = new BLLRol();
+                IBLLUsuario _BLLUsuario = new BLLUsuario();
+                IBLLSupervisor _BLLSupervisor = new BLLSupervisor();
+
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -139,14 +154,14 @@ namespace PayrollPal.Layers.DAL {
                     oColaborador.FechaNacimiento = DateTime.Parse(dt.Rows[0]["FechaNacimiento"].ToString());
                     oColaborador.Direccion = dt.Rows[0]["Direccion"].ToString();
                     oColaborador.FechaIngreso = DateTime.Parse(dt.Rows[0]["FechaIngreso"].ToString());
-                    oColaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dt.Rows[0]["IDDepartamento"].ToString());
+                    oColaborador.IDDepartamento = _BLLDepartamento.SelectById(dt.Rows[0]["IDDepartamento"].ToString());
                     oColaborador.SalarioHora = decimal.Parse(dt.Rows[0]["SalarioHora"].ToString());
                     oColaborador.CorreoElectronico = dt.Rows[0]["CorreoElectronico"].ToString();
-                    oColaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dt.Rows[0]["CodigoPuesto"].ToString());
-                    oColaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
+                    oColaborador.CodigoPuesto = _BLLPuesto.SelectById(dt.Rows[0]["CodigoPuesto"].ToString());
+                    oColaborador.IDRol = _BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
                     oColaborador.CuentaIBAN = dt.Rows[0]["CuentaIBAN"].ToString();
-                    oColaborador.IDUsuario = BLL.BLLUsuario.SelectById(dt.Rows[0]["IDUsuario"].ToString());
-                    oColaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dt.Rows[0]["IDSupervisor"].ToString());
+                    oColaborador.IDUsuario = _BLLUsuario.SelectById(dt.Rows[0]["IDUsuario"].ToString());
+                    oColaborador.IDSupervisor = _BLLSupervisor.SelectById(dt.Rows[0]["IDSupervisor"].ToString());
                     oColaborador.Foto = (byte[])dt.Rows[0]["Foto"];
                     oColaborador.Estado = bool.Parse(dt.Rows[0]["Estado"].ToString());
                     return oColaborador;
@@ -170,10 +185,16 @@ namespace PayrollPal.Layers.DAL {
 
         #region SELECT Colaborador BY ID Supervisor
 
-        public static List<Colaborador> SelectColaboradorIdSupervisor (string Id)
+        public List<Colaborador> SelectColaboradorIdSupervisor (string Id)
         {
             try
             {
+                IBLLDepartamento _BLLDepartamento = new BLLDepartamento();
+                IBLLPuesto _BLLPuesto = new BLLPuesto();
+                IBLLRol _BLLRol = new BLLRol();
+                IBLLUsuario _BLLUsuario = new BLLUsuario();
+                IBLLSupervisor _BLLSupervisor = new BLLSupervisor();
+
                 DataSet ds = null;  // Crear Dataset
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -195,14 +216,14 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
                         colaborador.Direccion = dr["Direccion"].ToString();
                         colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
-                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.IDDepartamento = _BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
-                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CodigoPuesto = _BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
+                        colaborador.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
-                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
-                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.IDUsuario = _BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(colaborador);  // Agregar el objeto a la lista
@@ -220,10 +241,16 @@ namespace PayrollPal.Layers.DAL {
 
         #region SELECT Solo colaboradores
 
-        public static List<Colaborador> SelectSoloColaboradores ()
+        public List<Colaborador> SelectSoloColaboradores ()
         {
             try
             {
+                IBLLDepartamento _BLLDepartamento = new BLLDepartamento();
+                IBLLPuesto _BLLPuesto = new BLLPuesto();
+                IBLLRol _BLLRol = new BLLRol();
+                IBLLUsuario _BLLUsuario = new BLLUsuario();
+                IBLLSupervisor _BLLSupervisor = new BLLSupervisor();
+
                 DataSet ds = null;  // Crear Dataset
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -244,14 +271,14 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
                         colaborador.Direccion = dr["Direccion"].ToString();
                         colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
-                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.IDDepartamento = _BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
-                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CodigoPuesto = _BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
+                        colaborador.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
-                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
-                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.IDUsuario = _BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(colaborador);  // Agregar el objeto a la lista
@@ -268,10 +295,16 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region SELECT Colaboradores con la misma Deduccion/Percepcion asignada
-        public static List<Colaborador> SELECTColaboradoresmismaDeduccionPercepcion()
+        public List<Colaborador> SELECTColaboradoresmismaDeduccionPercepcion()
         {
             try
             {
+                IBLLDepartamento _BLLDepartamento = new BLLDepartamento();
+                IBLLPuesto _BLLPuesto = new BLLPuesto();
+                IBLLRol _BLLRol = new BLLRol();
+                IBLLUsuario _BLLUsuario = new BLLUsuario();
+                IBLLSupervisor _BLLSupervisor = new BLLSupervisor();
+
                 DataSet ds = null;  // Crear Dataset
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -292,14 +325,14 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
                         colaborador.Direccion = dr["Direccion"].ToString();
                         colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
-                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.IDDepartamento = _BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
-                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CodigoPuesto = _BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
+                        colaborador.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
-                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
-                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.IDUsuario = _BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(colaborador);  // Agregar el objeto a la lista
@@ -315,11 +348,17 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region SELECT Solo Colaboradores Sin Deducciones Percepciones Asignadas
-        public static List<Colaborador> SelectSoloColaboradoresSinDedPerc()
+        public List<Colaborador> SelectSoloColaboradoresSinDedPerc()
         {
 
             try
             {
+                IBLLDepartamento _BLLDepartamento = new BLLDepartamento();
+                IBLLPuesto _BLLPuesto = new BLLPuesto();
+                IBLLRol _BLLRol = new BLLRol();
+                IBLLUsuario _BLLUsuario = new BLLUsuario();
+                IBLLSupervisor _BLLSupervisor = new BLLSupervisor();
+
                 DataSet ds = null;  // Crear Dataset
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -340,14 +379,14 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.FechaNacimiento = DateTime.Parse(dr["FechaNacimiento"].ToString());
                         colaborador.Direccion = dr["Direccion"].ToString();
                         colaborador.FechaIngreso = DateTime.Parse(dr["FechaIngreso"].ToString());
-                        colaborador.IDDepartamento = BLL.BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
+                        colaborador.IDDepartamento = _BLLDepartamento.SelectById(dr["IDDepartamento"].ToString());
                         colaborador.SalarioHora = decimal.Parse(dr["SalarioHora"].ToString());
                         colaborador.CorreoElectronico = dr["CorreoElectronico"].ToString();
-                        colaborador.CodigoPuesto = BLL.BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
-                        colaborador.IDRol = BLL.BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        colaborador.CodigoPuesto = _BLLPuesto.SelectById(dr["CodigoPuesto"].ToString());
+                        colaborador.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         colaborador.CuentaIBAN = dr["CuentaIBAN"].ToString();
-                        colaborador.IDUsuario = BLL.BLLUsuario.SelectById(dr["IDUsuario"].ToString());
-                        colaborador.IDSupervisor = BLL.BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
+                        colaborador.IDUsuario = _BLLUsuario.SelectById(dr["IDUsuario"].ToString());
+                        colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(colaborador);  // Agregar el objeto a la lista
@@ -363,7 +402,7 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region CREATE
-        public static void CREATE(Colaborador pColaborador)
+        public void CREATE(Colaborador pColaborador)
         {
             try
             {
@@ -411,7 +450,7 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Colaborador pColaborador)
+        public void UPDATE(Colaborador pColaborador)
         {
             try
             {
@@ -460,7 +499,7 @@ namespace PayrollPal.Layers.DAL {
         #endregion
 
         #region DELETE
-        public static void DELETE(string pIdColaborador)
+        public void DELETE(string pIdColaborador)
         {
             try
             {

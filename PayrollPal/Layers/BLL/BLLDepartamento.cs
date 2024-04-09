@@ -1,4 +1,6 @@
-﻿using PayrollPal.Layers.Entities;
+﻿using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +10,26 @@ using System.Windows.Forms;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLDepartamento
+    public class BLLDepartamento : IBLLDepartamento
     {
         #region SELECT ALL
-        public static List<Departamento> SelectAll()
+        public List<Departamento> SelectAll()
         {
-            return DAL.DALDepartamento.SelectAll();
+            IDALDepartamento dALDepartamento = new DALDepartamento();
+            return dALDepartamento.SelectAll();
         }
         #endregion
 
         #region SELECT BY ID
-        public static Departamento SelectById(string Id)
+        public Departamento SelectById(string Id)
         {
-            return DAL.DALDepartamento.SelectById(Id);
+            IDALDepartamento dALDepartamento = new DALDepartamento();
+            return dALDepartamento.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Departamento pDepartamento)
+        public void Create(Departamento pDepartamento)
         {
             DialogResult resultado = new DialogResult();
 
@@ -36,34 +40,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALDepartamento.UPDATE(pDepartamento);
+                    IDALDepartamento dALDepartamento = new DALDepartamento();
+                    dALDepartamento.UPDATE(pDepartamento);
                 }
 
             }
             else
             {
-                DAL.DALDepartamento.CREATE(pDepartamento);
+                IDALDepartamento dALDepartamento = new DALDepartamento();
+                dALDepartamento.CREATE(pDepartamento);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Departamento pDepartamento)
+        public void Update(Departamento pDepartamento)
         {
-            DAL.DALDepartamento.UPDATE(pDepartamento);
+            IDALDepartamento dALDepartamento = new DALDepartamento();
+            dALDepartamento.UPDATE(pDepartamento);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pIdDepartamento)
+        public void Delete(string pIdDepartamento)
         {
-            DAL.DALDepartamento.DELETE(pIdDepartamento);
+            IDALDepartamento dALDepartamento = new DALDepartamento();
+            dALDepartamento.DELETE(pIdDepartamento);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearDepartamento(string pIDDepartamento)
+        public bool ChequearDepartamento(string pIDDepartamento)
         {
             bool existe = false;
 

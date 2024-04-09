@@ -12,15 +12,16 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Enumeraciones;
 
+
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALPlanillaPago
+    public class DALPlanillaPago :IDALPlanillaPago
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<PlanillaPago> SelectAll()
+        public List<PlanillaPago> SelectAll()
         {
             try
             {
@@ -72,7 +73,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static PlanillaPago SelectById(string codigo)
+        public PlanillaPago SelectById(string codigo)
         {
             try
             {
@@ -117,7 +118,7 @@ namespace PayrollPal.Layers.DAL
 
         #region SecuenciadorPlanillaPago
 
-        public static string SecuenciadorPlanillaPago()
+        public string SecuenciadorPlanillaPago()
         {
             try
             {
@@ -147,7 +148,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(PlanillaPago pPlanillaPago)
+        public void CREATE(PlanillaPago pPlanillaPago)
         {
             try
             {
@@ -185,7 +186,7 @@ namespace PayrollPal.Layers.DAL
 
         #region UPDATE
 
-        public static void UPDATE(PlanillaPago pPlanillaPago)
+        public void UPDATE(PlanillaPago pPlanillaPago)
         {
             try
             {
@@ -223,7 +224,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pCodigoPlanilla)
+        public void DELETE(string pCodigoPlanilla)
         {
             try
             {

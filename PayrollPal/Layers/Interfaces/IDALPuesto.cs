@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALPuesto
+    public interface IDALPuesto
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SecuenciadorPuesto
 

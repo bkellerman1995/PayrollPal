@@ -9,39 +9,42 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.DAL;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLDeducciones_Percepciones_Por_Colaborador
+    public class BLLDeducciones_Percepciones_Por_Colaborador : IBLLDeducciones_Percepciones_Por_Colaborador
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                      log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Deducciones_Percepciones_Por_Colaborador> SelectAll()
+        public List<Deducciones_Percepciones_Por_Colaborador> SelectAll()
         {
-
-            return DAL.DALDeducciones_Percepciones_Por_Colaborador.SelectAll();
+            IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+            return dALDeducciones_Percepciones_Por_Colaborador.SelectAll();
         }
         #endregion
 
         #region SELECT TODOS    
-        public static List<Deducciones_Percepciones_Por_Colaborador> SelectTodo()
+        public List<Deducciones_Percepciones_Por_Colaborador> SelectTodo()
         {
-
-            return DAL.DALDeducciones_Percepciones_Por_Colaborador.SelectTodo();
+            IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+            return dALDeducciones_Percepciones_Por_Colaborador.SelectTodo();
         }
         #endregion
 
         #region SELECT BY ID
-        public static Deducciones_Percepciones_Por_Colaborador SelectById(string codigoDeduccionPercepcion, string idColaborador)
+        public Deducciones_Percepciones_Por_Colaborador SelectById(string codigoDeduccionPercepcion, string idColaborador)
         {
-            return DAL.DALDeducciones_Percepciones_Por_Colaborador.SelectById(codigoDeduccionPercepcion, idColaborador);
+            IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+            return dALDeducciones_Percepciones_Por_Colaborador.SelectById(codigoDeduccionPercepcion, idColaborador);
         }
         #endregion
 
         #region CREATE
-        public static void Create(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
+        public void Create(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
         {
             DialogResult resultado = new DialogResult();
 
@@ -52,34 +55,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALDeducciones_Percepciones_Por_Colaborador.UPDATE(pDedPercColab);
+                    IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+                    dALDeducciones_Percepciones_Por_Colaborador.UPDATE(pDedPercColab);
                 }
 
             }
             else
             {
-                DAL.DALDeducciones_Percepciones_Por_Colaborador.CREATE(pDedPercColab);
+                IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+                dALDeducciones_Percepciones_Por_Colaborador.CREATE(pDedPercColab);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
+        public void Update(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
         {
-            DAL.DALDeducciones_Percepciones_Por_Colaborador.UPDATE(pDedPercColab);
+            IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+            dALDeducciones_Percepciones_Por_Colaborador.UPDATE(pDedPercColab);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pCodigoDeduccionPercepcion, string pIdColaborador)
+        public void Delete(string pCodigoDeduccionPercepcion, string pIdColaborador)
         {
-            DAL.DALDeducciones_Percepciones_Por_Colaborador.DELETE(pCodigoDeduccionPercepcion, pIdColaborador);
+            IDALDeducciones_Percepciones_Por_Colaborador dALDeducciones_Percepciones_Por_Colaborador = new DALDeducciones_Percepciones_Por_Colaborador();
+            dALDeducciones_Percepciones_Por_Colaborador.DELETE(pCodigoDeduccionPercepcion, pIdColaborador);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearpDedPercColab(string pCodigoDeduccionPercepcion, string pIDColaborador)
+        public bool ChequearpDedPercColab(string pCodigoDeduccionPercepcion, string pIDColaborador)
         {
             bool existe = false;
 

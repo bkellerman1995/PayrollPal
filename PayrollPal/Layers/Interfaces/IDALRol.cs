@@ -13,10 +13,10 @@ using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALRol
+    public interface IDALRol
     {
         
-                             log4net.LogManager.GetLogger("MyControlEventos");
+                             
 
         #region SELECT ALL
         List<Rol> SelectAll();

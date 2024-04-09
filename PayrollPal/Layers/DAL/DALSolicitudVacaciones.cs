@@ -11,17 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PayrollPal.Enumeraciones;
 using log4net;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.BLL;
+
 
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALSolicitudVacaciones
+    public class DALSolicitudVacaciones : IDALSolicitudVacaciones
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                           log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorSolicitudVacaciones
 
-        public static string SecuenciadorSolicitudVacaciones()
+        public string SecuenciadorSolicitudVacaciones()
         {
             try
             {
@@ -51,10 +54,11 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT ALL
-        public static List<SolicitudVacaciones> SelectAll()
+        public List<SolicitudVacaciones> SelectAll()
         {
             try
             {
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -71,7 +75,7 @@ namespace PayrollPal.Layers.DAL
 
                         SolicitudVacaciones solicitud = new SolicitudVacaciones();
                         solicitud.IDSolicitudVacas = dr["IDSolicitudVacas"].ToString();
-                        solicitud.IDColaborador = BLL.BLLColaborador.SelectById(dr["IDColaborador"].ToString());
+                        solicitud.IDColaborador = _BLLColaborador.SelectById(dr["IDColaborador"].ToString());
                         solicitud.FechaSolicitud = DateTime.Parse(dr["FechaSolicitud"].ToString());
                         solicitud.FechaSolicitarDesde = DateTime.Parse(dr["FechaSolicitarDesde"].ToString());
                         solicitud.FechaSolicitarHasta = DateTime.Parse(dr["FechaSolicitarHasta"].ToString());
@@ -105,10 +109,11 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static SolicitudVacaciones SelectById(string Id)
+        public SolicitudVacaciones SelectById(string Id)
         {
             try
             {
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -125,7 +130,7 @@ namespace PayrollPal.Layers.DAL
                     SolicitudVacaciones oSolicitud= new SolicitudVacaciones();
 
                     oSolicitud.IDSolicitudVacas = dt.Rows[0]["IDSolicitudVacas"].ToString();
-                    oSolicitud.IDColaborador = BLL.BLLColaborador.SelectById(dt.Rows[0]["IDColaborador"].ToString());
+                    oSolicitud.IDColaborador = _BLLColaborador.SelectById(dt.Rows[0]["IDColaborador"].ToString());
                     oSolicitud.FechaSolicitud = DateTime.Parse(dt.Rows[0]["FechaSolicitud"].ToString());
                     oSolicitud.FechaSolicitarDesde = DateTime.Parse(dt.Rows[0]["FechaSolicitarDesde"].ToString());
                     oSolicitud.FechaSolicitarHasta = DateTime.Parse(dt.Rows[0]["FechaSolicitarHasta"].ToString());
@@ -154,7 +159,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(SolicitudVacaciones pSolicitud)
+        public void CREATE(SolicitudVacaciones pSolicitud)
         {
             try
             {
@@ -195,7 +200,7 @@ namespace PayrollPal.Layers.DAL
 
         #region UPDATE
 
-        public static void UPDATE(SolicitudVacaciones pSolicitud)
+        public void UPDATE(SolicitudVacaciones pSolicitud)
         {
             try
             {
@@ -238,7 +243,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pSolicitud)
+        public void DELETE(string pSolicitud)
         {
             try
             {

@@ -8,73 +8,77 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.DAL;
 using PayrollPal.Entities;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.Layers.BLL
 {
-    public class BLLColaborador
+    public class BLLColaborador : IBLLColaborador
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                          log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Colaborador> SelectAll()
+        public List<Colaborador> SelectAll()
         {
-
-            return DAL.DALColaborador.SelectAll();
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SelectAll();
         }
         #endregion
 
         #region SecuenciadorColaborador
 
-        public static string SecuenciadorColaborador()
+        public string SecuenciadorColaborador()
         {
-            return DALColaborador.SecuenciadorColaboradorumentar();
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SecuenciadorColaboradorumentar();
         }
 
         #endregion
 
         #region SELECT BY ID
-        public static Colaborador SelectById(string Id)
+        public Colaborador SelectById(string Id)
         {
-            return DAL.DALColaborador.SelectById(Id);
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SelectById(Id);
         }
         #endregion
 
         #region SELECT Solo Colaboradores
-        public static List<Colaborador> SelectSoloColaboradores()
+        public List<Colaborador> SelectSoloColaboradores()
         {
-
-            return DAL.DALColaborador.SelectSoloColaboradores();
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SelectSoloColaboradores();
         }
         #endregion
 
         #region SELECT Colaboradores con la misma Deduccion/Percepcion asignada
-        public static List<Colaborador> SELECTColaboradoresmismaDeduccionPercepcion()
+        public List<Colaborador> SELECTColaboradoresmismaDeduccionPercepcion()
         {
-
-            return DAL.DALColaborador.SELECTColaboradoresmismaDeduccionPercepcion();
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SELECTColaboradoresmismaDeduccionPercepcion();
         }
         #endregion
 
 
         #region SELECT Solo Colaboradores Sin Deducciones Percepciones Asignadas
-        public static List<Colaborador> SelectSoloColaboradoresSinDedPerc()
+        public List<Colaborador> SelectSoloColaboradoresSinDedPerc()
         {
-
-            return DAL.DALColaborador.SelectSoloColaboradoresSinDedPerc();
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SelectSoloColaboradoresSinDedPerc();
         }
         #endregion
 
         #region SELECT Colaborador BY ID Supervisor
-        public static List<Colaborador> SelectColaboradorIdSupervisor(string Id)
+        public List<Colaborador> SelectColaboradorIdSupervisor(string Id)
         {
-            return DAL.DALColaborador.SelectColaboradorIdSupervisor(Id);
+            IDALColaborador dALColaborador = new DALColaborador();
+            return dALColaborador.SelectColaboradorIdSupervisor(Id);
         }
 
         #endregion
 
         #region CREATE
-        public static void Create(Colaborador pColaborador)
+        public void Create(Colaborador pColaborador)
         {
             DialogResult resultado = new DialogResult();
 
@@ -85,34 +89,38 @@ namespace PayrollPal.Layers.BLL
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALColaborador.UPDATE(pColaborador);
+                    IDALColaborador dALColaborador = new DALColaborador();
+                    dALColaborador.UPDATE(pColaborador);
                 }
 
             }
             else
             {
-                DAL.DALColaborador.CREATE(pColaborador);
+                IDALColaborador dALColaborador = new DALColaborador();
+                dALColaborador.CREATE(pColaborador);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(Colaborador pColaborador)
+        public void Update(Colaborador pColaborador)
         {
-            DAL.DALColaborador.UPDATE(pColaborador);
+            IDALColaborador dALColaborador = new DALColaborador();
+            dALColaborador.UPDATE(pColaborador);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pIdColaborador)
+        public void Delete(string pIdColaborador)
         {
-            DAL.DALColaborador.DELETE(pIdColaborador);
+            IDALColaborador dALColaborador = new DALColaborador();
+            dALColaborador.DELETE(pIdColaborador);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearColaborador(string pColaborador)
+        public bool ChequearColaborador(string pColaborador)
         {
             bool existe = false;
 
@@ -126,11 +134,12 @@ namespace PayrollPal.Layers.BLL
 
         #region CalcularHorasOrdinariasExtraordinarias
 
-        public static void CalcularHorasOrdExt(Colaborador oColab, PlanillaPago oPago, Planilla_Detalle planillaDetalle)
+        public void CalcularHorasOrdExt(Colaborador oColab, PlanillaPago oPago, Planilla_Detalle planillaDetalle)
         {
             double horasOrdinarias = 0;
             double horasExtraordinarias = 0;
-            List<ControlDeMarcas> listaMarcas = BLLControlDeMarcas.SelectAll().Where(marca => marca.IdColaborador == oColab.IDColaborador
+            IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
+            List<ControlDeMarcas> listaMarcas = bLLControlDeMarcas.SelectAll().Where(marca => marca.IdColaborador == oColab.IDColaborador
             && (DateTime.ParseExact((marca.Fecha), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)
             >= oPago.FechaDesde) && (DateTime.ParseExact((marca.Fecha), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)
             <= oPago.FechaHasta)).ToList();

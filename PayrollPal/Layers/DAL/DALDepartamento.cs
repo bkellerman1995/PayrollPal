@@ -11,15 +11,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 
+
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALDepartamento
+    public class DALDepartamento : IDALDepartamento
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
-        public static List<Departamento> SelectAll()
+        public List<Departamento> SelectAll()
         {
             try
             {
@@ -66,7 +67,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Departamento SelectById(string Id)
+        public Departamento SelectById(string Id)
         {
             try
             {
@@ -106,7 +107,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Departamento pDepartamento)
+        public void CREATE(Departamento pDepartamento)
         {
             try
             {
@@ -139,7 +140,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Departamento pDepartamento)
+        public void UPDATE(Departamento pDepartamento)
         {
             try
             {
@@ -174,7 +175,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pIdDepartamento)
+        public void DELETE(string pIdDepartamento)
         {
             try
             {

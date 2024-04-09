@@ -9,37 +9,39 @@ using System.Windows.Forms;
 
 namespace PayrollPal.Layers
 {
-    public class BLLSolicitudVacaciones
+    public class BLLSolicitudVacaciones : IBLLSolicitudVacaciones
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorSolicitudVacaciones
 
-        public static string SecuenciadorSolicitudVacaciones()
+        public string SecuenciadorSolicitudVacaciones()
         {
-            return DALSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
+            IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+            return dALSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
         }
 
         #endregion
 
         #region SELECT ALL
-        public static List<SolicitudVacaciones> SelectAll()
+        public List<SolicitudVacaciones> SelectAll()
         {
-
-            return DAL.DALSolicitudVacaciones.SelectAll();
+            IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+            return dALSolicitudVacaciones.SelectAll();
         }
         #endregion
 
         #region SELECT BY ID
-        public static SolicitudVacaciones SelectById(string Id)
+        public SolicitudVacaciones SelectById(string Id)
         {
-            return DAL.DALSolicitudVacaciones.SelectById(Id);
+            IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+            return dALSolicitudVacaciones.SelectById(Id);
         }
         #endregion
 
         #region CREATE
-        public static void Create(SolicitudVacaciones pSolicitud)
+        public void Create(SolicitudVacaciones pSolicitud)
         {
             DialogResult resultado = new DialogResult();
 
@@ -50,34 +52,38 @@ namespace PayrollPal.Layers
 
                 if (resultado == DialogResult.Yes)
                 {
-                    DAL.DALSolicitudVacaciones.UPDATE(pSolicitud);
+                    IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+                    dALSolicitudVacaciones.UPDATE(pSolicitud);
                 }
 
             }
             else
             {
-                DAL.DALSolicitudVacaciones.CREATE(pSolicitud);
+                IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+                dALSolicitudVacaciones.CREATE(pSolicitud);
             }
 
         }
         #endregion
 
         #region UPDATE
-        public static void Update(SolicitudVacaciones pSolicitud)
+        public void Update(SolicitudVacaciones pSolicitud)
         {
-            DAL.DALSolicitudVacaciones.UPDATE(pSolicitud);
+            IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+            dALSolicitudVacaciones.UPDATE(pSolicitud);
         }
         #endregion
 
         #region DELETE
-        public static void Delete(string pIdSolicitud)
+        public void Delete(string pIdSolicitud)
         {
-            DAL.DALSolicitudVacaciones.DELETE(pIdSolicitud);
+            IDALSolicitudVacaciones dALSolicitudVacaciones = new DALSolicitudVacaciones();
+            dALSolicitudVacaciones.DELETE(pIdSolicitud);
         }
         #endregion
 
         #region EXISTE
-        public static bool ChequearSolicitudVacaciones(string pSolicitud)
+        public bool ChequearSolicitudVacaciones(string pSolicitud)
         {
             bool existe = false;
 

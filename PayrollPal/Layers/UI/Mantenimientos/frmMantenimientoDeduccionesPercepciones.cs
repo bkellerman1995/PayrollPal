@@ -14,6 +14,7 @@ using PayrollPal.Enumeraciones;
 using PayrollPal.Layers;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -22,6 +23,7 @@ namespace PayrollPal.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        IBLLDeduccionesPercepciones bLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
         public frmMantenimientoDeduccionesPercepciones()
         {
             InitializeComponent();
@@ -67,7 +69,7 @@ namespace PayrollPal.UI.Mantenimientos
             try
             {
 
-                this.dgvDeduccionesPercepciones.DataSource = BLLDeduccionesPercepciones.SelectAll();
+                this.dgvDeduccionesPercepciones.DataSource = bLLDeduccionesPercepciones.SelectAll();
                 this.dgvDeduccionesPercepciones.ClearSelection();
             }
             catch (Exception msg)
@@ -300,7 +302,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLDeduccionesPercepciones.Delete(codigoDeduccionPercepcion);
+                bLLDeduccionesPercepciones.Delete(codigoDeduccionPercepcion);
                 CargarLista();
                 LimpiarControles();
             }
@@ -329,7 +331,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-                        this.txtCod.Text = this.txtCod.Text + BLLDeduccionesPercepciones.SecuenciadorDeduccionesPercepciones();
+                        this.txtCod.Text = this.txtCod.Text + bLLDeduccionesPercepciones.SecuenciadorDeduccionesPercepciones();
 
                         //habilitar los controles de texto (txtBox)
 
@@ -515,14 +517,14 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si la deducción/percepción existe primero
             //antes de agregar la deducción/percepción
 
-            if (BLLDeduccionesPercepciones.SelectById(this.txtCod.Text) != null)
+            if (bLLDeduccionesPercepciones.SelectById(this.txtCod.Text) != null)
             {
 
-                BLLDeduccionesPercepciones.Update(oDeduccionesPercepciones);
+                bLLDeduccionesPercepciones.Update(oDeduccionesPercepciones);
             }
             else
             {
-                BLLDeduccionesPercepciones.Create(oDeduccionesPercepciones);
+                bLLDeduccionesPercepciones.Create(oDeduccionesPercepciones);
             }
 
             //Insertar el usuario a la base de datos

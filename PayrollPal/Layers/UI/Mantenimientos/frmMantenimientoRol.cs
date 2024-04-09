@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.IBLL;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PayrollPal.Layers.UI.Mantenimientos
@@ -19,6 +20,8 @@ namespace PayrollPal.Layers.UI.Mantenimientos
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        IBLLRol bLLRol = new BLLRol();
 
         private List<int> listaRolesCargados = new List<int>();
         public frmMantenimientoRol()
@@ -82,10 +85,10 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
-                this.dgvRoles.DataSource = BLLRol.SelectAll();
+                this.dgvRoles.DataSource = bLLRol.SelectAll();
                 this.dgvRoles.ClearSelection();
 
-                foreach (var rol in BLLRol.SelectAll())
+                foreach (var rol in bLLRol.SelectAll())
                 {
                     listaRolesCargados.Add(1);
                 }
@@ -124,7 +127,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         private void CargarCombo()
         {
 
-            foreach (var item in BLLRol.IDRolesCombo())
+            foreach (var item in bLLRol.IDRolesCombo())
             {
                 switch (item)
                 {
@@ -437,7 +440,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             //que se encarga de revisar si el rol existe primero
             //antes de agregar al rol
 
-            BLLRol.Create(oRol);
+            bLLRol.Create(oRol);
 
             //Insertar el rol a la base de datos
             //por medio del BLLRol (método CREATE)
@@ -480,7 +483,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLRol.Delete(idRol);
+                bLLRol.Delete(idRol);
                 CargarLista();
                 LimpiarControles();
             }

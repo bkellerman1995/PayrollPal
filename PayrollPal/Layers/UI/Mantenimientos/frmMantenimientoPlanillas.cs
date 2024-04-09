@@ -15,6 +15,7 @@ using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.Util;
 using System.IO;
 using PayrollPal.Enumeraciones;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal
 {
@@ -22,6 +23,8 @@ namespace PayrollPal
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
+
+        IBLLPlanillaPago bLLPlanillaPago = new BLLPlanillaPago();
         public frmMantenimientoPlanillas()
         {
             InitializeComponent();
@@ -154,7 +157,7 @@ namespace PayrollPal
             {
 
                 CambiarEstadoPlanillaInactiva();
-                this.dgvPlanillas.DataSource = BLLPlanillaPago.SelectAll();
+                this.dgvPlanillas.DataSource = bLLPlanillaPago.SelectAll();
                 this.dgvPlanillas.ClearSelection();
             }
             catch (Exception msg)
@@ -173,7 +176,7 @@ namespace PayrollPal
 
         private void CambiarEstadoPlanillaInactiva()
         {
-            foreach (var planilla in BLLPlanillaPago.SelectAll())
+            foreach (var planilla in bLLPlanillaPago.SelectAll())
             {
                 if (planilla.Estado == PlanillaEstado.Activa && 
                     planilla.FechaPago < DateTime.Today)
@@ -365,7 +368,7 @@ namespace PayrollPal
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-                        this.txtCod.Text = this.txtCod.Text + BLLPlanillaPago.SecuenciadorPlanillasPago();
+                        this.txtCod.Text = this.txtCod.Text + bLLPlanillaPago.SecuenciadorPlanillasPago();
 
                         //habilitar los controles de texto, datetimepickers
                         //y radiobuttons
@@ -494,7 +497,7 @@ namespace PayrollPal
             bool hayPlanillas = false;
             try
             {
-                foreach (var planilla in BLLPlanillaPago.SelectAll())
+                foreach (var planilla in bLLPlanillaPago.SelectAll())
                 {
                     if (planilla.Estado == Enumeraciones.PlanillaEstado.Activa)
                     {
@@ -538,14 +541,14 @@ namespace PayrollPal
             //Insertar la planilla de pago a la base de datos
             //por medio del BLLPlanillaPago (método CREATE)
 
-            if (BLLPlanillaPago.SelectById(this.txtCod.Text) != null)
+            if (bLLPlanillaPago.SelectById(this.txtCod.Text) != null)
             {
 
-                BLLPlanillaPago.Update(oPlanillaPago);
+                bLLPlanillaPago.Update(oPlanillaPago);
             }
             else
             {
-                BLLPlanillaPago.Create(oPlanillaPago);
+                bLLPlanillaPago.Create(oPlanillaPago);
             }
 
             //Refrescar la lista
@@ -583,7 +586,7 @@ namespace PayrollPal
 
             if (resultado == DialogResult.Yes)
             {
-                BLLPlanillaPago.Delete(codigoPlanilla);
+                bLLPlanillaPago.Delete(codigoPlanilla);
                 CargarLista();
                 LimpiarControles();
             }

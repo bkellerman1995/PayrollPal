@@ -14,10 +14,10 @@ using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
-    public interface DALSolicitudVacaciones
+    public interface IDALSolicitudVacaciones
     {
         
-                          log4net.LogManager.GetLogger("MyControlEventos");
+                          
 
         #region SecuenciadorSolicitudVacaciones
 

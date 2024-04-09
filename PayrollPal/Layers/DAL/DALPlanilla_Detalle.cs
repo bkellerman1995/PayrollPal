@@ -10,17 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.BLL;
+
 
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALPlanilla_Detalle
+    public class DALPlanilla_Detalle : IDALPlanilla_Detalle
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SecuenciadorPlanEncabezado
 
-        public static string SecuenciadorPlanDetalle()
+        public string SecuenciadorPlanDetalle()
         {
             try
             {
@@ -50,10 +53,12 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT ALL
-        public static List<Planilla_Detalle> SelectAll()
+        public List<Planilla_Detalle> SelectAll()
         {
             try
             {
+                IBLLPlanilla_Encabezado _BLLPlanilla_Encabezado = new BLLPlanilla_Encabezado();
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -70,8 +75,8 @@ namespace PayrollPal.Layers.DAL
 
                         Planilla_Detalle planillaDetalle = new Planilla_Detalle();
                         planillaDetalle.IdDetalle = dr["IdDetalle"].ToString();
-                        planillaDetalle.IdEncabezado = BLL.BLLPlanilla_Encabezado.SelectById(dr["IdEncabezado"].ToString());
-                        planillaDetalle.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
+                        planillaDetalle.IdEncabezado = _BLLPlanilla_Encabezado.SelectById(dr["IdEncabezado"].ToString());
+                        planillaDetalle.IdColaborador = _BLLColaborador.SelectById(dr["IdColaborador"].ToString());
                         planillaDetalle.NombreColaborador = dr["NombreColaborador"].ToString();
                         planillaDetalle.hrsTrabajadas = double.Parse(dr["hrsTrabajadas"].ToString());
                         planillaDetalle.hrsExtras = double.Parse(dr["hrsExtras"].ToString());
@@ -105,10 +110,12 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Planilla_Detalle SelectById(string Id)
+        public Planilla_Detalle SelectById(string Id)
         {
             try
             {
+                IBLLPlanilla_Encabezado _BLLPlanilla_Encabezado = new BLLPlanilla_Encabezado();
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -125,8 +132,8 @@ namespace PayrollPal.Layers.DAL
 
                     Planilla_Detalle planillaDetalle = new Planilla_Detalle();
                     planillaDetalle.IdDetalle = dt.Rows[0]["IdDetalle"].ToString();
-                    planillaDetalle.IdEncabezado = BLL.BLLPlanilla_Encabezado.SelectById(dt.Rows[0]["IdEncabezado"].ToString());
-                    planillaDetalle.IdColaborador = BLL.BLLColaborador.SelectById(dt.Rows[0]["IdColaborador"].ToString());
+                    planillaDetalle.IdEncabezado = _BLLPlanilla_Encabezado.SelectById(dt.Rows[0]["IdEncabezado"].ToString());
+                    planillaDetalle.IdColaborador = _BLLColaborador.SelectById(dt.Rows[0]["IdColaborador"].ToString());
                     planillaDetalle.NombreColaborador = dt.Rows[0]["NombreColaborador"].ToString();
                     planillaDetalle.hrsTrabajadas = double.Parse(dt.Rows[0]["hrsTrabajadas"].ToString());
                     planillaDetalle.hrsExtras = double.Parse(dt.Rows[0]["hrsExtras"].ToString());
@@ -153,7 +160,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Planilla_Detalle pPlanilla_Detalle)
+        public void CREATE(Planilla_Detalle pPlanilla_Detalle)
         {
             try
             {
@@ -194,7 +201,7 @@ namespace PayrollPal.Layers.DAL
 
         #region UPDATE
 
-        public static void UPDATE(Planilla_Detalle pPlanilla_Detalle)
+        public void UPDATE(Planilla_Detalle pPlanilla_Detalle)
         {
             try
             {
@@ -237,7 +244,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pPlanillaDetalle)
+        public void DELETE(string pPlanillaDetalle)
         {
             try
             {

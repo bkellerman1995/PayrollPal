@@ -12,8 +12,6 @@ namespace PayrollPal.Layers.IBLL
 {
     public interface IBLLSupervisor
     {
-        
-                             log4net.LogManager.GetLogger("MyControlEventos");
 
         #region SELECT ALL
         List<Supervisor> SelectAll();

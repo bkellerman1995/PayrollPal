@@ -14,6 +14,7 @@ using log4net;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Enumeraciones;
 using PayrollPal.Layers.DAL;
+using PayrollPal.Layers.IBLL;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -22,6 +23,8 @@ namespace PayrollPal.UI.Mantenimientos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
+        IBLLSolicitudVacaciones bLLSolicitudVacaciones = new BLLSolicitudVacaciones();
+        IBLLColaborador bLLColaborador = new BLLColaborador();
         public frmMantenimientoSolicitudVacaciones()
         {
             InitializeComponent();
@@ -69,7 +72,7 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.dgvSolicitud.DataSource = BLLSolicitudVacaciones.SelectAll();
+                this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
                 this.dgvSolicitud.ClearSelection();
 
             }
@@ -90,7 +93,7 @@ namespace PayrollPal.UI.Mantenimientos
 
         private void CargarCombos()
         {
-            List<Colaborador> listaColab = BLLColaborador.SelectAll();
+            List<Colaborador> listaColab = bLLColaborador.SelectAll();
             foreach (var colab in listaColab)
             {
                 this.cmbColaborador.Items.Add(colab);
@@ -107,7 +110,7 @@ namespace PayrollPal.UI.Mantenimientos
             string camposVacios = "";
             bool vacio = false;
 
-            if (BLLColaborador.SelectAll().Count == 0)
+            if (bLLColaborador.SelectAll().Count == 0)
             {
                 camposVacios += "\n- Colaboradores";
                 vacio = true;
@@ -459,14 +462,14 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si el usuario existe primero
             //antes de agregar al usuario
 
-            if (BLLSolicitudVacaciones.SelectById(this.txtID.Text) != null)
+            if (bLLSolicitudVacaciones.SelectById(this.txtID.Text) != null)
             {
 
-                BLLSolicitudVacaciones.Update(oSolicitud);
+                bLLSolicitudVacaciones.Update(oSolicitud);
             }
             else
             {
-                BLLSolicitudVacaciones.Create(oSolicitud);
+                bLLSolicitudVacaciones.Create(oSolicitud);
             }
 
             //Insertar el usuario a la base de datos
@@ -542,7 +545,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-                        this.txtID.Text = this.txtID.Text + BLLSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
+                        this.txtID.Text = this.txtID.Text + bLLSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
 
                         //habilitar los controles de texto (txtBox)
 
@@ -658,7 +661,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                BLLSolicitudVacaciones.Delete(idSolicitud);
+                bLLSolicitudVacaciones.Delete(idSolicitud);
                 CargarListas();
                 LimpiarControles();
             }

@@ -9,20 +9,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PayrollPal.Enumeraciones;
+using PayrollPal.Layers.BLL;
+using PayrollPal.Layers.IBLL;
+
 
 namespace PayrollPal.Layers.DAL
 {
-    public class IDALDeducciones_Percepciones_Por_Colaborador
+    public class DALDeducciones_Percepciones_Por_Colaborador : IDALDeducciones_Percepciones_Por_Colaborador
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                      log4net.LogManager.GetLogger("MyControlEventos");
 
 
         #region SELECT ALL
-        public static List<Deducciones_Percepciones_Por_Colaborador> SelectAll()
+        public List<Deducciones_Percepciones_Por_Colaborador> SelectAll()
         {
             try
             {
+                IBLLDeduccionesPercepciones _BLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -38,7 +43,7 @@ namespace PayrollPal.Layers.DAL
                     {
 
                         Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
-                        dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
+                        dedPercColab.CodigoDeduccionPercepcion = _BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
                         dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
                         dedPercColab.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(dedPercColab);
@@ -67,10 +72,13 @@ namespace PayrollPal.Layers.DAL
 
 
         #region SELECT TODO
-        public static List<Deducciones_Percepciones_Por_Colaborador> SelectTodo()
+        public List<Deducciones_Percepciones_Por_Colaborador> SelectTodo()
         {
             try
             {
+                IBLLDeduccionesPercepciones _BLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
+
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -86,8 +94,8 @@ namespace PayrollPal.Layers.DAL
                     {
 
                         Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
-                        dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
-                        dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
+                        dedPercColab.CodigoDeduccionPercepcion = _BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
+                        dedPercColab.IdColaborador = _BLLColaborador.SelectById(dr["IdColaborador"].ToString());
                         dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
                         dedPercColab.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(dedPercColab);
@@ -115,10 +123,13 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region SELECT BY ID
-        public static Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion, string idColaborador)
+        public Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion, string idColaborador)
         {
             try
             {
+                IBLLDeduccionesPercepciones _BLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
+
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
                 {
@@ -134,8 +145,8 @@ namespace PayrollPal.Layers.DAL
                 {
                     DataTable dt = ds.Tables[0];
                     Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
-                    dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dt.Rows[0]["CodigoDeduccionPercepcion"].ToString());
-                    dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dt.Rows[0]["IdColaborador"].ToString());
+                    dedPercColab.CodigoDeduccionPercepcion = _BLLDeduccionesPercepciones.SelectById(dt.Rows[0]["CodigoDeduccionPercepcion"].ToString());
+                    dedPercColab.IdColaborador = _BLLColaborador.SelectById(dt.Rows[0]["IdColaborador"].ToString());
                     dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dt.Rows[0]["Prioridad"].ToString()));
                     return dedPercColab;
                 }
@@ -157,7 +168,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region CREATE
-        public static void CREATE(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
+        public void CREATE(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
         {
             try
             {
@@ -193,7 +204,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region UPDATE
-        public static void UPDATE(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
+        public void UPDATE(Deducciones_Percepciones_Por_Colaborador pDedPercColab)
         {
             try
             {
@@ -231,7 +242,7 @@ namespace PayrollPal.Layers.DAL
         #endregion
 
         #region DELETE
-        public static void DELETE(string pCodigoDeduccionPercepcion, string pIdColaborador)
+        public void DELETE(string pCodigoDeduccionPercepcion, string pIdColaborador)
         {
             try
             {
