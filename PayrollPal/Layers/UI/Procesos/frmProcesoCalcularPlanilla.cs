@@ -22,7 +22,6 @@ namespace PayrollPal.UI.Procesos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
-        private bool encabezadoPlanCreado = false;
 
         private ServicioBCCR servicioBCCR = new ServicioBCCR();
 
@@ -265,12 +264,22 @@ namespace PayrollPal.UI.Procesos
         }
         private void cmbColaborador_SelectedIndexChanged(object sender, EventArgs e)
         {
+            foreach (Control c in this.Controls)
+            {
+                this.errProv1.SetError(c, String.Empty);
+                this.errProv1.Clear();
+            }
             CargarDGVMarcas();
             CargarDGVHorOrdExt();
         }
 
         private void cmbPlanilla_SelectedIndexChanged(object sender, EventArgs e)
         {
+            foreach (Control c in this.Controls)
+            {
+                this.errProv1.SetError(c, String.Empty);
+                this.errProv1.Clear();
+            }
             CargarDGVMarcas();
             CargarDGVHorOrdExt();
 
@@ -537,9 +546,14 @@ namespace PayrollPal.UI.Procesos
             this.txtImprimir.Text = impresion.ToString();
 
             planEnc.Codigo.Estado = PlanillaEstado.PorEnviar;
+            planDet.IdEncabezado = planEnc;
+
+            BLLPlanillaPago.Update(planEnc.Codigo);
 
             BLLPlanilla_Encabezado.Create(planEnc);
             BLLPlanilla_Detalle.Create(planDet);
+
+
 
         }
     }

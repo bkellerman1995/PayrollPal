@@ -153,7 +153,7 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_INSERT_Planilla_Encabezado");
                     command.Parameters.AddWithValue("@IdEncabezado", pPlanillaEncabezado.IdEncabezado);
-                    command.Parameters.AddWithValue("@NombreCodigoUsuario", pPlanillaEncabezado.Codigo);
+                    command.Parameters.AddWithValue("@Codigo", pPlanillaEncabezado.Codigo.Codigo);
                     command.Parameters.AddWithValue("@TipoCambio",pPlanillaEncabezado.TipoCambio);
                     command.Parameters.AddWithValue("@TotalIngresos", pPlanillaEncabezado.TotalIngresos);
                     command.Parameters.AddWithValue("@TotalGastos", pPlanillaEncabezado.TotalGastos);

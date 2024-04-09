@@ -42,6 +42,8 @@ namespace PayrollPal
                 ConfigurarDateTimePickerFechaHasta();
                 ConfigurarDateTimePickerFechaPago();
 
+                this.lblEstado2.Text = "";
+
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALPlanillaPago
 
@@ -84,7 +86,7 @@ namespace PayrollPal
                 this.txtNombre.Clear();
                 this.txtNombre.BackColor = Color.White;
 
-                this.rdbActiva.Checked = true;
+                this.lblEstado2.Text = "";
 
                 InhabilitarControles();
 
@@ -118,16 +120,11 @@ namespace PayrollPal
 
                 this.txtCod.Enabled = false;
                 this.txtNombre.Enabled = false;
-                this.rdbActiva.Enabled = false;
 
                 this.dtpFechaDesde.Enabled = false;
                 this.dtpFechaHasta.Enabled = false;
                 this.dtpFechaPago.Enabled = false;
 
-                this.rdbActiva.Enabled = false;
-                this.rdbInactiva.Enabled = false;
-                this.rdbPorEnviar.Enabled = false;
-                this.rdbEnviada.Enabled = false;
 
 
             }
@@ -379,7 +376,6 @@ namespace PayrollPal
                         this.dtpFechaDesde.Enabled = true;
                         this.dtpFechaHasta.Enabled = true;
                         this.dtpFechaPago.Enabled = true;
-                        this.rdbActiva.Enabled = true;
 
 
                         break;
@@ -390,10 +386,7 @@ namespace PayrollPal
                         //y radiobuttons
 
                         this.txtCod.ReadOnly = true;
-                        this.rdbActiva.Enabled = true;
-                        this.rdbInactiva.Enabled = true;
-                        this.rdbPorEnviar.Enabled = true;
-                        this.rdbEnviada.Enabled = true;
+
                         break;
 
 
@@ -463,7 +456,7 @@ namespace PayrollPal
                     return false;
                 }
 
-                if (this.rdbActiva.Checked)
+                if (String.Equals(this.lblEstado2.Text,"Activa",StringComparison.OrdinalIgnoreCase))
                 {
                     if (VerificarSiHayPlanillasActivas())
                     {
@@ -536,18 +529,7 @@ namespace PayrollPal
 
             oPlanillaPago.Codigo = this.txtCod.Text;
             oPlanillaPago.Nombre = this.txtNombre.Text;
-
-            if (this.rdbActiva.Checked)
-                oPlanillaPago.Estado = Enumeraciones.PlanillaEstado.Activa;
-            
-            if (this.rdbInactiva.Checked)
-                oPlanillaPago.Estado = Enumeraciones.PlanillaEstado.Inactiva;
-
-            if (this.rdbPorEnviar.Checked)
-                oPlanillaPago.Estado = Enumeraciones.PlanillaEstado.PorEnviar;
-
-            if (this.rdbEnviada.Checked)
-                oPlanillaPago.Estado = Enumeraciones.PlanillaEstado.Enviada;
+            oPlanillaPago.Estado = Enumeraciones.PlanillaEstado.Activa;
 
             oPlanillaPago.FechaDesde = this.dtpFechaDesde.Value;
             oPlanillaPago.FechaHasta = this.dtpFechaHasta.Value;
@@ -687,16 +669,16 @@ namespace PayrollPal
                     this.dtpFechaPago.Text = oPlanillaPago.FechaPago.ToString();
 
                     if (oPlanillaPago.Estado == Enumeraciones.PlanillaEstado.Activa)
-                        this.rdbActiva.Checked = true;
+                        this.lblEstado2.Text = "Activa";
 
                     if (oPlanillaPago.Estado == Enumeraciones.PlanillaEstado.Inactiva)
-                        this.rdbInactiva.Checked = true;
+                        this.lblEstado2.Text = "Inactiva";
 
                     if (oPlanillaPago.Estado == Enumeraciones.PlanillaEstado.PorEnviar)
-                        this.rdbPorEnviar.Checked = true;
+                        this.lblEstado2.Text = "Por Enviar";
 
                     if (oPlanillaPago.Estado == Enumeraciones.PlanillaEstado.Enviada)
-                        this.rdbEnviada.Checked = true;
+                        this.lblEstado2.Text = "Enviada";
                 }
             }
             catch (Exception msg)

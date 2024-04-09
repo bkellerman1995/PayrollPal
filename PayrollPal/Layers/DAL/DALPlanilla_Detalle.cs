@@ -161,8 +161,8 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_INSERT_Planilla_Detalle");
                     command.Parameters.AddWithValue("@IdDetalle", pPlanilla_Detalle.IdDetalle);
-                    command.Parameters.AddWithValue("@IdEncabezado", pPlanilla_Detalle.IdEncabezado);
-                    command.Parameters.AddWithValue("@IdColaborador", pPlanilla_Detalle.IdColaborador);
+                    command.Parameters.AddWithValue("@IdEncabezado", pPlanilla_Detalle.IdEncabezado.IdEncabezado);
+                    command.Parameters.AddWithValue("@IdColaborador", pPlanilla_Detalle.IdColaborador.IDColaborador);
                     command.Parameters.AddWithValue("@NombreColaborador", pPlanilla_Detalle.NombreColaborador);
                     command.Parameters.AddWithValue("@hrsTrabajadas", pPlanilla_Detalle.hrsTrabajadas);
                     command.Parameters.AddWithValue("@hrsExtras", pPlanilla_Detalle.hrsExtras);
