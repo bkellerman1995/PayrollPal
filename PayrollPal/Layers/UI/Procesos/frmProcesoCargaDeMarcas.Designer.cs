@@ -1,6 +1,6 @@
 ﻿namespace PayrollPal.UI.Consultas
 {
-    partial class frmConsultaMarcas
+    partial class frmProcesoCargaDeMarcas
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCargarArchivoJson = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnMostrarListaMarcas = new System.Windows.Forms.Button();
@@ -40,6 +40,12 @@
             this.pctCargarJSON = new System.Windows.Forms.PictureBox();
             this.dgvListaMarcas = new System.Windows.Forms.DataGridView();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.idMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HorasTrabajadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -126,31 +132,38 @@
             // 
             this.dgvListaMarcas.AllowUserToAddRows = false;
             this.dgvListaMarcas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvListaMarcas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvListaMarcas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListaMarcas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvListaMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvListaMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvListaMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvListaMarcas.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvListaMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idMarca,
+            this.IdColaborador,
+            this.HoraEntrada,
+            this.HoraSalida,
+            this.Fecha,
+            this.HorasTrabajadas});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvListaMarcas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvListaMarcas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListaMarcas.Location = new System.Drawing.Point(0, 0);
             this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(1);
@@ -167,14 +180,56 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // frmConsultaMarcas
+            // idMarca
+            // 
+            this.idMarca.DataPropertyName = "idMarca";
+            this.idMarca.HeaderText = "ID";
+            this.idMarca.Name = "idMarca";
+            this.idMarca.ReadOnly = true;
+            // 
+            // IdColaborador
+            // 
+            this.IdColaborador.DataPropertyName = "IdColaborador";
+            this.IdColaborador.HeaderText = "Colaborador";
+            this.IdColaborador.Name = "IdColaborador";
+            this.IdColaborador.ReadOnly = true;
+            // 
+            // HoraEntrada
+            // 
+            this.HoraEntrada.DataPropertyName = "HoraEntrada";
+            this.HoraEntrada.HeaderText = "Hora de Entrada";
+            this.HoraEntrada.Name = "HoraEntrada";
+            this.HoraEntrada.ReadOnly = true;
+            // 
+            // HoraSalida
+            // 
+            this.HoraSalida.DataPropertyName = "HoraSalida";
+            this.HoraSalida.HeaderText = "Hora de Salida";
+            this.HoraSalida.Name = "HoraSalida";
+            this.HoraSalida.ReadOnly = true;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
+            // HorasTrabajadas
+            // 
+            this.HorasTrabajadas.DataPropertyName = "HorasTrabajadas";
+            this.HorasTrabajadas.HeaderText = "Horas Trabajadas";
+            this.HorasTrabajadas.Name = "HorasTrabajadas";
+            this.HorasTrabajadas.ReadOnly = true;
+            // 
+            // frmProcesoCargaDeMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(826, 516);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "frmConsultaMarcas";
+            this.Name = "frmProcesoCargaDeMarcas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de Marcas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConsultaMarcas_FormClosing);
@@ -200,5 +255,11 @@
         private System.Windows.Forms.Button btnMostrarListaMarcas;
         private System.Windows.Forms.DataGridView dgvListaMarcas;
         private System.Windows.Forms.ErrorProvider errProv1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idMarca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdColaborador;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraEntrada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraSalida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HorasTrabajadas;
     }
 }

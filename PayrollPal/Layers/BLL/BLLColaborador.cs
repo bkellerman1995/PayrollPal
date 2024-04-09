@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.DAL;
+using PayrollPal.Entities;
 
 namespace PayrollPal.Layers.BLL
 {
@@ -121,6 +122,37 @@ namespace PayrollPal.Layers.BLL
             }
             return existe;
         }
+        #endregion
+
+        #region CalcularHorasOrdinariasExtraordinarias
+
+        public static void CalcularHorasOrdExt(Colaborador oColab, PlanillaPago oPago, Planilla_Detalle planillaDetalle)
+        {
+            double horasOrdinarias = 0;
+            double horasExtraordinarias = 0;
+            List<ControlDeMarcas> listaMarcas = BLLControlDeMarcas.SelectAll().Where(marca => marca.IdColaborador == oColab.IDColaborador
+            && (DateTime.ParseExact((marca.Fecha), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)
+            >= oPago.FechaDesde) && (DateTime.ParseExact((marca.Fecha), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)
+            <= oPago.FechaHasta)).ToList();
+
+            foreach (var marca in listaMarcas)
+            {
+                if (marca.HorasTrabajadas > 48)
+                {
+                    horasOrdinarias += 48;
+                    horasExtraordinarias += marca.HorasTrabajadas - horasOrdinarias;
+                }
+                else
+                {
+                    horasOrdinarias += marca.HorasTrabajadas;
+                }
+            }
+
+            planillaDetalle.hrsTrabajadas = horasOrdinarias;
+            planillaDetalle.hrsExtras = horasExtraordinarias;
+
+        }
+
         #endregion
     }
 }

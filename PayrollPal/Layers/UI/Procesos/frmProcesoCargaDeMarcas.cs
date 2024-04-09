@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace PayrollPal.UI.Consultas
 {
-    public partial class frmConsultaMarcas : Form
+    public partial class frmProcesoCargaDeMarcas : Form
     {
         private bool click_Agregar;
-        public frmConsultaMarcas()
+        public frmProcesoCargaDeMarcas()
         {
             InitializeComponent();
         }

@@ -1,6 +1,7 @@
 ﻿using PayrollPal.Layers.UI.Mantenimientos;
 using PayrollPal.UI.Consultas;
 using PayrollPal.UI.Mantenimientos;
+using PayrollPal.UI.Procesos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,7 @@ namespace PayrollPal.UI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            frmConsultaMarcas frm = new frmConsultaMarcas();
+            frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
             frm.ShowDialog();
         }
 
@@ -119,6 +120,12 @@ namespace PayrollPal.UI
         private void solicitudesDeVacacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMantenimientoSolicitudVacaciones frm = new frmMantenimientoSolicitudVacaciones();
+            frm.ShowDialog();
+        }
+
+        private void calcularPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProcesoCalcularPlanilla frm = new frmProcesoCalcularPlanilla();
             frm.ShowDialog();
         }
     }

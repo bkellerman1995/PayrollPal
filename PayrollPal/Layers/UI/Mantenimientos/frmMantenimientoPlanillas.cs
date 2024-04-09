@@ -14,6 +14,7 @@ using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.Util;
 using System.IO;
+using PayrollPal.Enumeraciones;
 
 namespace PayrollPal
 {
@@ -155,6 +156,7 @@ namespace PayrollPal
             try
             {
 
+                CambiarEstadoPlanillaInactiva();
                 this.dgvPlanillas.DataSource = BLLPlanillaPago.SelectAll();
                 this.dgvPlanillas.ClearSelection();
             }
@@ -168,6 +170,19 @@ namespace PayrollPal
 
                 //Mostrar mensaje al usuario
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void CambiarEstadoPlanillaInactiva()
+        {
+            foreach (var planilla in BLLPlanillaPago.SelectAll())
+            {
+                if (planilla.Estado == PlanillaEstado.Activa && 
+                    planilla.FechaPago < DateTime.Today)
+                {
+                    planilla.Estado = PlanillaEstado.Inactiva;
+                }
 
             }
         }

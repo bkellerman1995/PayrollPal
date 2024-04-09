@@ -44,8 +44,6 @@ namespace PayrollPal.Layers.DAL
         }
         #endregion
 
-        #region SELECT ALL
-
         #region UPDATE
         public static void UPDATE(ControlDeMarcas control)
         {
@@ -85,6 +83,7 @@ namespace PayrollPal.Layers.DAL
         }
         #endregion
 
+        #region SELECT ALL
         public static List<ControlDeMarcas> SelectAll()
         {
             try
