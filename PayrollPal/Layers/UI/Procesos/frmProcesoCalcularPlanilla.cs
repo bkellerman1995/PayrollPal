@@ -24,6 +24,8 @@ namespace PayrollPal.UI.Procesos
 
         private bool encabezadoPlanCreado = false;
 
+        private ServicioBCCR servicioBCCR = new ServicioBCCR();
+
         private Planilla_Detalle planilla_Detalle = new Planilla_Detalle();
         public frmProcesoCalcularPlanilla()
         {
@@ -45,11 +47,37 @@ namespace PayrollPal.UI.Procesos
 
                 this.txtIdEncPlan.Text = "Enc" + fechaHoy.ToString("yyyyMMdd") + BLLPlanilla_Encabezado.SecuenciadorPlanEnc();
 
+                CargartxtTipoCambio();
                 CargarCombos();
 
                 //Limpiar los controles del form 
                 LimpiarControles();
                 RevisarCombosVacios();
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void CargartxtTipoCambio()
+        {
+            try
+            {
+                foreach (var dolar in servicioBCCR.GetDolar(DateTime.Today,DateTime.Today,"318"))
+                {
+                    this.txtTipoCambio.Text = dolar.Monto.ToString();
+                }
+
+                this.lblTipoCambio2.Text = "para hoy " + DateTime.Today.ToString("dd/MM/yyyy") + " (venta)";
             }
             catch (Exception msg)
             {
@@ -434,95 +462,95 @@ namespace PayrollPal.UI.Procesos
             planEnc.IdEncabezado = this.txtIdEncPlan.Text;
             planEnc.Codigo = (PlanillaPago)this.cmbPlanillas.SelectedItem;
             planEnc.TipoCambio = Double.Parse(this.txtTipoCambio.Text);
-            planEnc.TotalIngresos = BLL
+            //planEnc.TotalIngresos = BLL
 
-            planEnc.TotalIngresos = Double.Parse(this.txtTipoCambio.Text);
+            //planEnc.TotalIngresos = Double.Parse(this.txtTipoCambio.Text);
 
 
-            oColaborador.IDColaborador = this.txtID.Text;
-            idColaborador = oColaborador.IDColaborador;
-            oColaborador.Nombre = this.txtNombre.Text;
-            oColaborador.Apellido1 = this.txtApellido1.Text;
-            oColaborador.Apellido2 = this.txtApellido2.Text;
-            oColaborador.Apellido2 = this.txtApellido2.Text;
-            oColaborador.FechaNacimiento = this.dtpFechaNacimiento.Value;
-            oColaborador.Direccion = this.txtDireccion.Text;
-            oColaborador.FechaIngreso = this.dtpFechaIngreso.Value;
-            oColaborador.IDDepartamento = (Departamento)this.cmbDepartamento.SelectedItem;
-            oColaborador.SalarioHora = decimal.Parse(this.mktSalarioHora.Text);
-            foreach (char c in reemplazarCaracteresSalario)
-            {
-                Salario = decimal.Parse(this.mktSalarioHora.Text.Replace(c.ToString(), ""));
-            }
-            oColaborador.SalarioHora = Salario;
-            oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
-            oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
-            oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
-            if (BLLColaborador.SelectById(idColaborador) != null)
-            {
-                if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
-                {
-                    oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
-                }
-            }
+            //oColaborador.IDColaborador = this.txtID.Text;
+            //idColaborador = oColaborador.IDColaborador;
+            //oColaborador.Nombre = this.txtNombre.Text;
+            //oColaborador.Apellido1 = this.txtApellido1.Text;
+            //oColaborador.Apellido2 = this.txtApellido2.Text;
+            //oColaborador.Apellido2 = this.txtApellido2.Text;
+            //oColaborador.FechaNacimiento = this.dtpFechaNacimiento.Value;
+            //oColaborador.Direccion = this.txtDireccion.Text;
+            //oColaborador.FechaIngreso = this.dtpFechaIngreso.Value;
+            //oColaborador.IDDepartamento = (Departamento)this.cmbDepartamento.SelectedItem;
+            //oColaborador.SalarioHora = decimal.Parse(this.mktSalarioHora.Text);
+            //foreach (char c in reemplazarCaracteresSalario)
+            //{
+            //    Salario = decimal.Parse(this.mktSalarioHora.Text.Replace(c.ToString(), ""));
+            //}
+            //oColaborador.SalarioHora = Salario;
+            //oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
+            //oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
+            //oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
+            //if (BLLColaborador.SelectById(idColaborador) != null)
+            //{
+            //    if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+            //    {
+            //        oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
+            //    }
+            //}
 
 
             //Si el usuario va a cambiarse
             //debe cambiarse el estado del usuario 
             //que estaba anteriormente asignado
 
-            oColaborador.IDUsuario.Asignado = true;
-            BLLUsuario.Update(oColaborador.IDUsuario);
+            //oColaborador.IDUsuario.Asignado = true;
+            //BLLUsuario.Update(oColaborador.IDUsuario);
 
-            oColaborador.CodigoPuesto = (Puesto)this.cmbPuestos.SelectedItem;
-            oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
+            //oColaborador.CodigoPuesto = (Puesto)this.cmbPuestos.SelectedItem;
+            //oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
 
-            switch (oColaborador.IDRol.IDRol)
-            {
-                case 1:
-                case 2:
-                    supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
-                    oColaborador.IDSupervisor = supervisor;
-                    break;
-                case 3:
-                    oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
-                    break;
-            }
-            oColaborador.Foto = (byte[])pctFoto.Tag;
+            //switch (oColaborador.IDRol.IDRol)
+            //{
+            //    case 1:
+            //    case 2:
+            //        supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
+            //        oColaborador.IDSupervisor = supervisor;
+            //        break;
+            //    case 3:
+            //        oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
+            //        break;
+            //}
+            //oColaborador.Foto = (byte[])pctFoto.Tag;
 
-            if (this.rdbActivo.Checked)
-                oColaborador.Estado = true;
-            if (this.rdbInactivo.Checked)
-                oColaborador.Estado = false;
+            //if (this.rdbActivo.Checked)
+            //    oColaborador.Estado = true;
+            //if (this.rdbInactivo.Checked)
+            //    oColaborador.Estado = false;
 
-            //Se llama al método Create del Colaborador 
-            //que se encarga de revisar si el colaborador existe primero
-            //antes de agregar al colaborador
-            if (BLLColaborador.SelectById(idColaborador) != null)
-            {
-                if (oColaborador.IDUsuario.ToString() != BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
-                {
-                    oUsuarioADeshabilitar = BLLColaborador.SelectById(idColaborador).IDUsuario;
-                    oUsuarioADeshabilitar.Asignado = false;
-                    oUsuarioADeshabilitar.Contrasenna = Criptografia.DecrypthAES(oUsuarioADeshabilitar.Contrasenna);
+            ////Se llama al método Create del Colaborador 
+            ////que se encarga de revisar si el colaborador existe primero
+            ////antes de agregar al colaborador
+            //if (BLLColaborador.SelectById(idColaborador) != null)
+            //{
+            //    if (oColaborador.IDUsuario.ToString() != BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
+            //    {
+            //        oUsuarioADeshabilitar = BLLColaborador.SelectById(idColaborador).IDUsuario;
+            //        oUsuarioADeshabilitar.Asignado = false;
+            //        oUsuarioADeshabilitar.Contrasenna = Criptografia.DecrypthAES(oUsuarioADeshabilitar.Contrasenna);
 
-                    BLLUsuario.Update(oUsuarioADeshabilitar);
-                }
-                BLLColaborador.Update(oColaborador);
-            }
-            else
-            {
-                BLLColaborador.Create(oColaborador);
-            }
+            //        BLLUsuario.Update(oUsuarioADeshabilitar);
+            //    }
+            //    BLLColaborador.Update(oColaborador);
+            //}
+            //else
+            //{
+            //    BLLColaborador.Create(oColaborador);
+            //}
 
-            //Insertar el colaborador a la base de datos
-            //por medio del BLLColaborador (método CREATE)
+            ////Insertar el colaborador a la base de datos
+            ////por medio del BLLColaborador (método CREATE)
 
-            //Refrescar la lista
-            CargarLista();
+            ////Refrescar la lista
+            //CargarLista();
 
-            //Limpiar los controles
-            LimpiarControles();
+            ////Limpiar los controles
+            //LimpiarControles();
         }
     }
 }

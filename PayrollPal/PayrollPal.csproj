@@ -73,6 +73,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -85,6 +87,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\BCCR\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Layers\BLL\BLLPlanilla_Detalle.cs" />
     <Compile Include="Layers\BLL\BLLPlanilla_Encabezado.cs" />
     <Compile Include="Layers\BLL\BLLSolicitudVacaciones.cs" />
@@ -116,11 +123,13 @@
     <Compile Include="Layers\Entities\Deducciones_Percepciones.cs" />
     <Compile Include="Layers\Entities\Deducciones_Percepciones_Por_Colaborador.cs" />
     <Compile Include="Layers\Entities\Departamento.cs" />
+    <Compile Include="Layers\Entities\Dolar.cs" />
     <Compile Include="Layers\Entities\PlanillaPago.cs" />
     <Compile Include="Layers\Entities\Planilla_Detalle.cs" />
     <Compile Include="Layers\Entities\Planilla_Encabezado.cs" />
     <Compile Include="Layers\Entities\Puesto.cs" />
     <Compile Include="Layers\Entities\Rol.cs" />
+    <Compile Include="Layers\Entities\ServicioBCCR.cs" />
     <Compile Include="Layers\Entities\SolicitudVacaciones.cs" />
     <Compile Include="Layers\Entities\Supervisor.cs" />
     <Compile Include="Layers\Entities\Usuario.cs" />
@@ -277,7 +286,9 @@
     <EmbeddedResource Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.resx">
       <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -306,6 +317,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Layers\Imagenes\Colaborador_Generico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\BCCR\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\BCCR\wsindicadoreseconomicos.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\BCCR\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\BCCR\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\BCCR\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
