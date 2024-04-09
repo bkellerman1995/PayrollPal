@@ -14,7 +14,7 @@ using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.Layers.DAL
 {
-    public class DALDeduccionesPercepciones
+    public class IDALDeduccionesPercepciones
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");

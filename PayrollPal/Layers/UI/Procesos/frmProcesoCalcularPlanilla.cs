@@ -467,7 +467,7 @@ namespace PayrollPal.UI.Procesos
 
             impresion.AppendLine("ENVIO DE PLANILLA:  " + planEnc.IdEncabezado);
             impresion.AppendLine("");
-            impresion.AppendLine("Detalle de planilla:  " + planDet.IdDetalle);
+            impresion.AppendLine("Planilla No.:  " + planEnc.Codigo.Codigo);
             impresion.AppendLine("");
             impresion.AppendLine("ID Colaborador:  " + planDet.IdColaborador);
             impresion.AppendLine("Nombre completo:  " + planDet.NombreColaborador);

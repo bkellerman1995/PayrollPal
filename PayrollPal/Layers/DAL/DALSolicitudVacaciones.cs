@@ -14,7 +14,7 @@ using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
-    public class DALSolicitudVacaciones
+    public class IDALSolicitudVacaciones
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                           log4net.LogManager.GetLogger("MyControlEventos");

@@ -13,7 +13,7 @@ using log4net;
 
 namespace PayrollPal.Layers.DAL
 {
-    public class DALPlanilla_Detalle
+    public class IDALPlanilla_Detalle
     {
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
