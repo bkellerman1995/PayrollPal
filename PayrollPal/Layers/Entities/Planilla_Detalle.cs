@@ -14,11 +14,10 @@ namespace PayrollPal.Layers.Entities
         public string NombreColaborador { set; get; }
         public double hrsTrabajadas { set; get; }
         public double hrsExtras { set; get; }
-        public double MontoHora { set; get; }
-        public double SalarioBruto { set; get; }
-        public Deducciones_Percepciones CodigoDeduccionPercepcion { set; get; }
-        public string TipoDecPerc { set; get; }
-        public double SalarioNeto { set; get; }
+        public decimal MontoHora { set; get; }
+        public decimal SalarioBruto { set; get; }
+        public List<Deducciones_Percepciones_Por_Colaborador> deducciones_Percepciones_Por_Colaborador { set; get; }
+        public decimal SalarioNeto { set; get; }
 
         public string devolverHorasTrabajadas
         {

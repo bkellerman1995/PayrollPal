@@ -65,6 +65,55 @@ namespace PayrollPal.Layers.DAL
         }
         #endregion
 
+
+        #region SELECT TODO
+        public static List<Deducciones_Percepciones_Por_Colaborador> SelectTodo()
+        {
+            try
+            {
+                DataSet ds = null;
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_SELECT_Deducciones_Percepciones_Por_Colaborador_TODOS");
+                    command.CommandType = CommandType.StoredProcedure;
+                    ds = db.ExecuteReader(command, "Deducciones_Percepciones_Por_Colaborador");
+                }
+
+                List<Deducciones_Percepciones_Por_Colaborador> lista = new List<Deducciones_Percepciones_Por_Colaborador>();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+
+                        Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
+                        dedPercColab.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
+                        dedPercColab.IdColaborador = BLL.BLLColaborador.SelectById(dr["IdColaborador"].ToString());
+                        dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
+                        dedPercColab.Estado = bool.Parse(dr["Estado"].ToString());
+                        lista.Add(dedPercColab);
+                    }
+                }
+
+                //Salvar un mensaje de info en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Info("Se cargó la lista de deducciones y percepcions por colaborador");
+
+                return lista;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
+            }
+        }
+        #endregion
+
         #region SELECT BY ID
         public static Deducciones_Percepciones_Por_Colaborador SelectById(string CodigoDeduccionPercepcion, string idColaborador)
         {

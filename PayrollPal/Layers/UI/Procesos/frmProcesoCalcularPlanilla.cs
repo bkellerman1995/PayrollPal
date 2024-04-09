@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.Util;
+using PayrollPal.Layers;
+using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.UI.Procesos
 {
@@ -20,13 +22,12 @@ namespace PayrollPal.UI.Procesos
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
 
-        private DateTime fechaHoy = DateTime.Now;
-
         private bool encabezadoPlanCreado = false;
 
         private ServicioBCCR servicioBCCR = new ServicioBCCR();
 
-        private Planilla_Detalle planilla_Detalle = new Planilla_Detalle();
+        private Planilla_Detalle planDet = new Planilla_Detalle();
+
         public frmProcesoCalcularPlanilla()
         {
             InitializeComponent();
@@ -45,7 +46,7 @@ namespace PayrollPal.UI.Procesos
             try
             {
 
-                this.txtIdEncPlan.Text = "Enc" + fechaHoy.ToString("yyyyMMdd") + BLLPlanilla_Encabezado.SecuenciadorPlanEnc();
+                this.txtIdEncPlan.Text = "Enc" + DateTime.Now.ToString("yyyyMMdd") + BLLPlanilla_Encabezado.SecuenciadorPlanEnc();
 
                 CargartxtTipoCambio();
                 CargarCombos();
@@ -72,12 +73,12 @@ namespace PayrollPal.UI.Procesos
         {
             try
             {
-                foreach (var dolar in servicioBCCR.GetDolar(DateTime.Today,DateTime.Today,"318"))
+                foreach (var dolar in servicioBCCR.GetDolar(DateTime.Today, DateTime.Today, "318"))
                 {
                     this.txtTipoCambio.Text = dolar.Monto.ToString();
                 }
 
-                this.lblTipoCambio2.Text = "para hoy " + DateTime.Today.ToString("dd/MM/yyyy") + " (venta)";
+                this.lblTipoCambio2.Text = "para hoy " + DateTime.Today.ToString("dd/MM/yyyy") + " (venta)           ₡";
             }
             catch (Exception msg)
             {
@@ -130,14 +131,14 @@ namespace PayrollPal.UI.Procesos
                 {
                     Colaborador oColab = (Colaborador)this.cmbColaborador.SelectedItem;
                     PlanillaPago oPago = (PlanillaPago)this.cmbPlanillas.SelectedItem;
-                    planilla_Detalle.IdDetalle = BLLPlanilla_Detalle.SecuenciadorPlanDetalle();
-                    planilla_Detalle.IdColaborador = oColab;
-                    planilla_Detalle.NombreColaborador = oColab.Nombre;
+
+                    planDet.IdColaborador = oColab;
+                    planDet.NombreColaborador = oColab.Nombre;
                     List<Planilla_Detalle> lista = new List<Planilla_Detalle>();
 
-                    BLLColaborador.CalcularHorasOrdExt(oColab, oPago, planilla_Detalle);
+                    BLLColaborador.CalcularHorasOrdExt(oColab, oPago, planDet);
 
-                    lista.Add(planilla_Detalle);
+                    lista.Add(planDet);
 
                     this.dgvHorOrdvsExt.DataSource = lista;
 
@@ -149,13 +150,11 @@ namespace PayrollPal.UI.Procesos
                     this.dgvHorOrdvsExt.Columns["hrsExtras"].Visible = false;
                     this.dgvHorOrdvsExt.Columns["MontoHora"].Visible = false;
                     this.dgvHorOrdvsExt.Columns["SalarioBruto"].Visible = false;
-                    this.dgvHorOrdvsExt.Columns["CodigoDeduccionPercepcion"].Visible = false;
-                    this.dgvHorOrdvsExt.Columns["TipoDecPerc"].Visible = false;
                     this.dgvHorOrdvsExt.Columns["SalarioNeto"].Visible = false;
 
                     this.dgvHorOrdvsExt.ClearSelection();
                 }
-  
+
 
             }
             catch (Exception msg)
@@ -207,9 +206,9 @@ namespace PayrollPal.UI.Procesos
 
                 this.cmbPlanillas.SelectedIndex = 0;
                 this.cmbColaborador.SelectedIndex = 0;
-
-
-                InhabilitarControles();
+                this.txtImprimir.Clear();
+                this.btnGenerarColilla.Enabled = true;
+                this.btnGenerarColilla.Focus();
 
             }
             catch (Exception msg)
@@ -229,7 +228,7 @@ namespace PayrollPal.UI.Procesos
         {
             try
             {
-                if (BLLPlanillaPago.SelectAll().Where(planilla => planilla.Estado 
+                if (BLLPlanillaPago.SelectAll().Where(planilla => planilla.Estado
                 == Enumeraciones.PlanillaEstado.Activa).ToList().Count != 0)
                 {
                     this.errProv1.SetError(this.cmbPlanillas, string.Empty);
@@ -264,29 +263,6 @@ namespace PayrollPal.UI.Procesos
 
             }
         }
-
-        private void InhabilitarControles()
-        {
-            try
-            {
-
-                this.txtImprimir.Text = "";
-
-            }
-            catch (Exception msg)
-            {
-
-                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
-                //de la base de datos
-                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
-                    , msg)));
-
-                //Mostrar mensaje al usuario
-                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
-
-            }
-        }
-
         private void cmbColaborador_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarDGVMarcas();
@@ -311,7 +287,7 @@ namespace PayrollPal.UI.Procesos
                 this.dtpFechaHasta.MaxDate = this.dtpFechaHasta.Value;
             }
 
-  
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -339,10 +315,11 @@ namespace PayrollPal.UI.Procesos
                 {
                     return;
                 }
+                this.btnGenerarColilla.Enabled = false;
 
                 //Llamar al método que crea y actualiza los usuarios
                 CrearActualizarPlanEncyDetalle();
-                LimpiarControles();
+
             }
             catch (Exception msg)
             {
@@ -389,7 +366,7 @@ namespace PayrollPal.UI.Procesos
 
                 //Validar combo Planilla
 
-                if (this.cmbPlanillas.SelectedIndex !=0 )
+                if (this.cmbPlanillas.SelectedIndex != 0)
                 {
                     this.errProv1.SetError(this.cmbPlanillas, string.Empty);
                 }
@@ -401,7 +378,7 @@ namespace PayrollPal.UI.Procesos
 
                 //Validar combo Colaborador
 
-                if (this.cmbColaborador.SelectedItem != null)
+                if (this.cmbColaborador.SelectedIndex != 0)
                 {
                     this.errProv1.SetError(this.cmbColaborador, string.Empty);
                 }
@@ -452,9 +429,22 @@ namespace PayrollPal.UI.Procesos
 
         private void CrearActualizarPlanEncyDetalle()
         {
-
+            Colaborador oColaborador = new Colaborador();
+            StringBuilder impresion = new StringBuilder();
             //Crear la instancia de PlanillaDetalle
 
+            oColaborador = this.cmbColaborador.SelectedItem as Colaborador;
+            planDet.IdDetalle = BLLPlanilla_Detalle.SecuenciadorPlanDetalle();
+            planDet.IdColaborador = oColaborador;
+            planDet.NombreColaborador = oColaborador.Nombre + " " + oColaborador.Apellido1 + " " + oColaborador.Apellido2;
+            planDet.hrsTrabajadas = planDet.hrsTrabajadas;
+            planDet.hrsExtras = planDet.hrsExtras;
+            planDet.MontoHora = oColaborador.SalarioHora;
+            planDet.SalarioBruto = BLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
+            planDet.deducciones_Percepciones_Por_Colaborador = BLLDeducciones_Percepciones_Por_Colaborador.SelectTodo().Where(dedPerc
+                => dedPerc.Estado = true && dedPerc.IdColaborador.IDColaborador == oColaborador.IDColaborador).ToList();
+
+            planDet.SalarioNeto = BLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
 
             //Crear la instancia de PlanillaEncabezado
             Planilla_Encabezado planEnc = new Planilla_Encabezado();
@@ -462,95 +452,95 @@ namespace PayrollPal.UI.Procesos
             planEnc.IdEncabezado = this.txtIdEncPlan.Text;
             planEnc.Codigo = (PlanillaPago)this.cmbPlanillas.SelectedItem;
             planEnc.TipoCambio = Double.Parse(this.txtTipoCambio.Text);
-            //planEnc.TotalIngresos = BLL
+            planEnc.TotalIngresos = (double)BLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
+            planEnc.TotalGastos = (double)BLLPlanilla_Detalle.CalcularSalarioBruto(planDet) - (double)BLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            planEnc.TotalPagar = (double)BLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
 
-            //planEnc.TotalIngresos = Double.Parse(this.txtTipoCambio.Text);
+            impresion.AppendLine("ENVIO DE PLANILLA:  " + planEnc.IdEncabezado);
+            impresion.AppendLine("");
+            impresion.AppendLine("Detalle de planilla:  " + planDet.IdDetalle);
+            impresion.AppendLine("");
+            impresion.AppendLine("ID Colaborador:  " + planDet.IdColaborador);
+            impresion.AppendLine("Nombre completo:  " + planDet.NombreColaborador);
+            impresion.AppendLine("");
+            impresion.AppendLine("");
+            impresion.AppendLine("Fecha de pago: " + planEnc.Codigo.FechaPago.ToString("dd/MM/yyyy"));
+            impresion.AppendLine("");
+            impresion.AppendLine("--Desde:  " + planEnc.Codigo.FechaDesde.ToString("dd/MM/yyyy"));
+            impresion.AppendLine("--Hasta:  " + planEnc.Codigo.FechaHasta.ToString("dd/MM/yyyy"));
+            impresion.AppendLine("");
+            impresion.AppendLine("Horas Ordinarias trabajadas: " + planDet.hrsTrabajadas);
+            impresion.AppendLine("Horas Extraordinarias trabajadas: " + planDet.hrsExtras);
+            impresion.AppendLine("Total de Horas trabajadas: " + (planDet.hrsTrabajadas + planDet.hrsExtras));
+            impresion.AppendLine("");
+            impresion.AppendLine("Salario por Hora Ordinaria: ₡" + planDet.IdColaborador.SalarioHora);
+            impresion.AppendLine("Salario por Hora Extraordinaria: ₡" + (planDet.IdColaborador.SalarioHora) * (decimal)1.5);
+            impresion.AppendLine("");
+            impresion.AppendLine("=================");
+            impresion.AppendLine("DEDUCCIONES");
+            impresion.AppendLine("=================");
+            impresion.AppendLine("");
+
+            foreach (var item in planDet.deducciones_Percepciones_Por_Colaborador)
+            {
+                Deducciones_Percepciones odedPerc = BLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                if (odedPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Deduccion)
+                {
+                    impresion.AppendLine("-- " + odedPerc.ToString());
+                }
+            }
+            impresion.AppendLine("");
+            impresion.AppendLine("Total de Deducciones: ₡" + planEnc.TotalGastos);
+
+            impresion.AppendLine("");
+            impresion.AppendLine("");
+            impresion.AppendLine("=================");
+            impresion.AppendLine("PERCEPCIONES");
+            impresion.AppendLine("=================");
+            impresion.AppendLine("");
 
 
-            //oColaborador.IDColaborador = this.txtID.Text;
-            //idColaborador = oColaborador.IDColaborador;
-            //oColaborador.Nombre = this.txtNombre.Text;
-            //oColaborador.Apellido1 = this.txtApellido1.Text;
-            //oColaborador.Apellido2 = this.txtApellido2.Text;
-            //oColaborador.Apellido2 = this.txtApellido2.Text;
-            //oColaborador.FechaNacimiento = this.dtpFechaNacimiento.Value;
-            //oColaborador.Direccion = this.txtDireccion.Text;
-            //oColaborador.FechaIngreso = this.dtpFechaIngreso.Value;
-            //oColaborador.IDDepartamento = (Departamento)this.cmbDepartamento.SelectedItem;
-            //oColaborador.SalarioHora = decimal.Parse(this.mktSalarioHora.Text);
-            //foreach (char c in reemplazarCaracteresSalario)
-            //{
-            //    Salario = decimal.Parse(this.mktSalarioHora.Text.Replace(c.ToString(), ""));
-            //}
-            //oColaborador.SalarioHora = Salario;
-            //oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
-            //oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
-            //oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
-            //if (BLLColaborador.SelectById(idColaborador) != null)
-            //{
-            //    if (oColaborador.IDUsuario.ToString() == BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
-            //    {
-            //        oColaborador.IDUsuario.Contrasenna = Criptografia.DecrypthAES(oColaborador.IDUsuario.Contrasenna);
-            //    }
-            //}
+            foreach (var item in planDet.deducciones_Percepciones_Por_Colaborador)
+            {
+                Deducciones_Percepciones odedPerc = BLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
+                if (odedPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Percepcion)
+                {
+                    impresion.AppendLine("-- " + odedPerc.ToString());
+                }
+            }
+            impresion.AppendLine("-------------------------");
+            impresion.AppendLine("Vacaciones disfutadas");
+            impresion.AppendLine("-------------------------");
+
+            List<SolicitudVacaciones> solicitudVacaciones = BLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
+            >= planEnc.Codigo.FechaDesde && sol.FechaSolicitarHasta <= planEnc.Codigo.FechaHasta && sol.IDColaborador.IDColaborador == planDet.IdColaborador.IDColaborador
+            && sol.Observaciones_Final == ObservacionSolicVacaciones.Aprobada && sol.Estado == true).ToList();
 
 
-            //Si el usuario va a cambiarse
-            //debe cambiarse el estado del usuario 
-            //que estaba anteriormente asignado
+            foreach (var item in solicitudVacaciones)
+            { 
+                impresion.AppendLine("-- " + item.ToString());
+            }
+            impresion.AppendLine("-----------------------");
 
-            //oColaborador.IDUsuario.Asignado = true;
-            //BLLUsuario.Update(oColaborador.IDUsuario);
+            impresion.AppendLine("");
+            impresion.AppendLine("");
+            impresion.AppendLine("Total de Percepciones: ₡" + planEnc.TotalIngresos);
+            impresion.AppendLine("");
+            impresion.AppendLine("");
+            impresion.AppendLine("TOTAL A PAGAR: ₡" + planEnc.TotalPagar);
 
-            //oColaborador.CodigoPuesto = (Puesto)this.cmbPuestos.SelectedItem;
-            //oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
+            decimal dolar = decimal.Parse(this.txtTipoCambio.Text);
 
-            //switch (oColaborador.IDRol.IDRol)
-            //{
-            //    case 1:
-            //    case 2:
-            //        supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
-            //        oColaborador.IDSupervisor = supervisor;
-            //        break;
-            //    case 3:
-            //        oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
-            //        break;
-            //}
-            //oColaborador.Foto = (byte[])pctFoto.Tag;
+            impresion.AppendLine("TOTAL A PAGAR: $" + BLLPlanilla_Detalle.CalcularSalarioDolares(planDet, dolar));
 
-            //if (this.rdbActivo.Checked)
-            //    oColaborador.Estado = true;
-            //if (this.rdbInactivo.Checked)
-            //    oColaborador.Estado = false;
+            this.txtImprimir.Text = impresion.ToString();
 
-            ////Se llama al método Create del Colaborador 
-            ////que se encarga de revisar si el colaborador existe primero
-            ////antes de agregar al colaborador
-            //if (BLLColaborador.SelectById(idColaborador) != null)
-            //{
-            //    if (oColaborador.IDUsuario.ToString() != BLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
-            //    {
-            //        oUsuarioADeshabilitar = BLLColaborador.SelectById(idColaborador).IDUsuario;
-            //        oUsuarioADeshabilitar.Asignado = false;
-            //        oUsuarioADeshabilitar.Contrasenna = Criptografia.DecrypthAES(oUsuarioADeshabilitar.Contrasenna);
+            planEnc.Codigo.Estado = PlanillaEstado.PorEnviar;
 
-            //        BLLUsuario.Update(oUsuarioADeshabilitar);
-            //    }
-            //    BLLColaborador.Update(oColaborador);
-            //}
-            //else
-            //{
-            //    BLLColaborador.Create(oColaborador);
-            //}
+            BLLPlanilla_Encabezado.Create(planEnc);
+            BLLPlanilla_Detalle.Create(planDet);
 
-            ////Insertar el colaborador a la base de datos
-            ////por medio del BLLColaborador (método CREATE)
-
-            ////Refrescar la lista
-            //CargarLista();
-
-            ////Limpiar los controles
-            //LimpiarControles();
         }
     }
 }

@@ -122,7 +122,7 @@ namespace PayrollPal.Layers.DAL
                     oDeduccionesPercepciones.Nombre = dt.Rows[0]["Nombre"].ToString();
                     oDeduccionesPercepciones.Tipo = (TipoPercepcionDeduccion)Enum.Parse(typeof(PlanillaEstado), (dt.Rows[0]["Tipo"].ToString()));
                     oDeduccionesPercepciones.Valor = double.Parse(dt.Rows[0]["Valor"].ToString());
-                    oDeduccionesPercepciones.TipoValor = (TipoPorcAbs)Enum.Parse(typeof(TipoPorcAbs), (dt.Rows[0]["Tipo"].ToString()));
+                    oDeduccionesPercepciones.TipoValor = (TipoPorcAbs)Enum.Parse(typeof(TipoPorcAbs), (dt.Rows[0]["TipoValor"].ToString()));
                     return oDeduccionesPercepciones;
                 }
                 return null;

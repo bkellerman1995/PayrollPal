@@ -75,12 +75,9 @@ namespace PayrollPal.Layers.DAL
                         planillaDetalle.NombreColaborador = dr["NombreColaborador"].ToString();
                         planillaDetalle.hrsTrabajadas = double.Parse(dr["hrsTrabajadas"].ToString());
                         planillaDetalle.hrsExtras = double.Parse(dr["hrsExtras"].ToString());
-                        planillaDetalle.MontoHora = double.Parse(dr["MontoHora"].ToString());
-                        planillaDetalle.SalarioBruto = double.Parse(dr["SalarioBruto"].ToString());
-                        planillaDetalle.SalarioBruto = double.Parse(dr["SalarioBruto"].ToString());
-                        planillaDetalle.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
-                        planillaDetalle.TipoDecPerc = dr["TipoDecPerc"].ToString();
-                        planillaDetalle.SalarioNeto = double.Parse(dr["SalarioNeto"].ToString());
+                        planillaDetalle.MontoHora = (decimal)(dr["MontoHora"]);
+                        planillaDetalle.SalarioBruto = (decimal)(dr["SalarioBruto"]);
+                        planillaDetalle.SalarioNeto = (decimal)(dr["SalarioNeto"]);
 
 
                         lista.Add(planillaDetalle);
@@ -133,12 +130,9 @@ namespace PayrollPal.Layers.DAL
                     planillaDetalle.NombreColaborador = dt.Rows[0]["NombreColaborador"].ToString();
                     planillaDetalle.hrsTrabajadas = double.Parse(dt.Rows[0]["hrsTrabajadas"].ToString());
                     planillaDetalle.hrsExtras = double.Parse(dt.Rows[0]["hrsExtras"].ToString());
-                    planillaDetalle.MontoHora = double.Parse(dt.Rows[0]["MontoHora"].ToString());
-                    planillaDetalle.SalarioBruto = double.Parse(dt.Rows[0]["SalarioBruto"].ToString());
-                    planillaDetalle.SalarioBruto = double.Parse(dt.Rows[0]["SalarioBruto"].ToString());
-                    planillaDetalle.CodigoDeduccionPercepcion = BLL.BLLDeduccionesPercepciones.SelectById(dt.Rows[0]["CodigoDeduccionPercepcion"].ToString());
-                    planillaDetalle.TipoDecPerc = dt.Rows[0]["TipoDecPerc"].ToString();
-                    planillaDetalle.SalarioNeto = double.Parse(dt.Rows[0]["SalarioNeto"].ToString());
+                    planillaDetalle.MontoHora = (decimal)(dt.Rows[0]["MontoHora"]);
+                    planillaDetalle.SalarioBruto = (decimal)(dt.Rows[0]["SalarioBruto"]);
+                    planillaDetalle.SalarioNeto = (decimal)(dt.Rows[0]["SalarioNeto"]);
                     return planillaDetalle;
                 }
                 return null;
@@ -174,8 +168,6 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@hrsExtras", pPlanilla_Detalle.hrsExtras);
                     command.Parameters.AddWithValue("@MontoHora", pPlanilla_Detalle.MontoHora);
                     command.Parameters.AddWithValue("@SalarioBruto", pPlanilla_Detalle.SalarioBruto);
-                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pPlanilla_Detalle.CodigoDeduccionPercepcion);
-                    command.Parameters.AddWithValue("@TipoDecPerc", pPlanilla_Detalle.TipoDecPerc);
                     command.Parameters.AddWithValue("@SalarioNeto", pPlanilla_Detalle.SalarioNeto);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
@@ -217,8 +209,6 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@hrsExtras", pPlanilla_Detalle.hrsExtras);
                     command.Parameters.AddWithValue("@MontoHora", pPlanilla_Detalle.MontoHora);
                     command.Parameters.AddWithValue("@SalarioBruto", pPlanilla_Detalle.SalarioBruto);
-                    command.Parameters.AddWithValue("@CodigoDeduccionPercepcion", pPlanilla_Detalle.CodigoDeduccionPercepcion);
-                    command.Parameters.AddWithValue("@TipoDecPerc", pPlanilla_Detalle.TipoDecPerc);
                     command.Parameters.AddWithValue("@SalarioNeto", pPlanilla_Detalle.SalarioNeto);
 
 

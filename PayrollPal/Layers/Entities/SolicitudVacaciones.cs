@@ -19,6 +19,12 @@ namespace PayrollPal.Layers.Entities
         public bool Estado { set; get; }
         public ObservacionSolicVacaciones Observaciones_Final { set; get; }
 
+        public override string ToString()
+        {
+            return IDSolicitudVacas + " - " + "Desde " + FechaSolicitarDesde.ToString("dd/MM/yyyy") +
+                " - " + "Hasta " + FechaSolicitarHasta.ToString("dd/MM/yyyy") + " - " + "(Dias: " + CantidadDias +")";
+        }
+
     }
 
 }

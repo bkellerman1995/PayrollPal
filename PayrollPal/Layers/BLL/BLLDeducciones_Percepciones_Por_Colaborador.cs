@@ -25,6 +25,14 @@ namespace PayrollPal.Layers.BLL
         }
         #endregion
 
+        #region SELECT TODOS    
+        public static List<Deducciones_Percepciones_Por_Colaborador> SelectTodo()
+        {
+
+            return DAL.DALDeducciones_Percepciones_Por_Colaborador.SelectTodo();
+        }
+        #endregion
+
         #region SELECT BY ID
         public static Deducciones_Percepciones_Por_Colaborador SelectById(string codigoDeduccionPercepcion, string idColaborador)
         {
