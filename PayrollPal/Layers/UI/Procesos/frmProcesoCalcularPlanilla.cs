@@ -512,7 +512,7 @@ namespace PayrollPal.UI.Procesos
             string nombreCompletoColaborador = planDet.IdColaborador.Nombre + " " + planDet.IdColaborador.Apellido1 +
                 " " + planDet.IdColaborador.Apellido2;
             string montoAPagarCol = planEnc.TotalPagar.ToString();
-            double dolares = (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            double dolares = (double)bLLPlanilla_Detalle.CalcularSalarioDolares(planDet, decimal.Parse(this.txtTipoCambio.Text));
             string montoAPagarDol = dolares.ToString();
 
             Image imagen = QuickResponse.QuickResponseGenerador(planDet.IdColaborador.IDColaborador, nombreCompletoColaborador, montoAPagarCol, montoAPagarDol, 53);
@@ -534,7 +534,7 @@ namespace PayrollPal.UI.Procesos
             this.dataTable2TableAdapter.Fill(this.dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
             // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
             //creado y el valor
-            
+
             ReportParameter param = new ReportParameter("quickResponse", ruta);
 
             //Pasamos el array de los parámetros al ReportViewer
@@ -543,14 +543,48 @@ namespace PayrollPal.UI.Procesos
             this.reportViewer1.RefreshReport();
             #endregion
 
-            DialogResult resultado = MessageBox.Show("Planilla de pago: " + planEnc.Codigo.Codigo + "Enviada" +
+            DialogResult resultado = MessageBox.Show("Planilla de pago: " + planEnc.Codigo.Codigo + "Generada" +
                 "\n¿Desea enviarla al colaborador ahora?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-
+                string rutaPDF = @"C:\temp\" +"Planilla-"+planEnc.IdEncabezado+"-Envío.pdf";
+                GenerarPDF(this.reportViewer1, rutaPDF);
             }
 
         }
+
+        private void GenerarPDF(ReportViewer reportViewer, string rutaDestino)
+        {
+            if (!Directory.Exists(@"C:\temp"))
+                Directory.CreateDirectory(@"C:\temp");
+
+            string deviceInfo =
+
+             "<DeviceInfo>" +
+             "  <OutputFormat>PDF</OutputFormat>" +
+             "  <PageWidth>8.5in</PageWidth>" +
+             "  <PageHeight>11in</PageHeight>" +
+             "  <MarginTop>0.5in</MarginTop>" +
+             "  <MarginLeft>0.5in</MarginLeft>" +
+             "  <MarginRight>0.5in</MarginRight>" +
+             "  <MarginBottom>0.5in</MarginBottom>" +
+             "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+            // Render the report to byte array
+            byte[] bytes = this.reportViewer1.LocalReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streamIds, out warnings);
+
+            // Save the byte array to a file
+            File.WriteAllBytes(rutaDestino, bytes);
+
+            Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);
+        }
+
     }
 }

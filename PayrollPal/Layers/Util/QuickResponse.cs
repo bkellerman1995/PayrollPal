@@ -25,8 +25,8 @@ namespace PayrollPal.Layers.Util
             sb.AppendLine("");
             sb.AppendLine("Nombre Completo: " + nombreCompleto);
             sb.AppendLine("");
-            sb.AppendLine("Monto a Pagar (: ₡" + montoAPagarCol);
-            sb.AppendLine("Monto a Pagar (: $" + montoAPagarDol);
+            sb.AppendLine("Monto a Pagar (colones): ₡" + montoAPagarCol);
+            sb.AppendLine("Monto a Pagar (dólares): $" + montoAPagarDol);
 
             string toenc = sb.ToString();
             MessagingToolkit.QRCode.Codec.QRCodeEncoder qe = new MessagingToolkit.QRCode.Codec.QRCodeEncoder();
