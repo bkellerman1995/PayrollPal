@@ -54,7 +54,7 @@ namespace PayrollPal.Layers.UI.Consultas
 
 
             ReportDataSource reportDataSource = new ReportDataSource("DataSetPlanillaEnviar", dSPlanillaEnviar.Tables["DataTable2"]);
-            
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
             this.reportViewer1.LocalReport.EnableExternalImages = true;
             ReportParameter param = new ReportParameter("quickResponse", "Cargar Código");
@@ -62,7 +62,7 @@ namespace PayrollPal.Layers.UI.Consultas
             this.reportViewer1.RefreshReport();
 
 
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
+
 
         }
 
