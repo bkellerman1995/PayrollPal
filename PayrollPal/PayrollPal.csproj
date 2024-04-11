@@ -67,10 +67,30 @@
     <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1620.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1620.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1620.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1620.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1620.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -91,6 +111,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DSPlanillaEnviar.cs">
+      <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPlanillaEnviar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
     </Compile>
     <Compile Include="Layers\BLL\BLLPlanilla_Detalle.cs" />
     <Compile Include="Layers\BLL\BLLPlanilla_Encabezado.cs" />
@@ -164,6 +192,18 @@
     <Compile Include="Layers\Persistencia\FactoryConexion.cs" />
     <Compile Include="Layers\Persistencia\FactoryDataBase.cs" />
     <Compile Include="Layers\Persistencia\IDataBase.cs" />
+    <Compile Include="Layers\UI\Consultas\frmConsultaPlanillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Consultas\frmConsultaPlanillas.Designer.cs">
+      <DependentUpon>frmConsultaPlanillas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.Designer.cs">
+      <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layers\UI\Procesos\frmProcesoCargaDeMarcas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,12 +294,13 @@
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoUsuarios.Designer.cs">
       <DependentUpon>frmMantenimientoUsuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.Designer.cs">
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Layers\UI\Consultas\frmConsultaPlanillas.resx">
+      <DependentUpon>frmConsultaPlanillas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.resx">
       <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
-    </Compile>
+    </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Procesos\frmProcesoCargaDeMarcas.resx">
       <DependentUpon>frmProcesoCargaDeMarcas.cs</DependentUpon>
     </EmbeddedResource>
@@ -309,10 +350,19 @@
     <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoUsuarios.resx">
       <DependentUpon>frmMantenimientoUsuarios.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Layers\UI\Procesos\frmProcesoCalcularPlanilla.resx">
-      <DependentUpon>frmProcesoCalcularPlanilla.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Procesos\ReportePlanEnviar.rdlc" />
     <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
+    <None Include="DSPlanillaEnviar.xsc">
+      <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
+    </None>
+    <None Include="DSPlanillaEnviar.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPlanillaEnviar.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPlanillaEnviar.xss">
+      <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
@@ -330,7 +380,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Layers\Patrones\" />
-    <Folder Include="Layers\UI\Consultas\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Layers\Imagenes\Logo.png" />
@@ -364,6 +413,21 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

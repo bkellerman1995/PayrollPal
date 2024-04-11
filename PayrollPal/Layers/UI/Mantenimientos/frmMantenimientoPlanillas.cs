@@ -46,6 +46,7 @@ namespace PayrollPal
                 ConfigurarDateTimePickerFechaPago();
 
                 this.lblEstado2.Text = "";
+                this.btnEnviar.Visible = false;
 
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALPlanillaPago
@@ -91,6 +92,7 @@ namespace PayrollPal
 
                 this.lblEstado2.Text = "";
 
+
                 InhabilitarControles();
 
             }
@@ -120,6 +122,7 @@ namespace PayrollPal
                 this.btnEliminar.Enabled = false;
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
+                this.btnEnviar.Visible = false;
 
                 this.txtCod.Enabled = false;
                 this.txtNombre.Enabled = false;
@@ -682,6 +685,15 @@ namespace PayrollPal
 
                     if (oPlanillaPago.Estado == Enumeraciones.PlanillaEstado.Enviada)
                         this.lblEstado2.Text = "Enviada";
+
+                    if (oPlanillaPago.Estado == Enumeraciones.PlanillaEstado.PorEnviar)
+                    {
+                        this.btnEnviar.Visible = true;
+                    }
+                    else
+                    {
+                        this.btnEnviar.Visible = false;
+                    }
                 }
             }
             catch (Exception msg)
@@ -696,6 +708,17 @@ namespace PayrollPal
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
             }
+        }
+
+        /// <summary>
+        /// Método para enviar correo con la planilla 
+        /// que está en estado por enviar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

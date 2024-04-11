@@ -63,6 +63,8 @@ namespace PayrollPal.UI.Procesos
                 //Limpiar los controles del form 
                 LimpiarControles();
                 RevisarCombosVacios();
+
+                this.reportViewer1.RefreshReport();
             }
             catch (Exception msg)
             {
@@ -76,6 +78,7 @@ namespace PayrollPal.UI.Procesos
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
             }
+            this.reportViewer1.RefreshReport();
         }
 
         private void CargartxtTipoCambio()
@@ -475,6 +478,8 @@ namespace PayrollPal.UI.Procesos
             planEnc.TotalGastos = (double)bLLPlanilla_Detalle.CalcularSalarioBruto(planDet) - (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
             planEnc.TotalPagar = (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
 
+
+
             impresion.AppendLine("ENVIO DE PLANILLA:  " + planEnc.IdEncabezado);
             impresion.AppendLine("");
             impresion.AppendLine("Planilla No.:  " + planEnc.Codigo.Codigo);
@@ -563,7 +568,9 @@ namespace PayrollPal.UI.Procesos
             bLLPlanilla_Encabezado.Create(planEnc);
             bLLPlanilla_Detalle.Create(planDet);
 
-
+            //Codigo test para cargar el reporte
+            this.dataTable1TableAdapter.Fill(this.dSPlanillaEnviar.DataTable1, planEnc.IdEncabezado);
+            this.reportViewer1.RefreshReport();
 
         }
     }
