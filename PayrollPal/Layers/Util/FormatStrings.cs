@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace UTNLeccion8B.Utilities
+namespace PayrollPal.Layers.Util
 {
     class FormatStrings
     {

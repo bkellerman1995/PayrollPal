@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Examen.CableTV.Util
+namespace PayrollPal.Layers.Util
 {
     public class JSONGenericList<T>
     {

@@ -351,6 +351,7 @@
       <DependentUpon>frmMantenimientoUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Procesos\ReportePlanEnviar.rdlc" />
+    <EmbeddedResource Include="test.rdlc" />
     <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
     <None Include="DSPlanillaEnviar.xsc">
       <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>

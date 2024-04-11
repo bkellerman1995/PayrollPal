@@ -33,7 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProcesoCalcularPlanilla));
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.dSPlanillaEnviar = new PayrollPal.DSPlanillaEnviar();
             this.btnGenerarColilla = new System.Windows.Forms.Button();
             this.lblFechaDesde = new System.Windows.Forms.Label();
             this.lblFechaHasta = new System.Windows.Forms.Label();
@@ -67,9 +66,9 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.txtImprimir = new System.Windows.Forms.TextBox();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataTable1TableAdapter = new PayrollPal.DSPlanillaEnviarTableAdapters.DataTable1TableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).BeginInit();
+            this.dataTable2BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dSPlanillaEnviar = new PayrollPal.DSPlanillaEnviar();
+            this.dataTable2TableAdapter = new PayrollPal.DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,13 +77,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).BeginInit();
             this.toolStripMantEmpresa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dSPlanillaEnviar
-            // 
-            this.dSPlanillaEnviar.DataSetName = "DSPlanillaEnviar";
-            this.dSPlanillaEnviar.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnGenerarColilla
             // 
@@ -268,8 +263,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.reportViewer1);
             this.splitContainer1.Panel2.Controls.Add(this.txtImprimir);
-            this.splitContainer1.Size = new System.Drawing.Size(1471, 537);
-            this.splitContainer1.SplitterDistance = 856;
+            this.splitContainer1.Size = new System.Drawing.Size(1471, 681);
+            this.splitContainer1.SplitterDistance = 846;
             this.splitContainer1.TabIndex = 0;
             // 
             // lblTipoCambio2
@@ -414,7 +409,7 @@
             this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
             this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(856, 28);
+            this.toolStripMantEmpresa.Size = new System.Drawing.Size(846, 28);
             this.toolStripMantEmpresa.TabIndex = 18;
             this.toolStripMantEmpresa.Text = "toolStrip1";
             // 
@@ -444,13 +439,13 @@
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             reportDataSource1.Name = "DataSetPlanillaEnviar";
-            reportDataSource1.Value = this.dataTable1BindingSource;
+            reportDataSource1.Value = this.dataTable2BindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.Layers.UI.Procesos.ReportePlanEnviar.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.test.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(611, 537);
+            this.reportViewer1.Size = new System.Drawing.Size(621, 681);
             this.reportViewer1.TabIndex = 1;
             // 
             // txtImprimir
@@ -466,26 +461,30 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // dataTable1BindingSource
+            // dataTable2BindingSource
             // 
-            this.dataTable1BindingSource.DataMember = "DataTable1";
-            this.dataTable1BindingSource.DataSource = this.dSPlanillaEnviar;
+            this.dataTable2BindingSource.DataMember = "DataTable2";
+            this.dataTable2BindingSource.DataSource = this.dSPlanillaEnviar;
             // 
-            // dataTable1TableAdapter
+            // dSPlanillaEnviar
             // 
-            this.dataTable1TableAdapter.ClearBeforeFill = true;
+            this.dSPlanillaEnviar.DataSetName = "DSPlanillaEnviar";
+            this.dSPlanillaEnviar.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataTable2TableAdapter
+            // 
+            this.dataTable2TableAdapter.ClearBeforeFill = true;
             // 
             // frmProcesoCalcularPlanilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1471, 537);
+            this.ClientSize = new System.Drawing.Size(1471, 681);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmProcesoCalcularPlanilla";
             this.Text = "Cálculo de Planilla";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmProcesoCalcularPlanilla_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -497,7 +496,8 @@
             this.toolStripMantEmpresa.ResumeLayout(false);
             this.toolStripMantEmpresa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -537,8 +537,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasExtraordinarias;
         private System.Windows.Forms.Label lblTipoCambio2;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.BindingSource dataTable2BindingSource;
         private DSPlanillaEnviar dSPlanillaEnviar;
-        private System.Windows.Forms.BindingSource dataTable1BindingSource;
-        private DSPlanillaEnviarTableAdapters.DataTable1TableAdapter dataTable1TableAdapter;
+        private DSPlanillaEnviarTableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
 }

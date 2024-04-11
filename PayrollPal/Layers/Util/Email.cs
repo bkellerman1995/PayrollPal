@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace UTNLeccion8B.Utilities
+namespace PayrollPal.Layers.Util
 {
     class Email
     {

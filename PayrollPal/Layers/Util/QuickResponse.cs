@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MessagingToolkit.QRCode.Codec; // Agregar Reference: MessagingToolkit.QRCode
 
-namespace UTNLeccion8B.Utilities
+namespace PayrollPal.Layers.Util
 {
     class QuickResponse
     {
@@ -18,9 +18,17 @@ namespace UTNLeccion8B.Utilities
         /// <param name="input"></param>
         /// <param name="qrlevel"></param>
         /// <returns></returns>
-        public static Image QuickResponseGenerador(string input, int qrlevel)
+        public static Image QuickResponseGenerador(string idcolaborador, string nombreCompleto, string montoAPagarCol, string montoAPagarDol, int qrlevel)
         {
-            string toenc = input;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("ID de colaborador: " + idcolaborador);
+            sb.AppendLine("");
+            sb.AppendLine("Nombre Completo: " + nombreCompleto);
+            sb.AppendLine("");
+            sb.AppendLine("Monto a Pagar (: ₡" + montoAPagarCol);
+            sb.AppendLine("Monto a Pagar (: $" + montoAPagarDol);
+
+            string toenc = sb.ToString();
             MessagingToolkit.QRCode.Codec.QRCodeEncoder qe = new MessagingToolkit.QRCode.Codec.QRCodeEncoder();
             qe.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
             qe.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.L; // - Using LOW for more storage

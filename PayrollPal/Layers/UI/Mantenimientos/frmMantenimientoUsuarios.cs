@@ -12,7 +12,6 @@ using log4net;
 using System.Reflection;
 using PayrollPal.Layers.Entities;
 using System.IO;
-using UTNLeccion8B;
 using PayrollPal.Layers.Util;
 using System.Diagnostics.Eventing.Reader;
 using PayrollPal.Layers.IBLL;

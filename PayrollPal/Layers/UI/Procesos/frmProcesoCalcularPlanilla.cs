@@ -15,6 +15,9 @@ using PayrollPal.Layers.Util;
 using PayrollPal.Layers;
 using PayrollPal.Enumeraciones;
 using PayrollPal.Layers.IBLL;
+using System.IO;
+using System.Drawing.Imaging;
+using Microsoft.Reporting.WinForms;
 
 namespace PayrollPal.UI.Procesos
 {
@@ -64,7 +67,11 @@ namespace PayrollPal.UI.Procesos
                 LimpiarControles();
                 RevisarCombosVacios();
 
+                this.reportViewer1.LocalReport.EnableExternalImages = true;
+                ReportParameter param = new ReportParameter("quickResponse", "Cargar Código");
+                this.reportViewer1.LocalReport.SetParameters(param);
                 this.reportViewer1.RefreshReport();
+
             }
             catch (Exception msg)
             {
@@ -78,6 +85,7 @@ namespace PayrollPal.UI.Procesos
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
             }
+
             this.reportViewer1.RefreshReport();
         }
 
@@ -452,8 +460,8 @@ namespace PayrollPal.UI.Procesos
         private void CrearActualizarPlanEncyDetalle()
         {
             Colaborador oColaborador = new Colaborador();
-            StringBuilder impresion = new StringBuilder();
             //Crear la instancia de PlanillaDetalle
+
 
             oColaborador = this.cmbColaborador.SelectedItem as Colaborador;
             planDet.IdDetalle = bLLPlanilla_Detalle.SecuenciadorPlanDetalle();
@@ -480,86 +488,12 @@ namespace PayrollPal.UI.Procesos
             planEnc.Fechahoy = DateTime.Today;
 
 
-
-            impresion.AppendLine("ENVIO DE PLANILLA:  " + planEnc.IdEncabezado);
-            impresion.AppendLine("");
-            impresion.AppendLine("Planilla No.:  " + planEnc.Codigo.Codigo);
-            impresion.AppendLine("");
-            impresion.AppendLine("ID Colaborador:  " + planDet.IdColaborador);
-            impresion.AppendLine("Nombre completo:  " + planDet.NombreColaborador);
-            impresion.AppendLine("");
-            impresion.AppendLine("");
-            impresion.AppendLine("Fecha de pago: " + planEnc.Codigo.FechaPago.ToString("dd/MM/yyyy"));
-            impresion.AppendLine("");
-            impresion.AppendLine("--Desde:  " + planEnc.Codigo.FechaDesde.ToString("dd/MM/yyyy"));
-            impresion.AppendLine("--Hasta:  " + planEnc.Codigo.FechaHasta.ToString("dd/MM/yyyy"));
-            impresion.AppendLine("");
-            impresion.AppendLine("Horas Ordinarias trabajadas: " + planDet.hrsTrabajadas);
-            impresion.AppendLine("Horas Extraordinarias trabajadas: " + planDet.hrsExtras);
-            impresion.AppendLine("Total de Horas trabajadas: " + (planDet.hrsTrabajadas + planDet.hrsExtras));
-            impresion.AppendLine("");
-            impresion.AppendLine("Salario por Hora Ordinaria: ₡" + planDet.IdColaborador.SalarioHora);
-            impresion.AppendLine("Salario por Hora Extraordinaria: ₡" + (planDet.IdColaborador.SalarioHora) * (decimal)1.5);
-            impresion.AppendLine("");
-            impresion.AppendLine("=================");
-            impresion.AppendLine("DEDUCCIONES");
-            impresion.AppendLine("=================");
-            impresion.AppendLine("");
-
-            foreach (var item in planDet.deducciones_Percepciones_Por_Colaborador)
-            {
-                Deducciones_Percepciones odedPerc = bLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
-                if (odedPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Deduccion)
-                {
-                    impresion.AppendLine("-- " + odedPerc.ToString());
-                }
-            }
-            impresion.AppendLine("");
-            impresion.AppendLine("Total de Deducciones: ₡" + planEnc.TotalGastos);
-
-            impresion.AppendLine("");
-            impresion.AppendLine("");
-            impresion.AppendLine("=================");
-            impresion.AppendLine("PERCEPCIONES");
-            impresion.AppendLine("=================");
-            impresion.AppendLine("");
-
-
-            foreach (var item in planDet.deducciones_Percepciones_Por_Colaborador)
-            {
-                Deducciones_Percepciones odedPerc = bLLDeduccionesPercepciones.SelectById(item.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion);
-                if (odedPerc.Tipo == Enumeraciones.TipoPercepcionDeduccion.Percepcion)
-                {
-                    impresion.AppendLine("-- " + odedPerc.ToString());
-                }
-            }
-            impresion.AppendLine("-------------------------");
-            impresion.AppendLine("Vacaciones disfutadas");
-            impresion.AppendLine("-------------------------");
-
             List<SolicitudVacaciones> solicitudVacaciones = bLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
             >= planEnc.Codigo.FechaDesde && sol.FechaSolicitarHasta <= planEnc.Codigo.FechaHasta && sol.IDColaborador.IDColaborador == planDet.IdColaborador.IDColaborador
             && sol.Observaciones_Final == ObservacionSolicVacaciones.Aprobada && sol.Estado == true).ToList();
 
-
-            foreach (var item in solicitudVacaciones)
-            { 
-                impresion.AppendLine("-- " + item.ToString());
-            }
-            impresion.AppendLine("-----------------------");
-
-            impresion.AppendLine("");
-            impresion.AppendLine("");
-            impresion.AppendLine("Total de Percepciones: ₡" + planEnc.TotalIngresos);
-            impresion.AppendLine("");
-            impresion.AppendLine("");
-            impresion.AppendLine("TOTAL A PAGAR: ₡" + planEnc.TotalPagar);
-
             decimal dolar = decimal.Parse(this.txtTipoCambio.Text);
 
-            impresion.AppendLine("TOTAL A PAGAR: $" + bLLPlanilla_Detalle.CalcularSalarioDolares(planDet, dolar));
-
-            this.txtImprimir.Text = impresion.ToString();
 
             planEnc.Codigo.Estado = PlanillaEstado.PorEnviar;
             planDet.IdEncabezado = planEnc;
@@ -569,9 +503,53 @@ namespace PayrollPal.UI.Procesos
             bLLPlanilla_Encabezado.Create(planEnc);
             bLLPlanilla_Detalle.Create(planDet);
 
-            //Codigo test para cargar el reporte
-            this.dataTable1TableAdapter.Fill(this.dSPlanillaEnviar.DataTable1, planEnc.IdEncabezado);
+            #region Creacion Código QR
+            //Se consulta si el directorio temp existe caso contrario lo crea
+            if (!Directory.Exists(@"C:\temp"))
+                Directory.CreateDirectory(@"C:\temp");
+            // Convertir imagen a QR, se envía por parámetro lo que se requiere 
+
+            string nombreCompletoColaborador = planDet.IdColaborador.Nombre + " " + planDet.IdColaborador.Apellido1 +
+                " " + planDet.IdColaborador.Apellido2;
+            string montoAPagarCol = planEnc.TotalPagar.ToString();
+            double dolares = (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            string montoAPagarDol = dolares.ToString();
+
+            Image imagen = QuickResponse.QuickResponseGenerador(planDet.IdColaborador.IDColaborador, nombreCompletoColaborador, montoAPagarCol, montoAPagarDol, 53);
+            // Salvar imagen en la carpeta temp
+            imagen.Save(@"c:\temp\qr.png", ImageFormat.Png);
+            // Config imagen del QR (Para poder pasar una imagen por parámetro se 
+            //debe realizar con la siguiente linea
+            string ruta = @"file:///" + @"C:/temp/qr.png";
+            #endregion
+
+            #region Creacion Reporte
+            //Llamado e invocación del Reporte (si el fill del reporte tiene 
+            //parametros)
+            //Se deberá indicar los valores en el mismo orden como los recibe el
+            //fill
+
+
+
+            this.dataTable2TableAdapter.Fill(this.dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
+            // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
+            //creado y el valor
+            
+            ReportParameter param = new ReportParameter("quickResponse", ruta);
+
+            //Pasamos el array de los parámetros al ReportViewer
+            this.reportViewer1.LocalReport.SetParameters(param);
+            //Se recarga el Reporte
             this.reportViewer1.RefreshReport();
+            #endregion
+
+            DialogResult resultado = MessageBox.Show("Planilla de pago: " + planEnc.Codigo.Codigo + "Enviada" +
+                "\n¿Desea enviarla al colaborador ahora?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+
+            }
 
         }
     }
