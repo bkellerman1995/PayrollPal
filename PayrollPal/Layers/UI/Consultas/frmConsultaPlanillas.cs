@@ -34,6 +34,10 @@ namespace PayrollPal.Layers.UI.Consultas
         Planilla_Encabezado planEnc = new Planilla_Encabezado();
         Planilla_Detalle planDet = new Planilla_Detalle();
 
+        DSPlanillaEnviar dSPlanillaEnviar = new DSPlanillaEnviar();
+        
+
+        DSPlanillaEnviarTableAdapters.DataTable2TableAdapter tableAdapter = new DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
 
         public frmConsultaPlanillas()
         {
@@ -47,6 +51,18 @@ namespace PayrollPal.Layers.UI.Consultas
             this.txtColab.Text = "col21";
             string idColaborador = this.txtColab.Text;
             CargarPlanillasDePagoPorFecha(idColaborador);
+
+
+            ReportDataSource reportDataSource = new ReportDataSource("DataSetPlanillaEnviar", dSPlanillaEnviar.Tables["DataTable2"]);
+            
+
+            this.reportViewer1.LocalReport.EnableExternalImages = true;
+            ReportParameter param = new ReportParameter("quickResponse", "Cargar Código");
+            this.reportViewer1.LocalReport.SetParameters(param);
+            this.reportViewer1.RefreshReport();
+
+
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
         }
 
@@ -168,9 +184,6 @@ namespace PayrollPal.Layers.UI.Consultas
 
             decimal dolar = (decimal)(planEnc.TipoCambio);
 
-            bLLPlanilla_Encabezado.Create(planEnc);
-            bLLPlanilla_Detalle.Create(planDet);
-
             #region Creacion Código QR
             //Se consulta si el directorio temp existe caso contrario lo crea
             if (!Directory.Exists(@"C:\temp"))
@@ -197,16 +210,16 @@ namespace PayrollPal.Layers.UI.Consultas
             //Se deberá indicar los valores en el mismo orden como los recibe el
             //fill
 
-            DSPlanillaEnviar dSPlanillaEnviar = new DSPlanillaEnviar();
+ 
 
-            DSPlanillaEnviarTableAdapters.DataTable2TableAdapter tableAdapter = new DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
-            ReportDataSource reportDataSource = new ReportDataSource("DSPlanillaEnviar", dSPlanillaEnviar.Tables["DataTable2"]);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
+            tableAdapter.Fill(dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
 
             // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
             //creado y el valor
 
             ReportParameter param = new ReportParameter("quickResponse", ruta);
+
+            reportViewer1.ProcessingMode = ProcessingMode.Local;
 
             //Pasamos el array de los parámetros al ReportViewer
             this.reportViewer1.LocalReport.SetParameters(param);
