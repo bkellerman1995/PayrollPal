@@ -15,6 +15,8 @@ namespace PayrollPal.Layers.Entities
         public double TotalGastos { set; get; }
         public double TotalPagar { set; get; }
 
+        public DateTime Fechahoy { set; get; }
+
         public override string ToString()
         {
             return IdEncabezado + " - " + Codigo;

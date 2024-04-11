@@ -477,6 +477,7 @@ namespace PayrollPal.UI.Procesos
             planEnc.TotalIngresos = (double)bLLPlanilla_Detalle.CalcularSalarioBruto(planDet);
             planEnc.TotalGastos = (double)bLLPlanilla_Detalle.CalcularSalarioBruto(planDet) - (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
             planEnc.TotalPagar = (double)bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
+            planEnc.Fechahoy = DateTime.Today;
 
 
 

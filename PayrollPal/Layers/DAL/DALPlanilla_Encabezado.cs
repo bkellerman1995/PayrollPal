@@ -79,6 +79,7 @@ namespace PayrollPal.Layers.DAL
                         planillaEnc.TotalIngresos = double.Parse(dr["TotalIngresos"].ToString());
                         planillaEnc.TotalGastos = double.Parse(dr["TotalGastos"].ToString());
                         planillaEnc.TotalPagar = double.Parse(dr["TotalPagar"].ToString());
+                        planillaEnc.Fechahoy = DateTime.Parse(dr["TotalPagar"].ToString());
 
                         lista.Add(planillaEnc);
                     }
@@ -130,6 +131,7 @@ namespace PayrollPal.Layers.DAL
                     planillaEnc.TotalIngresos = double.Parse(dt.Rows[0]["TotalIngresos"].ToString());
                     planillaEnc.TotalGastos = double.Parse(dt.Rows[0]["TotalGastos"].ToString());
                     planillaEnc.TotalPagar = double.Parse(dt.Rows[0]["TotalPagar"].ToString());
+                    planillaEnc.Fechahoy = DateTime.Parse(dt.Rows[0]["TotalPagar"].ToString());
                     return planillaEnc;
                 }
                 return null;
@@ -163,6 +165,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@TotalIngresos", pPlanillaEncabezado.TotalIngresos);
                     command.Parameters.AddWithValue("@TotalGastos", pPlanillaEncabezado.TotalGastos);
                     command.Parameters.AddWithValue("@TotalPagar", pPlanillaEncabezado.TotalPagar);
+                    command.Parameters.AddWithValue("@FechaHoy", pPlanillaEncabezado.Fechahoy);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -201,6 +204,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@TotalIngresos", pPlanillaEncabezado.TotalIngresos);
                     command.Parameters.AddWithValue("@TotalGastos", pPlanillaEncabezado.TotalGastos);
                     command.Parameters.AddWithValue("@TotalPagar", pPlanillaEncabezado.TotalPagar);
+                    command.Parameters.AddWithValue("@TotalPagar", pPlanillaEncabezado.Fechahoy);
 
 
                     command.CommandType = CommandType.StoredProcedure;

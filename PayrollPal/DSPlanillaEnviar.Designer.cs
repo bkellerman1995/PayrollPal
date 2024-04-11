@@ -315,7 +315,11 @@ namespace PayrollPal {
             
             private global::System.Data.DataColumn columnSalarioHora;
             
+            private global::System.Data.DataColumn columnVacaciones;
+            
             private global::System.Data.DataColumn columnDeduccionesList;
+            
+            private global::System.Data.DataColumn columnPercepcionesList;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -496,9 +500,25 @@ namespace PayrollPal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn VacacionesColumn {
+                get {
+                    return this.columnVacaciones;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn DeduccionesListColumn {
                 get {
                     return this.columnDeduccionesList;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn PercepcionesListColumn {
+                get {
+                    return this.columnPercepcionesList;
                 }
             }
             
@@ -558,7 +578,9 @@ namespace PayrollPal {
                         System.DateTime FechaDesde, 
                         System.DateTime FechaHasta, 
                         decimal SalarioHora, 
-                        string DeduccionesList) {
+                        string Vacaciones, 
+                        string DeduccionesList, 
+                        string PercepcionesList) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IdEncabezado,
@@ -579,7 +601,9 @@ namespace PayrollPal {
                         FechaDesde,
                         FechaHasta,
                         SalarioHora,
-                        DeduccionesList};
+                        Vacaciones,
+                        DeduccionesList,
+                        PercepcionesList};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -628,7 +652,9 @@ namespace PayrollPal {
                 this.columnFechaDesde = base.Columns["FechaDesde"];
                 this.columnFechaHasta = base.Columns["FechaHasta"];
                 this.columnSalarioHora = base.Columns["SalarioHora"];
+                this.columnVacaciones = base.Columns["Vacaciones"];
                 this.columnDeduccionesList = base.Columns["DeduccionesList"];
+                this.columnPercepcionesList = base.Columns["PercepcionesList"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -670,8 +696,12 @@ namespace PayrollPal {
                 base.Columns.Add(this.columnFechaHasta);
                 this.columnSalarioHora = new global::System.Data.DataColumn("SalarioHora", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSalarioHora);
+                this.columnVacaciones = new global::System.Data.DataColumn("Vacaciones", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVacaciones);
                 this.columnDeduccionesList = new global::System.Data.DataColumn("DeduccionesList", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDeduccionesList);
+                this.columnPercepcionesList = new global::System.Data.DataColumn("PercepcionesList", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPercepcionesList);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIdEncabezado,
                                 this.columnIdDetalle}, true));
@@ -682,8 +712,12 @@ namespace PayrollPal {
                 this.columnIdDetalle.MaxLength = 20;
                 this.columnIdColaborador.MaxLength = 20;
                 this.columnNombreColaborador.MaxLength = 60;
+                this.columnVacaciones.ReadOnly = true;
+                this.columnVacaciones.MaxLength = 2147483647;
                 this.columnDeduccionesList.ReadOnly = true;
                 this.columnDeduccionesList.MaxLength = 2147483647;
+                this.columnPercepcionesList.ReadOnly = true;
+                this.columnPercepcionesList.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1104,6 +1138,22 @@ namespace PayrollPal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Vacaciones {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.VacacionesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Vacaciones\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.VacacionesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string DeduccionesList {
                 get {
                     try {
@@ -1115,6 +1165,22 @@ namespace PayrollPal {
                 }
                 set {
                     this[this.tableDataTable1.DeduccionesListColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string PercepcionesList {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.PercepcionesListColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PercepcionesList\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.PercepcionesListColumn] = value;
                 }
             }
             
@@ -1312,6 +1378,18 @@ namespace PayrollPal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsVacacionesNull() {
+                return this.IsNull(this.tableDataTable1.VacacionesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetVacacionesNull() {
+                this[this.tableDataTable1.VacacionesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDeduccionesListNull() {
                 return this.IsNull(this.tableDataTable1.DeduccionesListColumn);
             }
@@ -1320,6 +1398,18 @@ namespace PayrollPal {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetDeduccionesListNull() {
                 this[this.tableDataTable1.DeduccionesListColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsPercepcionesListNull() {
+                return this.IsNull(this.tableDataTable1.PercepcionesListColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetPercepcionesListNull() {
+                this[this.tableDataTable1.PercepcionesListColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1500,7 +1590,9 @@ namespace PayrollPal.DSPlanillaEnviarTableAdapters {
             tableMapping.ColumnMappings.Add("FechaDesde", "FechaDesde");
             tableMapping.ColumnMappings.Add("FechaHasta", "FechaHasta");
             tableMapping.ColumnMappings.Add("SalarioHora", "SalarioHora");
+            tableMapping.ColumnMappings.Add("Vacaciones", "Vacaciones");
             tableMapping.ColumnMappings.Add("DeduccionesList", "DeduccionesList");
+            tableMapping.ColumnMappings.Add("PercepcionesList", "PercepcionesList");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1535,11 +1627,32 @@ namespace PayrollPal.DSPlanillaEnviarTableAdapters {
                 "on\r\n            WHERE dpp.Estado = 1 \r\n                  AND PD.IdColaborador = " +
                 "C.IdColaborador\r\n                  AND dpp.IdColaborador = PD.IdColaborador\r\n   " +
                 "               AND dp.Tipo = 1 -- Filter by deduction type\r\n            FOR XML " +
-                "PATH(\'\')), 1, 2, \'\')\r\n) AS DeduccionesList\r\n\r\nFROM \r\n    Planilla_Encabezado AS " +
-                "PE \r\nINNER JOIN \r\n    Planilla_Detalle AS PD ON PE.IdEncabezado = PD.IdEncabezad" +
-                "o \r\nINNER JOIN \r\n    PlanillaPago AS PP ON PE.Codigo = PP.Codigo \r\nINNER JOIN \r\n" +
-                "    Colaborador AS C ON PD.IdColaborador = C.IdColaborador\r\nWHERE \r\n    (PE.IdEn" +
-                "cabezado = @IdEncabezado)";
+                "PATH(\'\')), 1, 2, \'\')\r\n) AS DeduccionesList,\r\n\r\n\t (\r\n        SELECT \r\n           " +
+                " STUFF((\r\n                SELECT \', \' + \r\n                       CASE \r\n        " +
+                "                  WHEN dp.Tipo = 0 THEN dp.Nombre\r\n                          ELS" +
+                "E dp.Nombre + \' (\' + CAST(dp.Valor AS VARCHAR(20)) + \'%)\'\r\n                     " +
+                "  END + \r\n                       CASE \r\n                          WHEN dp.Tipo =" +
+                " 0 THEN \'\'\r\n                          ELSE \' + ₡\' + \r\n                          " +
+                "    CAST(CASE WHEN dp.TipoValor = 0 THEN PD.SalarioBruto * (dp.Valor / 100)\r\n   " +
+                "                                     WHEN dp.TipoValor = 1 THEN dp.Valor \r\n     " +
+                "                              END AS VARCHAR(20)) \r\n                       END\r\n" +
+                "                FROM Deducciones_Percepciones_Por_Colaborador AS dpp \r\n         " +
+                "       INNER JOIN Deducciones_Percepciones AS dp ON dpp.CodigoDeduccionPercepcio" +
+                "n = dp.CodigoDeduccionPercepcion\r\n                WHERE dpp.Estado = 1 \r\n       " +
+                "               AND PD.IdColaborador = C.IdColaborador\r\n                      AND" +
+                " dpp.IdColaborador = PD.IdColaborador\r\n                      AND dp.Tipo = 0 -- " +
+                "Filter by perception type\r\n                FOR XML PATH(\'\')), 1, 2, \'\')\r\n    ) A" +
+                "S PercepcionesList,\r\n\r\n(SELECT \r\n     STUFF((SELECT \r\n                 \', \' + \' " +
+                "- Desde \' + FORMAT(SV.FechaSolicitarDesde, \'dd/MM/yyyy\') + \' Hasta \' + FORMAT(SV" +
+                ".FechaSolicitarHasta, \'dd/MM/yyyy\') + \' (Días: \' + CAST(SV.CantidadDias AS VARCH" +
+                "AR(10)) + \')\' \r\n             FROM \r\n                 SolicitudVacaciones AS SV \r" +
+                "\n             WHERE \r\n                 SV.IDColaborador = PD.IdColaborador \r\n   " +
+                "              AND SV.Estado = 1 \r\n                 AND SV.Observaciones_Final = " +
+                "0\r\n             FOR XML PATH(\'\')), 1, 2, \'\') AS ListaVacaciones\r\n) AS Vacaciones" +
+                "\r\nFROM \r\n    Planilla_Encabezado AS PE \r\nINNER JOIN \r\n    Planilla_Detalle AS PD" +
+                " ON PE.IdEncabezado = PD.IdEncabezado \r\nINNER JOIN \r\n    PlanillaPago AS PP ON P" +
+                "E.Codigo = PP.Codigo \r\nINNER JOIN \r\n    Colaborador AS C ON PD.IdColaborador = C" +
+                ".IdColaborador\r\nWHERE \r\n    PE.IdEncabezado = @IdEncabezado;\r\n\r\n";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IdEncabezado", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "IdEncabezado", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
