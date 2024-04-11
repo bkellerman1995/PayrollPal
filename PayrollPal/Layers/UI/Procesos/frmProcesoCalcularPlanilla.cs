@@ -30,6 +30,7 @@ namespace PayrollPal.UI.Procesos
         private ServicioBCCR servicioBCCR = new ServicioBCCR();
 
         private Planilla_Detalle planDet = new Planilla_Detalle();
+        private Planilla_Encabezado planEnc = new Planilla_Encabezado();
 
         IBLLPlanilla_Encabezado bLLPlanilla_Encabezado = new BLLPlanilla_Encabezado();
         IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
@@ -477,7 +478,7 @@ namespace PayrollPal.UI.Procesos
             planDet.SalarioNeto = bLLPlanilla_Detalle.CalcularSalarioNeto(planDet);
 
             //Crear la instancia de PlanillaEncabezado
-            Planilla_Encabezado planEnc = new Planilla_Encabezado();
+
 
             planEnc.IdEncabezado = this.txtIdEncPlan.Text;
             planEnc.Codigo = (PlanillaPago)this.cmbPlanillas.SelectedItem;
@@ -583,7 +584,14 @@ namespace PayrollPal.UI.Procesos
             // Save the byte array to a file
             File.WriteAllBytes(rutaDestino, bytes);
 
-            Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);
+            bool enviado = Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);
+
+            if (enviado == true)
+            {
+                planEnc.Codigo.Estado = PlanillaEstado.Enviada;
+                MessageBox.Show("La planilla con ID: " + planEnc.Codigo.Codigo + " se envió correctamente",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
     }

@@ -25,9 +25,9 @@ namespace PayrollPal.Layers.Util
 
         public String ContrasenaGeneradaGmail = "tcprbobjrnevtoyx";
 
-        public static void Enviar(string cuerpo, string pNombreColaborador, string correoColaborador, string adjunto)
+        public static bool Enviar(string cuerpo, string pNombreColaborador, string correoColaborador, string adjunto)
         {
-
+            bool enviar = false; 
             // mensaje            
             mensaje.AppendFormat("Estimado: ");
             mensaje.AppendFormat(pNombreColaborador);
@@ -63,6 +63,8 @@ namespace PayrollPal.Layers.Util
                     cliente.EnableSsl = true;
                     cliente.Send(correo);
                 }
+
+                enviar = true;
             }
             catch (Exception msg)
             {
@@ -73,9 +75,11 @@ namespace PayrollPal.Layers.Util
                 //    , msg)));
 
                 //Mostrar mensaje al usuario
+                enviar = false; 
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
-
             }
+
+            return enviar;
 
         }
         
