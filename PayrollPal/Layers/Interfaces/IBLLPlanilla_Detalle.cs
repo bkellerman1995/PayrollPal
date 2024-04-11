@@ -36,6 +36,7 @@ namespace PayrollPal.Layers.IBLL
 
         #endregion
 
+
         #region CREATE
         void Create(Planilla_Detalle pPlanillaDetalle);
 

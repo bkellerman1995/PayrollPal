@@ -1,4 +1,5 @@
-﻿using PayrollPal.Layers.UI.Mantenimientos;
+﻿using PayrollPal.Layers.UI.Consultas;
+using PayrollPal.Layers.UI.Mantenimientos;
 using PayrollPal.UI.Consultas;
 using PayrollPal.UI.Mantenimientos;
 using PayrollPal.UI.Procesos;
@@ -126,6 +127,12 @@ namespace PayrollPal.UI
         private void calcularPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmProcesoCalcularPlanilla frm = new frmProcesoCalcularPlanilla();
+            frm.ShowDialog();
+        }
+
+        private void ConsultaPlanillasColab_Click(object sender, EventArgs e)
+        {
+            frmConsultaPlanillas frm = new frmConsultaPlanillas();
             frm.ShowDialog();
         }
     }

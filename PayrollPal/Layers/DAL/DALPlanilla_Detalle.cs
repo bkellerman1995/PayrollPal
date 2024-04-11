@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using log4net;
 using PayrollPal.Layers.IBLL;
 using PayrollPal.Layers.BLL;
+using PayrollPal.Enumeraciones;
 
 
 namespace PayrollPal.Layers.DAL
@@ -274,6 +275,8 @@ namespace PayrollPal.Layers.DAL
 
             }
         }
+
         #endregion
+
     }
 }

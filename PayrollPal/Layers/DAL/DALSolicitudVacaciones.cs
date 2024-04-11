@@ -15,6 +15,7 @@ using PayrollPal.Layers.IBLL;
 using PayrollPal.Layers.BLL;
 
 
+
 namespace PayrollPal.Layers.DAL
 {
     public class DALSolicitudVacaciones : IDALSolicitudVacaciones

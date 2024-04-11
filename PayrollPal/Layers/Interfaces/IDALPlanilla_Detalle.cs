@@ -33,6 +33,7 @@ namespace PayrollPal.Layers.DAL
 
         #endregion
 
+
         #region CREATE
         void CREATE(Planilla_Detalle pPlanilla_Detalle);
 
