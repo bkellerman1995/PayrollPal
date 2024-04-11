@@ -35,7 +35,7 @@ namespace PayrollPal.Layers.UI.Consultas
         Planilla_Detalle planDet = new Planilla_Detalle();
 
         DSPlanillaEnviar dSPlanillaEnviar = new DSPlanillaEnviar();
-        
+
 
         DSPlanillaEnviarTableAdapters.DataTable2TableAdapter tableAdapter = new DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
 
@@ -46,7 +46,7 @@ namespace PayrollPal.Layers.UI.Consultas
 
         private void frmConsultaPlanillas_Load(object sender, EventArgs e)
         {
-            this.btnConsultar.Enabled = false;
+
             this.btnEnviar.Enabled = false;
             this.txtColab.Text = "col21";
             string idColaborador = this.txtColab.Text;
@@ -109,21 +109,6 @@ namespace PayrollPal.Layers.UI.Consultas
             this.dtpFechaHasta.MaxDate = this.dtpFechaDesde.Value;
         }
 
-        private void dgvPlanillas_SelectionChanged(object sender, EventArgs e)
-        {
-            if (this.dgvPlanillas.SelectedRows.Count == 1)
-            {
-                this.btnConsultar.Enabled = true;
-                this.btnEnviar.Enabled = true;
-
-            }
-            else
-            {
-                this.btnConsultar.Enabled = false;
-                this.btnEnviar.Enabled = false;
-            }
-        }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -139,8 +124,15 @@ namespace PayrollPal.Layers.UI.Consultas
                     this.errProv1.Clear();
                 }
 
-                CrearActualizarPlanEncyDetalle();
+                DialogResult resultado = MessageBox.Show("¿Desea enviarla la planilla de pago con ID: " +
+                   planEnc.IdEncabezado + " al correo: " + planDet.IdColaborador.CorreoElectronico + "?",
+                   "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                if (resultado == DialogResult.Yes)
+                {
+                    string rutaPDF = @"C:\temp\" + "Planilla-" + planEnc.IdEncabezado + "-Envío.pdf";
+                    GenerarPDF(this.reportViewer1, rutaPDF);
+                }
             }
             catch (Exception msg)
             {
@@ -157,85 +149,92 @@ namespace PayrollPal.Layers.UI.Consultas
         }
         private void CrearActualizarPlanEncyDetalle()
         {
-            Colaborador oColaborador = bLLColaborador.SelectById(this.txtColab.Text);
-
-            //Crear la instancia de Planillaencabezado
-
-
-            planEnc = this.dgvPlanillas.SelectedRows[0].DataBoundItem as Planilla_Encabezado;
-
-
-            //Crear la instancia de PlanillaDetalle
-
-            var obtenerPlanDet = bLLPlanilla_Detalle.SelectAll().Where(det => det.IdEncabezado.IdEncabezado == planEnc.IdEncabezado).ToList();
-
-            foreach (var item in obtenerPlanDet)
+            try
             {
-                planDet = item;
-                break;
+                Colaborador oColaborador = bLLColaborador.SelectById(this.txtColab.Text);
+
+                //Crear la instancia de Planillaencabezado
+
+
+                planEnc = this.dgvPlanillas.SelectedRows[0].DataBoundItem as Planilla_Encabezado;
+
+
+                //Crear la instancia de PlanillaDetalle
+
+                var obtenerPlanDet = bLLPlanilla_Detalle.SelectAll().Where(det => det.IdEncabezado.IdEncabezado == planEnc.IdEncabezado).ToList();
+
+                foreach (var item in obtenerPlanDet)
+                {
+                    planDet = item;
+                    break;
+                }
+
+                planDet.deducciones_Percepciones_Por_Colaborador = bLLDeducciones_Percepciones_Por_Colaborador.SelectTodo().Where(dedPerc
+                    => dedPerc.Estado = true && dedPerc.IdColaborador.IDColaborador == oColaborador.IDColaborador).ToList();
+
+                List<SolicitudVacaciones> solicitudVacaciones = bLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
+                >= planEnc.Codigo.FechaDesde && sol.FechaSolicitarHasta <= planEnc.Codigo.FechaHasta && sol.IDColaborador.IDColaborador == planDet.IdColaborador.IDColaborador
+                && sol.Observaciones_Final == ObservacionSolicVacaciones.Aprobada && sol.Estado == true).ToList();
+
+                decimal dolar = (decimal)(planEnc.TipoCambio);
+
+                #region Creacion Código QR
+                //Se consulta si el directorio temp existe caso contrario lo crea
+                if (!Directory.Exists(@"C:\temp"))
+                    Directory.CreateDirectory(@"C:\temp");
+                // Convertir imagen a QR, se envía por parámetro lo que se requiere 
+
+                string nombreCompletoColaborador = planDet.IdColaborador.Nombre + " " + planDet.IdColaborador.Apellido1 +
+                    " " + planDet.IdColaborador.Apellido2;
+                string montoAPagarCol = planEnc.TotalPagar.ToString();
+                double dolares = (double)bLLPlanilla_Detalle.CalcularSalarioDolares(planDet, dolar);
+                string montoAPagarDol = dolares.ToString();
+
+                Image imagen = QuickResponse.QuickResponseGenerador(planDet.IdColaborador.IDColaborador, nombreCompletoColaborador, montoAPagarCol, montoAPagarDol, 53);
+                // Salvar imagen en la carpeta temp
+                imagen.Save(@"c:\temp\qr.png", ImageFormat.Png);
+                // Config imagen del QR (Para poder pasar una imagen por parámetro se 
+                //debe realizar con la siguiente linea
+                string ruta = @"file:///" + @"C:/temp/qr.png";
+                #endregion
+
+                #region Creacion Reporte
+                //Llamado e invocación del Reporte (si el fill del reporte tiene 
+                //parametros)
+                //Se deberá indicar los valores en el mismo orden como los recibe el
+                //fill
+
+
+
+                tableAdapter.Fill(dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
+
+                // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
+                //creado y el valor
+
+                ReportParameter param = new ReportParameter("quickResponse", ruta);
+
+                reportViewer1.ProcessingMode = ProcessingMode.Local;
+
+                //Pasamos el array de los parámetros al ReportViewer
+                this.reportViewer1.LocalReport.SetParameters(param);
+                //Se recarga el Reporte
+                this.reportViewer1.RefreshReport();
+                #endregion
+
+                this.btnEnviar.Enabled = true;
             }
-
-            planDet.deducciones_Percepciones_Por_Colaborador = bLLDeducciones_Percepciones_Por_Colaborador.SelectTodo().Where(dedPerc
-                => dedPerc.Estado = true && dedPerc.IdColaborador.IDColaborador == oColaborador.IDColaborador).ToList();
-
-            List<SolicitudVacaciones> solicitudVacaciones = bLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
-            >= planEnc.Codigo.FechaDesde && sol.FechaSolicitarHasta <= planEnc.Codigo.FechaHasta && sol.IDColaborador.IDColaborador == planDet.IdColaborador.IDColaborador
-            && sol.Observaciones_Final == ObservacionSolicVacaciones.Aprobada && sol.Estado == true).ToList();
-
-            decimal dolar = (decimal)(planEnc.TipoCambio);
-
-            #region Creacion Código QR
-            //Se consulta si el directorio temp existe caso contrario lo crea
-            if (!Directory.Exists(@"C:\temp"))
-                Directory.CreateDirectory(@"C:\temp");
-            // Convertir imagen a QR, se envía por parámetro lo que se requiere 
-
-            string nombreCompletoColaborador = planDet.IdColaborador.Nombre + " " + planDet.IdColaborador.Apellido1 +
-                " " + planDet.IdColaborador.Apellido2;
-            string montoAPagarCol = planEnc.TotalPagar.ToString();
-            double dolares = (double)bLLPlanilla_Detalle.CalcularSalarioDolares(planDet, dolar);
-            string montoAPagarDol = dolares.ToString();
-
-            Image imagen = QuickResponse.QuickResponseGenerador(planDet.IdColaborador.IDColaborador, nombreCompletoColaborador, montoAPagarCol, montoAPagarDol, 53);
-            // Salvar imagen en la carpeta temp
-            imagen.Save(@"c:\temp\qr.png", ImageFormat.Png);
-            // Config imagen del QR (Para poder pasar una imagen por parámetro se 
-            //debe realizar con la siguiente linea
-            string ruta = @"file:///" + @"C:/temp/qr.png";
-            #endregion
-
-            #region Creacion Reporte
-            //Llamado e invocación del Reporte (si el fill del reporte tiene 
-            //parametros)
-            //Se deberá indicar los valores en el mismo orden como los recibe el
-            //fill
-
- 
-
-            tableAdapter.Fill(dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
-
-            // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
-            //creado y el valor
-
-            ReportParameter param = new ReportParameter("quickResponse", ruta);
-
-            reportViewer1.ProcessingMode = ProcessingMode.Local;
-
-            //Pasamos el array de los parámetros al ReportViewer
-            this.reportViewer1.LocalReport.SetParameters(param);
-            //Se recarga el Reporte
-            this.reportViewer1.RefreshReport();
-            #endregion
-
-            DialogResult resultado = MessageBox.Show("Planilla de pago: " + planEnc.Codigo.Codigo + "Generada" +
-                "\n¿Desea enviarla al colaborador ahora?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
+            catch (Exception msg)
             {
-                string rutaPDF = @"C:\temp\" + "Planilla-" + planEnc.IdEncabezado + "-Envío.pdf";
-                GenerarPDF(this.reportViewer1, rutaPDF);
-            }
 
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return;
+            }
 
 
         }
@@ -275,8 +274,22 @@ namespace PayrollPal.Layers.UI.Consultas
             {
                 planEnc.Codigo.Estado = PlanillaEstado.Enviada;
                 bLLPlanillaPago.Update(planEnc.Codigo);
-                MessageBox.Show("La planilla con ID: " + planEnc.Codigo.Codigo + " se envió correctamente",
+                MessageBox.Show("La planilla con ID: " + planEnc.IdEncabezado + " se envió correctamente",
                     "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void dgvPlanillas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvPlanillas.SelectedRows.Count == 1)
+            {
+                this.btnEnviar.Enabled = true;
+
+                CrearActualizarPlanEncyDetalle();
+            }
+            else
+            {
+                this.btnEnviar.Enabled = false;
             }
         }
     }

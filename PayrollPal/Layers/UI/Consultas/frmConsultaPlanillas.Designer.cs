@@ -29,21 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConsultaPlanillas));
-            this.btnConsultar = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtColab = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
-            this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.lblHasta = new System.Windows.Forms.Label();
-            this.lblDesde = new System.Windows.Forms.Label();
-            this.btnEnviar = new System.Windows.Forms.Button();
+            this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvPlanillas = new System.Windows.Forms.DataGridView();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Planilla = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,27 +44,23 @@
             this.TotalGastos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalPagar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaHoy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.btnEnviar = new System.Windows.Forms.Button();
+            this.txtColab = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.lblDesde = new System.Windows.Forms.Label();
+            this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
+            this.lblHasta = new System.Windows.Forms.Label();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanillas)).BeginInit();
             this.toolStripMantEmpresa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanillas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultar.Location = new System.Drawing.Point(10, 151);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(125, 32);
-            this.btnConsultar.TabIndex = 4;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -85,7 +74,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.dgvPlanillas);
             this.splitContainer1.Panel1.Controls.Add(this.btnEnviar);
             this.splitContainer1.Panel1.Controls.Add(this.txtColab);
-            this.splitContainer1.Panel1.Controls.Add(this.btnConsultar);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.dtpFechaHasta);
             this.splitContainer1.Panel1.Controls.Add(this.lblDesde);
@@ -99,94 +87,50 @@
             this.splitContainer1.SplitterDistance = 805;
             this.splitContainer1.TabIndex = 5;
             // 
-            // txtColab
+            // toolStripMantEmpresa
             // 
-            this.txtColab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtColab.Location = new System.Drawing.Point(111, 38);
-            this.txtColab.Name = "txtColab";
-            this.txtColab.ReadOnly = true;
-            this.txtColab.Size = new System.Drawing.Size(100, 29);
-            this.txtColab.TabIndex = 12;
+            this.toolStripMantEmpresa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMantEmpresa.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStripMantEmpresa.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSalir});
+            this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
+            this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
+            this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStripMantEmpresa.Size = new System.Drawing.Size(805, 28);
+            this.toolStripMantEmpresa.TabIndex = 18;
+            this.toolStripMantEmpresa.Text = "toolStrip1";
             // 
-            // label1
+            // btnSalir
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 21);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Colaborador";
-            // 
-            // dtpFechaHasta
-            // 
-            this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHasta.Location = new System.Drawing.Point(457, 82);
-            this.dtpFechaHasta.Name = "dtpFechaHasta";
-            this.dtpFechaHasta.Size = new System.Drawing.Size(200, 29);
-            this.dtpFechaHasta.TabIndex = 8;
-            // 
-            // dtpFechaDesde
-            // 
-            this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(102, 84);
-            this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(200, 29);
-            this.dtpFechaDesde.TabIndex = 7;
-            // 
-            // lblHasta
-            // 
-            this.lblHasta.AutoSize = true;
-            this.lblHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHasta.Location = new System.Drawing.Point(402, 90);
-            this.lblHasta.Name = "lblHasta";
-            this.lblHasta.Size = new System.Drawing.Size(49, 21);
-            this.lblHasta.TabIndex = 10;
-            this.lblHasta.Text = "Hasta";
-            // 
-            // lblDesde
-            // 
-            this.lblDesde.AutoSize = true;
-            this.lblDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDesde.Location = new System.Drawing.Point(43, 92);
-            this.lblDesde.Name = "lblDesde";
-            this.lblDesde.Size = new System.Drawing.Size(53, 21);
-            this.lblDesde.TabIndex = 9;
-            this.lblDesde.Text = "Desde";
-            // 
-            // btnEnviar
-            // 
-            this.btnEnviar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviar.Location = new System.Drawing.Point(677, 151);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(125, 32);
-            this.btnEnviar.TabIndex = 13;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
+            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(45, 25);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // dgvPlanillas
             // 
             this.dgvPlanillas.AllowUserToAddRows = false;
             this.dgvPlanillas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPlanillas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPlanillas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPlanillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlanillas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -196,14 +140,14 @@
             this.TotalGastos,
             this.TotalPagar,
             this.FechaHoy});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvPlanillas.Location = new System.Drawing.Point(0, 189);
             this.dgvPlanillas.Margin = new System.Windows.Forms.Padding(1);
             this.dgvPlanillas.Name = "dgvPlanillas";
@@ -214,17 +158,7 @@
             this.dgvPlanillas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlanillas.Size = new System.Drawing.Size(804, 558);
             this.dgvPlanillas.TabIndex = 14;
-            this.dgvPlanillas.SelectionChanged += new System.EventHandler(this.dgvPlanillas_SelectionChanged);
-            // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.test.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(653, 748);
-            this.reportViewer1.TabIndex = 0;
+            this.dgvPlanillas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanillas_CellContentDoubleClick);
             // 
             // ID
             // 
@@ -275,29 +209,83 @@
             this.FechaHoy.Name = "FechaHoy";
             this.FechaHoy.ReadOnly = true;
             // 
-            // toolStripMantEmpresa
+            // btnEnviar
             // 
-            this.toolStripMantEmpresa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMantEmpresa.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStripMantEmpresa.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSalir});
-            this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
-            this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
-            this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(805, 28);
-            this.toolStripMantEmpresa.TabIndex = 18;
-            this.toolStripMantEmpresa.Text = "toolStrip1";
+            this.btnEnviar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnviar.Location = new System.Drawing.Point(677, 151);
+            this.btnEnviar.Name = "btnEnviar";
+            this.btnEnviar.Size = new System.Drawing.Size(125, 32);
+            this.btnEnviar.TabIndex = 13;
+            this.btnEnviar.Text = "Enviar";
+            this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
-            // btnSalir
+            // txtColab
             // 
-            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(45, 25);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.txtColab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtColab.Location = new System.Drawing.Point(111, 38);
+            this.txtColab.Name = "txtColab";
+            this.txtColab.ReadOnly = true;
+            this.txtColab.Size = new System.Drawing.Size(100, 29);
+            this.txtColab.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 21);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Colaborador";
+            // 
+            // dtpFechaHasta
+            // 
+            this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaHasta.Location = new System.Drawing.Point(457, 82);
+            this.dtpFechaHasta.Name = "dtpFechaHasta";
+            this.dtpFechaHasta.Size = new System.Drawing.Size(200, 29);
+            this.dtpFechaHasta.TabIndex = 8;
+            // 
+            // lblDesde
+            // 
+            this.lblDesde.AutoSize = true;
+            this.lblDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDesde.Location = new System.Drawing.Point(43, 92);
+            this.lblDesde.Name = "lblDesde";
+            this.lblDesde.Size = new System.Drawing.Size(53, 21);
+            this.lblDesde.TabIndex = 9;
+            this.lblDesde.Text = "Desde";
+            // 
+            // dtpFechaDesde
+            // 
+            this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaDesde.Location = new System.Drawing.Point(102, 84);
+            this.dtpFechaDesde.Name = "dtpFechaDesde";
+            this.dtpFechaDesde.Size = new System.Drawing.Size(200, 29);
+            this.dtpFechaDesde.TabIndex = 7;
+            // 
+            // lblHasta
+            // 
+            this.lblHasta.AutoSize = true;
+            this.lblHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHasta.Location = new System.Drawing.Point(402, 90);
+            this.lblHasta.Name = "lblHasta";
+            this.lblHasta.Size = new System.Drawing.Size(49, 21);
+            this.lblHasta.TabIndex = 10;
+            this.lblHasta.Text = "Hasta";
+            // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.test.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(653, 748);
+            this.reportViewer1.TabIndex = 0;
             // 
             // errProv1
             // 
@@ -313,22 +301,22 @@
             this.Name = "frmConsultaPlanillas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta de Planillas";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmConsultaPlanillas_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanillas)).EndInit();
             this.toolStripMantEmpresa.ResumeLayout(false);
             this.toolStripMantEmpresa.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanillas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnConsultar;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox txtColab;
         private System.Windows.Forms.Label label1;

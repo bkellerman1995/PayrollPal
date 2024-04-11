@@ -590,7 +590,7 @@ namespace PayrollPal.UI.Procesos
             {
                 planEnc.Codigo.Estado = PlanillaEstado.Enviada;
                 bLLPlanillaPago.Update(planEnc.Codigo);
-                MessageBox.Show("La planilla con ID: " + planEnc.Codigo.Codigo + " se envió correctamente",
+                MessageBox.Show("La planilla con ID: " + planEnc.IdEncabezado + " se envió correctamente",
                     "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
