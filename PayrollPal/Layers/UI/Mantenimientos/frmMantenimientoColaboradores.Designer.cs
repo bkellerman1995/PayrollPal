@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoColaboradores));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblIDSupervisor = new System.Windows.Forms.Label();
+            this.cmbIDSup = new System.Windows.Forms.ComboBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.cmbPuestos = new System.Windows.Forms.ComboBox();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
@@ -120,6 +122,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblIDSupervisor);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbIDSup);
             this.splitContainer1.Panel1.Controls.Add(this.txtID);
             this.splitContainer1.Panel1.Controls.Add(this.cmbPuestos);
             this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
@@ -168,6 +172,28 @@
             this.splitContainer1.SplitterDistance = 641;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // lblIDSupervisor
+            // 
+            this.lblIDSupervisor.AutoSize = true;
+            this.lblIDSupervisor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIDSupervisor.Location = new System.Drawing.Point(903, 432);
+            this.lblIDSupervisor.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblIDSupervisor.Name = "lblIDSupervisor";
+            this.lblIDSupervisor.Size = new System.Drawing.Size(125, 21);
+            this.lblIDSupervisor.TabIndex = 73;
+            this.lblIDSupervisor.Text = "ID de Supervisor";
+            // 
+            // cmbIDSup
+            // 
+            this.cmbIDSup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIDSup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbIDSup.FormattingEnabled = true;
+            this.cmbIDSup.Location = new System.Drawing.Point(1044, 429);
+            this.cmbIDSup.Margin = new System.Windows.Forms.Padding(1);
+            this.cmbIDSup.Name = "cmbIDSup";
+            this.cmbIDSup.Size = new System.Drawing.Size(254, 29);
+            this.cmbIDSup.TabIndex = 72;
             // 
             // txtID
             // 
@@ -958,5 +984,7 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel tslblUsuarioConectado;
+        private System.Windows.Forms.Label lblIDSupervisor;
+        private System.Windows.Forms.ComboBox cmbIDSup;
     }
 }

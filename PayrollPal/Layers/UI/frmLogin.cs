@@ -174,7 +174,7 @@ namespace PayrollPal.Layers.UI
 
                 if (contCamposCorrectos == 2)
                 {
-                    MessageBox.Show("¡Bienvenido(a) al sistema: " + oColaborador.Nombre + "! (usuario: !" + oColaborador.IDUsuario.IDUsuario + ")",
+                    MessageBox.Show("¡Bienvenido(a) al sistema: " + oColaborador.Nombre + "! (usuario: " + oColaborador.IDUsuario.IDUsuario + ")",
                         "BIENVENIDA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     loginCorrecto = true;
                 }
@@ -209,5 +209,10 @@ namespace PayrollPal.Layers.UI
             LoginFormClosed?.Invoke(this, EventArgs.Empty);
         }
 
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            frmLogin.colaboradorLoggeado = null;
+            Application.Exit();
+        }
     }
 }

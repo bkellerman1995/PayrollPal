@@ -61,6 +61,8 @@ namespace PayrollPal.UI.Mantenimientos
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALColaborador
 
+                this.cmbIDSup.Visible = false;
+                this.lblIDSupervisor.Visible = false;
                 CargarLista();
                 CargarCombos();
 
@@ -108,7 +110,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             }
 
-            if (bLLPuesto.SelectAll().Where(puesto => puesto.Estado==true).ToList().Count != 0)
+            if (bLLPuesto.SelectAll().Where(puesto => puesto.Estado == true).ToList().Count != 0)
             {
                 this.errProv1.SetError(this.cmbPuestos, string.Empty);
             }
@@ -173,6 +175,13 @@ namespace PayrollPal.UI.Mantenimientos
 
             this.cmbRol.DataSource = bLLRol.SelectAll();
             this.cmbSupervisor.DataSource = bLLSupervisor.SelectAll();
+
+            List<Supervisor> listaSupervisores = bLLSupervisor.SelectAll();
+
+            foreach (var sup in listaSupervisores)
+            {
+                this.cmbIDSup.Items.Add(sup.IDSupervisor.ToString());
+            }
 
             foreach (var item in bLLPuesto.SelectAll())
             {
@@ -646,6 +655,19 @@ namespace PayrollPal.UI.Mantenimientos
                     return false;
                 }
 
+                //Validar combo IDSupervisor
+
+                if (this.cmbIDSup.SelectedItem != null ||
+                    !this.cmbIDSup.Visible)
+                {
+                    this.errProv1.SetError(this.cmbIDSup, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.cmbSupervisor, "Campo ID supervisor no es correcto");
+                    return false;
+                }
+
                 //Validar pictureBox de Foto
 
                 if (this.pctFoto.Tag == null)
@@ -727,6 +749,7 @@ namespace PayrollPal.UI.Mantenimientos
                 case 1:
                 case 2:
                     supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
+                    oColaborador.supID = this.cmbIDSup.SelectedItem.ToString();
                     oColaborador.IDSupervisor = supervisor;
                     break;
                 case 3:
@@ -985,9 +1008,11 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
         {
+            Rol rol = new Rol();
             if (this.cmbRol.SelectedIndex > 0
                 && bLLRol.EsColaborador((Rol)this.cmbRol.SelectedItem))
             {
+
                 this.cmbSupervisor.Visible = true;
                 this.lblSupervisor.Visible = true;
 
@@ -1006,6 +1031,18 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 this.cmbSupervisor.Visible = false;
                 this.lblSupervisor.Visible = false;
+            }
+            rol = (Rol)this.cmbRol.SelectedItem;
+            if (this.cmbRol.SelectedIndex > 0
+                && rol.IDRol == 2)
+            {
+                this.cmbIDSup.Visible = true;
+                this.lblIDSupervisor.Visible = true;
+            }
+            else
+            {
+                this.cmbIDSup.Visible = false;
+                this.lblIDSupervisor.Visible = false;
             }
         }
 

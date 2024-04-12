@@ -46,6 +46,26 @@ namespace PayrollPal.UI.Mantenimientos
                 //del DALUsuario
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
     " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
+
+                switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                {
+                    case 2:
+
+                        this.btnAgregar.Enabled = false;
+                        this.btnEliminar.Enabled = false;
+                        this.lblColaborador.Visible = false;
+                        this.cmbColaborador.Visible = false;
+                        this.lblEstado.Visible = false;
+
+                        break;
+
+                    case 3:
+
+                        this.lblObservacionesFinales.Visible = false;
+                        this.cmbObservacionesFinales.Visible = false;
+                        break;
+                }
+
                 CargarListas();
                 CargarCombos();
                 RevisarCombosListasVacios();
@@ -74,6 +94,15 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
+                switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                {
+                    case 2:
+                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(
+                            sol => sol.IDColaborador.IDSupervisor.IDSupervisor == frmLogin.colaboradorLoggeado.supID).ToList();
+                        break;
+                    default:
+                        break;
+                }
                 this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
                 this.dgvSolicitud.ClearSelection();
 
@@ -95,11 +124,18 @@ namespace PayrollPal.UI.Mantenimientos
 
         private void CargarCombos()
         {
-            List<Colaborador> listaColab = bLLColaborador.SelectAll();
-            foreach (var colab in listaColab)
-            {
-                this.cmbColaborador.Items.Add(colab);
-            }
+            List<Colaborador> listaColab = new List<Colaborador>();
+            //foreach (var colab in listaColab)
+            //{
+            //    this.cmbColaborador.Items.Add(colab);
+            //}
+
+            //switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+            //{
+            //    case 2:
+            //        listaColab = bLLColaborador.SelectAll().Where(col => col.IDSupervisor == .
+
+            //}
 
             foreach (ObservacionSolicVacaciones obs in Enum.GetValues(typeof(ObservacionSolicVacaciones)))
             {
@@ -443,22 +479,43 @@ namespace PayrollPal.UI.Mantenimientos
         {
             //Crear la instancia de SolicitudVacaciones
             SolicitudVacaciones oSolicitud = new SolicitudVacaciones();
-
-
             oSolicitud.IDSolicitudVacas = this.txtID.Text;
-            oSolicitud.IDColaborador = this.cmbColaborador.SelectedItem as Colaborador;
             oSolicitud.FechaSolicitud = this.dtpFechaSolicitud.Value;
             oSolicitud.FechaSolicitarDesde = this.dtpFechaDesde.Value;
             oSolicitud.FechaSolicitarHasta = this.dtpFechaHasta.Value;
             oSolicitud.CantidadDias = int.Parse(this.txtCantDias.Text);
             oSolicitud.Observaciones = this.txtObservaciones.Text;
 
-            if (this.rdbActiva.Checked)
-                oSolicitud.Estado = true;
-            if (this.rdbInactiva.Checked)
-                oSolicitud.Estado = false;
+            switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+            {
+                case 2:
 
-            oSolicitud.Observaciones_Final = (ObservacionSolicVacaciones)this.cmbObservacionesFinales.SelectedItem;
+                    oSolicitud.IDColaborador = frmLogin.colaboradorLoggeado;
+                    if (this.rdbActiva.Checked)
+                        oSolicitud.Estado = true;
+                    if (this.rdbInactiva.Checked)
+                        oSolicitud.Estado = false;
+
+                    oSolicitud.Observaciones_Final = (ObservacionSolicVacaciones)this.cmbObservacionesFinales.SelectedItem;
+
+                    break;
+
+
+                case 3:
+
+                    oSolicitud.IDColaborador = frmLogin.colaboradorLoggeado;
+
+                    if (this.rdbActiva.Checked)
+                        oSolicitud.Estado = true;
+                    if (this.rdbInactiva.Checked)
+                        oSolicitud.Estado = false;
+
+                    oSolicitud.Observaciones_Final = ObservacionSolicVacaciones.Rechazada;
+
+                    break;
+            }
+
+
 
             //Se llama al método Create del Usuario 
             //que se encarga de revisar si el usuario existe primero
@@ -542,25 +599,37 @@ namespace PayrollPal.UI.Mantenimientos
                 switch (opcion)
                 {
                     case 'C':
-                        //habiitar los botones de limpiar, 
-                        //agregar y salir
+
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
+                        this.txtID.Enabled = true;
+                        this.txtObservaciones.Enabled = true;
+
+                        switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                        {
+                            case 2:
+                                this.cmbColaborador.Enabled = true;
+                                this.cmbObservacionesFinales.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+                                break;
+
+                            case 3:
+                                this.dtpFechaSolicitud.Enabled = true;
+                                this.dtpFechaDesde.Enabled = true;
+                                this.dtpFechaHasta.Enabled = true;
+                                this.txtCantDias.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+
+                                break;
+
+
+                        }
+
                         this.txtID.Text = this.txtID.Text + bLLSolicitudVacaciones.SecuenciadorSolicitudVacaciones();
 
-                        //habilitar los controles de texto (txtBox)
-
-                        this.txtID.Enabled = true;
-                        this.cmbColaborador.Enabled = true;
-                        this.dtpFechaSolicitud.Enabled = true;
-                        this.dtpFechaDesde.Enabled = true;
-                        this.dtpFechaHasta.Enabled = true;
-                        this.txtCantDias.Enabled = true;
-                        this.txtObservaciones.Enabled = true;
-                        this.cmbObservacionesFinales.Enabled = true;
-                        this.rdbActiva.Enabled = true;
-                        this.rdbInactiva.Enabled = true;
                         break;
 
                     case 'U':
@@ -568,19 +637,31 @@ namespace PayrollPal.UI.Mantenimientos
                         //y salir
                         this.btnLimpiar.Enabled = true;
                         this.btnSalir.Enabled = true;
-
-                        //habilitar los controles de texto (txtBox)
-
                         this.txtID.ReadOnly = true;
-                        this.cmbColaborador.Enabled = true;
-                        this.dtpFechaSolicitud.Enabled = true;
-                        this.dtpFechaDesde.Enabled = true;
-                        this.dtpFechaHasta.Enabled = true;
-                        this.txtCantDias.Enabled = true;
                         this.txtObservaciones.Enabled = true;
-                        this.cmbObservacionesFinales.Enabled = true;
-                        this.rdbActiva.Enabled = true;
-                        this.rdbInactiva.Enabled = true;
+
+                        switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                        {
+                            case 2:
+                                this.cmbColaborador.Enabled = true;
+                                this.cmbObservacionesFinales.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+                                break;
+
+                            case 3:
+                                this.dtpFechaSolicitud.Enabled = true;
+                                this.dtpFechaDesde.Enabled = true;
+                                this.dtpFechaHasta.Enabled = true;
+                                this.txtCantDias.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+
+                                break;
+
+
+                        }
+
                         break;
 
 

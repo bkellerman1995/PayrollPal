@@ -49,7 +49,7 @@ namespace PayrollPal.Layers.UI.Consultas
             this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
     " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
             this.btnEnviar.Enabled = false;
-            this.txtColab.Text = "col21";
+            this.txtColab.Text = frmLogin.colaboradorLoggeado.IDColaborador;
             string idColaborador = this.txtColab.Text;
             CargarPlanillasDePagoPorFecha(idColaborador);
 

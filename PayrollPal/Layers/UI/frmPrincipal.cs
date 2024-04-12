@@ -37,9 +37,46 @@ namespace PayrollPal.UI
 
         private void frmLogin_LoginFormClosed(object sender, EventArgs e)
         {
- 
-            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
-                " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
+            if (frmLogin.colaboradorLoggeado != null)
+            {
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +" Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
+
+                //switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                //{
+                //    case 2:
+                //        this.usuariosToolStripMenuItem.Enabled = false;
+                //        this.rolToolStripMenuItem.Enabled = false;
+                //        this.puestoToolStripMenuItem.Enabled = false;
+                //        this.supervisorToolStripMenuItem.Enabled = false;
+                //        this.colaboradoresToolStripMenuItem.Enabled = false;
+                //        this.planillasDePagoToolStripMenuItem.Enabled = false;
+                //        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
+                //        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
+                //        this.procesosToolStripMenuItem.Enabled = false;
+
+                //        break;
+                //    case 3:
+                //        this.usuariosToolStripMenuItem.Enabled= false;
+                //        this.rolToolStripMenuItem.Enabled = false;
+                //        this.puestoToolStripMenuItem.Enabled = false;
+                //        this.supervisorToolStripMenuItem.Enabled = false;
+                //        this.colaboradoresToolStripMenuItem.Enabled = false;
+                //        this.planillasDePagoToolStripMenuItem.Enabled = false;
+                //        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
+                //        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
+
+                //        this.procesosToolStripMenuItem.Enabled = false;
+                //        this.reportesToolStripMenuItem.Enabled = false;
+
+                //        break;
+                //    default:
+                //        break;
+                //}
+
+                frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
+                frm.ShowDialog();
+            }
+
 
         }
 
@@ -51,7 +88,7 @@ namespace PayrollPal.UI
         /// <param name="e"></param>
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?","Pregunta",
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)

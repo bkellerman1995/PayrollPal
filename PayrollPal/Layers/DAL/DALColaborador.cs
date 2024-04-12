@@ -64,6 +64,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        colaborador.supID = dr["supID"].ToString();
 
 
                         lista.Add(colaborador);
@@ -164,6 +165,7 @@ namespace PayrollPal.Layers.DAL {
                     oColaborador.IDSupervisor = _BLLSupervisor.SelectById(dt.Rows[0]["IDSupervisor"].ToString());
                     oColaborador.Foto = (byte[])dt.Rows[0]["Foto"];
                     oColaborador.Estado = bool.Parse(dt.Rows[0]["Estado"].ToString());
+                    oColaborador.supID = dt.Rows[0]["supID"].ToString();
                     return oColaborador;
                 }
                 return null;
@@ -226,6 +228,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        colaborador.supID = dr["supID"].ToString();
                         lista.Add(colaborador);  // Agregar el objeto a la lista
                     }
                 }
@@ -281,6 +284,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        colaborador.supID = dr["supID"].ToString();
                         lista.Add(colaborador);  // Agregar el objeto a la lista
                     }
                 }
@@ -335,6 +339,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        colaborador.supID = dr["supID"].ToString();
                         lista.Add(colaborador);  // Agregar el objeto a la lista
                     }
                 }
@@ -389,6 +394,7 @@ namespace PayrollPal.Layers.DAL {
                         colaborador.IDSupervisor = _BLLSupervisor.SelectById(dr["IDSupervisor"].ToString());
                         colaborador.Foto = (byte[])dr["Foto"];
                         colaborador.Estado = bool.Parse(dr["Estado"].ToString());
+                        colaborador.supID = dr["supID"].ToString();
                         lista.Add(colaborador);  // Agregar el objeto a la lista
                     }
                 }
@@ -426,6 +432,8 @@ namespace PayrollPal.Layers.DAL {
                     command.Parameters.AddWithValue("@IDUsuario", pColaborador.IDUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@IDSupervisor", pColaborador.IDSupervisor.IDSupervisor);
                     command.Parameters.AddWithValue("@Estado", pColaborador.Estado);
+                    command.Parameters.AddWithValue("@supID", pColaborador.supID);
+
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -474,6 +482,7 @@ namespace PayrollPal.Layers.DAL {
                     command.Parameters.AddWithValue("@IDUsuario", pColaborador.IDUsuario.IDUsuario);
                     command.Parameters.AddWithValue("@IDSupervisor", pColaborador.IDSupervisor.IDSupervisor);
                     command.Parameters.AddWithValue("@Estado", pColaborador.Estado);
+                    command.Parameters.AddWithValue("@supID", pColaborador.supID);
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
                 }
