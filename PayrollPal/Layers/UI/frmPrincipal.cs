@@ -1,4 +1,5 @@
-﻿using PayrollPal.Layers.UI.Consultas;
+﻿using PayrollPal.Layers.UI;
+using PayrollPal.Layers.UI.Consultas;
 using PayrollPal.Layers.UI.Mantenimientos;
 using PayrollPal.UI.Consultas;
 using PayrollPal.UI.Mantenimientos;
@@ -24,7 +25,7 @@ namespace PayrollPal.UI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
+            frmLogin frm = new frmLogin();
             frm.ShowDialog();
         }
 
