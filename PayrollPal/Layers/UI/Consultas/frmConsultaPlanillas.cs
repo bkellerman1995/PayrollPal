@@ -30,6 +30,7 @@ namespace PayrollPal.Layers.UI.Consultas
         IBLLSolicitudVacaciones bLLSolicitudVacaciones = new BLLSolicitudVacaciones();
         IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
         IBLLPlanillaPago bLLPlanillaPago = new BLLPlanillaPago();
+        IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
 
         Planilla_Encabezado planEnc = new Planilla_Encabezado();
         Planilla_Detalle planDet = new Planilla_Detalle();
@@ -62,12 +63,7 @@ namespace PayrollPal.Layers.UI.Consultas
             this.reportViewer1.LocalReport.SetParameters(param);
             this.reportViewer1.RefreshReport();
 
-
-
-
         }
-
-
 
         private void CargarPlanillasDePagoPorFecha(string pIdColaborador)
         {
@@ -154,7 +150,7 @@ namespace PayrollPal.Layers.UI.Consultas
                 Colaborador oColaborador = bLLColaborador.SelectById(this.txtColab.Text);
 
                 //Crear la instancia de Planillaencabezado
-
+                
 
                 planEnc = this.dgvPlanillas.SelectedRows[0].DataBoundItem as Planilla_Encabezado;
 
@@ -283,6 +279,7 @@ namespace PayrollPal.Layers.UI.Consultas
         {
             if (this.dgvPlanillas.SelectedRows.Count == 1)
             {
+
                 this.btnEnviar.Enabled = true;
 
                 CrearActualizarPlanEncyDetalle();
@@ -291,6 +288,77 @@ namespace PayrollPal.Layers.UI.Consultas
             {
                 this.btnEnviar.Enabled = false;
             }
+        }
+
+        private void dgvPlanillas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+            {
+                case 1:
+                    if (this.dgvPlanillas.SelectedRows.Count == 1)
+                    {
+
+                        this.btnEliminar.Visible = true;
+                    }
+                    else
+                    {
+                        this.btnEliminar.Enabled = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar el cálculo de planilla?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    Colaborador oColaborador = bLLColaborador.SelectById(this.txtColab.Text);
+
+                    planEnc = this.dgvPlanillas.SelectedRows[0].DataBoundItem as Planilla_Encabezado;
+
+
+                    //Crear la instancia de PlanillaDetalle
+
+                    var obtenerPlanDet = bLLPlanilla_Detalle.SelectAll().Where(det => det.IdEncabezado.IdEncabezado == planEnc.IdEncabezado).ToList();
+
+                    foreach (var item in obtenerPlanDet)
+                    {
+                        planDet = item;
+                        break;
+                    }
+
+                    bLLPlanilla_Detalle.Delete(planDet.IdDetalle);
+                    bLLPlanilla_Encabezado.Delete(planEnc.IdEncabezado);
+
+                    foreach (var item in bLLControlDeMarcas.SelectAll().Where(cont => cont.IdColaborador == oColaborador.IDColaborador
+                    && DateTime.Parse(cont.Fecha) >= planEnc.Codigo.FechaDesde && DateTime.Parse(cont.Fecha) <= planEnc.Codigo.FechaHasta).ToList())
+                    {
+                        bLLControlDeMarcas.DELETEBYID(item.idMarca);
+                    }
+
+                    MessageBox.Show("Planilla de pago: " + planEnc.IdEncabezado + " eliminada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+
         }
     }
 }

@@ -20,7 +20,7 @@ namespace PayrollPal.Layers.DAL
         private static readonly log4net.ILog _MyLogControlEventos =
                              log4net.LogManager.GetLogger("MyControlEventos");
         #region CREATE  
-        public void CREATE (ControlDeMarcas control)
+        public void CREATE(ControlDeMarcas control)
         {
             try
             {
@@ -146,5 +146,35 @@ namespace PayrollPal.Layers.DAL
         }
         #endregion
 
+        #region DELETE BY ID
+        public void DELETEBYID(int pIdControl)
+        {
+            try
+            {
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_DELETE_ControlDeMarcas_ByID");
+                    command.Parameters.AddWithValue("@idMarca", pIdControl);
+                    command.CommandType = CommandType.StoredProcedure;
+                    db.ExecuteNonQuery(command);
+                }
+
+                _MyLogControlEventos.Info("Se eliminó el control de marca con el ID: " + pIdControl + " en la base de datos (Tabla ControlDeMarcas)");
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+        #endregion
     }
+
 }

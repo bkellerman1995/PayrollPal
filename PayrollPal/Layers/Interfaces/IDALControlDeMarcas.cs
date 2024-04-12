@@ -36,7 +36,12 @@ namespace PayrollPal.Layers.DAL
 
         #region DELETE
         void DELETE();
-		 
+
+        #endregion
+
+        #region DELETE BY ID
+        void DELETEBYID(int id);
+
         #endregion
 
     }

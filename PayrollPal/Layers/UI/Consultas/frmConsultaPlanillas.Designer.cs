@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConsultaPlanillas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
@@ -55,6 +55,7 @@
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,10 +70,12 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnEliminar);
             this.splitContainer1.Panel1.Controls.Add(this.toolStripMantEmpresa);
             this.splitContainer1.Panel1.Controls.Add(this.dgvPlanillas);
             this.splitContainer1.Panel1.Controls.Add(this.btnEnviar);
@@ -86,8 +89,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.reportViewer1);
-            this.splitContainer1.Size = new System.Drawing.Size(1462, 748);
-            this.splitContainer1.SplitterDistance = 805;
+            this.splitContainer1.Size = new System.Drawing.Size(3655, 1870);
+            this.splitContainer1.SplitterDistance = 2012;
+            this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 5;
             // 
             // toolStripMantEmpresa
@@ -99,7 +103,7 @@
             this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
             this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(805, 28);
+            this.toolStripMantEmpresa.Size = new System.Drawing.Size(2012, 65);
             this.toolStripMantEmpresa.TabIndex = 18;
             this.toolStripMantEmpresa.Text = "toolStrip1";
             // 
@@ -110,7 +114,7 @@
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(45, 25);
+            this.btnSalir.Size = new System.Drawing.Size(102, 58);
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -118,22 +122,22 @@
             // 
             this.dgvPlanillas.AllowUserToAddRows = false;
             this.dgvPlanillas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPlanillas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPlanillas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPlanillas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPlanillas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPlanillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlanillas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -143,30 +147,32 @@
             this.TotalGastos,
             this.TotalPagar,
             this.FechaHoy});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvPlanillas.Location = new System.Drawing.Point(0, 189);
-            this.dgvPlanillas.Margin = new System.Windows.Forms.Padding(1);
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPlanillas.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvPlanillas.Location = new System.Drawing.Point(0, 472);
+            this.dgvPlanillas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvPlanillas.Name = "dgvPlanillas";
             this.dgvPlanillas.ReadOnly = true;
             this.dgvPlanillas.RowHeadersVisible = false;
             this.dgvPlanillas.RowHeadersWidth = 102;
             this.dgvPlanillas.RowTemplate.Height = 40;
             this.dgvPlanillas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPlanillas.Size = new System.Drawing.Size(804, 558);
+            this.dgvPlanillas.Size = new System.Drawing.Size(2010, 1395);
             this.dgvPlanillas.TabIndex = 14;
+            this.dgvPlanillas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanillas_CellContentClick);
             this.dgvPlanillas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPlanillas_CellContentDoubleClick);
             // 
             // ID
             // 
             this.ID.DataPropertyName = "IdEncabezado";
             this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 12;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             // 
@@ -174,6 +180,7 @@
             // 
             this.Planilla.DataPropertyName = "Codigo";
             this.Planilla.HeaderText = "Planilla";
+            this.Planilla.MinimumWidth = 12;
             this.Planilla.Name = "Planilla";
             this.Planilla.ReadOnly = true;
             // 
@@ -181,6 +188,7 @@
             // 
             this.TipoCambio.DataPropertyName = "TipoCambio";
             this.TipoCambio.HeaderText = "Tipo de Cambio";
+            this.TipoCambio.MinimumWidth = 12;
             this.TipoCambio.Name = "TipoCambio";
             this.TipoCambio.ReadOnly = true;
             // 
@@ -188,6 +196,7 @@
             // 
             this.TotalIngresos.DataPropertyName = "TotalIngresos";
             this.TotalIngresos.HeaderText = "TotalIngresos";
+            this.TotalIngresos.MinimumWidth = 12;
             this.TotalIngresos.Name = "TotalIngresos";
             this.TotalIngresos.ReadOnly = true;
             // 
@@ -195,6 +204,7 @@
             // 
             this.TotalGastos.DataPropertyName = "TotalGastos";
             this.TotalGastos.HeaderText = "TotalGastos";
+            this.TotalGastos.MinimumWidth = 12;
             this.TotalGastos.Name = "TotalGastos";
             this.TotalGastos.ReadOnly = true;
             // 
@@ -202,6 +212,7 @@
             // 
             this.TotalPagar.DataPropertyName = "TotalPagar";
             this.TotalPagar.HeaderText = "TotalPagar";
+            this.TotalPagar.MinimumWidth = 12;
             this.TotalPagar.Name = "TotalPagar";
             this.TotalPagar.ReadOnly = true;
             // 
@@ -209,15 +220,17 @@
             // 
             this.FechaHoy.DataPropertyName = "Fechahoy";
             this.FechaHoy.HeaderText = "Fecha Generada";
+            this.FechaHoy.MinimumWidth = 12;
             this.FechaHoy.Name = "FechaHoy";
             this.FechaHoy.ReadOnly = true;
             // 
             // btnEnviar
             // 
             this.btnEnviar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviar.Location = new System.Drawing.Point(677, 151);
+            this.btnEnviar.Location = new System.Drawing.Point(1692, 378);
+            this.btnEnviar.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(125, 32);
+            this.btnEnviar.Size = new System.Drawing.Size(312, 80);
             this.btnEnviar.TabIndex = 13;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
@@ -226,19 +239,21 @@
             // txtColab
             // 
             this.txtColab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtColab.Location = new System.Drawing.Point(111, 38);
+            this.txtColab.Location = new System.Drawing.Point(278, 95);
+            this.txtColab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.txtColab.Name = "txtColab";
             this.txtColab.ReadOnly = true;
-            this.txtColab.Size = new System.Drawing.Size(100, 29);
+            this.txtColab.Size = new System.Drawing.Size(244, 61);
             this.txtColab.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 41);
+            this.label1.Location = new System.Drawing.Point(20, 102);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 21);
+            this.label1.Size = new System.Drawing.Size(243, 54);
             this.label1.TabIndex = 11;
             this.label1.Text = "Colaborador";
             // 
@@ -246,18 +261,20 @@
             // 
             this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHasta.Location = new System.Drawing.Point(457, 82);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(1142, 205);
+            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
-            this.dtpFechaHasta.Size = new System.Drawing.Size(200, 29);
+            this.dtpFechaHasta.Size = new System.Drawing.Size(494, 61);
             this.dtpFechaHasta.TabIndex = 8;
             // 
             // lblDesde
             // 
             this.lblDesde.AutoSize = true;
             this.lblDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDesde.Location = new System.Drawing.Point(43, 92);
+            this.lblDesde.Location = new System.Drawing.Point(108, 230);
+            this.lblDesde.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblDesde.Name = "lblDesde";
-            this.lblDesde.Size = new System.Drawing.Size(53, 21);
+            this.lblDesde.Size = new System.Drawing.Size(134, 54);
             this.lblDesde.TabIndex = 9;
             this.lblDesde.Text = "Desde";
             // 
@@ -265,18 +282,20 @@
             // 
             this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(102, 84);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(255, 210);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(200, 29);
+            this.dtpFechaDesde.Size = new System.Drawing.Size(494, 61);
             this.dtpFechaDesde.TabIndex = 7;
             // 
             // lblHasta
             // 
             this.lblHasta.AutoSize = true;
             this.lblHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHasta.Location = new System.Drawing.Point(402, 90);
+            this.lblHasta.Location = new System.Drawing.Point(1005, 225);
+            this.lblHasta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblHasta.Name = "lblHasta";
-            this.lblHasta.Size = new System.Drawing.Size(49, 21);
+            this.lblHasta.Size = new System.Drawing.Size(122, 54);
             this.lblHasta.TabIndex = 10;
             this.lblHasta.Text = "Hasta";
             // 
@@ -285,9 +304,10 @@
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.test.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(653, 748);
+            this.reportViewer1.Size = new System.Drawing.Size(1633, 1870);
             this.reportViewer1.TabIndex = 0;
             // 
             // errProv1
@@ -301,10 +321,10 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 723);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 1809);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(1462, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(3655, 61);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -312,17 +332,31 @@
             // 
             this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
             this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Location = new System.Drawing.Point(1681, 34);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(8);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(312, 80);
+            this.btnEliminar.TabIndex = 19;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Visible = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // frmConsultaPlanillas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1462, 748);
+            this.ClientSize = new System.Drawing.Size(3655, 1870);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.Name = "frmConsultaPlanillas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta de Planillas";
@@ -367,5 +401,6 @@
         private System.Windows.Forms.ErrorProvider errProv1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel tslblUsuarioConectado;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

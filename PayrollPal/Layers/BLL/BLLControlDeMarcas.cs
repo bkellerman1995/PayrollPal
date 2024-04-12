@@ -47,6 +47,14 @@ namespace PayrollPal.Layers.BLL
             dALControlDeMarcas.DELETE();
         }
         #endregion
+
+        #region DELETEBYID
+        public void DELETEBYID(int ID)
+        {
+            IDALControlDeMarcas dALControlDeMarcas = new DALControlDeMarcas();
+            dALControlDeMarcas.DELETE();
+        }
+        #endregion
     }
 
 }

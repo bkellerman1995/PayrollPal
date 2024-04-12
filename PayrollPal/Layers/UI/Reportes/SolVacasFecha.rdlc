@@ -874,19 +874,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Dim observacionesFinal As Integer = Fields!Observaciones_Final.Value ' Example value
-
-
-Dim observacionesFinalString As String
-
-If observacionesFinal = 0 Then
-    observacionesFinalString = "Aprobada"
-ElseIf observacionesFinal = 1 Then
-    observacionesFinalString = "Rechazada"
-Else
-
-    observacionesFinalString = "Estado desconocido"
-End If</Value>
+                            <Value>=Fields!Observaciones_Final.Value</Value>
                             <Style>
                               <FontWeight>Normal</FontWeight>
                               <Color>#333333</Color>
@@ -908,6 +896,7 @@ End If</Value>
                       <PaddingBottom>2pt</PaddingBottom>
                     </Style>
                   </Textbox>
+                  <rd:Selected>true</rd:Selected>
                 </CellContents>
               </TablixHeader>
               <TablixMembers>
@@ -920,7 +909,7 @@ End If</Value>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>0.5in</Height>
-        <Width>14.52083in</Width>
+        <Width>14.52084in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -931,7 +920,7 @@ End If</Value>
     <Height>3.33333in</Height>
     <Style />
   </Body>
-  <Width>14.52083in</Width>
+  <Width>14.52084in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>

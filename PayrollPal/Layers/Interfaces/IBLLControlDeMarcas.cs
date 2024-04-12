@@ -32,6 +32,11 @@ namespace PayrollPal.Layers.IBLL
         void DELETE();
 
         #endregion
+
+        #region DELETE BY ID
+        void DELETEBYID(int id);
+
+        #endregion
     }
 
 }
