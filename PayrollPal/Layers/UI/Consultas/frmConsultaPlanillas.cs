@@ -79,20 +79,19 @@ namespace PayrollPal.Layers.UI.Consultas
                            join detalle in listaPlanDet on encabezado.IdEncabezado equals detalle.IdEncabezado.IdEncabezado
                            select encabezado;
 
-            //List<Planilla_Encabezado> listaEnc = new List<Planilla_Encabezado>();
-
-            //foreach (var planEnc in querySQL)
-            //{
-            //    listaEnc.Add(planEnc);
-            //}
-
 
             this.dgvPlanillas.DataSource = querySQL.OrderBy(enc => enc.Fechahoy).ToList();
             this.dgvPlanillas.ClearSelection();
-            DateTime fechaPagoPrimer = querySQL.First().Codigo.FechaPago;
-            DateTime fechaPagoUltimo = querySQL.Last().Codigo.FechaPago;
-            ConfigurarDateTimePickerFechaDesde(fechaPagoPrimer);
-            ConfigurarDateTimePickerFechaHasta(fechaPagoUltimo);
+
+            if (querySQL.Count() > 0)
+            {
+                DateTime fechaPagoPrimer = querySQL.First().Codigo.FechaPago;
+                DateTime fechaPagoUltimo = querySQL.Last().Codigo.FechaPago;
+                ConfigurarDateTimePickerFechaDesde(fechaPagoPrimer);
+                ConfigurarDateTimePickerFechaHasta(fechaPagoUltimo);
+            }
+
+
         }
 
         private void ConfigurarDateTimePickerFechaDesde(DateTime fechaPagoPrimer)
