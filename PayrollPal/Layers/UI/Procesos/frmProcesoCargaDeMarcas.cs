@@ -1,6 +1,7 @@
 ﻿using PayrollPal.Entities;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,6 +80,8 @@ namespace PayrollPal.UI.Consultas
             CargarEstadoBotones();
             this.pctCargarJSON.Image = PayrollPal.Properties.Resources.Json_sinCheck;
             click_Agregar = false;
+            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+                " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
         }
 
         private void CargarEstadoBotones()

@@ -36,6 +36,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
+
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+                    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALUsuarios
 

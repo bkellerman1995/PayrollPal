@@ -39,13 +39,15 @@
             this.lblRutaArchivoJSON = new System.Windows.Forms.Label();
             this.pctCargarJSON = new System.Windows.Forms.PictureBox();
             this.dgvListaMarcas = new System.Windows.Forms.DataGridView();
-            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.idMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoraEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoraSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasTrabajadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +55,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCargarArchivoJson
@@ -83,6 +86,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel2.Controls.Add(this.dgvListaMarcas);
             this.splitContainer1.Size = new System.Drawing.Size(826, 516);
             this.splitContainer1.SplitterDistance = 185;
@@ -176,10 +180,6 @@
             this.dgvListaMarcas.Size = new System.Drawing.Size(826, 327);
             this.dgvListaMarcas.TabIndex = 5;
             // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
-            // 
             // idMarca
             // 
             this.idMarca.DataPropertyName = "idMarca";
@@ -222,6 +222,31 @@
             this.HorasTrabajadas.Name = "HorasTrabajadas";
             this.HorasTrabajadas.ReadOnly = true;
             // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslblUsuarioConectado});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 302);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(826, 25);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslblUsuarioConectado
+            // 
+            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
+            this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            // 
             // frmProcesoCargaDeMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -237,11 +262,14 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -261,5 +289,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraSalida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasTrabajadas;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel tslblUsuarioConectado;
     }
 }

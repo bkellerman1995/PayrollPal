@@ -33,6 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProcesoCalcularPlanilla));
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.dataTable2BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dSPlanillaEnviar = new PayrollPal.DSPlanillaEnviar();
             this.btnGenerarColilla = new System.Windows.Forms.Button();
             this.lblFechaDesde = new System.Windows.Forms.Label();
             this.lblFechaHasta = new System.Windows.Forms.Label();
@@ -66,9 +68,11 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.txtImprimir = new System.Windows.Forms.TextBox();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataTable2BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dSPlanillaEnviar = new PayrollPal.DSPlanillaEnviar();
             this.dataTable2TableAdapter = new PayrollPal.DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,9 +81,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).BeginInit();
             this.toolStripMantEmpresa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dataTable2BindingSource
+            // 
+            this.dataTable2BindingSource.DataMember = "DataTable2";
+            this.dataTable2BindingSource.DataSource = this.dSPlanillaEnviar;
+            // 
+            // dSPlanillaEnviar
+            // 
+            this.dSPlanillaEnviar.DataSetName = "DSPlanillaEnviar";
+            this.dSPlanillaEnviar.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnGenerarColilla
             // 
@@ -239,6 +252,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel1.Controls.Add(this.lblTipoCambio2);
             this.splitContainer1.Panel1.Controls.Add(this.dgvHorOrdvsExt);
             this.splitContainer1.Panel1.Controls.Add(this.dgvListaMarcas);
@@ -461,19 +475,30 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // dataTable2BindingSource
-            // 
-            this.dataTable2BindingSource.DataMember = "DataTable2";
-            this.dataTable2BindingSource.DataSource = this.dSPlanillaEnviar;
-            // 
-            // dSPlanillaEnviar
-            // 
-            this.dSPlanillaEnviar.DataSetName = "DSPlanillaEnviar";
-            this.dSPlanillaEnviar.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // dataTable2TableAdapter
             // 
             this.dataTable2TableAdapter.ClearBeforeFill = true;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslblUsuarioConectado});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 656);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(846, 25);
+            this.toolStrip1.TabIndex = 45;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslblUsuarioConectado
+            // 
+            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
+            this.tslblUsuarioConectado.Text = "toolStripLabel1";
             // 
             // frmProcesoCalcularPlanilla
             // 
@@ -485,6 +510,8 @@
             this.Text = "Cálculo de Planilla";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmProcesoCalcularPlanilla_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -496,8 +523,8 @@
             this.toolStripMantEmpresa.ResumeLayout(false);
             this.toolStripMantEmpresa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -540,5 +567,7 @@
         private System.Windows.Forms.BindingSource dataTable2BindingSource;
         private DSPlanillaEnviar dSPlanillaEnviar;
         private DSPlanillaEnviarTableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel tslblUsuarioConectado;
     }
 }

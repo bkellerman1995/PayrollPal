@@ -38,7 +38,8 @@ namespace PayrollPal.UI
         private void frmLogin_LoginFormClosed(object sender, EventArgs e)
         {
  
-            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario;
+            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+                " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
 
         }
 

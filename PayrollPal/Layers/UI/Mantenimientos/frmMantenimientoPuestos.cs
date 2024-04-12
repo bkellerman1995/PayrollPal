@@ -12,6 +12,7 @@ using log4net;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.UI;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -46,6 +47,9 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
+
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+                    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 //Cargar el datagridview de puestos con el SELECT_ALL 
                 //del DALPuesto
 

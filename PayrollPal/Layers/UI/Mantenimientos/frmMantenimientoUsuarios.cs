@@ -15,7 +15,7 @@ using System.IO;
 using PayrollPal.Layers.Util;
 using System.Diagnostics.Eventing.Reader;
 using PayrollPal.Layers.IBLL;
-
+using PayrollPal.Layers.UI;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -51,6 +51,8 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALUsuario
 

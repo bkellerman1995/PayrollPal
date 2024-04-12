@@ -15,6 +15,7 @@ using PayrollPal.Layers.Entities;
 using PayrollPal.Enumeraciones;
 using PayrollPal.Layers.DAL;
 using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.UI;
 
 namespace PayrollPal.UI.Mantenimientos
 {
@@ -43,7 +44,8 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 //Cargar el datagridview de usuarios con el SELECT_ALL 
                 //del DALUsuario
-
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 CargarListas();
                 CargarCombos();
                 RevisarCombosListasVacios();

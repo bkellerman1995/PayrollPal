@@ -18,6 +18,7 @@ using PayrollPal.Layers.IBLL;
 using System.IO;
 using System.Drawing.Imaging;
 using Microsoft.Reporting.WinForms;
+using PayrollPal.Layers.UI;
 
 namespace PayrollPal.UI.Procesos
 {
@@ -58,7 +59,8 @@ namespace PayrollPal.UI.Procesos
         {
             try
             {
-
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 this.txtIdEncPlan.Text = "Enc" + DateTime.Now.ToString("yyyyMMdd") + bLLPlanilla_Encabezado.SecuenciadorPlanEnc();
 
                 CargartxtTipoCambio();

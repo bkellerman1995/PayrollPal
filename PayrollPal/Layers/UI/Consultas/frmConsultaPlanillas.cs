@@ -46,7 +46,8 @@ namespace PayrollPal.Layers.UI.Consultas
 
         private void frmConsultaPlanillas_Load(object sender, EventArgs e)
         {
-
+            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
             this.btnEnviar.Enabled = false;
             this.txtColab.Text = "col21";
             string idColaborador = this.txtColab.Text;

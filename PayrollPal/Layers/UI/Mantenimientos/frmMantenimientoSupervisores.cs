@@ -45,6 +45,9 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         {
             try
             {
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+                    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
+                frmLogin frm = new frmLogin();
                 //Cargar el datagridview de supervisores con el SELECT_ALL 
                 //del DALSupervisor
 

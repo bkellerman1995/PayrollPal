@@ -16,6 +16,7 @@ using PayrollPal.Layers.Util;
 using System.IO;
 using PayrollPal.Enumeraciones;
 using PayrollPal.Layers.IBLL;
+using PayrollPal.Layers.UI;
 
 namespace PayrollPal
 {
@@ -40,6 +41,8 @@ namespace PayrollPal
         {
             try
             {
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 //Método para configurar los valores de los datetimepicker
                 ConfigurarDateTimePickerFechaDesde();
                 ConfigurarDateTimePickerFechaHasta();
