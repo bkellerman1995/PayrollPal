@@ -41,37 +41,37 @@ namespace PayrollPal.UI
             {
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +" Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
 
-                //switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
-                //{
-                //    case 2:
-                //        this.usuariosToolStripMenuItem.Enabled = false;
-                //        this.rolToolStripMenuItem.Enabled = false;
-                //        this.puestoToolStripMenuItem.Enabled = false;
-                //        this.supervisorToolStripMenuItem.Enabled = false;
-                //        this.colaboradoresToolStripMenuItem.Enabled = false;
-                //        this.planillasDePagoToolStripMenuItem.Enabled = false;
-                //        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
-                //        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
-                //        this.procesosToolStripMenuItem.Enabled = false;
+                switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                {
+                    case 2:
+                        this.usuariosToolStripMenuItem.Enabled = false;
+                        this.rolToolStripMenuItem.Enabled = false;
+                        this.puestoToolStripMenuItem.Enabled = false;
+                        this.supervisorToolStripMenuItem.Enabled = false;
+                        this.colaboradoresToolStripMenuItem.Enabled = false;
+                        this.planillasDePagoToolStripMenuItem.Enabled = false;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
+                        this.procesosToolStripMenuItem.Enabled = false;
 
-                //        break;
-                //    case 3:
-                //        this.usuariosToolStripMenuItem.Enabled= false;
-                //        this.rolToolStripMenuItem.Enabled = false;
-                //        this.puestoToolStripMenuItem.Enabled = false;
-                //        this.supervisorToolStripMenuItem.Enabled = false;
-                //        this.colaboradoresToolStripMenuItem.Enabled = false;
-                //        this.planillasDePagoToolStripMenuItem.Enabled = false;
-                //        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
-                //        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
+                        break;
+                    case 3:
+                        this.usuariosToolStripMenuItem.Enabled = false;
+                        this.rolToolStripMenuItem.Enabled = false;
+                        this.puestoToolStripMenuItem.Enabled = false;
+                        this.supervisorToolStripMenuItem.Enabled = false;
+                        this.colaboradoresToolStripMenuItem.Enabled = false;
+                        this.planillasDePagoToolStripMenuItem.Enabled = false;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
 
-                //        this.procesosToolStripMenuItem.Enabled = false;
-                //        this.reportesToolStripMenuItem.Enabled = false;
+                        this.procesosToolStripMenuItem.Enabled = false;
+                        this.reportesToolStripMenuItem.Enabled = false;
 
-                //        break;
-                //    default:
-                //        break;
-                //}
+                        break;
+                    default:
+                        break;
+                }
 
                 frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
                 frm.ShowDialog();

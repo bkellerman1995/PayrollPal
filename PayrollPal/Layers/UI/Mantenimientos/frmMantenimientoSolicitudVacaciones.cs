@@ -53,16 +53,20 @@ namespace PayrollPal.UI.Mantenimientos
 
                         this.btnAgregar.Enabled = false;
                         this.btnEliminar.Enabled = false;
+                        this.lblEstado.Visible = false;
                         this.lblColaborador.Visible = false;
                         this.cmbColaborador.Visible = false;
-                        this.lblEstado.Visible = false;
 
                         break;
 
                     case 3:
 
+                        this.btnAgregar.Enabled = true;
                         this.lblObservacionesFinales.Visible = false;
                         this.cmbObservacionesFinales.Visible = false;
+                        this.lblColaborador.Visible = false;
+                        this.cmbColaborador.Visible = false;
+
                         break;
                 }
 
@@ -100,10 +104,15 @@ namespace PayrollPal.UI.Mantenimientos
                         this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(
                             sol => sol.IDColaborador.IDSupervisor.IDSupervisor == frmLogin.colaboradorLoggeado.supID).ToList();
                         break;
+                    case 3:
+                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(
+                            sol => sol.IDColaborador == frmLogin.colaboradorLoggeado).ToList();
+                        break;
                     default:
+                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
                         break;
                 }
-                this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
+
                 this.dgvSolicitud.ClearSelection();
 
             }
@@ -218,7 +227,7 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                this.btnAgregar.Enabled = true;
+
                 this.btnEditar.Enabled = false;
                 this.btnEliminar.Enabled = false;
                 this.btnLimpiar.Enabled = false;
@@ -353,8 +362,14 @@ namespace PayrollPal.UI.Mantenimientos
                     //Asignar a cada control los datos de la solicitudDeVacaciones
                     this.txtID.Text = oSolicitud.IDSolicitudVacas.ToString();
                     this.cmbColaborador.Text = oSolicitud.IDColaborador.ToString();
+                    this.dtpFechaSolicitud.MinDate = oSolicitud.FechaSolicitud;
+                    this.dtpFechaSolicitud.MaxDate = DateTimePicker.MaximumDateTime;
                     this.dtpFechaSolicitud.Text = oSolicitud.FechaSolicitud.ToString();
+                    this.dtpFechaDesde.MinDate = oSolicitud.FechaSolicitarDesde;
+                    this.dtpFechaDesde.MaxDate = DateTimePicker.MaximumDateTime; 
                     this.dtpFechaDesde.Value = oSolicitud.FechaSolicitarDesde;
+                    this.dtpFechaHasta.MinDate = oSolicitud.FechaSolicitarHasta;
+                    this.dtpFechaHasta.MaxDate = DateTimePicker.MaximumDateTime;
                     this.dtpFechaHasta.Value = oSolicitud.FechaSolicitarHasta;
                     this.txtCantDias.Text = oSolicitud.CantidadDias.ToString();
                     this.txtObservaciones.Text = oSolicitud.Observaciones.ToString();
