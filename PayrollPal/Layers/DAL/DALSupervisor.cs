@@ -44,6 +44,7 @@ namespace PayrollPal.Layers.DAL
                         supervisor.IDSupervisor = dr["IDSupervisor"].ToString();
                         supervisor.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
                         supervisor.Descripcion = dr["Descripcion"].ToString();
+                        supervisor.Asignado = bool.Parse(dr["Asignado"].ToString());
 
                         lista.Add(supervisor);
                     }
@@ -68,6 +69,7 @@ namespace PayrollPal.Layers.DAL
             }
         }
         #endregion
+
 
         #region SecuenciadorSupervisor
 
@@ -123,6 +125,7 @@ namespace PayrollPal.Layers.DAL
                     oSupervisor.IDSupervisor = dt.Rows[0]["IDSupervisor"].ToString();
                     oSupervisor.IDRol = _BLLRol.SelectById(int.Parse(dt.Rows[0]["IDRol"].ToString()));
                     oSupervisor.Descripcion = dt.Rows[0]["Descripcion"].ToString();
+                    oSupervisor.Asignado = bool.Parse(dt.Rows[0]["Asignado"].ToString());
                     return oSupervisor;
                 }
                 return null;
@@ -153,6 +156,8 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@IDSupervisor", pSupervisor.IDSupervisor);
                     command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol.IDRol);
                     command.Parameters.AddWithValue("@Descripcion", pSupervisor.Descripcion);
+                    command.Parameters.AddWithValue("@Asignado", pSupervisor.Asignado);
+
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
 
@@ -187,6 +192,7 @@ namespace PayrollPal.Layers.DAL
                     command.Parameters.AddWithValue("@IDSupervisor", pSupervisor.IDSupervisor);
                     command.Parameters.AddWithValue("@IDRol", pSupervisor.IDRol.IDRol);
                     command.Parameters.AddWithValue("@Descripcion", pSupervisor.Descripcion);
+                    command.Parameters.AddWithValue("@Asignado", pSupervisor.Asignado);
 
                     command.CommandType = CommandType.StoredProcedure;
                     db.ExecuteNonQuery(command);
@@ -241,6 +247,56 @@ namespace PayrollPal.Layers.DAL
                 //Mostrar mensaje al usuario
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
+            }
+        }
+        #endregion
+
+        #region SELECT ALL NO ASIGNADO
+        public List<Supervisor> SelectAllNoAsignado()
+        {
+            try
+            {
+                IBLLRol _BLLRol = new BLLRol();
+                DataSet ds = null;
+                using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
+                {
+                    var command = new SqlCommand("usp_SELECT_SupervisorNoAsignado_All");
+                    command.CommandType = CommandType.StoredProcedure;
+                    ds = db.ExecuteReader(command, "Supervisor");
+                }
+
+                List<Supervisor> lista = new List<Supervisor>();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+
+                        Supervisor supervisor = new Supervisor();
+                        supervisor.IDSupervisor = dr["IDSupervisor"].ToString();
+                        supervisor.IDRol = _BLLRol.SelectById(int.Parse(dr["IDRol"].ToString()));
+                        supervisor.Descripcion = dr["Descripcion"].ToString();
+                        supervisor.Asignado = bool.Parse(dr["Asignado"].ToString());
+
+                        lista.Add(supervisor);
+                    }
+                }
+
+                //Salvar un mensaje de info en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Info("Se cargó la lista de supervisores");
+
+                return lista;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en el log
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return null;
             }
         }
         #endregion

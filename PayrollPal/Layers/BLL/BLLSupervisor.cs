@@ -97,5 +97,13 @@ namespace PayrollPal.Layers.BLL
         }
         #endregion
 
+        #region SELECT ALL NO ASIGNADO
+        public List<Supervisor> SelectAllNoAsignado()
+        {
+            IDALSupervisor dALSupervisor = new DALSupervisor();
+            return dALSupervisor.SelectAllNoAsignado();
+        }
+        #endregion
+
     }
 }

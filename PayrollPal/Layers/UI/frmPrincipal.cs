@@ -25,8 +25,9 @@ namespace PayrollPal.UI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario;
+
             frmLogin frm = new frmLogin();
+            this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
 
             frm.LoginFormClosed += frmLogin_LoginFormClosed;
 
@@ -39,7 +40,7 @@ namespace PayrollPal.UI
         {
             if (frmLogin.colaboradorLoggeado != null)
             {
-                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +" Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario + " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
 
                 switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
@@ -70,11 +71,11 @@ namespace PayrollPal.UI
 
                         break;
                     default:
+
+                        frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
+                        frm.ShowDialog();
                         break;
                 }
-
-                frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
-                frm.ShowDialog();
             }
 
 
@@ -186,6 +187,18 @@ namespace PayrollPal.UI
         {
             frmConsultaPlanillas frm = new frmConsultaPlanillas();
             frm.ShowDialog();
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult cerrarSesion = MessageBox.Show("¿Está seguro(a) que desea cerrar sesión?", "Pregunta",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (cerrarSesion == DialogResult.Yes)
+            {
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
+                frmPrincipal_Load(this, EventArgs.Empty);
+            }
         }
     }
 

@@ -18,6 +18,10 @@ namespace PayrollPal.Layers.IBLL
 
         #endregion
 
+        #region SELECT ALL NO ASIGNADO
+        List<Supervisor> SelectAllNoAsignado();
+        #endregion
+
         #region SecuenciadorSupervisor
 
         string SecuenciadorPuesto();

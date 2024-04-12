@@ -172,15 +172,10 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbUsuario.Items.Add(item);
             }
 
-
-            this.cmbRol.DataSource = bLLRol.SelectAll();
-            this.cmbSupervisor.DataSource = bLLSupervisor.SelectAll();
-
-            List<Supervisor> listaSupervisores = bLLSupervisor.SelectAll();
-
-            foreach (var sup in listaSupervisores)
+            List<Supervisor> listaSupervisoresNoAsignados = bLLSupervisor.SelectAllNoAsignado();
+            foreach (var item in listaSupervisoresNoAsignados)
             {
-                this.cmbIDSup.Items.Add(sup.IDSupervisor.ToString());
+                this.cmbSupervisor.Items.Add(item);
             }
 
             foreach (var item in bLLPuesto.SelectAll())
@@ -750,6 +745,8 @@ namespace PayrollPal.UI.Mantenimientos
                 case 2:
                     supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
                     oColaborador.supID = this.cmbIDSup.SelectedItem.ToString();
+                    bLLSupervisor.SelectById(oColaborador.supID).Asignado = true;
+                    bLLSupervisor.Update(bLLSupervisor.SelectById(oColaborador.supID));
                     oColaborador.IDSupervisor = supervisor;
                     break;
                 case 3:
@@ -1199,7 +1196,12 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
+                (bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID)).Asignado = false;
+                bLLSupervisor.Update(bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID));
+                bLLColaborador.SelectById(idColaborador).supID = null;
+
                 Usuario oUsuario = bLLColaborador.SelectById(idColaborador).IDUsuario;
+
                 oUsuario.Contrasenna = Criptografia.DecrypthAES(oUsuario.Contrasenna);
                 oUsuario.Asignado = false;
                 bLLUsuario.Update(oUsuario);

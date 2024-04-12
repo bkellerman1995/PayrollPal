@@ -11,6 +11,7 @@ namespace PayrollPal.Layers.Entities
         public string IDSupervisor { set; get; }
         public Rol IDRol { set; get; }
         public string Descripcion { set; get; }
+        public bool Asignado { get; set; }
 
 
         public Supervisor()

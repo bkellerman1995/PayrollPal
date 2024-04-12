@@ -51,11 +51,11 @@ namespace PayrollPal.UI.Mantenimientos
                 {
                     case 2:
 
-                        this.btnAgregar.Enabled = false;
+                        this.btnAgregar.Enabled = true;
                         this.btnEliminar.Enabled = false;
                         this.lblEstado.Visible = false;
-                        this.lblColaborador.Visible = false;
-                        this.cmbColaborador.Visible = false;
+                        this.lblColaborador.Visible = true;
+                        this.cmbColaborador.Visible = true;
 
                         break;
 
@@ -134,17 +134,27 @@ namespace PayrollPal.UI.Mantenimientos
         private void CargarCombos()
         {
             List<Colaborador> listaColab = new List<Colaborador>();
-            //foreach (var colab in listaColab)
-            //{
-            //    this.cmbColaborador.Items.Add(colab);
-            //}
+            switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+            {
+                case 2:
+                    listaColab = bLLColaborador.SelectAll().Where(col => col.IDSupervisor == frmLogin.colaboradorLoggeado.IDSupervisor).ToList();
+                    this.cmbColaborador.Items.Add(frmLogin.colaboradorLoggeado.ToString());
 
-            //switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
-            //{
-            //    case 2:
-            //        listaColab = bLLColaborador.SelectAll().Where(col => col.IDSupervisor == .
+                    foreach (var colab in listaColab)
+                    {
+                        this.cmbColaborador.Items.Add(colab);
+                    }
 
-            //}
+
+                    break;
+                case 3:
+                    listaColab = null;
+                    break;
+                default:
+                    listaColab = bLLColaborador.SelectAll();
+                    this.cmbColaborador.DataSource = listaColab;
+                    break;
+            }
 
             foreach (ObservacionSolicVacaciones obs in Enum.GetValues(typeof(ObservacionSolicVacaciones)))
             {
@@ -436,15 +446,22 @@ namespace PayrollPal.UI.Mantenimientos
 
                 // Validar Colaborador
 
-                if (this.cmbColaborador.SelectedIndex >= 0)
+                switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
-                    this.errProv1.SetError(this.cmbColaborador, string.Empty);
+                    case 2:
+                        if (this.cmbColaborador.SelectedIndex >= 0)
+                        {
+                            this.errProv1.SetError(this.cmbColaborador, string.Empty);
+                        }
+                        else
+                        {
+                            this.errProv1.SetError(this.cmbColaborador, "Debe seleccionar un Colaborador");
+                            return false;
+                        }
+                        break;
+
                 }
-                else
-                {
-                    this.errProv1.SetError(this.cmbColaborador, "Debe seleccionar un Colaborador");
-                    return false;
-                }
+
 
                 //Validar Observaciones
 
@@ -503,6 +520,11 @@ namespace PayrollPal.UI.Mantenimientos
 
             switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
             {
+                case 1:
+
+                    oSolicitud.IDColaborador = this.cmbColaborador.SelectedItem as Colaborador;
+                    break;
+
                 case 2:
 
                     oSolicitud.IDColaborador = frmLogin.colaboradorLoggeado;
@@ -774,6 +796,7 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            this.btnAgregar.Enabled = true;
             LimpiarControles();
         }
 
