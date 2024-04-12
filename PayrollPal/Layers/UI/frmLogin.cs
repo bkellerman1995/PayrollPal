@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using log4net;
 using System.Reflection;
 using PayrollPal.Layers.Util;
+using PayrollPal.UI;
 
 namespace PayrollPal.Layers.UI
 {
@@ -23,8 +24,14 @@ namespace PayrollPal.Layers.UI
 
         IBLLUsuario bLLUsuario = new BLLUsuario();
         IBLLColaborador bLLColaborador = new BLLColaborador();
+        Colaborador oColaborador = new Colaborador();
+        Usuario oUsuario = new Usuario();
 
-        public static Colaborador colaboradorLoggeado { get; set; }
+        public static Colaborador colaboradorLoggeado = new Colaborador();
+
+        public event EventHandler LoginFormClosed;
+
+
         public frmLogin()
         {
             InitializeComponent();
@@ -54,7 +61,9 @@ namespace PayrollPal.Layers.UI
                 if (ValidarCampos() == true &&
                     VerificarLogin(this.txtUsuario.Text, this.txtPwd.Text))
                 {
-                    this.Dispose();
+                    colaboradorLoggeado = oColaborador;
+
+                    this.Close();
                 }
             }
             catch (Exception msg)
@@ -125,8 +134,7 @@ namespace PayrollPal.Layers.UI
         {
             bool loginCorrecto = true;
             int contCamposCorrectos = 0;
-            Usuario oUsuario = new Usuario();
-            Colaborador oColaborador = new Colaborador();
+
             try
             {
                 foreach (Control c in this.Controls)
@@ -194,9 +202,12 @@ namespace PayrollPal.Layers.UI
             return loginCorrecto;
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            Application.Exit();
+            base.OnFormClosed(e);
+            // Activa el evento personalizado cuando el formulario hijo se cierra
+            LoginFormClosed?.Invoke(this, EventArgs.Empty);
         }
+
     }
 }

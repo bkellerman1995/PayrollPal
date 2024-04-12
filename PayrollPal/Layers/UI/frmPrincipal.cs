@@ -25,8 +25,21 @@ namespace PayrollPal.UI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
+            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario;
             frmLogin frm = new frmLogin();
-            frm.ShowDialog();
+
+            frm.LoginFormClosed += frmLogin_LoginFormClosed;
+
+            frm.MdiParent = this;
+            frm.Show();
+
+        }
+
+        private void frmLogin_LoginFormClosed(object sender, EventArgs e)
+        {
+ 
+            this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario;
+
         }
 
         /// <summary>
