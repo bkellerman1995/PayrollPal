@@ -337,7 +337,8 @@ namespace PayrollPal.Layers.UI.Consultas
                     bLLPlanilla_Encabezado.Delete(planEnc.IdEncabezado);
 
                     foreach (var item in bLLControlDeMarcas.SelectAll().Where(cont => cont.IdColaborador == oColaborador.IDColaborador
-                    && DateTime.Parse(cont.Fecha) >= planEnc.Codigo.FechaDesde && DateTime.Parse(cont.Fecha) <= planEnc.Codigo.FechaHasta).ToList())
+                    && DateTime.Parse(cont.Fecha) >= planEnc.Codigo.FechaDesde && DateTime.Parse(cont.Fecha) <= planEnc.Codigo.FechaHasta
+                    && planEnc.Codigo.Estado == PlanillaEstado.PorEnviar).ToList())
                     {
                         bLLControlDeMarcas.DELETEBYID(item.idMarca);
                     }
