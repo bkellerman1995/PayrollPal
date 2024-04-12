@@ -205,6 +205,13 @@ namespace PayrollPal.UI
         private void planillasPorFechaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmReportePlanillaPorFechas frm = new frmReportePlanillaPorFechas();
+            frm.ShowDialog();
+        }
+
+        private void solicitudesDeVacacionesPorFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReporteSolVacasPorFecha frm = new frmReporteSolVacasPorFecha();
+            frm.ShowDialog();
         }
     }
 
