@@ -252,6 +252,18 @@
     <Compile Include="Layers\UI\Mantenimientos\frmMantenimientoSupervisores.Designer.cs">
       <DependentUpon>frmMantenimientoSupervisores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layers\UI\Reportes\frmReportePlanillaPorFechas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Reportes\frmReportePlanillaPorFechas.Designer.cs">
+      <DependentUpon>frmReportePlanillaPorFechas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\UI\Reportes\frmReporteSolVacasPorFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\UI\Reportes\frmReporteSolVacasPorFecha.Designer.cs">
+      <DependentUpon>frmReporteSolVacasPorFecha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layers\Util\Contrasenna.cs" />
     <Compile Include="Layers\Util\Criptografia.cs" />
     <Compile Include="Layers\Util\Email.cs" />
@@ -331,6 +343,14 @@
     <EmbeddedResource Include="Layers\UI\Mantenimientos\frmMantenimientoSupervisores.resx">
       <DependentUpon>frmMantenimientoSupervisores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Reportes\frmReportePlanillaPorFechas.resx">
+      <DependentUpon>frmReportePlanillaPorFechas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Reportes\frmReporteSolVacasPorFecha.resx">
+      <DependentUpon>frmReporteSolVacasPorFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\UI\Reportes\PlanillaPagoFecha.rdlc" />
+    <EmbeddedResource Include="Layers\UI\Reportes\SolVacasFecha.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -360,7 +380,7 @@
       <DependentUpon>frmMantenimientoUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layers\UI\Procesos\ReportePlanEnviar.rdlc" />
-    <EmbeddedResource Include="test.rdlc" />
+    <EmbeddedResource Include="Layers\UI\Reportes\PlanillaPago.rdlc" />
     <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
     <None Include="DSPlanillaEnviar.xsc">
       <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>

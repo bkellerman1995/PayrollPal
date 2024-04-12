@@ -137,8 +137,8 @@ namespace PayrollPal.UI.Mantenimientos
             switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
             {
                 case 2:
-                    listaColab = bLLColaborador.SelectAll().Where(col => col.IDSupervisor == frmLogin.colaboradorLoggeado.IDSupervisor).ToList();
-                    this.cmbColaborador.Items.Add(frmLogin.colaboradorLoggeado.ToString());
+                    listaColab = bLLColaborador.SelectAll().Where(
+                            col => col.IDSupervisor.IDSupervisor == frmLogin.colaboradorLoggeado.supID).ToList();
 
                     foreach (var colab in listaColab)
                     {

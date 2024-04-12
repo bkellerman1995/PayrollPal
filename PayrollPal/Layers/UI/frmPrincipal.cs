@@ -1,6 +1,7 @@
 ﻿using PayrollPal.Layers.UI;
 using PayrollPal.Layers.UI.Consultas;
 using PayrollPal.Layers.UI.Mantenimientos;
+using PayrollPal.Layers.UI.Reportes;
 using PayrollPal.UI.Consultas;
 using PayrollPal.UI.Mantenimientos;
 using PayrollPal.UI.Procesos;
@@ -199,6 +200,11 @@ namespace PayrollPal.UI
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
                 frmPrincipal_Load(this, EventArgs.Empty);
             }
+        }
+
+        private void planillasPorFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportePlanillaPorFechas frm = new frmReportePlanillaPorFechas();
         }
     }
 
