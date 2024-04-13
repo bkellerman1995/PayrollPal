@@ -41,9 +41,6 @@
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.dgvSupervisores = new System.Windows.Forms.DataGridView();
-            this.IDSupervisor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IDRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripMantSupervisor = new System.Windows.Forms.ToolStrip();
             this.btnAgregar = new System.Windows.Forms.ToolStripButton();
@@ -61,6 +58,10 @@
             this.lstColaboradoresALL = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
+            this.IDSupervisor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Asignado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupervisores)).BeginInit();
             this.toolStripMantSupervisor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
@@ -74,9 +75,10 @@
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(14, 329);
+            this.btnConfirmar.Location = new System.Drawing.Point(35, 822);
+            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(100, 35);
+            this.btnConfirmar.Size = new System.Drawing.Size(250, 88);
             this.btnConfirmar.TabIndex = 60;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
@@ -85,30 +87,31 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(165, 127);
+            this.txtDescripcion.Location = new System.Drawing.Point(412, 318);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(150, 29);
+            this.txtDescripcion.Size = new System.Drawing.Size(369, 61);
             this.txtDescripcion.TabIndex = 57;
             this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
             // txtRol
             // 
             this.txtRol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRol.Location = new System.Drawing.Point(165, 82);
-            this.txtRol.Margin = new System.Windows.Forms.Padding(1);
+            this.txtRol.Location = new System.Drawing.Point(412, 205);
+            this.txtRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtRol.Name = "txtRol";
             this.txtRol.ReadOnly = true;
-            this.txtRol.Size = new System.Drawing.Size(150, 29);
+            this.txtRol.Size = new System.Drawing.Size(369, 61);
             this.txtRol.TabIndex = 54;
             // 
             // lblRol
             // 
             this.lblRol.AutoSize = true;
             this.lblRol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRol.Location = new System.Drawing.Point(8, 88);
-            this.lblRol.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblRol.Location = new System.Drawing.Point(20, 220);
+            this.lblRol.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(33, 21);
+            this.lblRol.Size = new System.Drawing.Size(79, 54);
             this.lblRol.TabIndex = 53;
             this.lblRol.Text = "Rol";
             // 
@@ -116,10 +119,10 @@
             // 
             this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescripcion.Location = new System.Drawing.Point(8, 130);
-            this.lblDescripcion.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblDescripcion.Location = new System.Drawing.Point(20, 325);
+            this.lblDescripcion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(91, 21);
+            this.lblDescripcion.Size = new System.Drawing.Size(229, 54);
             this.lblDescripcion.TabIndex = 45;
             this.lblDescripcion.Text = "Descripción";
             // 
@@ -127,10 +130,10 @@
             // 
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID.Location = new System.Drawing.Point(10, 49);
-            this.lblID.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblID.Location = new System.Drawing.Point(25, 122);
+            this.lblID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(25, 21);
+            this.lblID.Size = new System.Drawing.Size(62, 54);
             this.lblID.TabIndex = 44;
             this.lblID.Text = "ID";
             // 
@@ -158,7 +161,8 @@
             this.dgvSupervisores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDSupervisor,
             this.IDRol,
-            this.Descripcion});
+            this.Descripcion,
+            this.Asignado});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -169,37 +173,17 @@
             this.dgvSupervisores.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSupervisores.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSupervisores.Location = new System.Drawing.Point(0, 0);
-            this.dgvSupervisores.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvSupervisores.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvSupervisores.Name = "dgvSupervisores";
             this.dgvSupervisores.ReadOnly = true;
             this.dgvSupervisores.RowHeadersVisible = false;
             this.dgvSupervisores.RowHeadersWidth = 102;
             this.dgvSupervisores.RowTemplate.Height = 40;
             this.dgvSupervisores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupervisores.Size = new System.Drawing.Size(1132, 406);
+            this.dgvSupervisores.Size = new System.Drawing.Size(2830, 1016);
             this.dgvSupervisores.TabIndex = 4;
             this.dgvSupervisores.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupervisores_CellContentDoubleClick);
-            // 
-            // IDSupervisor
-            // 
-            this.IDSupervisor.DataPropertyName = "IDSupervisor";
-            this.IDSupervisor.HeaderText = "ID Supervisor";
-            this.IDSupervisor.Name = "IDSupervisor";
-            this.IDSupervisor.ReadOnly = true;
-            // 
-            // IDRol
-            // 
-            this.IDRol.DataPropertyName = "IDRol";
-            this.IDRol.HeaderText = "Rol";
-            this.IDRol.Name = "IDRol";
-            this.IDRol.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
+            this.dgvSupervisores.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSupervisores_CellFormatting);
             // 
             // btnSalir
             // 
@@ -207,7 +191,7 @@
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(45, 25);
+            this.btnSalir.Size = new System.Drawing.Size(102, 58);
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -224,7 +208,7 @@
             this.toolStripMantSupervisor.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantSupervisor.Name = "toolStripMantSupervisor";
             this.toolStripMantSupervisor.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantSupervisor.Size = new System.Drawing.Size(1132, 28);
+            this.toolStripMantSupervisor.Size = new System.Drawing.Size(2830, 65);
             this.toolStripMantSupervisor.TabIndex = 43;
             this.toolStripMantSupervisor.Text = "toolStrip1";
             // 
@@ -234,7 +218,7 @@
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(70, 25);
+            this.btnAgregar.Size = new System.Drawing.Size(170, 58);
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
@@ -244,7 +228,7 @@
             this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(54, 25);
+            this.btnEditar.Size = new System.Drawing.Size(129, 58);
             this.btnEditar.Text = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
@@ -254,7 +238,7 @@
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(71, 25);
+            this.btnEliminar.Size = new System.Drawing.Size(168, 58);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -264,7 +248,7 @@
             this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
             this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(67, 25);
+            this.btnLimpiar.Size = new System.Drawing.Size(158, 58);
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
@@ -276,7 +260,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -301,18 +285,19 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel2.Controls.Add(this.dgvSupervisores);
-            this.splitContainer1.Size = new System.Drawing.Size(1132, 775);
-            this.splitContainer1.SplitterDistance = 367;
-            this.splitContainer1.SplitterWidth = 2;
+            this.splitContainer1.Size = new System.Drawing.Size(2830, 1938);
+            this.splitContainer1.SplitterDistance = 917;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
             // txtID
             // 
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtID.Location = new System.Drawing.Point(165, 46);
+            this.txtID.Location = new System.Drawing.Point(412, 115);
+            this.txtID.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(150, 29);
+            this.txtID.Size = new System.Drawing.Size(369, 61);
             this.txtID.TabIndex = 67;
             this.txtID.Text = "sup";
             // 
@@ -320,9 +305,10 @@
             // 
             this.lblListaColaboradoresSup.AutoSize = true;
             this.lblListaColaboradoresSup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaColaboradoresSup.Location = new System.Drawing.Point(793, 9);
+            this.lblListaColaboradoresSup.Location = new System.Drawing.Point(1982, 22);
+            this.lblListaColaboradoresSup.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblListaColaboradoresSup.Name = "lblListaColaboradoresSup";
-            this.lblListaColaboradoresSup.Size = new System.Drawing.Size(285, 21);
+            this.lblListaColaboradoresSup.Size = new System.Drawing.Size(718, 54);
             this.lblListaColaboradoresSup.TabIndex = 66;
             this.lblListaColaboradoresSup.Text = "Lista de Colaboradores (Por Supervisor)";
             // 
@@ -330,18 +316,20 @@
             // 
             this.lblListaColaboradoresALL.AutoSize = true;
             this.lblListaColaboradoresALL.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaColaboradoresALL.Location = new System.Drawing.Point(349, 9);
+            this.lblListaColaboradoresALL.Location = new System.Drawing.Point(872, 22);
+            this.lblListaColaboradoresALL.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblListaColaboradoresALL.Name = "lblListaColaboradoresALL";
-            this.lblListaColaboradoresALL.Size = new System.Drawing.Size(215, 21);
+            this.lblListaColaboradoresALL.Size = new System.Drawing.Size(547, 54);
             this.lblListaColaboradoresALL.TabIndex = 65;
             this.lblListaColaboradoresALL.Text = "Lista de Colaboradores (Total)";
             // 
             // btnQuitarColab
             // 
             this.btnQuitarColab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitarColab.Location = new System.Drawing.Point(650, 213);
+            this.btnQuitarColab.Location = new System.Drawing.Point(1625, 532);
+            this.btnQuitarColab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.btnQuitarColab.Name = "btnQuitarColab";
-            this.btnQuitarColab.Size = new System.Drawing.Size(84, 35);
+            this.btnQuitarColab.Size = new System.Drawing.Size(210, 88);
             this.btnQuitarColab.TabIndex = 64;
             this.btnQuitarColab.Text = "Quitar";
             this.btnQuitarColab.UseVisualStyleBackColor = true;
@@ -350,9 +338,10 @@
             // btnAgregarCol
             // 
             this.btnAgregarCol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarCol.Location = new System.Drawing.Point(650, 123);
+            this.btnAgregarCol.Location = new System.Drawing.Point(1625, 308);
+            this.btnAgregarCol.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.btnAgregarCol.Name = "btnAgregarCol";
-            this.btnAgregarCol.Size = new System.Drawing.Size(84, 35);
+            this.btnAgregarCol.Size = new System.Drawing.Size(210, 88);
             this.btnAgregarCol.TabIndex = 63;
             this.btnAgregarCol.Text = "Agregar";
             this.btnAgregarCol.UseVisualStyleBackColor = true;
@@ -362,10 +351,11 @@
             // 
             this.lstColaboradoresSup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstColaboradoresSup.FormattingEnabled = true;
-            this.lstColaboradoresSup.ItemHeight = 21;
-            this.lstColaboradoresSup.Location = new System.Drawing.Point(797, 45);
+            this.lstColaboradoresSup.ItemHeight = 54;
+            this.lstColaboradoresSup.Location = new System.Drawing.Point(1992, 112);
+            this.lstColaboradoresSup.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.lstColaboradoresSup.Name = "lstColaboradoresSup";
-            this.lstColaboradoresSup.Size = new System.Drawing.Size(219, 319);
+            this.lstColaboradoresSup.Size = new System.Drawing.Size(542, 760);
             this.lstColaboradoresSup.TabIndex = 62;
             this.lstColaboradoresSup.SelectedValueChanged += new System.EventHandler(this.lstColaboradoresSup_SelectedValueChanged);
             // 
@@ -373,10 +363,11 @@
             // 
             this.lstColaboradoresALL.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstColaboradoresALL.FormattingEnabled = true;
-            this.lstColaboradoresALL.ItemHeight = 21;
-            this.lstColaboradoresALL.Location = new System.Drawing.Point(353, 45);
+            this.lstColaboradoresALL.ItemHeight = 54;
+            this.lstColaboradoresALL.Location = new System.Drawing.Point(882, 112);
+            this.lstColaboradoresALL.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.lstColaboradoresALL.Name = "lstColaboradoresALL";
-            this.lstColaboradoresALL.Size = new System.Drawing.Size(220, 319);
+            this.lstColaboradoresALL.Size = new System.Drawing.Size(544, 760);
             this.lstColaboradoresALL.TabIndex = 61;
             this.lstColaboradoresALL.SelectedValueChanged += new System.EventHandler(this.lstColaboradoresALL_SelectedValueChanged);
             // 
@@ -387,10 +378,10 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 381);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 955);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(1132, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(2830, 61);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -398,16 +389,49 @@
             // 
             this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
             this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            // 
+            // IDSupervisor
+            // 
+            this.IDSupervisor.DataPropertyName = "IDSupervisor";
+            this.IDSupervisor.HeaderText = "ID Supervisor";
+            this.IDSupervisor.MinimumWidth = 12;
+            this.IDSupervisor.Name = "IDSupervisor";
+            this.IDSupervisor.ReadOnly = true;
+            // 
+            // IDRol
+            // 
+            this.IDRol.DataPropertyName = "IDRol";
+            this.IDRol.HeaderText = "Rol";
+            this.IDRol.MinimumWidth = 12;
+            this.IDRol.Name = "IDRol";
+            this.IDRol.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.MinimumWidth = 12;
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Asignado
+            // 
+            this.Asignado.DataPropertyName = "Asignado";
+            this.Asignado.HeaderText = "Asignado";
+            this.Asignado.MinimumWidth = 12;
+            this.Asignado.Name = "Asignado";
+            this.Asignado.ReadOnly = true;
             // 
             // frmMantenimientoSupervisores
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1132, 775);
+            this.ClientSize = new System.Drawing.Size(2830, 1938);
             this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.Name = "frmMantenimientoSupervisores";
             this.Text = "Mantenimiento de Supervisores";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -450,13 +474,14 @@
         private System.Windows.Forms.ListBox lstColaboradoresSup;
         private System.Windows.Forms.Button btnAgregarCol;
         private System.Windows.Forms.Button btnQuitarColab;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDSupervisor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDRol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.Label lblListaColaboradoresSup;
         private System.Windows.Forms.Label lblListaColaboradoresALL;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel tslblUsuarioConectado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDSupervisor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDRol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Asignado;
     }
 }

@@ -657,6 +657,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            Colaborador oColaborador = new Colaborador();
             Supervisor supervisor = new Supervisor();
             string idSupervisor = this.txtID.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el supervisor?", "Aviso",
@@ -669,6 +670,17 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                     colab.IDSupervisor = supervisor;
                     bLLColaborador.Update(colab);
                 }
+
+                foreach (Colaborador colab in bLLColaborador.SelectAll())
+                {
+                    if (colab.IDRol.IDRol ==2 && colab.supID == bLLSupervisor.SelectById(idSupervisor).IDSupervisor)
+                    {
+                        colab.supID = "0";
+                        bLLColaborador.Update(colab);
+                        break;
+                    }
+                }
+
                 bLLSupervisor.Delete(idSupervisor);
                 CargarListasColaboradoresALLySupervisores();
                 LimpiarControles();
@@ -709,5 +721,15 @@ namespace PayrollPal.Layers.UI.Mantenimientos
             }
         }
 
+        private void dgvSupervisores_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 3 && e.Value != null)
+            {
+                if (e.Value.ToString() == "True")
+                    e.Value = "Sí";
+                if (e.Value.ToString() == "False")
+                    e.Value = "No";
+            }
+        }
     }
 }

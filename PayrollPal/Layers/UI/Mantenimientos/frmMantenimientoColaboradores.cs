@@ -129,6 +129,19 @@ namespace PayrollPal.UI.Mantenimientos
                 this.errProv1.SetError(this.cmbRol, "No puede agregar colaboradores sin rol");
 
             }
+
+            if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 2)
+            {
+                if (bLLSupervisor.SelectAllNoAsignado().Count != 0)
+                {
+                    this.errProv1.SetError(this.cmbUsuario, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.cmbUsuario, "No puede agregar un colaboradr como supervisorBuscar sin supervisorBuscar");
+
+                }
+            }
         }
 
         /// <summary>
@@ -167,13 +180,18 @@ namespace PayrollPal.UI.Mantenimientos
             this.cmbDepartamento.DataSource = bLLDepartamento.SelectAll();
 
             List<Usuario> listaUsuariosNoAsignados = bLLUsuario.SelectAllNoAsignado();
+
             foreach (var item in listaUsuariosNoAsignados)
             {
                 this.cmbUsuario.Items.Add(item);
             }
 
-            List<Supervisor> listaSupervisoresNoAsignados = bLLSupervisor.SelectAllNoAsignado();
-            foreach (var item in listaSupervisoresNoAsignados)
+            foreach (var item in bLLSupervisor.SelectAllNoAsignado())
+            {
+                this.cmbIDSup.Items.Add(item.IDSupervisor);
+            }
+
+            foreach (var item in bLLSupervisor.SelectAll())
             {
                 this.cmbSupervisor.Items.Add(item);
             }
@@ -182,6 +200,12 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 this.cmbPuestos.Items.Add(item);
             }
+
+            foreach (var item in bLLRol.SelectAll())
+            {
+                this.cmbRol.Items.Add(item);
+            }
+
 
 
         }
@@ -199,6 +223,23 @@ namespace PayrollPal.UI.Mantenimientos
                     this.errProv1.SetError(c, String.Empty);
                     this.errProv1.Clear();
                 }
+
+                if (this.dgvColaboradores.SelectedRows.Count == 1)
+                {
+                    Colaborador oColaborador = new Colaborador();
+                    oColaborador = this.dgvColaboradores.SelectedRows[0].DataBoundItem as Colaborador;
+
+                    foreach (var sup in this.cmbIDSup.Items)
+                    {
+                        if (sup.ToString() == oColaborador.supID)
+                        {
+                            this.cmbIDSup.Items.Remove(sup);
+                            break;
+                        }
+                    }
+                }
+
+
 
                 this.txtID.Text = "col";
                 this.txtID.BackColor = Color.White;
@@ -230,6 +271,10 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbUsuario.SelectedIndex = -1;
                 this.cmbPuestos.SelectedIndex = -1;
                 this.cmbRol.SelectedIndex = -1;
+
+
+
+
                 this.lblSupervisor.Visible = false;
                 this.cmbSupervisor.Visible = false;
 
@@ -288,6 +333,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbPuestos.Enabled = false;
                 this.cmbRol.Enabled = false;
                 this.cmbSupervisor.Enabled = false;
+                this.cmbIDSup.Enabled = false;
 
 
                 this.pctFoto.Enabled = false;
@@ -415,6 +461,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.cmbPuestos.Enabled = true;
                         this.cmbRol.Enabled = true;
                         this.cmbSupervisor.Enabled = true;
+                        this.cmbIDSup.Enabled = true;
                         this.pctFoto.Enabled = true;
                         this.btnCargarFoto.Enabled = true;
                         this.rdbActivo.Enabled = true;
@@ -445,6 +492,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.cmbPuestos.Enabled = true;
                         this.cmbRol.Enabled = true;
                         this.cmbSupervisor.Enabled = true;
+                        this.cmbIDSup.Enabled = true;
                         this.pctFoto.Enabled = true;
                         this.btnCargarFoto.Enabled = true;
                         this.rdbActivo.Enabled = true;
@@ -495,6 +543,8 @@ namespace PayrollPal.UI.Mantenimientos
         /// <returns></returns>
         private bool ValidarCampos()
         {
+            Colaborador oColaborador = new Colaborador();
+            oColaborador = this.dgvColaboradores.SelectedRows[0].DataBoundItem as Colaborador;
             bool correcto = false;
             try
             {
@@ -646,22 +696,26 @@ namespace PayrollPal.UI.Mantenimientos
                 }
                 else
                 {
-                    this.errProv1.SetError(this.cmbSupervisor, "Campo supervisor no es correcto");
+                    this.errProv1.SetError(this.cmbSupervisor, "Campo supervisorBuscar no es correcto");
                     return false;
                 }
+
 
                 //Validar combo IDSupervisor
 
-                if (this.cmbIDSup.SelectedItem != null ||
-                    !this.cmbIDSup.Visible)
+                if (oColaborador.IDRol.IDRol == 2)
                 {
-                    this.errProv1.SetError(this.cmbIDSup, string.Empty);
+                    if (this.cmbIDSup.SelectedItem != null && this.cmbIDSup.Visible)
+                    {
+                        this.errProv1.SetError(this.cmbIDSup, string.Empty);
+                    }
+                    else
+                    {
+                        this.errProv1.SetError(this.cmbIDSup, "Campo ID supervisorBuscar no es correcto");
+                        return false;
+                    }
                 }
-                else
-                {
-                    this.errProv1.SetError(this.cmbSupervisor, "Campo ID supervisor no es correcto");
-                    return false;
-                }
+
 
                 //Validar pictureBox de Foto
 
@@ -696,10 +750,11 @@ namespace PayrollPal.UI.Mantenimientos
             //Crear la instancia de Colaborador
             Colaborador oColaborador = new Colaborador();
             char[] reemplazarCaracteresSalario = new char[] { ',', '.' };
-            decimal Salario = 0;
-            Supervisor supervisor = new Supervisor();
+            Supervisor supervisorBuscar = new Supervisor();
+            Supervisor supervisorDefault = new Supervisor();
             string idColaborador = "";
             Usuario oUsuarioADeshabilitar = new Usuario();
+            Supervisor oSupDeshabilitar = new Supervisor();
 
             oColaborador.IDColaborador = this.txtID.Text;
             idColaborador = oColaborador.IDColaborador;
@@ -712,14 +767,10 @@ namespace PayrollPal.UI.Mantenimientos
             oColaborador.FechaIngreso = this.dtpFechaIngreso.Value;
             oColaborador.IDDepartamento = (Departamento)this.cmbDepartamento.SelectedItem;
             oColaborador.SalarioHora = decimal.Parse(this.mktSalarioHora.Text);
-            foreach (char c in reemplazarCaracteresSalario)
-            {
-                Salario = decimal.Parse(this.mktSalarioHora.Text.Replace(c.ToString(), ""));
-            }
-            oColaborador.SalarioHora = Salario;
             oColaborador.CorreoElectronico = this.txtCorreoElectronico.Text;
             oColaborador.CuentaIBAN = this.lblCR.Text + this.mktCuentaIBAN.Text;
             oColaborador.IDUsuario = (Usuario)this.cmbUsuario.SelectedItem;
+            oColaborador.Foto = (byte[])pctFoto.Tag;
             if (bLLColaborador.SelectById(idColaborador) != null)
             {
                 if (oColaborador.IDUsuario.ToString() == bLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
@@ -729,42 +780,73 @@ namespace PayrollPal.UI.Mantenimientos
             }
 
 
-            //Si el usuario va a cambiarse
-            //debe cambiarse el estado del usuario 
-            //que estaba anteriormente asignado
-
             oColaborador.IDUsuario.Asignado = true;
             bLLUsuario.Update(oColaborador.IDUsuario);
 
             oColaborador.CodigoPuesto = (Puesto)this.cmbPuestos.SelectedItem;
             oColaborador.IDRol = (Rol)this.cmbRol.SelectedItem;
 
-            switch (oColaborador.IDRol.IDRol)
-            {
-                case 1:
-                case 2:
-                    supervisor.IDRol = (Rol)this.cmbRol.SelectedItem;
-                    oColaborador.supID = this.cmbIDSup.SelectedItem.ToString();
-                    bLLSupervisor.SelectById(oColaborador.supID).Asignado = true;
-                    bLLSupervisor.Update(bLLSupervisor.SelectById(oColaborador.supID));
-                    oColaborador.IDSupervisor = supervisor;
-                    break;
-                case 3:
-                    oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
-                    break;
-            }
-            oColaborador.Foto = (byte[])pctFoto.Tag;
-
             if (this.rdbActivo.Checked)
                 oColaborador.Estado = true;
             if (this.rdbInactivo.Checked)
                 oColaborador.Estado = false;
+
+            switch (oColaborador.IDRol.IDRol)
+            {
+                case 1:
+                    oColaborador.IDSupervisor = supervisorDefault;
+                    oColaborador.supID = "0";
+                    break;
+                case 2:
+                    supervisorBuscar.IDRol = (Rol)this.cmbRol.SelectedItem;
+                    oColaborador.supID = this.cmbIDSup.SelectedItem.ToString();
+                    supervisorBuscar = bLLSupervisor.SelectById(oColaborador.supID);
+                    supervisorBuscar.Asignado = true;
+                    bLLSupervisor.Update(supervisorBuscar);
+                    oColaborador.IDSupervisor = supervisorDefault;
+
+                    if (oColaborador.Estado == false)
+                    {
+                        foreach (Colaborador colab in bLLColaborador.SelectAll().Where(
+                            col => col.IDSupervisor.IDSupervisor == oColaborador.supID).ToList())
+                        {
+                            colab.IDSupervisor = supervisorBuscar;
+                            bLLColaborador.Update(colab);
+                        }
+                    }
+
+
+                    //Si el sypervisor va a cambiarse
+                    //debe cambiarse el estado del supervisorBuscar 
+                    //que estaba anteriormente asignado 
+
+                    if (oColaborador.supID.ToString() != bLLColaborador.SelectById(idColaborador).supID.ToString())
+                    {
+                        oSupDeshabilitar = bLLColaborador.SelectById(idColaborador).IDSupervisor;
+                        oSupDeshabilitar.Asignado = false;
+
+                        bLLSupervisor.Update(oSupDeshabilitar);
+                    }
+                    bLLColaborador.Update(oColaborador);
+
+                    break;
+                case 3:
+                    oColaborador.IDSupervisor = (Supervisor)this.cmbSupervisor.SelectedItem;
+                    oColaborador.supID = "0";
+                    break;
+            }
+
+
+
 
             //Se llama al método Create del Colaborador 
             //que se encarga de revisar si el colaborador existe primero
             //antes de agregar al colaborador
             if (bLLColaborador.SelectById(idColaborador) != null)
             {
+                //Si el usuario va a cambiarse
+                //debe cambiarse el estado del usuario 
+                //que estaba anteriormente asignado
                 if (oColaborador.IDUsuario.ToString() != bLLColaborador.SelectById(idColaborador).IDUsuario.ToString())
                 {
                     oUsuarioADeshabilitar = bLLColaborador.SelectById(idColaborador).IDUsuario;
@@ -774,11 +856,16 @@ namespace PayrollPal.UI.Mantenimientos
                     bLLUsuario.Update(oUsuarioADeshabilitar);
                 }
                 bLLColaborador.Update(oColaborador);
+
+
+
             }
             else
             {
                 bLLColaborador.Create(oColaborador);
             }
+
+
 
             //Insertar el colaborador a la base de datos
             //por medio del BLLColaborador (método CREATE)
@@ -1019,7 +1106,7 @@ namespace PayrollPal.UI.Mantenimientos
                 }
                 else
                 {
-                    this.errProv1.SetError(this.cmbSupervisor, "No puede agregar colaboradores sin supervisor");
+                    this.errProv1.SetError(this.cmbSupervisor, "No puede agregar colaboradores sin supervisorBuscar");
 
                 }
 
@@ -1064,7 +1151,7 @@ namespace PayrollPal.UI.Mantenimientos
             if (e.ColumnIndex == 15 && e.Value != null)
             {
                 if (e.Value.ToString().Contains("Nulo"))
-                    e.Value = "Sin supervisor";
+                    e.Value = "Sin supervisorBuscar";
             }
 
 
@@ -1134,6 +1221,13 @@ namespace PayrollPal.UI.Mantenimientos
                         this.pctFoto.Tag = oColaborador.Foto;
                         this.pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
                     }
+
+                    if (oColaborador.IDRol.IDRol == 2)
+                    {
+                        this.cmbIDSup.Items.Add(oColaborador.supID);
+                        this.cmbIDSup.Text = oColaborador.supID;
+
+                    }
                 }
             }
             catch (Exception msg)
@@ -1190,13 +1284,14 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            Supervisor supervisor = new Supervisor();
             string idColaborador = this.txtID.Text;
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el colaborador?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-                (bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID)).Asignado = false;
+
                 bLLSupervisor.Update(bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID));
                 bLLColaborador.SelectById(idColaborador).supID = null;
 
@@ -1205,6 +1300,21 @@ namespace PayrollPal.UI.Mantenimientos
                 oUsuario.Contrasenna = Criptografia.DecrypthAES(oUsuario.Contrasenna);
                 oUsuario.Asignado = false;
                 bLLUsuario.Update(oUsuario);
+
+                if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 2)
+                {
+                    bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID).Asignado = false;
+                    bLLSupervisor.Update(bLLColaborador.SelectById(idColaborador).IDSupervisor);
+
+                    foreach (Colaborador colaborador in bLLColaborador.SelectAll().Where(
+                        col => col.IDSupervisor.IDSupervisor == bLLColaborador.SelectById(idColaborador).supID).ToList())
+                    {
+                        colaborador.IDSupervisor = supervisor;
+                    }
+                    bLLColaborador.SelectById(idColaborador).supID = "";
+
+                }
+
                 bLLColaborador.Delete(idColaborador);
                 CargarLista();
                 LimpiarControles();
