@@ -391,7 +391,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.01291in</Top>
+            <Top>2.6529in</Top>
             <Left>4.71334in</Left>
             <Height>0.25in</Height>
             <Width>1.40625in</Width>
@@ -421,7 +421,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>2.01291in</Top>
+            <Top>2.6529in</Top>
             <Left>6.30584in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
@@ -453,7 +453,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.42958in</Top>
+            <Top>3.06957in</Top>
             <Left>4.71334in</Left>
             <Height>0.25in</Height>
             <Width>1.40625in</Width>
@@ -483,7 +483,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>2.42958in</Top>
+            <Top>3.06957in</Top>
             <Left>6.30584in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
@@ -515,7 +515,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.80631in</Top>
+            <Top>3.4463in</Top>
             <Left>4.71334in</Left>
             <Height>0.25in</Height>
             <Width>1.40625in</Width>
@@ -545,7 +545,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>2.80631in</Top>
+            <Top>3.4463in</Top>
             <Left>6.30584in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
@@ -577,7 +577,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.24728in</Top>
+            <Top>3.88727in</Top>
             <Left>4.71334in</Left>
             <Height>0.25in</Height>
             <Width>1.40625in</Width>
@@ -599,7 +599,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!TipoCambio.Value.ToString() &amp; " - " &amp; Format(Fields!FechaPago.Value, "dd/MM/yyyy")</Value>
+                    <Value>=Fields!TipoCambio.Value.ToString()</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -607,10 +607,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>3.24728in</Top>
+            <Top>3.88727in</Top>
             <Left>6.30584in</Left>
             <Height>0.25in</Height>
-            <Width>2.42708in</Width>
+            <Width>1in</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -1474,11 +1474,73 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox19">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Fecha:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>2.28125in</Top>
+            <Left>4.71334in</Left>
+            <Height>0.25in</Height>
+            <Width>1.40625in</Width>
+            <ZIndex>37</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox36">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Format(Today(), "dd/MM/yyyy")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox21</rd:DefaultName>
+            <Top>2.28125in</Top>
+            <Left>6.30584in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>38</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>10.04167in</Height>
         <Style />
       </Body>
-      <Width>8.8125in</Width>
+      <Width>7.46875in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

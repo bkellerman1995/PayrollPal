@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -46,32 +47,44 @@ namespace PayrollPal.UI
                 switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
                     case 2:
-                        this.usuariosToolStripMenuItem.Enabled = false;
-                        this.rolToolStripMenuItem.Enabled = false;
-                        this.puestoToolStripMenuItem.Enabled = false;
-                        this.supervisorToolStripMenuItem.Enabled = false;
-                        this.colaboradoresToolStripMenuItem.Enabled = false;
-                        this.planillasDePagoToolStripMenuItem.Enabled = false;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
-                        this.procesosToolStripMenuItem.Enabled = false;
+                        this.usuariosToolStripMenuItem.Visible = false;
+                        this.rolToolStripMenuItem.Visible = false;
+                        this.puestoToolStripMenuItem.Visible = false;
+                        this.supervisorToolStripMenuItem.Visible = false;
+                        this.colaboradoresToolStripMenuItem.Visible = false;
+                        this.planillasDePagoToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+                        this.procesosToolStripMenuItem.Visible = false;
 
                         break;
                     case 3:
-                        this.usuariosToolStripMenuItem.Enabled = false;
-                        this.rolToolStripMenuItem.Enabled = false;
-                        this.puestoToolStripMenuItem.Enabled = false;
-                        this.supervisorToolStripMenuItem.Enabled = false;
-                        this.colaboradoresToolStripMenuItem.Enabled = false;
-                        this.planillasDePagoToolStripMenuItem.Enabled = false;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Enabled = false;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Enabled = false;
+                        this.usuariosToolStripMenuItem.Visible = false;
+                        this.rolToolStripMenuItem.Visible = false;
+                        this.puestoToolStripMenuItem.Visible = false;
+                        this.supervisorToolStripMenuItem.Visible = false;
+                        this.colaboradoresToolStripMenuItem.Visible = false;
+                        this.planillasDePagoToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
 
-                        this.procesosToolStripMenuItem.Enabled = false;
-                        this.reportesToolStripMenuItem.Enabled = false;
+                        this.procesosToolStripMenuItem.Visible = false;
+                        this.reportesToolStripMenuItem.Visible = false;
 
                         break;
                     default:
+                        this.usuariosToolStripMenuItem.Visible = true;
+                        this.rolToolStripMenuItem.Visible = true;
+                        this.puestoToolStripMenuItem.Visible = true;
+                        this.supervisorToolStripMenuItem.Visible = true;
+                        this.colaboradoresToolStripMenuItem.Visible = true;
+                        this.planillasDePagoToolStripMenuItem.Visible = true;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = true;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = true;
+                        this.procesosToolStripMenuItem.Visible = true;
+
+                        this.procesosToolStripMenuItem.Visible = true;
+                        this.reportesToolStripMenuItem.Visible = true;
 
                         frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
                         frm.ShowDialog();
@@ -98,6 +111,7 @@ namespace PayrollPal.UI
                 Application.Exit();
             }
         }
+        
 
         /// <summary>
         /// Evento para abrir el form de Mantenimiento de Usuarios

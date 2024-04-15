@@ -69,7 +69,10 @@ namespace PayrollPal.Layers.UI.Consultas
         {
             List<Planilla_Encabezado> listaPlanEnc = bLLPlanilla_Encabezado.SelectAll();
             List<Planilla_Detalle> listaPlanDet = bLLPlanilla_Detalle.SelectAll().Where(
-                det => det.IdColaborador.IDColaborador == pIdColaborador).ToList();
+                det => det.IdColaborador.IDColaborador == pIdColaborador && 
+                (det.IdEncabezado.Codigo.Estado == PlanillaEstado.PorEnviar ||
+                det.IdEncabezado.Codigo.Estado == PlanillaEstado.Enviada
+                || det.IdEncabezado.Codigo.Estado == PlanillaEstado.Activa)).ToList();
 
             var querySQL = from encabezado in listaPlanEnc
                            join detalle in listaPlanDet on encabezado.IdEncabezado equals detalle.IdEncabezado.IdEncabezado

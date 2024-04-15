@@ -466,16 +466,45 @@ namespace PayrollPal.UI.Mantenimientos
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            string idUsuario = this.mktID.Text;
-            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el usuario?","Aviso",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
+            try
             {
-                bLLUsuario.Delete(idUsuario);
-                CargarLista();
-                LimpiarControles();
+                string idUsuario = this.mktID.Text;
+                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el usuario?", "Aviso",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    if (bLLUsuario.SelectById(idUsuario).Asignado == true)
+                    {
+                        MessageBox.Show("No se puede eliminar el usuario ya que está asignado a un colaborador." +
+                            "\n"+
+                            "\nDebe eliminar el colaborador al que el usuario está asignado " +
+                            "\n o desasignar el usuario al colaborador para poder eliminarlo.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        bLLUsuario.Delete(idUsuario);
+                        CargarLista();
+                        LimpiarControles();
+                    }
+
+                }
             }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+
 
 
         }

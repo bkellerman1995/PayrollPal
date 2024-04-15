@@ -592,6 +592,7 @@ namespace PayrollPal
 
             if (resultado == DialogResult.Yes)
             {
+
                 bLLPlanillaPago.Delete(codigoPlanilla);
                 CargarLista();
                 LimpiarControles();

@@ -33,6 +33,12 @@ namespace PayrollPal.UI.Procesos
         private Planilla_Detalle planDet = new Planilla_Detalle();
         private Planilla_Encabezado planEnc = new Planilla_Encabezado();
 
+        DSPlanillaEnviar dSPlanillaAEnviar = new DSPlanillaEnviar();
+
+
+        DSPlanillaEnviarTableAdapters.DataTable2TableAdapter tableAdapter = new DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
+
+
         IBLLPlanilla_Encabezado bLLPlanilla_Encabezado = new BLLPlanilla_Encabezado();
         IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
         IBLLColaborador bLLColaborador = new BLLColaborador();
@@ -41,6 +47,7 @@ namespace PayrollPal.UI.Procesos
         IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
         IBLLDeduccionesPercepciones bLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
         IBLLSolicitudVacaciones bLLSolicitudVacaciones = new BLLSolicitudVacaciones();
+
 
         public frmProcesoCalcularPlanilla()
         {
@@ -69,6 +76,9 @@ namespace PayrollPal.UI.Procesos
                 //Limpiar los controles del form 
                 LimpiarControles();
                 RevisarCombosVacios();
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSetPlanillaEnviar", dSPlanillaAEnviar.Tables["DataTable2"]);
+                this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
                 this.reportViewer1.LocalReport.EnableExternalImages = true;
                 ReportParameter param = new ReportParameter("quickResponse", "Cargar Código");
@@ -534,7 +544,7 @@ namespace PayrollPal.UI.Procesos
 
 
 
-            this.dataTable2TableAdapter.Fill(this.dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
+            this.tableAdapter.Fill(this.dSPlanillaAEnviar.DataTable2, planEnc.IdEncabezado);
             // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
             //creado y el valor
 

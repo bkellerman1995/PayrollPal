@@ -5063,11 +5063,12 @@ INNER JOIN
     Planilla_Encabezado AS PE ON PD.IdEncabezado = PE.IdEncabezado
 WHERE 
     PD.IdColaborador = @IdColaborador
-    AND (PE.FechaHoy BETWEEN @FechaInicio AND @FechaFinal);";
+    AND (Convert(varchar,PE.FechaHoy,120) = @FechaInicio
+	or (Convert(varchar,PE.FechaHoy,120) = @FechaFinal))";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IdColaborador", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "IdColaborador", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaInicio", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "FechaHoy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaFinal", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "FechaHoy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaInicio", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaFinal", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5083,13 +5084,13 @@ WHERE
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(IdColaborador));
             }
             if ((FechaInicio == null)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaInicio");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FechaInicio));
             }
             if ((FechaFinal == null)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaFinal");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FechaFinal));
@@ -5114,13 +5115,13 @@ WHERE
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(IdColaborador));
             }
             if ((FechaInicio == null)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaInicio");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FechaInicio));
             }
             if ((FechaFinal == null)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaFinal");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FechaFinal));
@@ -5299,11 +5300,12 @@ INNER JOIN
     Colaborador AS C ON SV.IDColaborador = C.IdColaborador
 WHERE 
     C.IdColaborador = @IdColaborador
-AND (SV.FechaSolicitud BETWEEN @FechaInicio AND @FechaFinal);";
+    AND (Convert(varchar,SV.FechaSolicitud,120) = @FechaInicio
+	or (Convert(varchar,SV.FechaSolicitud,120) = @FechaFinal));";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IdColaborador", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "IdColaborador", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaInicio", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "FechaSolicitud", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaFinal", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "FechaSolicitud", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaInicio", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaFinal", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5319,13 +5321,13 @@ AND (SV.FechaSolicitud BETWEEN @FechaInicio AND @FechaFinal);";
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(IdColaborador));
             }
             if ((FechaInicio == null)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaInicio");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FechaInicio));
             }
             if ((FechaFinal == null)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaFinal");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FechaFinal));
@@ -5350,13 +5352,13 @@ AND (SV.FechaSolicitud BETWEEN @FechaInicio AND @FechaFinal);";
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(IdColaborador));
             }
             if ((FechaInicio == null)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaInicio");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FechaInicio));
             }
             if ((FechaFinal == null)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("FechaFinal");
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FechaFinal));

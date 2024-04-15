@@ -54,7 +54,7 @@ namespace PayrollPal.Layers.UI.Reportes
                 this.errProv1.Clear();
             }
 
-            if (this.cmbColaborador.SelectedIndex > 0)
+            if (this.cmbColaborador.SelectedIndex >= 0)
             {
                 Colaborador oColaborador = this.cmbColaborador.SelectedItem as Colaborador;
                 this.errProv1.SetError(this.cmbColaborador, string.Empty);
@@ -64,10 +64,13 @@ namespace PayrollPal.Layers.UI.Reportes
                 fechaInicio = this.dtpFechaDesde.Value.Date;
                 fechaFinal = this.dtpFechaHasta.Value.Date;
 
+                string fInicio = fechaInicio.ToString("yyyy-MM-dd");
+                string fFinal = fechaFinal.ToString("yyyy-MM-dd");
+
                 ReportDataSource reportDataSource = new ReportDataSource("DataSet1", dSPlanillaPorFecha.Tables["DataTable4"]);
                 this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
-                tableAdapter.Fill(dSPlanillaPorFecha.DataTable4, oColaborador.IDColaborador, fechaInicio.ToString("dd/MM/yyyy"), fechaFinal.ToString("dd/MM/yyyy"));
+                tableAdapter.Fill(dSPlanillaPorFecha.DataTable4, oColaborador.IDColaborador, fInicio, fFinal);
                 this.reportViewer1.RefreshReport();
             }
 
@@ -76,6 +79,11 @@ namespace PayrollPal.Layers.UI.Reportes
                 this.errProv1.SetError(this.cmbColaborador, "Campo colaborador no es correcto");
 
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
     

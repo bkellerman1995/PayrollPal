@@ -598,7 +598,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             if ((TipoPorcAbs)this.cmbTipoValor.SelectedItem == TipoPorcAbs.Porcentaje)
             {
-                this.mktValor.Mask = "000";
+                this.mktValor.Mask = "000.00";
                 this.lblPorc.Visible = true;
             }
 

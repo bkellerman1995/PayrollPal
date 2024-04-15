@@ -106,7 +106,7 @@ namespace PayrollPal.UI.Mantenimientos
                         break;
                     case 3:
                         this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(
-                            sol => sol.IDColaborador == frmLogin.colaboradorLoggeado).ToList();
+                            sol => sol.IDColaborador.IDColaborador == frmLogin.colaboradorLoggeado.IDColaborador).ToList();
                         break;
                     default:
                         this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
@@ -448,6 +448,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
+                    case 1:
                     case 2:
                         if (this.cmbColaborador.SelectedIndex >= 0)
                         {
@@ -475,17 +476,23 @@ namespace PayrollPal.UI.Mantenimientos
                     return false;
                 }
 
-                // Validar estado Final
+                if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 1 ||
+                    frmLogin.colaboradorLoggeado.IDRol.IDRol == 2)
+                {
+                    // Validar estado Final
 
-                if (this.cmbObservacionesFinales.SelectedIndex >= 0)
-                {
-                    this.errProv1.SetError(this.cmbObservacionesFinales, string.Empty);
+                    if (this.cmbObservacionesFinales.SelectedIndex >= 0)
+                    {
+                        this.errProv1.SetError(this.cmbObservacionesFinales, string.Empty);
+                    }
+                    else
+                    {
+                        this.errProv1.SetError(this.cmbObservacionesFinales, "Debe seleccionar un estado final de la solicitud");
+                        return false;
+                    }
                 }
-                else
-                {
-                    this.errProv1.SetError(this.cmbObservacionesFinales, "Debe seleccionar un estado final de la solicitud");
-                    return false;
-                }
+
+
 
 
             }
@@ -523,6 +530,11 @@ namespace PayrollPal.UI.Mantenimientos
                 case 1:
 
                     oSolicitud.IDColaborador = this.cmbColaborador.SelectedItem as Colaborador;
+                    if (this.rdbActiva.Checked)
+                        oSolicitud.Estado = true;
+                    if (this.rdbInactiva.Checked)
+                        oSolicitud.Estado = false;
+
                     break;
 
                 case 2:
@@ -645,6 +657,18 @@ namespace PayrollPal.UI.Mantenimientos
 
                         switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                         {
+                            case 1:
+                                this.cmbColaborador.Enabled = true;
+                                this.cmbObservacionesFinales.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+                                this.dtpFechaSolicitud.Enabled = true;
+                                this.dtpFechaDesde.Enabled = true;
+                                this.dtpFechaHasta.Enabled = true;
+                                this.txtCantDias.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+                                break;
                             case 2:
                                 this.cmbColaborador.Enabled = true;
                                 this.cmbObservacionesFinales.Enabled = true;
@@ -679,6 +703,18 @@ namespace PayrollPal.UI.Mantenimientos
 
                         switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                         {
+                            case 1:
+                                this.cmbColaborador.Enabled = true;
+                                this.cmbObservacionesFinales.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+                                this.dtpFechaSolicitud.Enabled = true;
+                                this.dtpFechaDesde.Enabled = true;
+                                this.dtpFechaHasta.Enabled = true;
+                                this.txtCantDias.Enabled = true;
+                                this.rdbActiva.Enabled = true;
+                                this.rdbInactiva.Enabled = true;
+                                break;
                             case 2:
                                 this.cmbColaborador.Enabled = true;
                                 this.cmbObservacionesFinales.Enabled = true;

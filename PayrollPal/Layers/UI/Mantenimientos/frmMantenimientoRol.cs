@@ -22,6 +22,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         IBLLRol bLLRol = new BLLRol();
+        IBLLColaborador bLLColaborador = new BLLColaborador();
 
         private List<int> listaRolesCargados = new List<int>();
         public frmMantenimientoRol()
@@ -486,6 +487,18 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
+                foreach (Colaborador item in bLLColaborador.SelectAll())
+                {
+                    if (item.IDRol.IDRol == idRol)
+                    {
+                        MessageBox.Show("No se puede eliminar el rol ya que está asignado a uno o más colaboradores." +
+                            "\n" +
+                            "\nDebe eliminar el o los colaboradores que tiene(n) el rol asignado para poder eliminarlo.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
                 bLLRol.Delete(idRol);
                 CargarLista();
                 LimpiarControles();
