@@ -211,8 +211,26 @@ namespace PayrollPal.Layers.UI
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            frmLogin.colaboradorLoggeado = null;
-            Application.Exit();
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                frmLogin.colaboradorLoggeado = null;
+                Application.Exit();
+            }
+
+        }
+
+        private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }
