@@ -17,6 +17,7 @@ using System.IO;
 using PayrollPal.Enumeraciones;
 using PayrollPal.Layers.IBLL;
 using PayrollPal.Layers.UI;
+using PayrollPal.UI.Consultas;
 
 namespace PayrollPal
 {
@@ -26,6 +27,8 @@ namespace PayrollPal
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         IBLLPlanillaPago bLLPlanillaPago = new BLLPlanillaPago();
+        IBLLPlanilla_Detalle bllPlanillaDetalle = new BLLPlanilla_Detalle();
+        IBLLPlanilla_Encabezado bllPlanillaEncabezado = new BLLPlanilla_Encabezado();
         public frmMantenimientoPlanillas()
         {
             InitializeComponent();
@@ -590,12 +593,32 @@ namespace PayrollPal
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la planilla de pago?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (resultado == DialogResult.Yes)
+            if (resultado == DialogResult.Yes && bLLPlanillaPago.SelectById(codigoPlanilla).Estado ==
+                PlanillaEstado.PorEnviar)
             {
+                Planilla_Detalle planDet = new Planilla_Detalle();
+                Planilla_Encabezado planEnc = new Planilla_Encabezado();
 
+                foreach (Planilla_Detalle planillaDet in bllPlanillaDetalle.SelectAll())
+                {
+                    if (planillaDet.IdEncabezado.Codigo.Codigo == codigoPlanilla)
+                    {
+                        bllPlanillaDetalle.Delete(planillaDet.IdDetalle);
+                        bllPlanillaEncabezado.Delete(planillaDet.IdEncabezado.IdEncabezado);
+                    }
+                }
                 bLLPlanillaPago.Delete(codigoPlanilla);
                 CargarLista();
                 LimpiarControles();
+
+                MessageBox.Show("Ha eliminado un cálculo de planilla" +
+                    "\nDeberá volver a cargar lar marcas." +
+                    "\n" +
+                    "\nRevise bien las marcas antes de cargarlas de nuevo al sistema",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
+                frm.ShowDialog();
             }
 
 
