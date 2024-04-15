@@ -18,6 +18,9 @@ using PayrollPal.Enumeraciones;
 using PayrollPal.Layers.IBLL;
 using PayrollPal.Layers.UI;
 using PayrollPal.UI.Consultas;
+using PayrollPal.Layers;
+using Microsoft.Reporting.WinForms;
+using System.Drawing.Imaging;
 
 namespace PayrollPal
 {
@@ -29,6 +32,17 @@ namespace PayrollPal
         IBLLPlanillaPago bLLPlanillaPago = new BLLPlanillaPago();
         IBLLPlanilla_Detalle bllPlanillaDetalle = new BLLPlanilla_Detalle();
         IBLLPlanilla_Encabezado bllPlanillaEncabezado = new BLLPlanilla_Encabezado();
+        IBLLColaborador bLLColaborador = new BLLColaborador();
+        IBLLSolicitudVacaciones bLLSolicitudVacaciones = new BLLSolicitudVacaciones();
+        IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
+
+        Planilla_Encabezado planEnc = new Planilla_Encabezado();
+        Planilla_Detalle planDet = new Planilla_Detalle();
+
+        DSPlanillaEnviar dSPlanillaEnviar = new DSPlanillaEnviar();
+
+
+        DSPlanillaEnviarTableAdapters.DataTable2TableAdapter tableAdapter = new DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
         public frmMantenimientoPlanillas()
         {
             InitializeComponent();
@@ -61,6 +75,14 @@ namespace PayrollPal
 
                 ////Limpiar los controles del form 
                 LimpiarControles();
+
+                ReportDataSource reportDataSource = new ReportDataSource("DataSetPlanillaEnviar", dSPlanillaEnviar.Tables["DataTable2"]);
+                this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
+
+                this.reportViewer1.LocalReport.EnableExternalImages = true;
+                ReportParameter param = new ReportParameter("quickResponse", "Cargar Código");
+                this.reportViewer1.LocalReport.SetParameters(param);
+                this.reportViewer1.RefreshReport();
             }
             catch (Exception msg)
             {
@@ -74,6 +96,7 @@ namespace PayrollPal
                 MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
 
             }
+            this.reportViewer1.RefreshReport();
         }
 
         /// <summary>
@@ -187,7 +210,7 @@ namespace PayrollPal
         {
             foreach (var planilla in bLLPlanillaPago.SelectAll())
             {
-                if (planilla.Estado == PlanillaEstado.Activa && 
+                if (planilla.Estado == PlanillaEstado.Activa &&
                     planilla.FechaPago < DateTime.Today)
                 {
                     planilla.Estado = PlanillaEstado.Inactiva;
@@ -301,8 +324,8 @@ namespace PayrollPal
 
             if (this.dtpFechaDesde.Value.Day == 28)
             {
-                this.dtpFechaPago.MinDate = new DateTime(anno, this.dtpFechaDesde.Value.Month +1, 15);
-                this.dtpFechaPago.MaxDate = new DateTime(anno, this.dtpFechaDesde.Value.Month +1, 15);
+                this.dtpFechaPago.MinDate = new DateTime(anno, this.dtpFechaDesde.Value.Month + 1, 15);
+                this.dtpFechaPago.MaxDate = new DateTime(anno, this.dtpFechaDesde.Value.Month + 1, 15);
             }
 
             //Verificar si la fecha de pago es sábado o domingo (se paga el lunes)
@@ -468,7 +491,7 @@ namespace PayrollPal
                     return false;
                 }
 
-                if (String.Equals(this.lblEstado2.Text,"Activa",StringComparison.OrdinalIgnoreCase))
+                if (String.Equals(this.lblEstado2.Text, "Activa", StringComparison.OrdinalIgnoreCase))
                 {
                     if (VerificarSiHayPlanillasActivas())
                     {
@@ -478,7 +501,7 @@ namespace PayrollPal
                         return false;
                     }
                 }
- 
+
             }
             catch (Exception msg)
             {
@@ -593,32 +616,41 @@ namespace PayrollPal
             DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la planilla de pago?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (resultado == DialogResult.Yes && bLLPlanillaPago.SelectById(codigoPlanilla).Estado ==
-                PlanillaEstado.PorEnviar)
+            if (resultado == DialogResult.Yes)
             {
-                Planilla_Detalle planDet = new Planilla_Detalle();
-                Planilla_Encabezado planEnc = new Planilla_Encabezado();
-
-                foreach (Planilla_Detalle planillaDet in bllPlanillaDetalle.SelectAll())
+                if (bLLPlanillaPago.SelectById(codigoPlanilla).Estado ==
+                PlanillaEstado.PorEnviar)
                 {
-                    if (planillaDet.IdEncabezado.Codigo.Codigo == codigoPlanilla)
+                    Planilla_Detalle planDet = new Planilla_Detalle();
+                    Planilla_Encabezado planEnc = new Planilla_Encabezado();
+
+                    foreach (Planilla_Detalle planillaDet in bllPlanillaDetalle.SelectAll())
                     {
-                        bllPlanillaDetalle.Delete(planillaDet.IdDetalle);
-                        bllPlanillaEncabezado.Delete(planillaDet.IdEncabezado.IdEncabezado);
+                        if (planillaDet.IdEncabezado.Codigo.Codigo == codigoPlanilla)
+                        {
+                            bllPlanillaDetalle.Delete(planillaDet.IdDetalle);
+                            bllPlanillaEncabezado.Delete(planillaDet.IdEncabezado.IdEncabezado);
+                        }
                     }
+                    bLLPlanillaPago.Delete(codigoPlanilla);
+                    CargarLista();
+                    LimpiarControles();
+
+                    MessageBox.Show("Ha eliminado un cálculo de planilla" +
+                        "\nDeberá volver a cargar lar marcas." +
+                        "\n" +
+                        "\nRevise bien las marcas antes de cargarlas de nuevo al sistema",
+                        "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
+                    frm.ShowDialog();
                 }
-                bLLPlanillaPago.Delete(codigoPlanilla);
-                CargarLista();
-                LimpiarControles();
+                else
+                {
+                    MessageBox.Show("No puede eliminar planillas cuyo estado sea POR ENVIAR", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-                MessageBox.Show("Ha eliminado un cálculo de planilla" +
-                    "\nDeberá volver a cargar lar marcas." +
-                    "\n" +
-                    "\nRevise bien las marcas antes de cargarlas de nuevo al sistema",
-                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
-                frm.ShowDialog();
             }
 
 
@@ -721,6 +753,149 @@ namespace PayrollPal
                     {
                         this.btnEnviar.Visible = false;
                     }
+
+                    CrearActualizarPlanEncyDetalle();
+                }
+            }
+
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+
+        private void CrearActualizarPlanEncyDetalle()
+        {
+            try
+            {
+                Colaborador oColaborador = new Colaborador();
+                //Crear la instancia de Planillaencabezado
+
+
+                //planEnc = this.dgvPlanillas.SelectedRows[0].DataBoundItem as Planilla_Encabezado;
+                PlanillaPago planPago = this.dgvPlanillas.SelectedRows[0].DataBoundItem as PlanillaPago;
+
+                foreach (Planilla_Encabezado enc in bllPlanillaEncabezado.SelectAll())
+                {
+                    if (bllPlanillaEncabezado.SelectById(enc.IdEncabezado).Codigo.Codigo == planPago.Codigo)
+                    {
+                        planEnc = enc;
+                        break;
+                    }
+                }
+
+                //Crear la instancia de PlanillaDetalle
+
+                var obtenerPlanDet = bllPlanillaDetalle.SelectAll().Where(det => det.IdEncabezado.IdEncabezado == planEnc.IdEncabezado).ToList();
+
+                foreach (var item in obtenerPlanDet)
+                {
+                    planDet = item;
+                    oColaborador = bllPlanillaDetalle.SelectById(item.IdDetalle).IdColaborador;
+                    break;
+                }
+
+                planDet.deducciones_Percepciones_Por_Colaborador = bLLDeducciones_Percepciones_Por_Colaborador.SelectTodo().Where(dedPerc
+                    => dedPerc.Estado = true && dedPerc.IdColaborador.IDColaborador == oColaborador.IDColaborador).ToList();
+
+                List<SolicitudVacaciones> solicitudVacaciones = bLLSolicitudVacaciones.SelectAll().Where(sol => sol.FechaSolicitarDesde
+                >= planEnc.Codigo.FechaDesde && sol.FechaSolicitarHasta <= planEnc.Codigo.FechaHasta && sol.IDColaborador.IDColaborador == planDet.IdColaborador.IDColaborador
+                && sol.Observaciones_Final == ObservacionSolicVacaciones.Aprobada && sol.Estado == true).ToList();
+
+                decimal dolar = (decimal)(planEnc.TipoCambio);
+
+                #region Creacion Código QR
+                //Se consulta si el directorio temp existe caso contrario lo crea
+                if (!Directory.Exists(@"C:\temp"))
+                    Directory.CreateDirectory(@"C:\temp");
+                // Convertir imagen a QR, se envía por parámetro lo que se requiere 
+
+                string nombreCompletoColaborador = planDet.IdColaborador.Nombre + " " + planDet.IdColaborador.Apellido1 +
+                    " " + planDet.IdColaborador.Apellido2;
+                string montoAPagarCol = planEnc.TotalPagar.ToString();
+                double dolares = (double)bllPlanillaDetalle.CalcularSalarioDolares(planDet, dolar);
+                string montoAPagarDol = dolares.ToString();
+
+                Image imagen = QuickResponse.QuickResponseGenerador(planDet.IdColaborador.IDColaborador, nombreCompletoColaborador, montoAPagarCol, montoAPagarDol, 53);
+                // Salvar imagen en la carpeta temp
+                imagen.Save(@"c:\temp\qr.png", ImageFormat.Png);
+                // Config imagen del QR (Para poder pasar una imagen por parámetro se 
+                //debe realizar con la siguiente linea
+                string ruta = @"file:///" + @"C:/temp/qr.png";
+                #endregion
+
+                #region Creacion Reporte
+                //Llamado e invocación del Reporte (si el fill del reporte tiene 
+                //parametros)
+                //Se deberá indicar los valores en el mismo orden como los recibe el
+                //fill
+
+
+
+                tableAdapter.Fill(dSPlanillaEnviar.DataTable2, planEnc.IdEncabezado);
+
+                // Pasar parámetro siempre deberá llevar el mismo nombre del parametro 
+                //creado y el valor
+
+                ReportParameter param = new ReportParameter("quickResponse", ruta);
+
+                reportViewer1.ProcessingMode = ProcessingMode.Local;
+
+                //Pasamos el array de los parámetros al ReportViewer
+                this.reportViewer1.LocalReport.SetParameters(param);
+                //Se recarga el Reporte
+                this.reportViewer1.RefreshReport();
+                #endregion
+
+                this.btnEnviar.Enabled = true;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Método para enviar correo con la planilla 
+        /// que está en estado por enviar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
+
+                DialogResult resultado = MessageBox.Show("¿Desea enviarla la planilla de pago con ID: " +
+                   planEnc.IdEncabezado + " al correo: " + planDet.IdColaborador.CorreoElectronico + "?",
+                   "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    string rutaPDF = @"C:\temp\" + "Planilla-" + planEnc.IdEncabezado + "-Envío.pdf";
+                    GenerarPDF(this.reportViewer1, rutaPDF);
                 }
             }
             catch (Exception msg)
@@ -737,15 +912,45 @@ namespace PayrollPal
             }
         }
 
-        /// <summary>
-        /// Método para enviar correo con la planilla 
-        /// que está en estado por enviar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnEnviar_Click(object sender, EventArgs e)
+        private void GenerarPDF(ReportViewer reportViewer, string rutaDestino)
         {
+            if (!Directory.Exists(@"C:\temp"))
+                Directory.CreateDirectory(@"C:\temp");
 
+            string deviceInfo =
+
+             "<DeviceInfo>" +
+             "  <OutputFormat>PDF</OutputFormat>" +
+             "  <PageWidth>8.5in</PageWidth>" +
+             "  <PageHeight>11in</PageHeight>" +
+             "  <MarginTop>0.5in</MarginTop>" +
+             "  <MarginLeft>0.5in</MarginLeft>" +
+             "  <MarginRight>0.5in</MarginRight>" +
+             "  <MarginBottom>0.5in</MarginBottom>" +
+             "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+            // Render the report to byte array
+            byte[] bytes = this.reportViewer1.LocalReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streamIds, out warnings);
+
+            // Save the byte array to a file
+            File.WriteAllBytes(rutaDestino, bytes);
+
+            bool enviado = Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);
+
+            if (enviado == true)
+            {
+                planEnc.Codigo.Estado = PlanillaEstado.Enviada;
+                bLLPlanillaPago.Update(planEnc.Codigo);
+                MessageBox.Show("La planilla con ID: " + planEnc.IdEncabezado + " se envió correctamente",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
+
