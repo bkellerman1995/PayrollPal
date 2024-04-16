@@ -78,6 +78,7 @@ namespace PayrollPal.UI
 
                     case 2:
 
+                        this.archivoToolStripMenuItem.Visible = true;
                         this.mantenimientosToolStripMenuItem.Visible = true;
                         this.reportesToolStripMenuItem.Visible = true;
                         this.usuariosToolStripMenuItem.Visible = false;

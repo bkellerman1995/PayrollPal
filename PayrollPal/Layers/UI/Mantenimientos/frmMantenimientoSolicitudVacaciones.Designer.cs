@@ -323,6 +323,7 @@
             this.cmbColaborador.Name = "cmbColaborador";
             this.cmbColaborador.Size = new System.Drawing.Size(288, 29);
             this.cmbColaborador.TabIndex = 43;
+            this.cmbColaborador.SelectedValueChanged += new System.EventHandler(this.cmbColaborador_SelectedValueChanged);
             // 
             // lblColaborador
             // 

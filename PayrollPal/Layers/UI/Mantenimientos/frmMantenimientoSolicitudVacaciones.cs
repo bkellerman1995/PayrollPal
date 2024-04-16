@@ -51,11 +51,13 @@ namespace PayrollPal.UI.Mantenimientos
                 {
                     case 2:
 
-                        this.btnAgregar.Enabled = true;
-                        this.btnEliminar.Enabled = false;
+                        this.btnAgregar.Visible = false;
+                        this.btnEliminar.Visible = false;
                         this.lblEstado.Visible = false;
                         this.lblColaborador.Visible = true;
                         this.cmbColaborador.Visible = true;
+                        this.rdbActiva.Visible = false;
+                        this.rdbInactiva.Visible = false;
 
                         break;
 
@@ -100,17 +102,19 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
-                    case 2:
-                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(
-                            sol => sol.IDColaborador.IDSupervisor.IDSupervisor == frmLogin.colaboradorLoggeado.supID).ToList();
+                    case 1:
+                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
                         break;
+
+                    case 2:
+                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(sol => sol.IDColaborador.IDColaborador == frmLogin.colaboradorLoggeado.IDColaborador);
+                        break;
+
                     case 3:
                         this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll().Where(
                             sol => sol.IDColaborador.IDColaborador == frmLogin.colaboradorLoggeado.IDColaborador).ToList();
                         break;
-                    default:
-                        this.dgvSolicitud.DataSource = bLLSolicitudVacaciones.SelectAll();
-                        break;
+
                 }
 
                 this.dgvSolicitud.ClearSelection();
@@ -136,13 +140,27 @@ namespace PayrollPal.UI.Mantenimientos
             List<Colaborador> listaColab = new List<Colaborador>();
             switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
             {
-                case 2:
-                    listaColab = bLLColaborador.SelectAll().Where(
-                            col => col.IDSupervisor.IDSupervisor == frmLogin.colaboradorLoggeado.supID).ToList();
+                case 1:
+                    this.cmbColaborador.Items.Add(" ====SELECCIONE====");
 
                     foreach (var colab in listaColab)
                     {
                         this.cmbColaborador.Items.Add(colab);
+
+                    }
+                    break;
+
+                case 2:
+                    listaColab = bLLColaborador.SelectAll().Where(
+                            col => col.IDSupervisor.IDSupervisor == frmLogin.colaboradorLoggeado.supID).ToList();
+
+                    this.cmbColaborador.Items.Add(" ====SELECCIONE====");
+                    this.cmbColaborador.Items.Add(frmLogin.colaboradorLoggeado);
+
+                    foreach (var colab in listaColab)
+                    {
+                        this.cmbColaborador.Items.Add(colab);
+
                     }
 
 
@@ -150,10 +168,7 @@ namespace PayrollPal.UI.Mantenimientos
                 case 3:
                     listaColab = null;
                     break;
-                default:
-                    listaColab = bLLColaborador.SelectAll();
-                    this.cmbColaborador.DataSource = listaColab;
-                    break;
+
             }
 
             foreach (ObservacionSolicVacaciones obs in Enum.GetValues(typeof(ObservacionSolicVacaciones)))
@@ -198,7 +213,13 @@ namespace PayrollPal.UI.Mantenimientos
                 this.txtID.Text = "sol";
                 this.txtID.BackColor = Color.White;
 
-                this.cmbColaborador.SelectedIndex = -1;
+                switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
+                {
+                    case 1:
+                    case 2:
+                        this.cmbColaborador.SelectedIndex = 0;
+                        break;
+                }
 
                 //Método para configurar los valores de los datetimepicker
                 ConfigurarDateTimePickerFechaSolicitud();
@@ -243,8 +264,15 @@ namespace PayrollPal.UI.Mantenimientos
                 this.btnLimpiar.Enabled = false;
                 this.btnConfirmar.Visible = false;
 
+                if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 2)
+                {
+                    this.cmbColaborador.Enabled = true;
+                }
+                else
+                {
+                    this.cmbColaborador.Enabled = false;
+                }
                 this.txtID.Enabled = false;
-                this.cmbColaborador.Enabled = false;
                 this.dtpFechaSolicitud.Enabled = false;
                 this.dtpFechaDesde.Enabled = false;
                 this.dtpFechaHasta.Enabled = false;
@@ -539,7 +567,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 case 2:
 
-                    oSolicitud.IDColaborador = frmLogin.colaboradorLoggeado;
+                    oSolicitud.IDColaborador = this.cmbColaborador.SelectedItem as Colaborador;
                     if (this.rdbActiva.Checked)
                         oSolicitud.Estado = true;
                     if (this.rdbInactiva.Checked)
@@ -847,5 +875,55 @@ namespace PayrollPal.UI.Mantenimientos
             this.Close();
         }
 
+        private void cmbColaborador_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SolicitudVacaciones solicitud = new SolicitudVacaciones();
+            List<SolicitudVacaciones> listaColab = new List<SolicitudVacaciones>();
+            Colaborador colaborador = new Colaborador();
+
+            if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 2 &&
+                this.cmbColaborador.SelectedIndex != 0)
+            {
+                colaborador = this.cmbColaborador.SelectedItem as Colaborador;
+                if (colaborador.IDColaborador == frmLogin.colaboradorLoggeado.IDColaborador)
+                {
+                    this.rdbActiva.Visible = true;
+                    this.rdbInactiva.Visible = true;
+                    this.btnAgregar.Visible = true;
+
+                    foreach (SolicitudVacaciones sol in bLLSolicitudVacaciones.SelectAll())
+                    {
+                        if (sol.IDColaborador.IDColaborador == colaborador.IDColaborador)
+                        {
+                            solicitud = bLLSolicitudVacaciones.SelectById(sol.IDSolicitudVacas);
+                            listaColab.Add(solicitud);
+                            break;
+                        }
+                    }
+
+                    this.dgvSolicitud.DataSource = listaColab;
+                }
+                else
+                {
+                    //colaborador = this.cmbColaborador.SelectedItem as Colaborador;
+                    this.rdbActiva.Visible = false;
+                    this.rdbInactiva.Visible = false;
+                    this.btnAgregar.Visible = false;
+                    foreach (SolicitudVacaciones sol in bLLSolicitudVacaciones.SelectAll())
+                    {
+                        if (sol.IDColaborador.IDColaborador == colaborador.IDColaborador)
+                        {
+                            solicitud = bLLSolicitudVacaciones.SelectById(sol.IDSolicitudVacas);
+                            listaColab.Add(solicitud);
+                            break;
+                        }
+                    }
+
+                    this.dgvSolicitud.DataSource = listaColab;
+                }
+
+
+            }
+        }
     }
 }
