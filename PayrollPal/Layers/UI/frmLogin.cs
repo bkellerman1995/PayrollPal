@@ -39,17 +39,6 @@ namespace PayrollPal.Layers.UI
             InitializeComponent();
         }
 
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-            foreach (Control c in this.Controls)
-            {
-                this.errProv1.SetError(c, String.Empty);
-                this.errProv1.Clear();
-            }
-
-            this.txtUsuario.Focus();
-        }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -211,42 +200,29 @@ namespace PayrollPal.Layers.UI
             LoginFormClosed?.Invoke(this, EventArgs.Empty);
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
-    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
-            {
-                frmLogin.colaboradorLoggeado = null;
-                Application.Exit();
-            }
-
+            Application.Exit();
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-            if (contPregunta == 0 && colaboradorLoggeado == null)
+            int contPregunta = 0;
+            if ((frmLogin.colaboradorLoggeado == null || frmLogin.colaboradorLoggeado != null) &&
+                contPregunta == 0)
             {
-
                 DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
-        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (resultado == DialogResult.Yes )
+                if (resultado == DialogResult.Yes)
                 {
-                    contPregunta += 1;
-                    frmLogin.colaboradorLoggeado = null;
+                    contPregunta++ ;
                     Application.Exit();
                 }
                 else
                 {
-                    return;
+                    e.Cancel = true;
                 }
-            }
-            else
-            {
-                return;
             }
 
         }

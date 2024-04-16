@@ -43,10 +43,10 @@ namespace PayrollPal.Layers.UI
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(438, 53);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(1);
+            this.pictureBox2.Location = new System.Drawing.Point(1095, 132);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(104, 120);
+            this.pictureBox2.Size = new System.Drawing.Size(260, 300);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 13;
             this.pictureBox2.TabStop = false;
@@ -55,10 +55,10 @@ namespace PayrollPal.Layers.UI
             // 
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnAceptar.Location = new System.Drawing.Point(183, 239);
-            this.btnAceptar.Margin = new System.Windows.Forms.Padding(1);
+            this.btnAceptar.Location = new System.Drawing.Point(458, 598);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(170, 57);
+            this.btnAceptar.Size = new System.Drawing.Size(425, 142);
             this.btnAceptar.TabIndex = 11;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -68,30 +68,30 @@ namespace PayrollPal.Layers.UI
             // txtPwd
             // 
             this.txtPwd.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPwd.Location = new System.Drawing.Point(157, 131);
-            this.txtPwd.Margin = new System.Windows.Forms.Padding(1);
+            this.txtPwd.Location = new System.Drawing.Point(392, 328);
+            this.txtPwd.Margin = new System.Windows.Forms.Padding(2);
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.PasswordChar = '*';
-            this.txtPwd.Size = new System.Drawing.Size(241, 35);
+            this.txtPwd.Size = new System.Drawing.Size(596, 77);
             this.txtPwd.TabIndex = 10;
             // 
             // txtUsuario
             // 
             this.txtUsuario.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(157, 53);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(1);
+            this.txtUsuario.Location = new System.Drawing.Point(392, 132);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(241, 35);
+            this.txtUsuario.Size = new System.Drawing.Size(596, 77);
             this.txtUsuario.TabIndex = 9;
             // 
             // lblPwd
             // 
             this.lblPwd.AutoSize = true;
             this.lblPwd.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPwd.Location = new System.Drawing.Point(22, 133);
-            this.lblPwd.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblPwd.Location = new System.Drawing.Point(55, 332);
+            this.lblPwd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPwd.Name = "lblPwd";
-            this.lblPwd.Size = new System.Drawing.Size(118, 30);
+            this.lblPwd.Size = new System.Drawing.Size(294, 71);
             this.lblPwd.TabIndex = 8;
             this.lblPwd.Text = "Contraseña";
             // 
@@ -99,10 +99,10 @@ namespace PayrollPal.Layers.UI
             // 
             this.lblUsuario.AutoSize = true;
             this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.Location = new System.Drawing.Point(22, 53);
-            this.lblUsuario.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblUsuario.Location = new System.Drawing.Point(55, 132);
+            this.lblUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(83, 30);
+            this.lblUsuario.Size = new System.Drawing.Size(207, 71);
             this.lblUsuario.TabIndex = 7;
             this.lblUsuario.Text = "Usuario";
             // 
@@ -112,21 +112,22 @@ namespace PayrollPal.Layers.UI
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(559, 340);
+            this.ClientSize = new System.Drawing.Size(1398, 850);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtPwd);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.lblPwd);
             this.Controls.Add(this.lblUsuario);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
-            this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLogin_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
             this.ResumeLayout(false);
