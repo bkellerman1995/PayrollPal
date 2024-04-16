@@ -909,18 +909,20 @@ namespace PayrollPal.UI.Mantenimientos
                     this.rdbActiva.Visible = false;
                     this.rdbInactiva.Visible = false;
                     this.btnAgregar.Visible = false;
-                    foreach (SolicitudVacaciones sol in bLLSolicitudVacaciones.SelectAll())
+                    foreach (SolicitudVacaciones sol in bLLSolicitudVacaciones.SelectAll().Where(solic => solic.Estado == true).ToList())
                     {
                         if (sol.IDColaborador.IDColaborador == colaborador.IDColaborador)
                         {
                             solicitud = bLLSolicitudVacaciones.SelectById(sol.IDSolicitudVacas);
                             listaColab.Add(solicitud);
-                            break;
                         }
                     }
 
                     this.dgvSolicitud.DataSource = listaColab;
-                }
+                    this.dgvSolicitud.Columns[7].Visible = false;
+                    this.dgvSolicitud.ClearSelection();
+
+                 }
 
 
             }
