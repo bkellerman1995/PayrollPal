@@ -29,6 +29,8 @@ namespace PayrollPal.Layers.UI
 
         public static Colaborador colaboradorLoggeado = new Colaborador();
 
+        public static int contPregunta = 0;
+
         public event EventHandler LoginFormClosed;
 
 
@@ -224,13 +226,29 @@ namespace PayrollPal.Layers.UI
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
-    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (resultado == DialogResult.Yes)
+            if (contPregunta == 0 && colaboradorLoggeado == null)
             {
-                Application.Exit();
+
+                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea salir de la aplicación?", "Pregunta",
+        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes )
+                {
+                    contPregunta += 1;
+                    frmLogin.colaboradorLoggeado = null;
+                    Application.Exit();
+                }
+                else
+                {
+                    return;
+                }
             }
+            else
+            {
+                return;
+            }
+
         }
     }
 }

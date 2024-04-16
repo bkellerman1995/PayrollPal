@@ -227,6 +227,11 @@ namespace PayrollPal.UI
             frmReporteSolVacasPorFecha frm = new frmReporteSolVacasPorFecha();
             frm.ShowDialog();
         }
+
+        private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 
 
