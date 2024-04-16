@@ -647,7 +647,7 @@ namespace PayrollPal
                 }
                 else
                 {
-                    MessageBox.Show("No puede eliminar planillas cuyo estado sea POR ENVIAR", "Error",
+                    MessageBox.Show("No puede eliminar planillas cuyo estado sea diferente a POR ENVIAR", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
