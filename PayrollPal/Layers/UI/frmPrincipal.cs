@@ -1,4 +1,5 @@
-﻿using PayrollPal.Layers.UI;
+﻿using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.UI;
 using PayrollPal.Layers.UI.Consultas;
 using PayrollPal.Layers.UI.Mantenimientos;
 using PayrollPal.Layers.UI.Reportes;
@@ -28,7 +29,13 @@ namespace PayrollPal.UI
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
 
+            foreach (ToolStripItem item in this.menuStrip1.Items)
+            {
+                item.Visible = false;
+            }
+
             frmLogin frm = new frmLogin();
+
             this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
 
             frm.LoginFormClosed += frmLogin_LoginFormClosed;
@@ -40,39 +47,18 @@ namespace PayrollPal.UI
 
         private void frmLogin_LoginFormClosed(object sender, EventArgs e)
         {
-            if (frmLogin.colaboradorLoggeado != null)
+            if (frmLogin.colaboradorLoggeado.IDColaborador != null)
             {
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario + " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
 
                 switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
-                    case 2:
-                        this.usuariosToolStripMenuItem.Visible = false;
-                        this.rolToolStripMenuItem.Visible = false;
-                        this.puestoToolStripMenuItem.Visible = false;
-                        this.supervisorToolStripMenuItem.Visible = false;
-                        this.colaboradoresToolStripMenuItem.Visible = false;
-                        this.planillasDePagoToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
-                        this.procesosToolStripMenuItem.Visible = false;
+                    case 1:
 
-                        break;
-                    case 3:
-                        this.usuariosToolStripMenuItem.Visible = false;
-                        this.rolToolStripMenuItem.Visible = false;
-                        this.puestoToolStripMenuItem.Visible = false;
-                        this.supervisorToolStripMenuItem.Visible = false;
-                        this.colaboradoresToolStripMenuItem.Visible = false;
-                        this.planillasDePagoToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
-
-                        this.procesosToolStripMenuItem.Visible = false;
-                        this.reportesToolStripMenuItem.Visible = false;
-
-                        break;
-                    default:
+                        this.mantenimientosToolStripMenuItem.Visible = true;
+                        this.archivoToolStripMenuItem.Visible = true;
+                        this.consultasToolStripMenuItem.Visible = true;
+                        
                         this.usuariosToolStripMenuItem.Visible = true;
                         this.rolToolStripMenuItem.Visible = true;
                         this.puestoToolStripMenuItem.Visible = true;
@@ -88,6 +74,44 @@ namespace PayrollPal.UI
 
                         frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
                         frm.ShowDialog();
+                        break;
+
+                    case 2:
+
+                        this.mantenimientosToolStripMenuItem.Visible = true;
+                        this.reportesToolStripMenuItem.Visible = true;
+                        this.usuariosToolStripMenuItem.Visible = false;
+                        this.rolToolStripMenuItem.Visible = false;
+                        this.puestoToolStripMenuItem.Visible = false;
+                        this.supervisorToolStripMenuItem.Visible = false;
+                        this.colaboradoresToolStripMenuItem.Visible = false;
+                        this.planillasDePagoToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+                        this.procesosToolStripMenuItem.Visible = false;
+
+
+
+                        break;
+                    case 3:
+
+                        this.mantenimientosToolStripMenuItem.Visible = true;
+                        this.solicitudesDeVacacionesToolStripMenuItem.Visible = true;
+                        this.archivoToolStripMenuItem.Visible = true;
+                        this.consultasToolStripMenuItem.Visible = true;
+
+                        this.usuariosToolStripMenuItem.Visible = false;
+                        this.rolToolStripMenuItem.Visible = false;
+                        this.puestoToolStripMenuItem.Visible = false;
+                        this.supervisorToolStripMenuItem.Visible = false;
+                        this.colaboradoresToolStripMenuItem.Visible = false;
+                        this.planillasDePagoToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+
+                        this.procesosToolStripMenuItem.Visible = false;
+                        this.reportesToolStripMenuItem.Visible = false;
+
                         break;
                 }
             }
@@ -212,6 +236,7 @@ namespace PayrollPal.UI
             if (cerrarSesion == DialogResult.Yes)
             {
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
+                frmLogin.colaboradorLoggeado = new Colaborador();
                 frmPrincipal_Load(this, EventArgs.Empty);
             }
         }
