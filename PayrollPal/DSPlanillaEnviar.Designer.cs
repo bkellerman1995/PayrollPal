@@ -998,6 +998,16 @@ namespace PayrollPal {
             
             private global::System.Data.DataColumn columnVacaciones;
             
+            private global::System.Data.DataColumn columnIDEmpresa;
+            
+            private global::System.Data.DataColumn columnNombre;
+            
+            private global::System.Data.DataColumn columnTelefono;
+            
+            private global::System.Data.DataColumn columnDireccion;
+            
+            private global::System.Data.DataColumn columnLogo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DataTable2DataTable() {
@@ -1201,6 +1211,46 @@ namespace PayrollPal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn IDEmpresaColumn {
+                get {
+                    return this.columnIDEmpresa;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NombreColumn {
+                get {
+                    return this.columnNombre;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TelefonoColumn {
+                get {
+                    return this.columnTelefono;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DireccionColumn {
+                get {
+                    return this.columnDireccion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn LogoColumn {
+                get {
+                    return this.columnLogo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1257,7 +1307,12 @@ namespace PayrollPal {
                         decimal SalarioHora, 
                         string DeduccionesList, 
                         string PercepcionesList, 
-                        string Vacaciones) {
+                        string Vacaciones, 
+                        string IDEmpresa, 
+                        string Nombre, 
+                        string Telefono, 
+                        string Direccion, 
+                        byte[] Logo) {
                 DataTable2Row rowDataTable2Row = ((DataTable2Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IdEncabezado,
@@ -1280,7 +1335,12 @@ namespace PayrollPal {
                         SalarioHora,
                         DeduccionesList,
                         PercepcionesList,
-                        Vacaciones};
+                        Vacaciones,
+                        IDEmpresa,
+                        Nombre,
+                        Telefono,
+                        Direccion,
+                        Logo};
                 rowDataTable2Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable2Row);
                 return rowDataTable2Row;
@@ -1324,6 +1384,11 @@ namespace PayrollPal {
                 this.columnDeduccionesList = base.Columns["DeduccionesList"];
                 this.columnPercepcionesList = base.Columns["PercepcionesList"];
                 this.columnVacaciones = base.Columns["Vacaciones"];
+                this.columnIDEmpresa = base.Columns["IDEmpresa"];
+                this.columnNombre = base.Columns["Nombre"];
+                this.columnTelefono = base.Columns["Telefono"];
+                this.columnDireccion = base.Columns["Direccion"];
+                this.columnLogo = base.Columns["Logo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1371,6 +1436,16 @@ namespace PayrollPal {
                 base.Columns.Add(this.columnPercepcionesList);
                 this.columnVacaciones = new global::System.Data.DataColumn("Vacaciones", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVacaciones);
+                this.columnIDEmpresa = new global::System.Data.DataColumn("IDEmpresa", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDEmpresa);
+                this.columnNombre = new global::System.Data.DataColumn("Nombre", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombre);
+                this.columnTelefono = new global::System.Data.DataColumn("Telefono", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTelefono);
+                this.columnDireccion = new global::System.Data.DataColumn("Direccion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDireccion);
+                this.columnLogo = new global::System.Data.DataColumn("Logo", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLogo);
                 this.columnIdEncabezado.AllowDBNull = false;
                 this.columnIdEncabezado.MaxLength = 20;
                 this.columnCodigo.MaxLength = 10;
@@ -1384,6 +1459,11 @@ namespace PayrollPal {
                 this.columnPercepcionesList.MaxLength = 2147483647;
                 this.columnVacaciones.ReadOnly = true;
                 this.columnVacaciones.MaxLength = 2147483647;
+                this.columnIDEmpresa.AllowDBNull = false;
+                this.columnIDEmpresa.MaxLength = 10;
+                this.columnNombre.MaxLength = 100;
+                this.columnTelefono.MaxLength = 50;
+                this.columnDireccion.MaxLength = 200;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3301,6 +3381,81 @@ namespace PayrollPal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string IDEmpresa {
+                get {
+                    return ((string)(this[this.tableDataTable2.IDEmpresaColumn]));
+                }
+                set {
+                    this[this.tableDataTable2.IDEmpresaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Nombre {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable2.NombreColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Nombre\' in table \'DataTable2\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable2.NombreColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Telefono {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable2.TelefonoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Telefono\' in table \'DataTable2\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable2.TelefonoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Direccion {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable2.DireccionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Direccion\' in table \'DataTable2\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable2.DireccionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public byte[] Logo {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableDataTable2.LogoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Logo\' in table \'DataTable2\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable2.LogoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCodigoNull() {
                 return this.IsNull(this.tableDataTable2.CodigoColumn);
             }
@@ -3525,6 +3680,54 @@ namespace PayrollPal {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetVacacionesNull() {
                 this[this.tableDataTable2.VacacionesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNombreNull() {
+                return this.IsNull(this.tableDataTable2.NombreColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNombreNull() {
+                this[this.tableDataTable2.NombreColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTelefonoNull() {
+                return this.IsNull(this.tableDataTable2.TelefonoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTelefonoNull() {
+                this[this.tableDataTable2.TelefonoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDireccionNull() {
+                return this.IsNull(this.tableDataTable2.DireccionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDireccionNull() {
+                this[this.tableDataTable2.DireccionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsLogoNull() {
+                return this.IsNull(this.tableDataTable2.LogoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetLogoNull() {
+                this[this.tableDataTable2.LogoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4788,6 +4991,11 @@ namespace PayrollPal.DSPlanillaEnviarTableAdapters {
             tableMapping.ColumnMappings.Add("DeduccionesList", "DeduccionesList");
             tableMapping.ColumnMappings.Add("PercepcionesList", "PercepcionesList");
             tableMapping.ColumnMappings.Add("Vacaciones", "Vacaciones");
+            tableMapping.ColumnMappings.Add("IDEmpresa", "IDEmpresa");
+            tableMapping.ColumnMappings.Add("Nombre", "Nombre");
+            tableMapping.ColumnMappings.Add("Telefono", "Telefono");
+            tableMapping.ColumnMappings.Add("Direccion", "Direccion");
+            tableMapping.ColumnMappings.Add("Logo", "Logo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -4804,50 +5012,51 @@ namespace PayrollPal.DSPlanillaEnviarTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT \r\n    PE.IdEncabezado, \r\n    PE.Codigo, \r\n    PE.TipoCambio, \r\n    PE.Tota" +
-                "lIngresos, \r\n    PE.TotalGastos, \r\n    PE.TotalPagar, \r\n    PD.IdDetalle, \r\n    " +
-                "PD.IdColaborador, \r\n    PD.NombreColaborador, \r\n    PD.hrsTrabajadas, \r\n    PD.h" +
-                "rsExtras, \r\n    PD.MontoHora, \r\n    PD.SalarioBruto, \r\n    PD.SalarioNeto, \r\n   " +
-                " PP.FechaPago, \r\n    PP.FechaDesde, \r\n    PP.FechaHasta, \r\n    C.SalarioHora,\r\n\r" +
-                "\n(\r\n    SELECT \r\n        STUFF((\r\n            SELECT \', \' + \r\n                  " +
-                " CASE \r\n                      WHEN dp.Tipo = 1 THEN dp.Nombre + \' (\' + CAST(dp.V" +
-                "alor AS VARCHAR(20)) + \'%)\'\r\n                      ELSE dp.Nombre \r\n            " +
-                "       END + \r\n                   CASE \r\n                      WHEN dp.Tipo = 1 " +
-                "THEN \' - ₡\' + \r\n                          CAST(CASE WHEN dp.TipoValor = 0 THEN P" +
-                "D.SalarioBruto * (dp.Valor / 100)\r\n                                    WHEN dp.T" +
-                "ipoValor = 1 THEN dp.Valor \r\n                               END AS VARCHAR(20)) " +
-                "\r\n                      ELSE \'\' \r\n                   END\r\n            FROM Deduc" +
-                "ciones_Percepciones_Por_Colaborador AS dpp \r\n            INNER JOIN Deducciones_" +
-                "Percepciones AS dp ON dpp.CodigoDeduccionPercepcion = dp.CodigoDeduccionPercepci" +
-                "on\r\n            WHERE dpp.Estado = 1 \r\n                  AND PD.IdColaborador = " +
-                "C.IdColaborador\r\n                  AND dpp.IdColaborador = PD.IdColaborador\r\n   " +
-                "               AND dp.Tipo = 1 -- Filter by deduction type\r\n            FOR XML " +
-                "PATH(\'\')), 1, 2, \'\')\r\n) AS DeduccionesList,\r\n\r\n\t (\r\n        SELECT \r\n           " +
-                " STUFF((\r\n                SELECT \', \' + \r\n                       CASE \r\n        " +
-                "                  WHEN dp.Tipo = 0 THEN dp.Nombre\r\n                          ELS" +
-                "E dp.Nombre + \' (\' + CAST(dp.Valor AS VARCHAR(20)) + \'%)\'\r\n                     " +
-                "  END + \r\n                       CASE \r\n                          WHEN dp.Tipo =" +
-                " 0 THEN \'\'\r\n                          ELSE \' + ₡\' + \r\n                          " +
-                "    CAST(CASE WHEN dp.TipoValor = 0 THEN PD.SalarioBruto * (dp.Valor / 100)\r\n   " +
-                "                                     WHEN dp.TipoValor = 1 THEN dp.Valor \r\n     " +
-                "                              END AS VARCHAR(20)) \r\n                       END\r\n" +
-                "                FROM Deducciones_Percepciones_Por_Colaborador AS dpp \r\n         " +
-                "       INNER JOIN Deducciones_Percepciones AS dp ON dpp.CodigoDeduccionPercepcio" +
-                "n = dp.CodigoDeduccionPercepcion\r\n                WHERE dpp.Estado = 1 \r\n       " +
-                "               AND PD.IdColaborador = C.IdColaborador\r\n                      AND" +
-                " dpp.IdColaborador = PD.IdColaborador\r\n                      AND dp.Tipo = 0 -- " +
-                "Filter by perception type\r\n                FOR XML PATH(\'\')), 1, 2, \'\')\r\n    ) A" +
-                "S PercepcionesList,\r\n\r\n(SELECT \r\n     STUFF((SELECT \r\n                 \', \' + \' " +
-                "- Desde \' + FORMAT(SV.FechaSolicitarDesde, \'dd/MM/yyyy\') + \' Hasta \' + FORMAT(SV" +
-                ".FechaSolicitarHasta, \'dd/MM/yyyy\') + \' (Días: \' + CAST(SV.CantidadDias AS VARCH" +
-                "AR(10)) + \')\' \r\n             FROM \r\n                 SolicitudVacaciones AS SV \r" +
-                "\n             WHERE \r\n                 SV.IDColaborador = PD.IdColaborador \r\n   " +
-                "              AND SV.Estado = 1 \r\n                 AND SV.Observaciones_Final = " +
-                "0\r\n             FOR XML PATH(\'\')), 1, 2, \'\') AS ListaVacaciones\r\n) AS Vacaciones" +
-                "\r\nFROM \r\n    Planilla_Encabezado AS PE \r\nINNER JOIN \r\n    Planilla_Detalle AS PD" +
-                " ON PE.IdEncabezado = PD.IdEncabezado \r\nINNER JOIN \r\n    PlanillaPago AS PP ON P" +
-                "E.Codigo = PP.Codigo \r\nINNER JOIN \r\n    Colaborador AS C ON PD.IdColaborador = C" +
-                ".IdColaborador\r\nWHERE \r\n    PE.IdEncabezado = @IdEncabezado;\r\n\r\n";
+            this._commandCollection[0].CommandText = "SELECT\r\n    PE.IdEncabezado,\r\n    PE.Codigo,\r\n    PE.TipoCambio,\r\n    PE.TotalIng" +
+                "resos,\r\n    PE.TotalGastos,\r\n    PE.TotalPagar,\r\n    PD.IdDetalle,\r\n    PD.IdCol" +
+                "aborador,\r\n    PD.NombreColaborador,\r\n    PD.hrsTrabajadas,\r\n    PD.hrsExtras,\r\n" +
+                "    PD.MontoHora,\r\n    PD.SalarioBruto,\r\n    PD.SalarioNeto,\r\n    PP.FechaPago,\r" +
+                "\n    PP.FechaDesde,\r\n    PP.FechaHasta,\r\n    C.SalarioHora,\r\n    (\r\n\t\t\t   \r\n    " +
+                "    SELECT STUFF((\r\n            SELECT \', \' + \r\n                   CASE \r\n      " +
+                "                WHEN dp.Tipo = 1 THEN dp.Nombre + \' (\' + CAST(dp.Valor AS VARCHA" +
+                "R(20)) + \'%)\' \r\n                      ELSE dp.Nombre \r\n                   END + " +
+                "\r\n                   CASE \r\n                      WHEN dp.Tipo = 1 THEN \' - ₡\' +" +
+                " \r\n                          CAST(CASE WHEN dp.TipoValor = 0 THEN PD.SalarioBrut" +
+                "o * (dp.Valor / 100)\r\n                                   WHEN dp.TipoValor = 1 T" +
+                "HEN dp.Valor \r\n                              END AS VARCHAR(20)) \r\n             " +
+                "         ELSE \'\' \r\n                   END \r\n            FROM Deducciones_Percepc" +
+                "iones_Por_Colaborador AS dpp \r\n            INNER JOIN Deducciones_Percepciones A" +
+                "S dp ON dpp.CodigoDeduccionPercepcion = dp.CodigoDeduccionPercepcion\r\n          " +
+                "  WHERE dpp.Estado = 1 \r\n                  AND PD.IdColaborador = C.IdColaborado" +
+                "r\r\n                  AND dpp.IdColaborador = PD.IdColaborador\r\n                 " +
+                " AND dp.Tipo = 1 -- Filter by deduction type\r\n            FOR XML PATH(\'\')), 1, " +
+                "2, \'\')\r\n    ) AS DeduccionesList,\r\n\r\n    (\r\n\t\t\t   \r\n        SELECT STUFF((\r\n    " +
+                "        SELECT \', \' + \r\n                   CASE \r\n                      WHEN dp." +
+                "Tipo = 0 THEN dp.Nombre\r\n                      ELSE dp.Nombre + \' (\' + CAST(dp.V" +
+                "alor AS VARCHAR(20)) + \'%)\'\r\n                   END + \r\n                   CASE " +
+                "\r\n                      WHEN dp.Tipo = 0 THEN \'\'\r\n                      ELSE \' +" +
+                " ₡\' + \r\n                          CAST(CASE WHEN dp.TipoValor = 0 THEN PD.Salari" +
+                "oBruto * (dp.Valor / 100)\r\n                                   WHEN dp.TipoValor " +
+                "= 1 THEN dp.Valor \r\n                              END AS VARCHAR(20)) \r\n        " +
+                "           END \r\n            FROM Deducciones_Percepciones_Por_Colaborador AS dp" +
+                "p \r\n            INNER JOIN Deducciones_Percepciones AS dp ON dpp.CodigoDeduccion" +
+                "Percepcion = dp.CodigoDeduccionPercepcion\r\n            WHERE dpp.Estado = 1 \r\n  " +
+                "                AND PD.IdColaborador = C.IdColaborador\r\n                  AND dp" +
+                "p.IdColaborador = PD.IdColaborador\r\n                  AND dp.Tipo = 0 -- Filter " +
+                "by perception type\r\n            FOR XML PATH(\'\')), 1, 2, \'\')\r\n    ) AS Percepcio" +
+                "nesList,\r\n\r\n    (\r\n        SELECT STUFF((\r\n\t\t\t\t\t\t  \r\n            SELECT \', \' + \'" +
+                " - Desde \' + FORMAT(FechaSolicitarDesde, \'dd/MM/yyyy\') + \' Hasta \' + FORMAT(Fech" +
+                "aSolicitarHasta, \'dd/MM/yyyy\') + \' (Días: \' + CAST(CantidadDias AS VARCHAR(10)) " +
+                "+ \')\'\r\n            FROM SolicitudVacaciones AS SV\r\n\t\t\t\t\t\t\t\t\t\t\t\t  \r\n            W" +
+                "HERE IDColaborador = PD.IdColaborador \r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n                  AND E" +
+                "stado = 1 \r\n                  AND Observaciones_Final = 0 \r\n            FOR XML " +
+                "PATH(\'\')), 1, 2, \'\') AS ListaVacaciones\r\n    ) AS Vacaciones,\r\n    Empresa.IDEmp" +
+                "resa,\r\n    Empresa.Nombre,\r\n    Empresa.Telefono,\r\n    Empresa.Direccion,\r\n    E" +
+                "mpresa.Logo\r\nFROM\r\n    Planilla_Encabezado AS PE\r\nINNER JOIN\r\n    Planilla_Detal" +
+                "le AS PD ON PE.IdEncabezado = PD.IdEncabezado\r\nINNER JOIN\r\n    PlanillaPago AS P" +
+                "P ON PE.Codigo = PP.Codigo\r\nINNER JOIN\r\n    Colaborador AS C ON PD.IdColaborador" +
+                " = C.IdColaborador\r\nCROSS JOIN\r\n    Empresa\r\nWHERE\r\n    PE.IdEncabezado = @IdEnc" +
+                "abezado;\r\n";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IdEncabezado", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "IdEncabezado", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }

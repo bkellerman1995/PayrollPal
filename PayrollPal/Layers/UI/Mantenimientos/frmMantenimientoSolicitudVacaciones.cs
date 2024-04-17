@@ -141,6 +141,7 @@ namespace PayrollPal.UI.Mantenimientos
             switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
             {
                 case 1:
+                    listaColab = bLLColaborador.SelectAll().Where(col => col.Estado == true).ToList();
                     this.cmbColaborador.Items.Add(" ====SELECCIONE====");
 
                     foreach (var colab in listaColab)
@@ -393,13 +394,16 @@ namespace PayrollPal.UI.Mantenimientos
 
                 if (this.dgvSolicitud.SelectedRows.Count == 1)
                 {
+                    Colaborador oColaborador = new Colaborador();
                     //Crear instancia de solicitud de Vacaciones
                     SolicitudVacaciones oSolicitud = new SolicitudVacaciones();
                     //Asignar la fila seleccionada del datagridview al objeto solicitudVacaciones
                     oSolicitud = this.dgvSolicitud.SelectedRows[0].DataBoundItem as SolicitudVacaciones;
                     //Asignar a cada control los datos de la solicitudDeVacaciones
+                    oColaborador = oSolicitud.IDColaborador;
                     this.txtID.Text = oSolicitud.IDSolicitudVacas.ToString();
-                    this.cmbColaborador.Text = oSolicitud.IDColaborador.ToString();
+                    this.cmbColaborador.Items.Add(oColaborador);
+                    this.cmbColaborador.SelectedItem = oColaborador;
                     this.dtpFechaSolicitud.MinDate = oSolicitud.FechaSolicitud;
                     this.dtpFechaSolicitud.MaxDate = DateTimePicker.MaximumDateTime;
                     this.dtpFechaSolicitud.Text = oSolicitud.FechaSolicitud.ToString();
@@ -478,7 +482,7 @@ namespace PayrollPal.UI.Mantenimientos
                 {
                     case 1:
                     case 2:
-                        if (this.cmbColaborador.SelectedIndex >= 0)
+                        if (this.cmbColaborador.SelectedIndex > 0)
                         {
                             this.errProv1.SetError(this.cmbColaborador, string.Empty);
                         }
@@ -563,6 +567,7 @@ namespace PayrollPal.UI.Mantenimientos
                     if (this.rdbInactiva.Checked)
                         oSolicitud.Estado = false;
 
+                    oSolicitud.Observaciones_Final = (ObservacionSolicVacaciones)this.cmbObservacionesFinales.SelectedItem;
                     break;
 
                 case 2:

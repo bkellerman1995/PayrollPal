@@ -284,6 +284,11 @@
     <Compile Include="Layers\Util\ProperCase.cs" />
     <Compile Include="Layers\Util\QuickResponse.cs" />
     <Compile Include="Layers\Util\Utilitarios.cs" />
+    <Compile Include="PayRollPal_BDDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayRollPal_BDDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Layers\UI\frmPrincipal.cs">
@@ -392,9 +397,9 @@
     <EmbeddedResource Include="Layers\UI\Procesos\RepPlanillaEnviar.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Layers\UI\Reportes\PlanillaPago.rdlc">
+    <Content Include="Layers\UI\Reportes\PlanillaPago.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
     <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
     <None Include="DSPlanillaEnviar.xsc">
       <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
@@ -408,6 +413,17 @@
       <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="PayRollPal_BDDataSet.xsc">
+      <DependentUpon>PayRollPal_BDDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PayRollPal_BDDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PayRollPal_BDDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PayRollPal_BDDataSet.xss">
+      <DependentUpon>PayRollPal_BDDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -459,6 +475,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Layers\Imagenes\building.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

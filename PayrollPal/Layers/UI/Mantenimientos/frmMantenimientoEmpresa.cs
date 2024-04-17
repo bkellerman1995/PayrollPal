@@ -25,6 +25,9 @@ namespace PayrollPal.UI.Mantenimientos
 
         IBLLEmpresa bLLEmpresa = new BLLEmpresa();
         public static int contEmpresa = 0;
+        public static Empresa empresaUnica = new Empresa();
+
+        public event EventHandler MantEmpFormClosed;
         public frmMantenimientoEmpresa()
         {
             InitializeComponent();
@@ -44,6 +47,7 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
+                contEmpresa = 0;
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
     " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
                 //Cargar el datagridview de empresa con el SELECT_ALL 
@@ -128,7 +132,7 @@ namespace PayrollPal.UI.Mantenimientos
 
                 this.rdbActiva.Checked = true;
 
-                this.pctLogo.Image = PayrollPal.Properties.Resources.Colaborador_Generico;
+                this.pctLogo.Image = PayrollPal.Properties.Resources.building;
 
                 InhabilitarControles();
 
@@ -393,13 +397,15 @@ namespace PayrollPal.UI.Mantenimientos
             oEmpresa.IDEmpresa = this.mktID.Text.Replace("-", "");
             oEmpresa.Nombre = this.txtNombre.Text;
             oEmpresa.Telefono = this.mktTelefono.Text.Replace("-","");
+            oEmpresa.Direccion = this.txtDireccion.Text;
             if (this.rdbActiva.Checked)
                 oEmpresa.Estado = true;
             if (this.rdbInactiva.Checked)
             {
-                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea configurar la empresa como inactiva? +" +
+                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea configurar la empresa como inactiva?" +
                     "\n" +
-                    "\nEsta acción deshabilitará todas las funciones de la aplicación.", "Aviso",
+                    "\nEsta acción deshabilitará las funciones de mantenimiento (excepto empresa)" +
+                    "\nprocesos (calcular planilla), consultas y reportes de la aplicación.", "Aviso",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resultado == DialogResult.Yes)
@@ -414,7 +420,7 @@ namespace PayrollPal.UI.Mantenimientos
             //que se encarga de revisar si la empresa existe primero
             //antes de agregarla
 
-            if (bLLEmpresa.SelectById(this.mktID.Text) != null)
+            if (bLLEmpresa.SelectById(this.mktID.Text.Replace("-","")) != null)
             {
 
                 bLLEmpresa.Update(oEmpresa);
@@ -423,6 +429,8 @@ namespace PayrollPal.UI.Mantenimientos
             {
                 bLLEmpresa.Create(oEmpresa);
             }
+
+            empresaUnica = oEmpresa;
 
             //Refrescar la lista
             CargarLista();
@@ -438,7 +446,6 @@ namespace PayrollPal.UI.Mantenimientos
         private bool ValidarCampos()
         {
             Empresa oEmpresa = new Empresa();
-            oEmpresa = this.dgvEmpresa.SelectedRows[0].DataBoundItem as Empresa;
             bool correcto = false;
             try
             {
@@ -447,6 +454,18 @@ namespace PayrollPal.UI.Mantenimientos
                 {
                     this.errProv1.SetError(c, String.Empty);
                     this.errProv1.Clear();
+                }
+
+                //Validar combo TipoID
+
+                if (this.cmbTipoID.SelectedItem != null && this.cmbTipoID.SelectedIndex != 0)
+                {
+                    this.errProv1.SetError(this.cmbTipoID, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.cmbTipoID, "Campo tipo de identificación no es correcto");
+                    return false;
                 }
 
                 //Validar IdEmpresa
@@ -498,17 +517,7 @@ namespace PayrollPal.UI.Mantenimientos
                 }
 
 
-                //Validar combo TipoID
 
-                if (this.cmbTipoID.SelectedItem != null && this.cmbTipoID.SelectedIndex != 0)
-                {
-                    this.errProv1.SetError(this.cmbTipoID, string.Empty);
-                }
-                else
-                {
-                    this.errProv1.SetError(this.cmbTipoID, "Campo tipo de identificación no es correcto");
-                    return false;
-                }
 
                 //Validar pictureBox de Foto
 
@@ -599,10 +608,11 @@ namespace PayrollPal.UI.Mantenimientos
         {
             try
             {
-                string idEmpresa = this.mktID.Text;
-                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar? +" +
+                string idEmpresa = this.mktID.Text.Replace("-","");
+                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la empresa? +" +
                     "\n" +
-                    "\nEsta acción deshabilitará todas las funciones de la aplicación.", "Aviso",
+                    "\nEsta acción deshabilitará las funciones de mantenimiento (excepto empresa)" +
+                    "\nprocesos (calcular planilla), consultas y reportes de la aplicación.", "Aviso",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resultado == DialogResult.Yes)
@@ -631,6 +641,82 @@ namespace PayrollPal.UI.Mantenimientos
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarControles();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dgvEmpresa_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 6 && e.Value != null)
+            {
+                if (e.Value.ToString() == "True")
+                    e.Value = "Activa";
+                if (e.Value.ToString() == "False")
+                    e.Value = "Inactiva";
+            }
+        }
+
+        private void dgvEmpresa_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //Habilitar botones de Editar
+                //Eliminar y Editar
+                //tambien deshabilita el boton de Agregar
+
+                this.btnAgregar.Enabled = false;
+                this.btnEditar.Enabled = true;
+                this.btnEliminar.Enabled = true;
+                this.btnLimpiar.Enabled = true;
+
+                if (this.dgvEmpresa.SelectedRows.Count == 1)
+                {
+                    //Crear instancia de empresa
+                    Empresa oEmpresa = new Empresa();
+                    //Asignar la fila seleccionada del datagridview al objeto empresa
+                    oEmpresa = this.dgvEmpresa.SelectedRows[0].DataBoundItem as Empresa;
+                    //Asignar a cada control los datos del usuario
+                    this.cmbTipoID.Text = oEmpresa.TipoIdentificacion.ToString();
+                    this.mktID.Text = oEmpresa.IDEmpresa.ToString();
+                    this.txtNombre.Text = oEmpresa.Nombre.ToString();
+                    this.mktTelefono.Text = oEmpresa.Telefono.ToString();
+                    this.txtDireccion.Text = oEmpresa.Direccion.ToString();
+
+                    if (oEmpresa.Estado == true)
+                        this.rdbActiva.Checked = true;
+                    if (oEmpresa.Estado == false)
+                        this.rdbInactiva.Checked = true;
+
+                    if (oEmpresa.Logo != null)
+                    {
+                        this.pctLogo.Image = new Bitmap(new MemoryStream(oEmpresa.Logo));
+                        this.pctLogo.Tag = oEmpresa.Logo;
+                        this.pctLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                }
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+            // Activa el evento personalizado cuando el formulario hijo se cierra
+            MantEmpFormClosed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

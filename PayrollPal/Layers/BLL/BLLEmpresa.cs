@@ -27,11 +27,13 @@ namespace PayrollPal.Layers.BLL
         public void Create(Empresa pEmpresa)
         {
             IDALEmpresa dALEmpresa = new DALEmpresa();
+            dALEmpresa.Create(pEmpresa);
         }
 
         public void Delete(string pEmpresa)
         {
             IDALEmpresa dALEmpresa = new DALEmpresa();
+            dALEmpresa.Delete(pEmpresa);
         }
 
         public List<Empresa> SelectAll()
@@ -49,6 +51,7 @@ namespace PayrollPal.Layers.BLL
         public void Update(Empresa pEmpresa)
         {
             IDALEmpresa dALEmpresa = new DALEmpresa();
+            dALEmpresa.Update(pEmpresa);
         }
     }
 }

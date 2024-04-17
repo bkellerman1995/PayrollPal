@@ -196,7 +196,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbSupervisor.Items.Add(item);
             }
 
-            foreach (var item in bLLPuesto.SelectAll())
+            foreach (var item in bLLPuesto.SelectAll().Where(pto => pto.Estado == true).ToList())
             {
                 this.cmbPuestos.Items.Add(item);
             }

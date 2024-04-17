@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoEmpresa));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMantenimientoEmpresa));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.mktTelefono = new System.Windows.Forms.MaskedTextBox();
             this.mktID = new System.Windows.Forms.MaskedTextBox();
@@ -42,7 +42,6 @@
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblLogo = new System.Windows.Forms.Label();
-            this.pctLogo = new System.Windows.Forms.PictureBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.lblDireccion = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
@@ -50,24 +49,32 @@
             this.lblTipoIdentificacion = new System.Windows.Forms.Label();
             this.lblIdentificacion = new System.Windows.Forms.Label();
             this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
+            this.dgvEmpresa = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
+            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pctLogo = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.dgvEmpresa = new System.Windows.Forms.DataGridView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
-            this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.IDEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoIdentificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Logo = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).BeginInit();
             this.toolStripMantEmpresa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpresa)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -157,7 +164,7 @@
             this.cmbTipoID.Location = new System.Drawing.Point(182, 40);
             this.cmbTipoID.Margin = new System.Windows.Forms.Padding(1);
             this.cmbTipoID.Name = "cmbTipoID";
-            this.cmbTipoID.Size = new System.Drawing.Size(159, 29);
+            this.cmbTipoID.Size = new System.Drawing.Size(218, 29);
             this.cmbTipoID.TabIndex = 17;
             this.cmbTipoID.SelectedIndexChanged += new System.EventHandler(this.cmbTipoID_SelectedIndexChanged);
             this.cmbTipoID.SelectedValueChanged += new System.EventHandler(this.cmbTipoID_SelectedValueChanged);
@@ -220,16 +227,6 @@
             this.lblLogo.TabIndex = 10;
             this.lblLogo.Text = "Logo";
             this.lblLogo.Click += new System.EventHandler(this.lblLogo_Click);
-            // 
-            // pctLogo
-            // 
-            this.pctLogo.Location = new System.Drawing.Point(608, 43);
-            this.pctLogo.Margin = new System.Windows.Forms.Padding(1);
-            this.pctLogo.Name = "pctLogo";
-            this.pctLogo.Size = new System.Drawing.Size(217, 185);
-            this.pctLogo.TabIndex = 9;
-            this.pctLogo.TabStop = false;
-            this.pctLogo.Click += new System.EventHandler(this.pctLogo_Click);
             // 
             // lblEstado
             // 
@@ -314,6 +311,78 @@
             this.toolStripMantEmpresa.TabIndex = 0;
             this.toolStripMantEmpresa.Text = "toolStrip1";
             // 
+            // dgvEmpresa
+            // 
+            this.dgvEmpresa.AllowUserToAddRows = false;
+            this.dgvEmpresa.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvEmpresa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEmpresa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEmpresa.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvEmpresa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmpresa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDEmpresa,
+            this.TipoIdentificacion,
+            this.Nombre,
+            this.Telefono,
+            this.Direccion,
+            this.Logo,
+            this.Estado});
+            this.dgvEmpresa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEmpresa.Location = new System.Drawing.Point(0, 0);
+            this.dgvEmpresa.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvEmpresa.Name = "dgvEmpresa";
+            this.dgvEmpresa.ReadOnly = true;
+            this.dgvEmpresa.RowHeadersVisible = false;
+            this.dgvEmpresa.RowHeadersWidth = 102;
+            this.dgvEmpresa.RowTemplate.Height = 40;
+            this.dgvEmpresa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEmpresa.Size = new System.Drawing.Size(847, 339);
+            this.dgvEmpresa.TabIndex = 6;
+            this.dgvEmpresa.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmpresa_CellContentDoubleClick);
+            this.dgvEmpresa.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEmpresa_CellFormatting);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslblUsuarioConectado});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 339);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(847, 25);
+            this.toolStrip1.TabIndex = 4;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslblUsuarioConectado
+            // 
+            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
+            this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
+            // pctLogo
+            // 
+            this.pctLogo.Image = global::PayrollPal.Properties.Resources.building;
+            this.pctLogo.Location = new System.Drawing.Point(608, 43);
+            this.pctLogo.Margin = new System.Windows.Forms.Padding(1);
+            this.pctLogo.Name = "pctLogo";
+            this.pctLogo.Size = new System.Drawing.Size(217, 185);
+            this.pctLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctLogo.TabIndex = 9;
+            this.pctLogo.TabStop = false;
+            this.pctLogo.Click += new System.EventHandler(this.pctLogo_Click);
+            // 
             // btnAgregar
             // 
             this.btnAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -367,56 +436,59 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(45, 25);
             this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // dgvEmpresa
+            // IDEmpresa
             // 
-            this.dgvEmpresa.AllowUserToAddRows = false;
-            this.dgvEmpresa.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvEmpresa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvEmpresa.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dgvEmpresa.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvEmpresa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmpresa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEmpresa.Location = new System.Drawing.Point(0, 0);
-            this.dgvEmpresa.Margin = new System.Windows.Forms.Padding(1);
-            this.dgvEmpresa.Name = "dgvEmpresa";
-            this.dgvEmpresa.ReadOnly = true;
-            this.dgvEmpresa.RowHeadersVisible = false;
-            this.dgvEmpresa.RowHeadersWidth = 102;
-            this.dgvEmpresa.RowTemplate.Height = 40;
-            this.dgvEmpresa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmpresa.Size = new System.Drawing.Size(847, 339);
-            this.dgvEmpresa.TabIndex = 6;
+            this.IDEmpresa.DataPropertyName = "IDEmpresa";
+            this.IDEmpresa.HeaderText = "ID";
+            this.IDEmpresa.Name = "IDEmpresa";
+            this.IDEmpresa.ReadOnly = true;
             // 
-            // toolStrip1
+            // TipoIdentificacion
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 339);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(847, 25);
-            this.toolStrip1.TabIndex = 4;
-            this.toolStrip1.Text = "toolStrip1";
+            this.TipoIdentificacion.DataPropertyName = "TipoIdentificacion";
+            this.TipoIdentificacion.HeaderText = "Tipo ID";
+            this.TipoIdentificacion.Name = "TipoIdentificacion";
+            this.TipoIdentificacion.ReadOnly = true;
             // 
-            // tslblUsuarioConectado
+            // Nombre
             // 
-            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
-            this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
-            // errProv1
+            // Telefono
             // 
-            this.errProv1.ContainerControl = this;
+            this.Telefono.DataPropertyName = "Telefono";
+            this.Telefono.HeaderText = "Telefono";
+            this.Telefono.Name = "Telefono";
+            this.Telefono.ReadOnly = true;
+            // 
+            // Direccion
+            // 
+            this.Direccion.DataPropertyName = "Direccion";
+            this.Direccion.HeaderText = "Direccion";
+            this.Direccion.Name = "Direccion";
+            this.Direccion.ReadOnly = true;
+            // 
+            // Logo
+            // 
+            this.Logo.DataPropertyName = "Logo";
+            this.Logo.HeaderText = "Logo";
+            this.Logo.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Logo.Name = "Logo";
+            this.Logo.ReadOnly = true;
+            this.Logo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Logo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // frmMantenimientoEmpresa
             // 
@@ -436,13 +508,13 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).EndInit();
             this.toolStripMantEmpresa.ResumeLayout(false);
             this.toolStripMantEmpresa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpresa)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -477,5 +549,12 @@
         private System.Windows.Forms.ErrorProvider errProv1;
         private System.Windows.Forms.MaskedTextBox mktID;
         private System.Windows.Forms.MaskedTextBox mktTelefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoIdentificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
+        private System.Windows.Forms.DataGridViewImageColumn Logo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }

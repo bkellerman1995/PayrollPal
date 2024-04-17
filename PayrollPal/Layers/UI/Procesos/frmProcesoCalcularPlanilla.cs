@@ -217,7 +217,7 @@ namespace PayrollPal.UI.Procesos
             }
 
             List<Colaborador> listaColaboradores = bLLColaborador.SelectAll().Where(colab
-                => colab.IDRol.IDRol == 3 && colab.IDSupervisor.IDSupervisor != "0").ToList();
+                => colab.Estado == true).ToList();
 
 
             this.cmbColaborador.Items.Add(" ====SELECCIONE====");
@@ -561,50 +561,66 @@ namespace PayrollPal.UI.Procesos
 
             if (resultado == DialogResult.Yes)
             {
-                string rutaPDF = @"C:\temp\" +"Planilla-"+planEnc.IdEncabezado+"-Envío.pdf";
-                GenerarPDF(this.reportViewer1, rutaPDF);
+                string rutaPDF = @"C:\temp\" + "Planilla-" + planEnc.IdEncabezado + "-Envío.pdf";
+                GenerarPDF(this.reportViewer1,false, rutaPDF);
             }
 
         }
 
-        private void GenerarPDF(ReportViewer reportViewer, string rutaDestino)
+        private void GenerarPDF(ReportViewer reportViewer, Boolean pTipoVertical,string rutaDestino)
         {
-            if (!Directory.Exists(@"C:\temp"))
-                Directory.CreateDirectory(@"C:\temp");
-
-            string deviceInfo =
-
-             "<DeviceInfo>" +
-             "  <OutputFormat>PDF</OutputFormat>" +
-             "  <PageWidth>8.5in</PageWidth>" +
-             "  <PageHeight>11in</PageHeight>" +
-             "  <MarginTop>0.5in</MarginTop>" +
-             "  <MarginLeft>0.5in</MarginLeft>" +
-             "  <MarginRight>0.5in</MarginRight>" +
-             "  <MarginBottom>0.5in</MarginBottom>" +
-             "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType;
-            string encoding;
-            string fileNameExtension;
-
-            // Render the report to byte array
-            byte[] bytes = this.reportViewer1.LocalReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streamIds, out warnings);
-
-            // Save the byte array to a file
-            File.WriteAllBytes(rutaDestino, bytes);
-
-            bool enviado = Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);
-
-            if (enviado == true)
+            try
             {
-                planEnc.Codigo.Estado = PlanillaEstado.Enviada;
-                bLLPlanillaPago.Update(planEnc.Codigo);
-                MessageBox.Show("La planilla con ID: " + planEnc.IdEncabezado + " se envió correctamente",
-                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!Directory.Exists(@"C:\temp"))
+                    Directory.CreateDirectory(@"C:\temp");
+
+                string deviceInfo =
+                    "<DeviceInfo>" +
+                        "  <OutputFormat>PDF</OutputFormat>";
+                if (pTipoVertical)
+                {
+                    deviceInfo +=
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>";
+
+                }
+                else
+                {
+                    deviceInfo +=
+                        "  <PageWidth>11.69in</PageWidth>" +
+                        "  <PageHeight>8.27in</PageHeight>";
+                }
+
+                deviceInfo += "<MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0.4in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+                byte[] bytes = this.reportViewer1.LocalReport.Render("PDF", deviceInfo);
+
+                using (FileStream stream = new FileStream(rutaDestino, FileMode.Create))
+                {
+                    stream.Write(bytes, 0, bytes.Length);
+                }
+
+                bool enviado = Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);
+
+                if (enviado == true)
+                {
+                    planEnc.Codigo.Estado = PlanillaEstado.Enviada;
+                    bLLPlanillaPago.Update(planEnc.Codigo);
+                    MessageBox.Show("La planilla con ID: " + planEnc.IdEncabezado + " se envió correctamente",
+                        "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
     }

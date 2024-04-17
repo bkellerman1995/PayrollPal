@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using log4net;
 using System.Reflection;
 using System.Windows.Forms;
+using PayrollPal.Enumeraciones;
 
 namespace PayrollPal.Layers.DAL
 {
@@ -39,11 +40,11 @@ namespace PayrollPal.Layers.DAL
                     {
 
                         Empresa empresa = new Empresa();
-                        empresa.IDEmpresa = dr["IDEmpresa"].ToString();
-                        empresa.TipoIdentificacion = dr["TipoIdentificacion"].ToString();
-                        empresa.Nombre = dr["Nombre"].ToString();
-                        empresa.Telefono = dr["Telefono"].ToString();
-                        empresa.Direccion = dr["Direccion"].ToString();
+                        empresa.IDEmpresa = dr["IDEmpresa"].ToString().Trim();
+                        empresa.TipoIdentificacion = (TipoCedulaEmpresa)Enum.Parse(typeof(TipoCedulaEmpresa), dr["TipoIdentificacion"].ToString().Trim());
+                        empresa.Nombre = dr["Nombre"].ToString().Trim();
+                        empresa.Telefono = dr["Telefono"].ToString().Trim();
+                        empresa.Direccion = dr["Direccion"].ToString().Trim();
                         empresa.Logo = (byte[])dr["Logo"];
                         empresa.Estado = bool.Parse(dr["Estado"].ToString());
 
@@ -90,13 +91,13 @@ namespace PayrollPal.Layers.DAL
                 {
                     DataTable dt = ds.Tables[0];
                     Empresa empresa = new Empresa();
-                    empresa.IDEmpresa = dt.Rows[0]["IDEmpresa"].ToString();
-                    empresa.TipoIdentificacion = dt.Rows[0]["TipoIdentificacion"].ToString();
-                    empresa.Nombre = dt.Rows[0]["Nombre"].ToString();
-                    empresa.Telefono = dt.Rows[0]["Telefono"].ToString();
-                    empresa.Direccion = dt.Rows[0]["Direccion"].ToString();
+                    empresa.IDEmpresa = dt.Rows[0]["IDEmpresa"].ToString().Trim();
+                    empresa.TipoIdentificacion = (TipoCedulaEmpresa)Enum.Parse(typeof(TipoCedulaEmpresa), dt.Rows[0]["TipoIdentificacion"].ToString().Trim());
+                    empresa.Nombre = dt.Rows[0]["Nombre"].ToString().Trim();
+                    empresa.Telefono = dt.Rows[0]["Telefono"].ToString().Trim();
+                    empresa.Direccion = dt.Rows[0]["Direccion"].ToString().Trim();
                     empresa.Logo = (byte[])dt.Rows[0]["Logo"];
-                    empresa.Estado = bool.Parse(dt.Rows[0]["Estado"].ToString());
+                    empresa.Estado = bool.Parse(dt.Rows[0]["Estado"].ToString().Trim());
                     return empresa;
                 }
                 return null;

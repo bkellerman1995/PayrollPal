@@ -1,4 +1,6 @@
-﻿using PayrollPal.Layers.Entities;
+﻿using PayrollPal.Layers.BLL;
+using PayrollPal.Layers.Entities;
+using PayrollPal.Layers.Interfaces;
 using PayrollPal.Layers.UI;
 using PayrollPal.Layers.UI.Consultas;
 using PayrollPal.Layers.UI.Mantenimientos;
@@ -21,6 +23,7 @@ namespace PayrollPal.UI
 {
     public partial class frmPrincipal : Form
     {
+        IBLLEmpresa bLLEmpresa = new BLLEmpresa();
         public frmPrincipal()
         {
             InitializeComponent();
@@ -39,10 +42,25 @@ namespace PayrollPal.UI
             this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
 
             frm.LoginFormClosed += frmLogin_LoginFormClosed;
-
             frm.MdiParent = this;
             frm.Show();
 
+            ObtenerEstadoEmpresa();
+
+        }
+
+        private void ObtenerEstadoEmpresa()
+        {
+            foreach (Empresa emp in bLLEmpresa.SelectAll())
+            {
+                if (emp != null)
+                {
+                    frmMantenimientoEmpresa.empresaUnica = emp;
+                    frmMantenimientoEmpresa.contEmpresa = 1;
+                    break;
+
+                }
+            }
         }
 
         private void frmLogin_LoginFormClosed(object sender, EventArgs e)
@@ -51,26 +69,42 @@ namespace PayrollPal.UI
             {
                 this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario + " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
 
+
                 switch (frmLogin.colaboradorLoggeado.IDRol.IDRol)
                 {
                     case 1:
 
-                        this.mantenimientosToolStripMenuItem.Visible = true;
-                        this.archivoToolStripMenuItem.Visible = true;
-                        this.consultasToolStripMenuItem.Visible = true;
-                        
-                        this.usuariosToolStripMenuItem.Visible = true;
-                        this.rolToolStripMenuItem.Visible = true;
-                        this.puestoToolStripMenuItem.Visible = true;
-                        this.supervisorToolStripMenuItem.Visible = true;
-                        this.colaboradoresToolStripMenuItem.Visible = true;
-                        this.planillasDePagoToolStripMenuItem.Visible = true;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = true;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = true;
-                        this.procesosToolStripMenuItem.Visible = true;
+                        if (frmMantenimientoEmpresa.contEmpresa == 0 ||
+                            frmMantenimientoEmpresa.empresaUnica.Estado == false)
+                        {
+                            MessageBox.Show("No existe empresa o el estado es inactivo " +
+                                "\n" +
+                                "\nLa empresa debe estar existir y/o estar activa para habilitar todas las funciones de mantenimiento" +
+                                "\nprocesos (calcular planilla), consultas y reportes de la aplicación.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            this.mantenimientosToolStripMenuItem.Visible = true;
+                            this.empresaToolStripMenuItem.Visible = true;
+                        }
+                        else
+                        {
 
-                        this.procesosToolStripMenuItem.Visible = true;
-                        this.reportesToolStripMenuItem.Visible = true;
+                            this.mantenimientosToolStripMenuItem.Visible = true;
+                            this.archivoToolStripMenuItem.Visible = true;
+                            this.consultasToolStripMenuItem.Visible = true;
+
+                            this.usuariosToolStripMenuItem.Visible = true;
+                            this.rolToolStripMenuItem.Visible = true;
+                            this.puestoToolStripMenuItem.Visible = true;
+                            this.supervisorToolStripMenuItem.Visible = true;
+                            this.colaboradoresToolStripMenuItem.Visible = true;
+                            this.planillasDePagoToolStripMenuItem.Visible = true;
+                            this.deduccionesYPercepcionesToolStripMenuItem.Visible = true;
+                            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = true;
+                            this.procesosToolStripMenuItem.Visible = true;
+
+                            this.procesosToolStripMenuItem.Visible = true;
+                            this.reportesToolStripMenuItem.Visible = true;
+                        }
+
 
                         frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
                         frm.ShowDialog();
@@ -78,46 +112,96 @@ namespace PayrollPal.UI
 
                     case 2:
 
-                        this.archivoToolStripMenuItem.Visible = true;
-                        this.mantenimientosToolStripMenuItem.Visible = true;
-                        this.reportesToolStripMenuItem.Visible = true;
-                        this.usuariosToolStripMenuItem.Visible = false;
-                        this.rolToolStripMenuItem.Visible = false;
-                        this.puestoToolStripMenuItem.Visible = false;
-                        this.supervisorToolStripMenuItem.Visible = false;
-                        this.colaboradoresToolStripMenuItem.Visible = false;
-                        this.planillasDePagoToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
-                        this.procesosToolStripMenuItem.Visible = false;
+                        if (frmMantenimientoEmpresa.contEmpresa == 0 ||
+                            frmMantenimientoEmpresa.empresaUnica.Estado == false)
+                        {
+                            MessageBox.Show("No existe empresa o el estado es inactivo " +
+                                "\n" +
+                                "\nLa empresa debe estar existir y/o estar activa para habilitar las funciones de mantenimiento (solicitar, aprobar y rechazar vacaciones)" +
+                                "\ny reportes de la aplicación.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
 
+                        else
+                        {
 
+                            this.archivoToolStripMenuItem.Visible = true;
+                            this.mantenimientosToolStripMenuItem.Visible = true;
+                            this.reportesToolStripMenuItem.Visible = true;
+                            this.usuariosToolStripMenuItem.Visible = false;
+                            this.rolToolStripMenuItem.Visible = false;
+                            this.puestoToolStripMenuItem.Visible = false;
+                            this.supervisorToolStripMenuItem.Visible = false;
+                            this.colaboradoresToolStripMenuItem.Visible = false;
+                            this.planillasDePagoToolStripMenuItem.Visible = false;
+                            this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+                            this.procesosToolStripMenuItem.Visible = false;
+                        }
 
                         break;
                     case 3:
 
-                        this.mantenimientosToolStripMenuItem.Visible = true;
-                        this.solicitudesDeVacacionesToolStripMenuItem.Visible = true;
-                        this.archivoToolStripMenuItem.Visible = true;
-                        this.consultasToolStripMenuItem.Visible = true;
 
-                        this.usuariosToolStripMenuItem.Visible = false;
-                        this.rolToolStripMenuItem.Visible = false;
-                        this.puestoToolStripMenuItem.Visible = false;
-                        this.supervisorToolStripMenuItem.Visible = false;
-                        this.colaboradoresToolStripMenuItem.Visible = false;
-                        this.planillasDePagoToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
-                        this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+                        if (frmMantenimientoEmpresa.contEmpresa == 0 ||
+                            frmMantenimientoEmpresa.empresaUnica.Estado == false)
+                        {
+                            MessageBox.Show("No existe empresa o el estado es inactivo " +
+                                "\n" +
+                                "\nLa empresa debe estar existir y/o estar activa para habilitar las funciones de mantenimiento (solicitar vacaciones)" +
+                                "\ny consultas de la aplicación.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
 
-                        this.procesosToolStripMenuItem.Visible = false;
-                        this.reportesToolStripMenuItem.Visible = false;
+                        else
+                        {
+                            this.mantenimientosToolStripMenuItem.Visible = true;
+                            this.solicitudesDeVacacionesToolStripMenuItem.Visible = true;
+                            this.archivoToolStripMenuItem.Visible = true;
+                            this.consultasToolStripMenuItem.Visible = true;
+
+                            this.usuariosToolStripMenuItem.Visible = false;
+                            this.rolToolStripMenuItem.Visible = false;
+                            this.puestoToolStripMenuItem.Visible = false;
+                            this.supervisorToolStripMenuItem.Visible = false;
+                            this.colaboradoresToolStripMenuItem.Visible = false;
+                            this.planillasDePagoToolStripMenuItem.Visible = false;
+                            this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+
+                            this.procesosToolStripMenuItem.Visible = false;
+                            this.reportesToolStripMenuItem.Visible = false;
+                        }
 
                         break;
                 }
             }
 
 
+        }
+
+        private void frmMantEmp_MantEmpFormClosed(object sender, EventArgs e)
+        {
+            if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 1)
+            {
+                if (frmMantenimientoEmpresa.empresaUnica.Estado == true)
+                {
+                    this.mantenimientosToolStripMenuItem.Visible = true;
+                    this.archivoToolStripMenuItem.Visible = true;
+                    this.consultasToolStripMenuItem.Visible = true;
+
+                    this.usuariosToolStripMenuItem.Visible = true;
+                    this.rolToolStripMenuItem.Visible = true;
+                    this.puestoToolStripMenuItem.Visible = true;
+                    this.supervisorToolStripMenuItem.Visible = true;
+                    this.colaboradoresToolStripMenuItem.Visible = true;
+                    this.planillasDePagoToolStripMenuItem.Visible = true;
+                    this.deduccionesYPercepcionesToolStripMenuItem.Visible = true;
+                    this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = true;
+                    this.procesosToolStripMenuItem.Visible = true;
+
+                    this.procesosToolStripMenuItem.Visible = true;
+                    this.reportesToolStripMenuItem.Visible = true;
+                }
+            }
         }
 
         /// <summary>
@@ -137,7 +221,6 @@ namespace PayrollPal.UI
             }
         }
         
-
         /// <summary>
         /// Evento para abrir el form de Mantenimiento de Usuarios
         /// </summary>
@@ -262,7 +345,9 @@ namespace PayrollPal.UI
         private void empresaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMantenimientoEmpresa frm = new frmMantenimientoEmpresa();
-            frm.ShowDialog();
+            frm.MantEmpFormClosed += frmMantEmp_MantEmpFormClosed;
+            frm.MdiParent = this;
+            frm.Show();
         }
     }
 
