@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace PayrollPal.Enumeraciones
 {
+    
+    public enum TipoCedulaEmpresa
+    {
+        Fisica,
+        Juridica
+    }
+    
     public enum Estado
     {
         Activo,

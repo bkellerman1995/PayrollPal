@@ -1,4 +1,8 @@
-﻿using System;
+﻿using PayrollPal.Layers.BLL;
+using PayrollPal.Layers.Interfaces;
+using PayrollPal.Enumeraciones;
+using PayrollPal.Layers.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +11,626 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using log4net;
+using System.Reflection;
+using PayrollPal.Layers.Entities;
+using System.IO;
 
 namespace PayrollPal.UI.Mantenimientos
 {
     public partial class frmMantenimientoEmpresa : Form
     {
+        private static readonly log4net.ILog _MyLogControlEventos =
+                                log4net.LogManager.GetLogger("MyControlEventos");
+
+        IBLLEmpresa bLLEmpresa = new BLLEmpresa();
+        public static int contEmpresa = 0;
         public frmMantenimientoEmpresa()
         {
             InitializeComponent();
+        }
+
+        private void lblLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pctLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmMantenimientoEmpresa_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                this.tslblUsuarioConectado.Text = "Usuario Conectado: " + frmLogin.colaboradorLoggeado.IDUsuario.IDUsuario +
+    " Rol: " + frmLogin.colaboradorLoggeado.IDRol.Descripcion;
+                //Cargar el datagridview de empresa con el SELECT_ALL 
+                //del DALEmpresa
+
+                if (bLLEmpresa.SelectAll().Count > 0)
+                    contEmpresa++;
+
+                CargarLista();
+                CargarCombos();
+
+                //Limpiar los controles del form 
+                LimpiarControles();
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void CargarLista()
+        {
+            try
+            {
+
+                this.dgvEmpresa.DataSource = bLLEmpresa.SelectAll();
+                this.dgvEmpresa.ClearSelection();
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void CargarCombos()
+        {
+            this.cmbTipoID.Items.Add(" ==== SELECCIONE ==== ");
+            this.cmbTipoID.Items.Add(TipoCedulaEmpresa.Fisica);
+            this.cmbTipoID.Items.Add(TipoCedulaEmpresa.Juridica);
+        }
+
+        private void LimpiarControles()
+        {
+            try
+            {
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
+
+                this.mktID.Text = "";
+                this.mktID.BackColor = Color.White;
+
+                this.cmbTipoID.SelectedIndex = 0;
+
+                this.txtNombre.Clear();
+                this.txtNombre.BackColor = Color.White;
+
+                this.mktTelefono.Clear();
+                this.mktTelefono.BackColor = Color.White;
+
+                this.txtDireccion.Clear();
+                this.txtDireccion.BackColor = Color.White;
+
+
+                this.rdbActiva.Checked = true;
+
+                this.pctLogo.Image = PayrollPal.Properties.Resources.Colaborador_Generico;
+
+                InhabilitarControles();
+
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void InhabilitarControles()
+        {
+            try
+            {
+                if (contEmpresa > 0)
+                {
+                    this.btnAgregar.Enabled = false;
+                }
+                else
+                {
+                    this.btnAgregar.Enabled = true;
+                }
+
+                this.btnEditar.Enabled = false;
+                this.btnEliminar.Enabled = false;
+                this.btnLimpiar.Enabled = false;
+                this.btnConfirmar.Visible = false;
+                this.btnCargarLogo.Enabled = false;
+
+                this.mktID.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.mktTelefono.Enabled = false;
+                this.txtDireccion.Enabled = false;
+
+                this.cmbTipoID.Enabled = false;
+
+                this.pctLogo.Enabled = false;
+
+                this.rdbActiva.Enabled = false;
+                this.rdbInactiva.Enabled = false;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
+                ResetearForm('C');
+
+                //Habilitar el boton Confirmar
+
+                this.btnConfirmar.Visible = true;
+                this.btnCargarLogo.Enabled = true;
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void ResetearForm(char opcion)
+        {
+            try
+            {
+
+                //habilitar y deshabilitar los controles basado 
+                //en el proceso del CRUD a ejecutar
+
+                switch (opcion)
+                {
+                    case 'C':
+                        //habiitar los botones de limpiar, 
+                        //agregar y salir
+                        this.btnAgregar.Enabled = false;
+                        this.btnLimpiar.Enabled = true;
+                        this.btnSalir.Enabled = true;
+
+                        //habilitar los controles de texto, comboboxes
+                        //pictureBox 
+
+                        this.mktID.Enabled = true;
+                        this.txtNombre.Enabled = true;
+                        this.mktTelefono.Enabled = true;
+                        this.txtDireccion.Enabled = true;
+                        this.cmbTipoID.Enabled = true;
+                        this.pctLogo.Enabled = true;
+                        this.btnCargarLogo.Enabled = true;
+                        this.rdbActiva.Enabled = true;
+                        this.rdbInactiva.Enabled = true;
+
+
+                        break;
+
+                    case 'U':
+
+                        this.btnLimpiar.Enabled = true;
+                        this.btnSalir.Enabled = true;
+
+                        //habilitar los controles de texto, comboboxes
+                        //pictureBox 
+
+                        this.mktID.ReadOnly = true;
+                        this.txtNombre.Enabled = true;
+                        this.mktTelefono.Enabled = true;
+                        this.txtDireccion.Enabled = true;
+                        this.cmbTipoID.Enabled = true;
+                        this.pctLogo.Enabled = true;
+                        this.btnCargarLogo.Enabled = true;
+                        this.rdbActiva.Enabled = true;
+                        this.rdbInactiva.Enabled = true;
+
+
+                        break;
+
+
+                }
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void cmbTipoID_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTipoID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbTipoID.SelectedIndex != 0)
+            {
+                if ((TipoCedulaEmpresa)this.cmbTipoID.SelectedItem == TipoCedulaEmpresa.Fisica)
+                {
+                    mktID.Mask = "0-0000-0000";
+                }
+                else
+                {
+                    mktID.Mask = "0-000-000000";
+                }
+
+            }
+        }
+
+        private void mktID_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (this.mktID.MaskCompleted)
+            {
+                this.errProv1.SetError(this.mktID, string.Empty);
+                this.mktID.BackColor = Color.Honeydew;
+            }
+            else
+            {
+                this.errProv1.SetError(this.mktID, "Campo ID de empresa no es correcto");
+                this.mktID.BackColor = Color.MistyRose;
+            }
+        }
+
+        private void txtNombre_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
+            {
+                this.errProv1.SetError(this.txtNombre, string.Empty);
+                this.txtNombre.BackColor = Color.Honeydew;
+            }
+            else
+            {
+                this.errProv1.SetError(this.txtNombre, "Campo Nombre de empresa no es correcto");
+                this.txtNombre.BackColor = Color.MistyRose;
+            }
+        }
+
+        private void mktTelefono_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (this.mktTelefono.MaskCompleted)
+            {
+                this.errProv1.SetError(this.mktTelefono, string.Empty);
+                this.mktTelefono.BackColor = Color.Honeydew;
+            }
+            else
+            {
+                this.errProv1.SetError(this.mktTelefono, "Campo Teléfono de empresa no es correcto");
+                this.mktTelefono.BackColor = Color.MistyRose;
+            }
+        }
+
+        private void txtDireccion_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtDireccion.Text.Trim()))
+            {
+                this.errProv1.SetError(this.txtDireccion, string.Empty);
+                this.txtDireccion.BackColor = Color.Honeydew;
+            }
+            else
+            {
+                this.errProv1.SetError(this.txtDireccion, "Campo Dirección de empresa no es correcto");
+                this.txtDireccion.BackColor = Color.MistyRose;
+            }
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            //Validar que todos los campos del form estén correctamente llenados 
+            //para agregar o actualizar la empresa correctamente
+            if (!ValidarCampos())
+            {
+                return;
+            }
+
+            //Llamar al método que crea y actualiza la empresa
+            CrearActualizarEmpresa();
+            LimpiarControles();
+        }
+
+        private void CrearActualizarEmpresa()
+        {
+            //Crear la instancia de Empresa
+            Empresa oEmpresa = new Empresa();
+
+            oEmpresa.TipoIdentificacion = (TipoCedulaEmpresa)this.cmbTipoID.SelectedItem;
+            oEmpresa.IDEmpresa = this.mktID.Text.Replace("-", "");
+            oEmpresa.Nombre = this.txtNombre.Text;
+            oEmpresa.Telefono = this.mktTelefono.Text.Replace("-","");
+            if (this.rdbActiva.Checked)
+                oEmpresa.Estado = true;
+            if (this.rdbInactiva.Checked)
+            {
+                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea configurar la empresa como inactiva? +" +
+                    "\n" +
+                    "\nEsta acción deshabilitará todas las funciones de la aplicación.", "Aviso",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    oEmpresa.Estado = false;
+                }
+
+            }
+            oEmpresa.Logo = (byte[])pctLogo.Tag;
+
+            //Se llama al método Create de la empresa 
+            //que se encarga de revisar si la empresa existe primero
+            //antes de agregarla
+
+            if (bLLEmpresa.SelectById(this.mktID.Text) != null)
+            {
+
+                bLLEmpresa.Update(oEmpresa);
+            }
+            else
+            {
+                bLLEmpresa.Create(oEmpresa);
+            }
+
+            //Refrescar la lista
+            CargarLista();
+
+            //Ocultar el boton de confirmar
+            this.btnConfirmar.Visible = false;
+
+            //Limpiar los controles
+            LimpiarControles();
+
+        }
+
+        private bool ValidarCampos()
+        {
+            Empresa oEmpresa = new Empresa();
+            oEmpresa = this.dgvEmpresa.SelectedRows[0].DataBoundItem as Empresa;
+            bool correcto = false;
+            try
+            {
+                correcto = true;
+                foreach (Control c in this.Controls)
+                {
+                    this.errProv1.SetError(c, String.Empty);
+                    this.errProv1.Clear();
+                }
+
+                //Validar IdEmpresa
+
+                if (this.mktID.MaskCompleted)
+                {
+                    this.errProv1.SetError(this.mktID, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.mktID, "Campo ID de Empresa no es correcto");
+                    return false;
+                }
+
+                // Validar Nombre
+                if (!String.IsNullOrEmpty(this.txtNombre.Text.Trim()))
+                {
+                    this.errProv1.SetError(this.txtNombre, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.txtNombre, "Campo Nombre de Colaborador no es correcto");
+                    return false;
+                }
+
+                //Validar telefono
+
+                if (this.mktTelefono.MaskCompleted)
+                {
+                    this.errProv1.SetError(this.mktTelefono, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.mktTelefono, "Campo Teléfono no es correcto");
+                    return false;
+                }
+
+
+                //Validar direccion
+
+                if (!String.IsNullOrEmpty(this.txtDireccion.Text.Trim()))
+                {
+                    this.errProv1.SetError(this.txtDireccion, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.txtDireccion, "Campo Dirección no es correcto");
+                    return false;
+                }
+
+
+                //Validar combo TipoID
+
+                if (this.cmbTipoID.SelectedItem != null && this.cmbTipoID.SelectedIndex != 0)
+                {
+                    this.errProv1.SetError(this.cmbTipoID, string.Empty);
+                }
+                else
+                {
+                    this.errProv1.SetError(this.cmbTipoID, "Campo tipo de identificación no es correcto");
+                    return false;
+                }
+
+                //Validar pictureBox de Foto
+
+                if (this.pctLogo.Tag == null)
+                {
+                    MessageBox.Show("¡El logo es requerido!", "Error", MessageBoxButtons.OK,
+                          MessageBoxIcon.Error);
+                    btnCargarLogo_Click(this, EventArgs.Empty);
+                    return false;
+                }
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+            return correcto;
+        }
+
+        private void btnCargarLogo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Mostrar el Diálogo de archivos
+                OpenFileDialog ofd = new OpenFileDialog();
+                // Parámetros del dialogo
+                ofd.Title = "Seleccione la imagen";
+                ofd.SupportMultiDottedExtensions = true;
+                ofd.DefaultExt = "*.jpg";
+                ofd.Filter = "Archivos de Imagenes (*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF)|*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF";
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                ofd.FileName = "";
+
+                if (ofd.ShowDialog(this) == DialogResult.OK)
+                {
+                    try
+                    {
+                        this.pctLogo.ImageLocation = ofd.FileName;
+                        this.pctLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                        byte[] cadenaBytes = File.ReadAllBytes(ofd.FileName);
+
+                        this.pctLogo.Tag = (byte[])cadenaBytes;
+                    }
+                    catch (Exception msg)
+                    {
+
+                        //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                        //de la base de datos
+                        _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                            , msg)));
+
+                        //Mostrar mensaje al usuario
+                        MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+                    }
+                }
+            }
+
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            ResetearForm('U');
+            this.btnConfirmar.Visible = true;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string idEmpresa = this.mktID.Text;
+                DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar? +" +
+                    "\n" +
+                    "\nEsta acción deshabilitará todas las funciones de la aplicación.", "Aviso",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    bLLEmpresa.Delete(idEmpresa);
+                    contEmpresa--;
+                    CargarLista();
+                    LimpiarControles();
+
+                }
+            }
+            catch (Exception msg)
+            {
+
+                //Salvar un mensaje de error en la tabla Bitacora_Log4Net
+                //de la base de datos
+                _MyLogControlEventos.Error((Utilitarios.CreateGenericErrorExceptionDetail(MethodBase.GetCurrentMethod()
+                    , msg)));
+
+                //Mostrar mensaje al usuario
+                MessageBox.Show("Se ha producido el siguiente error: " + msg.Message, "Error");
+
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarControles();
         }
     }
 }

@@ -258,6 +258,12 @@ namespace PayrollPal.UI
         {
             Application.Exit();
         }
+
+        private void empresaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMantenimientoEmpresa frm = new frmMantenimientoEmpresa();
+            frm.ShowDialog();
+        }
     }
 
 
