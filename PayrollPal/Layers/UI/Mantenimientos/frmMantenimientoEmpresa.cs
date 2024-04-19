@@ -43,7 +43,7 @@ namespace PayrollPal.UI.Mantenimientos
 
         }
 
-        private void frmMantenimientoEmpresa_Load(object sender, EventArgs e)
+        private async void frmMantenimientoEmpresa_Load(object sender, EventArgs e)
         {
             try
             {
@@ -53,7 +53,9 @@ namespace PayrollPal.UI.Mantenimientos
                 //Cargar el datagridview de empresa con el SELECT_ALL 
                 //del DALEmpresa
 
-                if (bLLEmpresa.SelectAll().Count > 0)
+                List<Empresa> lista = await bLLEmpresa.SelectAll();
+
+                if (lista.Count > 0)
                     contEmpresa++;
 
                 CargarLista();
@@ -76,12 +78,13 @@ namespace PayrollPal.UI.Mantenimientos
             }
         }
 
-        private void CargarLista()
+        private async void CargarLista()
         {
             try
             {
-
-                this.dgvEmpresa.DataSource = bLLEmpresa.SelectAll();
+                Task<List<Empresa>> taskListaEmpresa = bLLEmpresa.SelectAll();
+                List<Empresa> listaEmpresa = await taskListaEmpresa;
+                this.dgvEmpresa.DataSource = listaEmpresa;
                 this.dgvEmpresa.ClearSelection();
             }
             catch (Exception msg)

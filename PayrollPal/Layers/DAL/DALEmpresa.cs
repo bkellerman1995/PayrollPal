@@ -21,7 +21,7 @@ namespace PayrollPal.Layers.DAL
 
 
         #region SELECT ALL
-        public List<Empresa> SelectAll()
+        public async Task<List<Empresa>> SelectAll()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace PayrollPal.Layers.DAL
                 {
                     var command = new SqlCommand("usp_SELECT_Empresa_All");
                     command.CommandType = CommandType.StoredProcedure;
-                    ds = db.ExecuteReader(command, "Empresa");
+                    ds = await db.ExecuterReaderAsync(command, "Empresa");
                 }
 
                 List<Empresa> lista = new List<Empresa>();

@@ -10,7 +10,7 @@ namespace PayrollPal.Layers.Interfaces
     public interface IBLLEmpresa
     {
         #region SELECT ALL
-        List<Empresa> SelectAll();
+        Task<List<Empresa>> SelectAll();
 
         #endregion
 

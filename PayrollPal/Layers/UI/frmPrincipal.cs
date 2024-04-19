@@ -36,7 +36,7 @@ namespace PayrollPal.UI
             {
                 item.Visible = false;
             }
-
+            
             frmLogin frm = new frmLogin();
 
             this.tslblUsuarioConectado.Text = "Usuario Conectado: ";
@@ -49,9 +49,11 @@ namespace PayrollPal.UI
 
         }
 
-        private void ObtenerEstadoEmpresa()
+        private async void ObtenerEstadoEmpresa()
         {
-            foreach (Empresa emp in bLLEmpresa.SelectAll())
+            Task<List<Empresa>> taskListaEmpresas = bLLEmpresa.SelectAll();
+            List<Empresa>empresaLista = await taskListaEmpresas;
+            foreach (Empresa emp in empresaLista)
             {
                 if (emp != null)
                 {
@@ -83,6 +85,16 @@ namespace PayrollPal.UI
                                 "\nprocesos (calcular planilla), consultas y reportes de la aplicación.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             this.mantenimientosToolStripMenuItem.Visible = true;
                             this.empresaToolStripMenuItem.Visible = true;
+                            this.archivoToolStripMenuItem.Visible = true;
+                            this.usuariosToolStripMenuItem.Visible = false;
+                            this.rolToolStripMenuItem.Visible = false;
+                            this.puestoToolStripMenuItem.Visible = false;
+                            this.supervisorToolStripMenuItem.Visible = false;
+                            this.colaboradoresToolStripMenuItem.Visible = false;
+                            this.planillasDePagoToolStripMenuItem.Visible = false;
+                            this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                            this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+                            this.solicitudesDeVacacionesToolStripMenuItem.Visible = false;
                         }
                         else
                         {
@@ -99,7 +111,8 @@ namespace PayrollPal.UI
                             this.planillasDePagoToolStripMenuItem.Visible = true;
                             this.deduccionesYPercepcionesToolStripMenuItem.Visible = true;
                             this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = true;
-                            this.procesosToolStripMenuItem.Visible = true;
+                            this.solicitudesDeVacacionesToolStripMenuItem.Visible = true;
+
 
                             this.procesosToolStripMenuItem.Visible = true;
                             this.reportesToolStripMenuItem.Visible = true;
@@ -197,11 +210,31 @@ namespace PayrollPal.UI
                     this.deduccionesYPercepcionesToolStripMenuItem.Visible = true;
                     this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = true;
                     this.procesosToolStripMenuItem.Visible = true;
-
-                    this.procesosToolStripMenuItem.Visible = true;
+                    this.solicitudesDeVacacionesToolStripMenuItem.Visible = true;
                     this.reportesToolStripMenuItem.Visible = true;
                 }
-            }
+                else
+                {
+                    this.mantenimientosToolStripMenuItem.Visible = true;
+                    this.empresaToolStripMenuItem.Visible = true;
+                    this.archivoToolStripMenuItem.Visible = true;
+                    this.consultasToolStripMenuItem.Visible = false;
+
+                    this.usuariosToolStripMenuItem.Visible = false;
+                    this.rolToolStripMenuItem.Visible = false;
+                    this.puestoToolStripMenuItem.Visible = false;
+                    this.supervisorToolStripMenuItem.Visible = false;
+                    this.colaboradoresToolStripMenuItem.Visible = false;
+                    this.planillasDePagoToolStripMenuItem.Visible = false;
+                    this.deduccionesYPercepcionesToolStripMenuItem.Visible = false;
+                    this.deduccionesYPercepcionesPorColaboradorToolStripMenuItem.Visible = false;
+                    this.solicitudesDeVacacionesToolStripMenuItem.Visible = false;
+
+
+                    this.procesosToolStripMenuItem.Visible = false;
+                    this.reportesToolStripMenuItem.Visible = false;
+                }
+             }
         }
 
         /// <summary>

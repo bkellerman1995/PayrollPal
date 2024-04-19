@@ -36,7 +36,7 @@ namespace PayrollPal.Layers.BLL
             dALEmpresa.Delete(pEmpresa);
         }
 
-        public List<Empresa> SelectAll()
+        public Task<List<Empresa>> SelectAll()
         {
             IDALEmpresa dALEmpresa = new DALEmpresa();
             return dALEmpresa.SelectAll();

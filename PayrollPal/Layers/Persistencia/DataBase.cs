@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-
+using System.Threading.Tasks;
 
 public class DataBase : IDataBase ,IDisposable
 {
@@ -64,6 +64,35 @@ public class DataBase : IDataBase ,IDisposable
             if (dsTabla != null)
                 dsTabla.Dispose(); 
         } 
+
+    }
+
+    public async Task<DataSet> ExecuterReaderAsync(IDbCommand pCommand, String pTabla)
+    {
+
+        DataSet dsTabla = new DataSet();
+        try
+        {
+
+            using (SqlDataAdapter adaptador = new SqlDataAdapter(pCommand as SqlCommand))
+            {
+                pCommand.Connection = _Conexion;
+                dsTabla = new DataSet();
+                await Task.Run(() => adaptador.Fill(dsTabla, pTabla));
+            }
+            return dsTabla;
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+        finally
+        {
+
+            if (dsTabla != null)
+                dsTabla.Dispose();
+        }
 
     }
 

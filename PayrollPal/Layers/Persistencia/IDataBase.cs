@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 
 public interface IDataBase: IDisposable 
 {
@@ -11,6 +12,7 @@ public interface IDataBase: IDisposable
     double ExecuteNonQuery(IDbCommand pCommand, IsolationLevel pIsolationLevel);
     IDataReader ExecuteReader(IDbCommand pCommand);
     DataSet ExecuteReader(IDbCommand pCommand, string pTabla);
+    Task<DataSet> ExecuterReaderAsync(IDbCommand pCommand, string pTabla);
     double ExecuteScalar(IDbCommand pCommand);
 
 }
