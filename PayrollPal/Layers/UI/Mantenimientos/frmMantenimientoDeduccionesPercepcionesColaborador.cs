@@ -618,7 +618,7 @@ namespace PayrollPal.Layers.UI.Mantenimientos
 
             Deducciones_Percepciones dedPerc = this.cmbDedPercCol.SelectedItem as Deducciones_Percepciones;
             string codigoDedPerc = dedPerc.CodigoDeduccionPercepcion;
-            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar el supervisor?", "Aviso",
+            DialogResult resultado = MessageBox.Show("¿Está seguro(a) que desea eliminar la deducción/percepción?", "Aviso",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)

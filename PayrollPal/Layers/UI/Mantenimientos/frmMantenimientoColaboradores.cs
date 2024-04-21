@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using PayrollPal.Entities;
+using PayrollPal.Layers;
 using PayrollPal.Layers.BLL;
 using PayrollPal.Layers.Entities;
 using PayrollPal.Layers.IBLL;
@@ -29,6 +31,10 @@ namespace PayrollPal.UI.Mantenimientos
         IBLLRol bLLRol = new BLLRol();
         IBLLColaborador bLLColaborador = new BLLColaborador();
         IBLLSupervisor bLLSupervisor = new BLLSupervisor();
+        IBLLSolicitudVacaciones bLLSolicitudVacaciones = new BLLSolicitudVacaciones();
+        IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
+        IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
+        IBLLPlanilla_Detalle bLLPlanilla_Detalle = new BLLPlanilla_Detalle();
         public frmMantenimientoColaboradores()
         {
             InitializeComponent();
@@ -1313,6 +1319,147 @@ namespace PayrollPal.UI.Mantenimientos
                     }
                     bLLColaborador.SelectById(idColaborador).supID = "";
 
+                }
+                bool existeSolicitud = false;
+
+
+                foreach (var sol in bLLSolicitudVacaciones.SelectAll())
+                {
+                    if ((String.Equals(sol.IDColaborador.IDColaborador,idColaborador, StringComparison.CurrentCultureIgnoreCase))){
+                        existeSolicitud = true;
+                        break;
+                    }
+                }
+
+
+                if (existeSolicitud == true)
+                {
+                    DialogResult pregunta = MessageBox.Show("Existen solicitudes de vacaciones para el colaborador con ID: " + idColaborador +
+                        "\n¿Desea eliminar las solicitudes de vacaciones?",
+                        "Aviso",MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        List<SolicitudVacaciones> listaSolicitudesBorrar = bLLSolicitudVacaciones.SelectAll().Where(
+                            sol => (String.Equals(sol.IDColaborador.IDColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase))).ToList();
+
+                        foreach (SolicitudVacaciones sol in listaSolicitudesBorrar)
+                        {
+                            bLLSolicitudVacaciones.Delete(sol.IDSolicitudVacas);
+                        }
+
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                bool existeDedPercAsignada = false;
+
+                foreach (var dedPerc in bLLDeducciones_Percepciones_Por_Colaborador.SelectAll())
+                {
+                    if ((String.Equals(dedPerc.IdColaborador.IDColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase)))
+                    {
+                        existeDedPercAsignada = true;
+                        break;
+                    }
+                }
+
+
+                if (existeDedPercAsignada == true)
+                {
+                    DialogResult pregunta = MessageBox.Show("Existen deducciones/percepciones para el colaborador con ID: " + idColaborador +
+                        "\n¿Desea eliminar las deducciones/percepciones del colaborador?",
+                        "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        List<Deducciones_Percepciones_Por_Colaborador> listaDedPerColabBorrar = bLLDeducciones_Percepciones_Por_Colaborador.SelectAll().Where(
+                            dedPerc => (String.Equals(dedPerc.IdColaborador.IDColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase))).ToList();
+
+                        foreach (Deducciones_Percepciones_Por_Colaborador dedPerc in listaDedPerColabBorrar)
+                        {
+                            bLLDeducciones_Percepciones_Por_Colaborador.Delete(dedPerc.CodigoDeduccionPercepcion.CodigoDeduccionPercepcion, idColaborador);
+                        }
+
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+
+                bool existeControlDeMarca = false;
+
+                foreach (var controlMarca in bLLControlDeMarcas.SelectAll())
+                {
+                    if ((String.Equals(controlMarca.IdColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase)))
+                    {
+                        existeControlDeMarca = true;
+                        break;
+                    }
+                }
+
+
+                if (existeControlDeMarca == true)
+                {
+                    DialogResult pregunta = MessageBox.Show("Existen controles de marca para el colaborador con ID: " + idColaborador +
+                        "\n¿Desea eliminar las marcas del colaborador?",
+                        "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        List<ControlDeMarcas> listaMarcasBorrar = bLLControlDeMarcas.SelectAll().Where(
+                            marca => (String.Equals(marca.IdColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase))).ToList();
+
+                        foreach (ControlDeMarcas marca in listaMarcasBorrar)
+                        {
+                            bLLControlDeMarcas.DELETEBYID(marca.idMarca);
+                        }
+
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                bool existePlanillaDetalle = false;
+
+
+                foreach (var planDet in bLLPlanilla_Detalle.SelectAll())
+                {
+                    if ((String.Equals(planDet.IdColaborador.IDColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase)))
+                    {
+                        existePlanillaDetalle = true;
+                        break;
+                    }
+                }
+
+
+                if (existePlanillaDetalle == true)
+                {
+                    DialogResult pregunta = MessageBox.Show("Existen planillas generadas para el colaborador con ID: " + idColaborador +
+                        "\n¿Desea eliminar las planillas?",
+                        "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        List<Planilla_Detalle> listaPlanDetBorrar = bLLPlanilla_Detalle.SelectAll().Where(
+                            planDet => (String.Equals(planDet.IdColaborador.IDColaborador, idColaborador, StringComparison.CurrentCultureIgnoreCase))).ToList();
+
+                        foreach (Planilla_Detalle planDet in listaPlanDetBorrar)
+                        {
+                            bLLPlanilla_Detalle.Delete(planDet.IdDetalle);
+                        }
+
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
 
                 bLLColaborador.Delete(idColaborador);

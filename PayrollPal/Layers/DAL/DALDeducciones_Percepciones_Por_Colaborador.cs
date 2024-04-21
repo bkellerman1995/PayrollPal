@@ -27,6 +27,7 @@ namespace PayrollPal.Layers.DAL
             try
             {
                 IBLLDeduccionesPercepciones _BLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+                IBLLColaborador _BLLColaborador = new BLLColaborador();
 
                 DataSet ds = null;
                 using (var db = FactoryDatabase.CreateDataBase(FactoryConexion.CreateConnection()))
@@ -44,6 +45,7 @@ namespace PayrollPal.Layers.DAL
 
                         Deducciones_Percepciones_Por_Colaborador dedPercColab = new Deducciones_Percepciones_Por_Colaborador();
                         dedPercColab.CodigoDeduccionPercepcion = _BLLDeduccionesPercepciones.SelectById(dr["CodigoDeduccionPercepcion"].ToString());
+                        dedPercColab.IdColaborador = _BLLColaborador.SelectById(dr["IdColaborador"].ToString());
                         dedPercColab.Prioridad = (PrioridadDeduccionPercepcion)Enum.Parse(typeof(PrioridadDeduccionPercepcion), (dr["Prioridad"].ToString()));
                         dedPercColab.Estado = bool.Parse(dr["Estado"].ToString());
                         lista.Add(dedPercColab);
