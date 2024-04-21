@@ -64,12 +64,12 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasTrabajadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.txtImprimir = new System.Windows.Forms.TextBox();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataTable2TableAdapter = new PayrollPal.DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
+            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -96,9 +96,10 @@
             // btnGenerarColilla
             // 
             this.btnGenerarColilla.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarColilla.Location = new System.Drawing.Point(702, 318);
+            this.btnGenerarColilla.Location = new System.Drawing.Point(1872, 758);
+            this.btnGenerarColilla.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnGenerarColilla.Name = "btnGenerarColilla";
-            this.btnGenerarColilla.Size = new System.Drawing.Size(142, 50);
+            this.btnGenerarColilla.Size = new System.Drawing.Size(379, 119);
             this.btnGenerarColilla.TabIndex = 19;
             this.btnGenerarColilla.Text = "Generar Colilla";
             this.btnGenerarColilla.UseVisualStyleBackColor = true;
@@ -108,9 +109,10 @@
             // 
             this.lblFechaDesde.AutoSize = true;
             this.lblFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaDesde.Location = new System.Drawing.Point(12, 165);
+            this.lblFechaDesde.Location = new System.Drawing.Point(32, 393);
+            this.lblFechaDesde.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblFechaDesde.Name = "lblFechaDesde";
-            this.lblFechaDesde.Size = new System.Drawing.Size(97, 21);
+            this.lblFechaDesde.Size = new System.Drawing.Size(247, 54);
             this.lblFechaDesde.TabIndex = 22;
             this.lblFechaDesde.Text = "Fecha Desde";
             // 
@@ -118,9 +120,10 @@
             // 
             this.lblFechaHasta.AutoSize = true;
             this.lblFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaHasta.Location = new System.Drawing.Point(12, 223);
+            this.lblFechaHasta.Location = new System.Drawing.Point(32, 532);
+            this.lblFechaHasta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblFechaHasta.Name = "lblFechaHasta";
-            this.lblFechaHasta.Size = new System.Drawing.Size(93, 21);
+            this.lblFechaHasta.Size = new System.Drawing.Size(235, 54);
             this.lblFechaHasta.TabIndex = 25;
             this.lblFechaHasta.Text = "Fecha Hasta";
             // 
@@ -128,27 +131,30 @@
             // 
             this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(117, 165);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(312, 393);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(219, 29);
+            this.dtpFechaDesde.Size = new System.Drawing.Size(577, 61);
             this.dtpFechaDesde.TabIndex = 26;
             // 
             // dtpFechaHasta
             // 
             this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHasta.Location = new System.Drawing.Point(117, 223);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(312, 532);
+            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
-            this.dtpFechaHasta.Size = new System.Drawing.Size(219, 29);
+            this.dtpFechaHasta.Size = new System.Drawing.Size(577, 61);
             this.dtpFechaHasta.TabIndex = 27;
             // 
             // lblColaborador
             // 
             this.lblColaborador.AutoSize = true;
             this.lblColaborador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblColaborador.Location = new System.Drawing.Point(12, 280);
+            this.lblColaborador.Location = new System.Drawing.Point(32, 668);
+            this.lblColaborador.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblColaborador.Name = "lblColaborador";
-            this.lblColaborador.Size = new System.Drawing.Size(97, 21);
+            this.lblColaborador.Size = new System.Drawing.Size(243, 54);
             this.lblColaborador.TabIndex = 28;
             this.lblColaborador.Text = "Colaborador";
             // 
@@ -157,9 +163,10 @@
             this.cmbColaborador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColaborador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColaborador.FormattingEnabled = true;
-            this.cmbColaborador.Location = new System.Drawing.Point(117, 277);
+            this.cmbColaborador.Location = new System.Drawing.Point(312, 661);
+            this.cmbColaborador.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cmbColaborador.Name = "cmbColaborador";
-            this.cmbColaborador.Size = new System.Drawing.Size(219, 29);
+            this.cmbColaborador.Size = new System.Drawing.Size(577, 62);
             this.cmbColaborador.TabIndex = 29;
             this.cmbColaborador.SelectedIndexChanged += new System.EventHandler(this.cmbColaborador_SelectedIndexChanged);
             // 
@@ -167,9 +174,10 @@
             // 
             this.lblMarcas.AutoSize = true;
             this.lblMarcas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarcas.Location = new System.Drawing.Point(12, 336);
+            this.lblMarcas.Location = new System.Drawing.Point(32, 801);
+            this.lblMarcas.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblMarcas.Name = "lblMarcas";
-            this.lblMarcas.Size = new System.Drawing.Size(60, 21);
+            this.lblMarcas.Size = new System.Drawing.Size(148, 54);
             this.lblMarcas.TabIndex = 33;
             this.lblMarcas.Text = "Marcas";
             // 
@@ -177,9 +185,10 @@
             // 
             this.lblHorasOrdvsExt.AutoSize = true;
             this.lblHorasOrdvsExt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHorasOrdvsExt.Location = new System.Drawing.Point(8, 620);
+            this.lblHorasOrdvsExt.Location = new System.Drawing.Point(21, 1478);
+            this.lblHorasOrdvsExt.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblHorasOrdvsExt.Name = "lblHorasOrdvsExt";
-            this.lblHorasOrdvsExt.Size = new System.Drawing.Size(239, 21);
+            this.lblHorasOrdvsExt.Size = new System.Drawing.Size(597, 54);
             this.lblHorasOrdvsExt.TabIndex = 34;
             this.lblHorasOrdvsExt.Text = "Horas Ordinarias y Extrardinarias";
             // 
@@ -187,28 +196,31 @@
             // 
             this.lblTipoCambio.AutoSize = true;
             this.lblTipoCambio.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoCambio.Location = new System.Drawing.Point(394, 27);
+            this.lblTipoCambio.Location = new System.Drawing.Point(1051, 64);
+            this.lblTipoCambio.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblTipoCambio.Name = "lblTipoCambio";
-            this.lblTipoCambio.Size = new System.Drawing.Size(188, 21);
+            this.lblTipoCambio.Size = new System.Drawing.Size(483, 54);
             this.lblTipoCambio.TabIndex = 35;
             this.lblTipoCambio.Text = "Tipo de Cambio del dólar ";
             // 
             // txtTipoCambio
             // 
             this.txtTipoCambio.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoCambio.Location = new System.Drawing.Point(675, 53);
+            this.txtTipoCambio.Location = new System.Drawing.Point(1800, 126);
+            this.txtTipoCambio.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtTipoCambio.Name = "txtTipoCambio";
             this.txtTipoCambio.ReadOnly = true;
-            this.txtTipoCambio.Size = new System.Drawing.Size(136, 29);
+            this.txtTipoCambio.Size = new System.Drawing.Size(356, 61);
             this.txtTipoCambio.TabIndex = 36;
             // 
             // lblPlanillaEnc
             // 
             this.lblPlanillaEnc.AutoSize = true;
             this.lblPlanillaEnc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlanillaEnc.Location = new System.Drawing.Point(12, 103);
+            this.lblPlanillaEnc.Location = new System.Drawing.Point(32, 246);
+            this.lblPlanillaEnc.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblPlanillaEnc.Name = "lblPlanillaEnc";
-            this.lblPlanillaEnc.Size = new System.Drawing.Size(60, 21);
+            this.lblPlanillaEnc.Size = new System.Drawing.Size(148, 54);
             this.lblPlanillaEnc.TabIndex = 37;
             this.lblPlanillaEnc.Text = "Planilla";
             // 
@@ -217,9 +229,10 @@
             this.cmbPlanillas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPlanillas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPlanillas.FormattingEnabled = true;
-            this.cmbPlanillas.Location = new System.Drawing.Point(117, 100);
+            this.cmbPlanillas.Location = new System.Drawing.Point(312, 238);
+            this.cmbPlanillas.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cmbPlanillas.Name = "cmbPlanillas";
-            this.cmbPlanillas.Size = new System.Drawing.Size(219, 29);
+            this.cmbPlanillas.Size = new System.Drawing.Size(577, 62);
             this.cmbPlanillas.TabIndex = 38;
             this.cmbPlanillas.SelectedIndexChanged += new System.EventHandler(this.cmbPlanilla_SelectedIndexChanged);
             // 
@@ -227,19 +240,21 @@
             // 
             this.lblIDPlanEnc.AutoSize = true;
             this.lblIDPlanEnc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIDPlanEnc.Location = new System.Drawing.Point(8, 56);
+            this.lblIDPlanEnc.Location = new System.Drawing.Point(21, 134);
+            this.lblIDPlanEnc.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblIDPlanEnc.Name = "lblIDPlanEnc";
-            this.lblIDPlanEnc.Size = new System.Drawing.Size(146, 21);
+            this.lblIDPlanEnc.Size = new System.Drawing.Size(370, 54);
             this.lblIDPlanEnc.TabIndex = 39;
             this.lblIDPlanEnc.Text = "Planilla Encabezado";
             // 
             // txtIdEncPlan
             // 
             this.txtIdEncPlan.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdEncPlan.Location = new System.Drawing.Point(164, 53);
+            this.txtIdEncPlan.Location = new System.Drawing.Point(437, 126);
+            this.txtIdEncPlan.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtIdEncPlan.Name = "txtIdEncPlan";
             this.txtIdEncPlan.ReadOnly = true;
-            this.txtIdEncPlan.Size = new System.Drawing.Size(172, 29);
+            this.txtIdEncPlan.Size = new System.Drawing.Size(452, 61);
             this.txtIdEncPlan.TabIndex = 40;
             // 
             // splitContainer1
@@ -247,10 +262,12 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightBlue;
             this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel1.Controls.Add(this.lblTipoCambio2);
             this.splitContainer1.Panel1.Controls.Add(this.dgvHorOrdvsExt);
@@ -276,8 +293,9 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.reportViewer1);
             this.splitContainer1.Panel2.Controls.Add(this.txtImprimir);
-            this.splitContainer1.Size = new System.Drawing.Size(1471, 681);
-            this.splitContainer1.SplitterDistance = 846;
+            this.splitContainer1.Size = new System.Drawing.Size(3923, 1624);
+            this.splitContainer1.SplitterDistance = 2256;
+            this.splitContainer1.SplitterWidth = 11;
             this.splitContainer1.TabIndex = 0;
             // 
             // toolStrip1
@@ -287,10 +305,10 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 656);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 1563);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(846, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(2256, 61);
             this.toolStrip1.TabIndex = 45;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -298,16 +316,17 @@
             // 
             this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
             this.tslblUsuarioConectado.Text = "toolStripLabel1";
             // 
             // lblTipoCambio2
             // 
             this.lblTipoCambio2.AutoSize = true;
             this.lblTipoCambio2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoCambio2.Location = new System.Drawing.Point(412, 56);
+            this.lblTipoCambio2.Location = new System.Drawing.Point(1099, 134);
+            this.lblTipoCambio2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblTipoCambio2.Name = "lblTipoCambio2";
-            this.lblTipoCambio2.Size = new System.Drawing.Size(164, 21);
+            this.lblTipoCambio2.Size = new System.Drawing.Size(419, 54);
             this.lblTipoCambio2.TabIndex = 44;
             this.lblTipoCambio2.Text = "para hoy (venta)        ₡";
             // 
@@ -327,15 +346,15 @@
             this.dgvHorOrdvsExt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.HorasOrdinarias,
             this.HorasExtraordinarias});
-            this.dgvHorOrdvsExt.Location = new System.Drawing.Point(12, 651);
-            this.dgvHorOrdvsExt.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvHorOrdvsExt.Location = new System.Drawing.Point(32, 1552);
+            this.dgvHorOrdvsExt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvHorOrdvsExt.Name = "dgvHorOrdvsExt";
             this.dgvHorOrdvsExt.ReadOnly = true;
             this.dgvHorOrdvsExt.RowHeadersVisible = false;
             this.dgvHorOrdvsExt.RowHeadersWidth = 102;
             this.dgvHorOrdvsExt.RowTemplate.Height = 40;
             this.dgvHorOrdvsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHorOrdvsExt.Size = new System.Drawing.Size(832, 236);
+            this.dgvHorOrdvsExt.Size = new System.Drawing.Size(2219, 563);
             this.dgvHorOrdvsExt.TabIndex = 42;
             // 
             // HorasOrdinarias
@@ -374,15 +393,15 @@
             this.HoraSalida,
             this.Fecha,
             this.HorasTrabajadas});
-            this.dgvListaMarcas.Location = new System.Drawing.Point(12, 372);
-            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvListaMarcas.Location = new System.Drawing.Point(32, 887);
+            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvListaMarcas.Name = "dgvListaMarcas";
             this.dgvListaMarcas.ReadOnly = true;
             this.dgvListaMarcas.RowHeadersVisible = false;
             this.dgvListaMarcas.RowHeadersWidth = 102;
             this.dgvListaMarcas.RowTemplate.Height = 40;
             this.dgvListaMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListaMarcas.Size = new System.Drawing.Size(832, 236);
+            this.dgvListaMarcas.Size = new System.Drawing.Size(2219, 563);
             this.dgvListaMarcas.TabIndex = 41;
             // 
             // idMarca
@@ -443,31 +462,9 @@
             this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
             this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(846, 28);
+            this.toolStripMantEmpresa.Size = new System.Drawing.Size(2256, 65);
             this.toolStripMantEmpresa.TabIndex = 18;
             this.toolStripMantEmpresa.Text = "toolStrip1";
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
-            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(67, 25);
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(45, 25);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // reportViewer1
             // 
@@ -476,18 +473,20 @@
             this.reportViewer1.LocalReport.ReportPath = "C:\\Users\\bkellerman\\Desktop\\PayrollPal\\PayrollPal\\Layers\\UI\\Procesos\\RepPlanillaE" +
     "nviar.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(621, 681);
+            this.reportViewer1.Size = new System.Drawing.Size(1656, 1624);
             this.reportViewer1.TabIndex = 1;
             // 
             // txtImprimir
             // 
             this.txtImprimir.Font = new System.Drawing.Font("Segoe UI", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImprimir.Location = new System.Drawing.Point(-1, 3);
+            this.txtImprimir.Location = new System.Drawing.Point(-3, 7);
+            this.txtImprimir.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtImprimir.Multiline = true;
             this.txtImprimir.Name = "txtImprimir";
-            this.txtImprimir.Size = new System.Drawing.Size(611, 935);
+            this.txtImprimir.Size = new System.Drawing.Size(1623, 2224);
             this.txtImprimir.TabIndex = 0;
             // 
             // errProv1
@@ -498,12 +497,35 @@
             // 
             this.dataTable2TableAdapter.ClearBeforeFill = true;
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(158, 58);
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(102, 58);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // frmProcesoCalcularPlanilla
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1471, 681);
+            this.ClientSize = new System.Drawing.Size(3923, 1624);
             this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "frmProcesoCalcularPlanilla";
             this.Text = "Cálculo de Planilla";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

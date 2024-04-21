@@ -60,6 +60,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.17.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.17\lib\net45\log4net.dll</HintPath>
@@ -397,6 +400,30 @@
     <EmbeddedResource Include="Layers\UI\Procesos\RepPlanillaEnviar.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Layers\Imagenes\cross_9403277.png" />
+    <None Include="Layers\Imagenes\logout_1828479.png" />
+    <None Include="Layers\Imagenes\user_1077114.png" />
+    <Content Include="favicon.ico" />
+    <None Include="Layers\Imagenes\builder.png" />
+    <None Include="Layers\Imagenes\candidates.png" />
+    <None Include="Layers\Imagenes\enter.png" />
+    <None Include="Layers\Imagenes\hierarchy-structure.png" />
+    <None Include="Layers\Imagenes\workers.png" />
+    <None Include="Layers\Imagenes\wallet.png" />
+    <None Include="Layers\Imagenes\taxation.png" />
+    <None Include="Layers\Imagenes\taxes.png" />
+    <None Include="Layers\Imagenes\vacations.png" />
+    <None Include="Layers\Imagenes\payslip.png" />
+    <None Include="Layers\Imagenes\protection.png" />
+    <None Include="Layers\Imagenes\report.png" />
+    <None Include="Layers\Imagenes\report2.png" />
+    <None Include="Layers\Imagenes\document.png" />
+    <None Include="Layers\Imagenes\tools.png" />
+    <None Include="Layers\Imagenes\iteration.png" />
+    <None Include="Layers\Imagenes\data-searching.png" />
+    <None Include="Layers\Imagenes\business-report.png" />
+    <None Include="Layers\Imagenes\right-arrow.png" />
+    <None Include="Layers\Imagenes\Agregar.ico" />
     <Content Include="Layers\UI\Reportes\PlanillaPago.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

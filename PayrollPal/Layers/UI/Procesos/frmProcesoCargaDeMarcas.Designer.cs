@@ -37,7 +37,8 @@
             this.btnMostrarListaMarcas = new System.Windows.Forms.Button();
             this.txtRutaArchivoJSON = new System.Windows.Forms.TextBox();
             this.lblRutaArchivoJSON = new System.Windows.Forms.Label();
-            this.pctCargarJSON = new System.Windows.Forms.PictureBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
             this.dgvListaMarcas = new System.Windows.Forms.DataGridView();
             this.idMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdColaborador = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,24 +47,24 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasTrabajadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
+            this.pctCargarJSON = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCargarArchivoJson
             // 
             this.btnCargarArchivoJson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCargarArchivoJson.Location = new System.Drawing.Point(12, 35);
+            this.btnCargarArchivoJson.Location = new System.Drawing.Point(30, 88);
+            this.btnCargarArchivoJson.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.btnCargarArchivoJson.Name = "btnCargarArchivoJson";
-            this.btnCargarArchivoJson.Size = new System.Drawing.Size(119, 37);
+            this.btnCargarArchivoJson.Size = new System.Drawing.Size(298, 92);
             this.btnCargarArchivoJson.TabIndex = 1;
             this.btnCargarArchivoJson.Text = "Cargar JSON";
             this.btnCargarArchivoJson.UseVisualStyleBackColor = true;
@@ -73,11 +74,13 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightBlue;
             this.splitContainer1.Panel1.Controls.Add(this.btnMostrarListaMarcas);
             this.splitContainer1.Panel1.Controls.Add(this.txtRutaArchivoJSON);
             this.splitContainer1.Panel1.Controls.Add(this.lblRutaArchivoJSON);
@@ -88,16 +91,18 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel2.Controls.Add(this.dgvListaMarcas);
-            this.splitContainer1.Size = new System.Drawing.Size(826, 516);
-            this.splitContainer1.SplitterDistance = 185;
+            this.splitContainer1.Size = new System.Drawing.Size(2065, 1290);
+            this.splitContainer1.SplitterDistance = 462;
+            this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 2;
             // 
             // btnMostrarListaMarcas
             // 
             this.btnMostrarListaMarcas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMostrarListaMarcas.Location = new System.Drawing.Point(341, 146);
+            this.btnMostrarListaMarcas.Location = new System.Drawing.Point(852, 365);
+            this.btnMostrarListaMarcas.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.btnMostrarListaMarcas.Name = "btnMostrarListaMarcas";
-            this.btnMostrarListaMarcas.Size = new System.Drawing.Size(119, 28);
+            this.btnMostrarListaMarcas.Size = new System.Drawing.Size(298, 70);
             this.btnMostrarListaMarcas.TabIndex = 6;
             this.btnMostrarListaMarcas.Text = "Mostrar Marcas";
             this.btnMostrarListaMarcas.UseVisualStyleBackColor = true;
@@ -106,31 +111,45 @@
             // txtRutaArchivoJSON
             // 
             this.txtRutaArchivoJSON.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRutaArchivoJSON.Location = new System.Drawing.Point(176, 99);
+            this.txtRutaArchivoJSON.Location = new System.Drawing.Point(440, 248);
+            this.txtRutaArchivoJSON.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.txtRutaArchivoJSON.Multiline = true;
             this.txtRutaArchivoJSON.Name = "txtRutaArchivoJSON";
             this.txtRutaArchivoJSON.ReadOnly = true;
-            this.txtRutaArchivoJSON.Size = new System.Drawing.Size(627, 41);
+            this.txtRutaArchivoJSON.Size = new System.Drawing.Size(1562, 96);
             this.txtRutaArchivoJSON.TabIndex = 5;
             // 
             // lblRutaArchivoJSON
             // 
             this.lblRutaArchivoJSON.AutoSize = true;
             this.lblRutaArchivoJSON.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRutaArchivoJSON.Location = new System.Drawing.Point(3, 108);
+            this.lblRutaArchivoJSON.Location = new System.Drawing.Point(8, 270);
+            this.lblRutaArchivoJSON.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblRutaArchivoJSON.Name = "lblRutaArchivoJSON";
-            this.lblRutaArchivoJSON.Size = new System.Drawing.Size(167, 21);
+            this.lblRutaArchivoJSON.Size = new System.Drawing.Size(420, 54);
             this.lblRutaArchivoJSON.TabIndex = 4;
             this.lblRutaArchivoJSON.Text = "Ruta del Archivo JSON";
             // 
-            // pctCargarJSON
+            // toolStrip1
             // 
-            this.pctCargarJSON.Location = new System.Drawing.Point(149, 35);
-            this.pctCargarJSON.Name = "pctCargarJSON";
-            this.pctCargarJSON.Size = new System.Drawing.Size(54, 51);
-            this.pctCargarJSON.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctCargarJSON.TabIndex = 2;
-            this.pctCargarJSON.TabStop = false;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslblUsuarioConectado});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 757);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(2065, 61);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslblUsuarioConectado
+            // 
+            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
+            this.tslblUsuarioConectado.Text = "toolStripLabel1";
             // 
             // dgvListaMarcas
             // 
@@ -170,20 +189,21 @@
             this.dgvListaMarcas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvListaMarcas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListaMarcas.Location = new System.Drawing.Point(0, 0);
-            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvListaMarcas.Name = "dgvListaMarcas";
             this.dgvListaMarcas.ReadOnly = true;
             this.dgvListaMarcas.RowHeadersVisible = false;
             this.dgvListaMarcas.RowHeadersWidth = 102;
             this.dgvListaMarcas.RowTemplate.Height = 40;
             this.dgvListaMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListaMarcas.Size = new System.Drawing.Size(826, 327);
+            this.dgvListaMarcas.Size = new System.Drawing.Size(2065, 818);
             this.dgvListaMarcas.TabIndex = 5;
             // 
             // idMarca
             // 
             this.idMarca.DataPropertyName = "idMarca";
             this.idMarca.HeaderText = "ID";
+            this.idMarca.MinimumWidth = 12;
             this.idMarca.Name = "idMarca";
             this.idMarca.ReadOnly = true;
             // 
@@ -191,6 +211,7 @@
             // 
             this.IdColaborador.DataPropertyName = "IdColaborador";
             this.IdColaborador.HeaderText = "Colaborador";
+            this.IdColaborador.MinimumWidth = 12;
             this.IdColaborador.Name = "IdColaborador";
             this.IdColaborador.ReadOnly = true;
             // 
@@ -198,6 +219,7 @@
             // 
             this.HoraEntrada.DataPropertyName = "HoraEntrada";
             this.HoraEntrada.HeaderText = "Hora de Entrada";
+            this.HoraEntrada.MinimumWidth = 12;
             this.HoraEntrada.Name = "HoraEntrada";
             this.HoraEntrada.ReadOnly = true;
             // 
@@ -205,6 +227,7 @@
             // 
             this.HoraSalida.DataPropertyName = "HoraSalida";
             this.HoraSalida.HeaderText = "Hora de Salida";
+            this.HoraSalida.MinimumWidth = 12;
             this.HoraSalida.Name = "HoraSalida";
             this.HoraSalida.ReadOnly = true;
             // 
@@ -212,6 +235,7 @@
             // 
             this.Fecha.DataPropertyName = "Fecha";
             this.Fecha.HeaderText = "Fecha";
+            this.Fecha.MinimumWidth = 12;
             this.Fecha.Name = "Fecha";
             this.Fecha.ReadOnly = true;
             // 
@@ -219,6 +243,7 @@
             // 
             this.HorasTrabajadas.DataPropertyName = "HorasTrabajadas";
             this.HorasTrabajadas.HeaderText = "Horas Trabajadas";
+            this.HorasTrabajadas.MinimumWidth = 12;
             this.HorasTrabajadas.Name = "HorasTrabajadas";
             this.HorasTrabajadas.ReadOnly = true;
             // 
@@ -226,34 +251,24 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // toolStrip1
+            // pctCargarJSON
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 302);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(826, 25);
-            this.toolStrip1.TabIndex = 6;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tslblUsuarioConectado
-            // 
-            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(115, 22);
-            this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            this.pctCargarJSON.Location = new System.Drawing.Point(372, 88);
+            this.pctCargarJSON.Margin = new System.Windows.Forms.Padding(8);
+            this.pctCargarJSON.Name = "pctCargarJSON";
+            this.pctCargarJSON.Size = new System.Drawing.Size(135, 128);
+            this.pctCargarJSON.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctCargarJSON.TabIndex = 2;
+            this.pctCargarJSON.TabStop = false;
             // 
             // frmProcesoCargaDeMarcas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(826, 516);
+            this.ClientSize = new System.Drawing.Size(2065, 1290);
             this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.Name = "frmProcesoCargaDeMarcas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga de Marcas";
@@ -265,11 +280,11 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).EndInit();
             this.ResumeLayout(false);
 
         }
