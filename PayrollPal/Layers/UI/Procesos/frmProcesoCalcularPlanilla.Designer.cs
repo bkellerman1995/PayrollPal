@@ -64,12 +64,12 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasTrabajadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
+            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.txtImprimir = new System.Windows.Forms.TextBox();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataTable2TableAdapter = new PayrollPal.DSPlanillaEnviarTableAdapters.DataTable2TableAdapter();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSPlanillaEnviar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -293,8 +293,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.reportViewer1);
             this.splitContainer1.Panel2.Controls.Add(this.txtImprimir);
-            this.splitContainer1.Size = new System.Drawing.Size(3923, 1624);
-            this.splitContainer1.SplitterDistance = 2256;
+            this.splitContainer1.Size = new System.Drawing.Size(3910, 2348);
+            this.splitContainer1.SplitterDistance = 2248;
             this.splitContainer1.SplitterWidth = 11;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -305,10 +305,10 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 1563);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 2287);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(2256, 61);
+            this.toolStrip1.Size = new System.Drawing.Size(2248, 61);
             this.toolStrip1.TabIndex = 45;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -462,40 +462,9 @@
             this.toolStripMantEmpresa.Location = new System.Drawing.Point(0, 0);
             this.toolStripMantEmpresa.Name = "toolStripMantEmpresa";
             this.toolStripMantEmpresa.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripMantEmpresa.Size = new System.Drawing.Size(2256, 65);
+            this.toolStripMantEmpresa.Size = new System.Drawing.Size(2248, 65);
             this.toolStripMantEmpresa.TabIndex = 18;
             this.toolStripMantEmpresa.Text = "toolStrip1";
-            // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.Layers.UI.Procesos.RepPlanillaEnviar.rdlc";
-            this.reportViewer1.LocalReport.ReportPath = "C:\\Users\\bkellerman\\Desktop\\PayrollPal\\PayrollPal\\Layers\\UI\\Procesos\\RepPlanillaE" +
-    "nviar.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(1656, 1624);
-            this.reportViewer1.TabIndex = 1;
-            // 
-            // txtImprimir
-            // 
-            this.txtImprimir.Font = new System.Drawing.Font("Segoe UI", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImprimir.Location = new System.Drawing.Point(-3, 7);
-            this.txtImprimir.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.txtImprimir.Multiline = true;
-            this.txtImprimir.Name = "txtImprimir";
-            this.txtImprimir.Size = new System.Drawing.Size(1623, 2224);
-            this.txtImprimir.TabIndex = 0;
-            // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
-            // 
-            // dataTable2TableAdapter
-            // 
-            this.dataTable2TableAdapter.ClearBeforeFill = true;
             // 
             // btnLimpiar
             // 
@@ -519,11 +488,42 @@
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.Layers.UI.Procesos.RepPlanillaEnviar.rdlc";
+            this.reportViewer1.LocalReport.ReportPath = "C:\\Users\\bkellerman\\Desktop\\PayrollPal\\PayrollPal\\Layers\\UI\\Procesos\\RepPlanillaE" +
+    "nviar.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(1651, 2348);
+            this.reportViewer1.TabIndex = 1;
+            // 
+            // txtImprimir
+            // 
+            this.txtImprimir.Font = new System.Drawing.Font("Segoe UI", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtImprimir.Location = new System.Drawing.Point(-3, 7);
+            this.txtImprimir.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.txtImprimir.Multiline = true;
+            this.txtImprimir.Name = "txtImprimir";
+            this.txtImprimir.Size = new System.Drawing.Size(1623, 2224);
+            this.txtImprimir.TabIndex = 0;
+            // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
+            // dataTable2TableAdapter
+            // 
+            this.dataTable2TableAdapter.ClearBeforeFill = true;
+            // 
             // frmProcesoCalcularPlanilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(3923, 1624);
+            this.ClientSize = new System.Drawing.Size(3910, 2348);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "frmProcesoCalcularPlanilla";

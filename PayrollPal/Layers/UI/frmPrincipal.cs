@@ -120,7 +120,8 @@ namespace PayrollPal.UI
 
 
                         frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
-                        frm.ShowDialog();
+                        frm.MdiParent = this;
+                        frm.Show();
                         break;
 
                     case 2:
@@ -250,7 +251,7 @@ namespace PayrollPal.UI
 
             if (resultado == DialogResult.Yes)
             {
-                Application.Exit();
+                Environment.Exit(0);
             }
         }
         
@@ -372,7 +373,7 @@ namespace PayrollPal.UI
 
         private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         private void empresaToolStripMenuItem_Click(object sender, EventArgs e)

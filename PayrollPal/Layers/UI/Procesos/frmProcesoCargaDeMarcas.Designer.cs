@@ -32,11 +32,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProcesoCargaDeMarcas));
             this.btnCargarArchivoJson = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnMostrarListaMarcas = new System.Windows.Forms.Button();
             this.txtRutaArchivoJSON = new System.Windows.Forms.TextBox();
             this.lblRutaArchivoJSON = new System.Windows.Forms.Label();
+            this.pctCargarJSON = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
             this.dgvListaMarcas = new System.Windows.Forms.DataGridView();
@@ -47,22 +49,22 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasTrabajadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pctCargarJSON = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCargarArchivoJson
             // 
+            this.btnCargarArchivoJson.AutoSize = true;
             this.btnCargarArchivoJson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargarArchivoJson.Location = new System.Drawing.Point(30, 88);
-            this.btnCargarArchivoJson.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnCargarArchivoJson.Margin = new System.Windows.Forms.Padding(8);
             this.btnCargarArchivoJson.Name = "btnCargarArchivoJson";
             this.btnCargarArchivoJson.Size = new System.Drawing.Size(298, 92);
             this.btnCargarArchivoJson.TabIndex = 1;
@@ -72,9 +74,8 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -91,18 +92,19 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel2.Controls.Add(this.dgvListaMarcas);
-            this.splitContainer1.Size = new System.Drawing.Size(2065, 1290);
-            this.splitContainer1.SplitterDistance = 462;
+            this.splitContainer1.Size = new System.Drawing.Size(2065, 1588);
+            this.splitContainer1.SplitterDistance = 661;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 2;
             // 
             // btnMostrarListaMarcas
             // 
+            this.btnMostrarListaMarcas.AutoSize = true;
             this.btnMostrarListaMarcas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMostrarListaMarcas.Location = new System.Drawing.Point(852, 365);
-            this.btnMostrarListaMarcas.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnMostrarListaMarcas.Location = new System.Drawing.Point(852, 419);
+            this.btnMostrarListaMarcas.Margin = new System.Windows.Forms.Padding(8);
             this.btnMostrarListaMarcas.Name = "btnMostrarListaMarcas";
-            this.btnMostrarListaMarcas.Size = new System.Drawing.Size(298, 70);
+            this.btnMostrarListaMarcas.Size = new System.Drawing.Size(307, 70);
             this.btnMostrarListaMarcas.TabIndex = 6;
             this.btnMostrarListaMarcas.Text = "Mostrar Marcas";
             this.btnMostrarListaMarcas.UseVisualStyleBackColor = true;
@@ -112,7 +114,7 @@
             // 
             this.txtRutaArchivoJSON.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRutaArchivoJSON.Location = new System.Drawing.Point(440, 248);
-            this.txtRutaArchivoJSON.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtRutaArchivoJSON.Margin = new System.Windows.Forms.Padding(8);
             this.txtRutaArchivoJSON.Multiline = true;
             this.txtRutaArchivoJSON.Name = "txtRutaArchivoJSON";
             this.txtRutaArchivoJSON.ReadOnly = true;
@@ -130,6 +132,16 @@
             this.lblRutaArchivoJSON.TabIndex = 4;
             this.lblRutaArchivoJSON.Text = "Ruta del Archivo JSON";
             // 
+            // pctCargarJSON
+            // 
+            this.pctCargarJSON.Location = new System.Drawing.Point(372, 88);
+            this.pctCargarJSON.Margin = new System.Windows.Forms.Padding(8);
+            this.pctCargarJSON.Name = "pctCargarJSON";
+            this.pctCargarJSON.Size = new System.Drawing.Size(135, 128);
+            this.pctCargarJSON.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctCargarJSON.TabIndex = 2;
+            this.pctCargarJSON.TabStop = false;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -137,7 +149,7 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 757);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 856);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(2065, 61);
@@ -189,14 +201,14 @@
             this.dgvListaMarcas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvListaMarcas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListaMarcas.Location = new System.Drawing.Point(0, 0);
-            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvListaMarcas.Margin = new System.Windows.Forms.Padding(2);
             this.dgvListaMarcas.Name = "dgvListaMarcas";
             this.dgvListaMarcas.ReadOnly = true;
             this.dgvListaMarcas.RowHeadersVisible = false;
             this.dgvListaMarcas.RowHeadersWidth = 102;
             this.dgvListaMarcas.RowTemplate.Height = 40;
             this.dgvListaMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListaMarcas.Size = new System.Drawing.Size(2065, 818);
+            this.dgvListaMarcas.Size = new System.Drawing.Size(2065, 917);
             this.dgvListaMarcas.TabIndex = 5;
             // 
             // idMarca
@@ -251,26 +263,17 @@
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // pctCargarJSON
-            // 
-            this.pctCargarJSON.Location = new System.Drawing.Point(372, 88);
-            this.pctCargarJSON.Margin = new System.Windows.Forms.Padding(8);
-            this.pctCargarJSON.Name = "pctCargarJSON";
-            this.pctCargarJSON.Size = new System.Drawing.Size(135, 128);
-            this.pctCargarJSON.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctCargarJSON.TabIndex = 2;
-            this.pctCargarJSON.TabStop = false;
-            // 
             // frmProcesoCargaDeMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(2065, 1290);
+            this.ClientSize = new System.Drawing.Size(2065, 1588);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "frmProcesoCargaDeMarcas";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Carga de Marcas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConsultaMarcas_FormClosing);
             this.Load += new System.EventHandler(this.frmConsultaMarcas_Load);
@@ -280,11 +283,11 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctCargarJSON)).EndInit();
             this.ResumeLayout(false);
 
         }

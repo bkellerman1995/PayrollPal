@@ -217,7 +217,7 @@ namespace PayrollPal.Layers.UI
                 if (resultado == DialogResult.Yes)
                 {
                     contPregunta = contPregunta + 1;
-                    Application.Exit();
+                    Environment.Exit(0);
                     
                 }
                 else
@@ -227,7 +227,7 @@ namespace PayrollPal.Layers.UI
             }
             else if (frmLogin.colaboradorLoggeado.IDColaborador == null && contPregunta > 0)
             {
-                Application.Exit();
+                Environment.Exit(0);
             }
 
         }

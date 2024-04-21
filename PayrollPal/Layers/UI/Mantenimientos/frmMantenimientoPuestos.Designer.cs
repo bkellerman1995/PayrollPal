@@ -44,6 +44,11 @@
             this.NombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Contrasenna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMantPuesto = new System.Windows.Forms.ToolStrip();
+            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
+            this.btnEditar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtCod = new System.Windows.Forms.TextBox();
@@ -51,11 +56,6 @@
             this.rdbActivo = new System.Windows.Forms.RadioButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
-            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPuestos)).BeginInit();
             this.toolStripMantPuesto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
@@ -70,7 +70,7 @@
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmar.Location = new System.Drawing.Point(962, 410);
-            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(8);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(250, 88);
             this.btnConfirmar.TabIndex = 60;
@@ -82,7 +82,7 @@
             // 
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(535, 212);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(2);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(369, 61);
             this.txtNombre.TabIndex = 54;
@@ -156,7 +156,7 @@
             this.dgvPuestos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPuestos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPuestos.Location = new System.Drawing.Point(0, 0);
-            this.dgvPuestos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvPuestos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvPuestos.Name = "dgvPuestos";
             this.dgvPuestos.ReadOnly = true;
             this.dgvPuestos.RowHeadersVisible = false;
@@ -209,98 +209,6 @@
             this.toolStripMantPuesto.TabIndex = 43;
             this.toolStripMantPuesto.Text = "toolStrip1";
             // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightBlue;
-            this.splitContainer1.Panel1.Controls.Add(this.txtCod);
-            this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
-            this.splitContainer1.Panel1.Controls.Add(this.rdbActivo);
-            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
-            this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
-            this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
-            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
-            this.splitContainer1.Panel1.Controls.Add(this.lblCodigo);
-            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantPuesto);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
-            this.splitContainer1.Panel2.Controls.Add(this.dgvPuestos);
-            this.splitContainer1.Size = new System.Drawing.Size(1285, 1105);
-            this.splitContainer1.SplitterDistance = 525;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // txtCod
-            // 
-            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCod.Location = new System.Drawing.Point(535, 115);
-            this.txtCod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtCod.Name = "txtCod";
-            this.txtCod.ReadOnly = true;
-            this.txtCod.Size = new System.Drawing.Size(369, 61);
-            this.txtCod.TabIndex = 63;
-            this.txtCod.Text = "pto";
-            // 
-            // rdbInactivo
-            // 
-            this.rdbInactivo.AutoSize = true;
-            this.rdbInactivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbInactivo.Location = new System.Drawing.Point(535, 410);
-            this.rdbInactivo.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.rdbInactivo.Name = "rdbInactivo";
-            this.rdbInactivo.Size = new System.Drawing.Size(198, 58);
-            this.rdbInactivo.TabIndex = 62;
-            this.rdbInactivo.TabStop = true;
-            this.rdbInactivo.Text = "Inactivo";
-            this.rdbInactivo.UseVisualStyleBackColor = true;
-            // 
-            // rdbActivo
-            // 
-            this.rdbActivo.AutoSize = true;
-            this.rdbActivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbActivo.Location = new System.Drawing.Point(535, 335);
-            this.rdbActivo.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.rdbActivo.Name = "rdbActivo";
-            this.rdbActivo.Size = new System.Drawing.Size(170, 58);
-            this.rdbActivo.TabIndex = 61;
-            this.rdbActivo.TabStop = true;
-            this.rdbActivo.Text = "Activo";
-            this.rdbActivo.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 514);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(1285, 61);
-            this.toolStrip1.TabIndex = 5;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tslblUsuarioConectado
-            // 
-            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
-            this.tslblUsuarioConectado.Text = "toolStripLabel1";
-            // 
             // btnAgregar
             // 
             this.btnAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -351,6 +259,97 @@
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.toolStripButtonSalir_Click);
             // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightBlue;
+            this.splitContainer1.Panel1.Controls.Add(this.txtCod);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbInactivo);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbActivo);
+            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
+            this.splitContainer1.Panel1.Controls.Add(this.txtNombre);
+            this.splitContainer1.Panel1.Controls.Add(this.lblNombre);
+            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
+            this.splitContainer1.Panel1.Controls.Add(this.lblCodigo);
+            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantPuesto);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvPuestos);
+            this.splitContainer1.Size = new System.Drawing.Size(1285, 1105);
+            this.splitContainer1.SplitterDistance = 525;
+            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // txtCod
+            // 
+            this.txtCod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCod.Location = new System.Drawing.Point(535, 115);
+            this.txtCod.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCod.Name = "txtCod";
+            this.txtCod.ReadOnly = true;
+            this.txtCod.Size = new System.Drawing.Size(369, 61);
+            this.txtCod.TabIndex = 63;
+            this.txtCod.Text = "pto";
+            // 
+            // rdbInactivo
+            // 
+            this.rdbInactivo.AutoSize = true;
+            this.rdbInactivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbInactivo.Location = new System.Drawing.Point(535, 410);
+            this.rdbInactivo.Margin = new System.Windows.Forms.Padding(8);
+            this.rdbInactivo.Name = "rdbInactivo";
+            this.rdbInactivo.Size = new System.Drawing.Size(198, 58);
+            this.rdbInactivo.TabIndex = 62;
+            this.rdbInactivo.TabStop = true;
+            this.rdbInactivo.Text = "Inactivo";
+            this.rdbInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbActivo
+            // 
+            this.rdbActivo.AutoSize = true;
+            this.rdbActivo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbActivo.Location = new System.Drawing.Point(535, 335);
+            this.rdbActivo.Margin = new System.Windows.Forms.Padding(8);
+            this.rdbActivo.Name = "rdbActivo";
+            this.rdbActivo.Size = new System.Drawing.Size(170, 58);
+            this.rdbActivo.TabIndex = 61;
+            this.rdbActivo.TabStop = true;
+            this.rdbActivo.Text = "Activo";
+            this.rdbActivo.UseVisualStyleBackColor = true;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslblUsuarioConectado});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 514);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(1285, 61);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslblUsuarioConectado
+            // 
+            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
+            this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            // 
             // frmMantenimientoPuestos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
@@ -358,7 +357,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1285, 1105);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMantenimientoPuestos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Puestos";

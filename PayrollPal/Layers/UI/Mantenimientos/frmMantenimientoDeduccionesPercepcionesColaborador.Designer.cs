@@ -43,6 +43,11 @@
             this.lblPrioridad = new System.Windows.Forms.Label();
             this.lblCodDedPerc = new System.Windows.Forms.Label();
             this.toolStripMantDedPercColab = new System.Windows.Forms.ToolStrip();
+            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
+            this.btnEditar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvDedPercColab = new System.Windows.Forms.DataGridView();
             this.CodigoDeduccionPercepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,11 +63,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslblUsuarioConectado = new System.Windows.Forms.ToolStripLabel();
             this.toolTipPercDedColaborador = new System.Windows.Forms.ToolTip(this.components);
-            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnLimpiar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripMantDedPercColab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProv1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDedPercColab)).BeginInit();
@@ -89,10 +89,10 @@
             this.btnQuitarColab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuitarColab.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitarColab.Image")));
             this.btnQuitarColab.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQuitarColab.Location = new System.Drawing.Point(1958, 502);
-            this.btnQuitarColab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnQuitarColab.Location = new System.Drawing.Point(1919, 469);
+            this.btnQuitarColab.Margin = new System.Windows.Forms.Padding(8);
             this.btnQuitarColab.Name = "btnQuitarColab";
-            this.btnQuitarColab.Size = new System.Drawing.Size(227, 88);
+            this.btnQuitarColab.Size = new System.Drawing.Size(304, 121);
             this.btnQuitarColab.TabIndex = 64;
             this.btnQuitarColab.Text = "Quitar";
             this.btnQuitarColab.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -104,10 +104,10 @@
             this.btnAgregarCol.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarCol.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarCol.Image")));
             this.btnAgregarCol.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregarCol.Location = new System.Drawing.Point(1958, 308);
-            this.btnAgregarCol.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnAgregarCol.Location = new System.Drawing.Point(1919, 273);
+            this.btnAgregarCol.Margin = new System.Windows.Forms.Padding(8);
             this.btnAgregarCol.Name = "btnAgregarCol";
-            this.btnAgregarCol.Size = new System.Drawing.Size(227, 88);
+            this.btnAgregarCol.Size = new System.Drawing.Size(304, 123);
             this.btnAgregarCol.TabIndex = 63;
             this.btnAgregarCol.Text = "Agregar";
             this.btnAgregarCol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -120,7 +120,7 @@
             this.lstDedPercPorColab.FormattingEnabled = true;
             this.lstDedPercPorColab.ItemHeight = 54;
             this.lstDedPercPorColab.Location = new System.Drawing.Point(2239, 165);
-            this.lstDedPercPorColab.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lstDedPercPorColab.Margin = new System.Windows.Forms.Padding(8);
             this.lstDedPercPorColab.Name = "lstDedPercPorColab";
             this.lstDedPercPorColab.Size = new System.Drawing.Size(686, 760);
             this.lstDedPercPorColab.TabIndex = 62;
@@ -132,7 +132,7 @@
             this.lstColaboradoresALL.FormattingEnabled = true;
             this.lstColaboradoresALL.ItemHeight = 54;
             this.lstColaboradoresALL.Location = new System.Drawing.Point(1209, 165);
-            this.lstColaboradoresALL.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lstColaboradoresALL.Margin = new System.Windows.Forms.Padding(8);
             this.lstColaboradoresALL.Name = "lstColaboradoresALL";
             this.lstColaboradoresALL.Size = new System.Drawing.Size(694, 760);
             this.lstColaboradoresALL.TabIndex = 61;
@@ -153,7 +153,7 @@
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmar.Location = new System.Drawing.Point(35, 822);
-            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(8);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(250, 88);
             this.btnConfirmar.TabIndex = 60;
@@ -199,206 +199,6 @@
             this.toolStripMantDedPercColab.Size = new System.Drawing.Size(2982, 65);
             this.toolStripMantDedPercColab.TabIndex = 43;
             this.toolStripMantDedPercColab.Text = "toolStrip1";
-            // 
-            // errProv1
-            // 
-            this.errProv1.ContainerControl = this;
-            // 
-            // dgvDedPercColab
-            // 
-            this.dgvDedPercColab.AllowUserToAddRows = false;
-            this.dgvDedPercColab.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvDedPercColab.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvDedPercColab.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDedPercColab.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDedPercColab.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvDedPercColab.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDedPercColab.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CodigoDeduccionPercepcion,
-            this.IdColaborador,
-            this.Prioridad,
-            this.Estado});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDedPercColab.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvDedPercColab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDedPercColab.Location = new System.Drawing.Point(0, 0);
-            this.dgvDedPercColab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dgvDedPercColab.Name = "dgvDedPercColab";
-            this.dgvDedPercColab.ReadOnly = true;
-            this.dgvDedPercColab.RowHeadersVisible = false;
-            this.dgvDedPercColab.RowHeadersWidth = 102;
-            this.dgvDedPercColab.RowTemplate.Height = 40;
-            this.dgvDedPercColab.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDedPercColab.Size = new System.Drawing.Size(2982, 1055);
-            this.dgvDedPercColab.TabIndex = 4;
-            this.dgvDedPercColab.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDedPercColab_CellContentDoubleClick);
-            this.dgvDedPercColab.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDedPercColab_CellFormatting);
-            // 
-            // CodigoDeduccionPercepcion
-            // 
-            this.CodigoDeduccionPercepcion.DataPropertyName = "CodigoDeduccionPercepcion";
-            this.CodigoDeduccionPercepcion.HeaderText = "Deducción Percepción";
-            this.CodigoDeduccionPercepcion.MinimumWidth = 12;
-            this.CodigoDeduccionPercepcion.Name = "CodigoDeduccionPercepcion";
-            this.CodigoDeduccionPercepcion.ReadOnly = true;
-            // 
-            // IdColaborador
-            // 
-            this.IdColaborador.DataPropertyName = "IdColaborador";
-            this.IdColaborador.HeaderText = "IdColaborador";
-            this.IdColaborador.MinimumWidth = 12;
-            this.IdColaborador.Name = "IdColaborador";
-            this.IdColaborador.ReadOnly = true;
-            // 
-            // Prioridad
-            // 
-            this.Prioridad.DataPropertyName = "Prioridad";
-            this.Prioridad.HeaderText = "Prioridad";
-            this.Prioridad.MinimumWidth = 12;
-            this.Prioridad.Name = "Prioridad";
-            this.Prioridad.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "Estado";
-            this.Estado.HeaderText = "Estado";
-            this.Estado.MinimumWidth = 12;
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightBlue;
-            this.splitContainer1.Panel1.Controls.Add(this.rdbInactiva);
-            this.splitContainer1.Panel1.Controls.Add(this.rdbActiva);
-            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
-            this.splitContainer1.Panel1.Controls.Add(this.cmbDedPercCol);
-            this.splitContainer1.Panel1.Controls.Add(this.cmbPrioridad);
-            this.splitContainer1.Panel1.Controls.Add(this.lblListaDedPercAsignadas);
-            this.splitContainer1.Panel1.Controls.Add(this.lblListaColaboradoresALL);
-            this.splitContainer1.Panel1.Controls.Add(this.btnQuitarColab);
-            this.splitContainer1.Panel1.Controls.Add(this.btnAgregarCol);
-            this.splitContainer1.Panel1.Controls.Add(this.lstDedPercPorColab);
-            this.splitContainer1.Panel1.Controls.Add(this.lstColaboradoresALL);
-            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
-            this.splitContainer1.Panel1.Controls.Add(this.lblPrioridad);
-            this.splitContainer1.Panel1.Controls.Add(this.lblCodDedPerc);
-            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantDedPercColab);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
-            this.splitContainer1.Panel2.Controls.Add(this.dgvDedPercColab);
-            this.splitContainer1.Size = new System.Drawing.Size(2982, 2010);
-            this.splitContainer1.SplitterDistance = 950;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // rdbInactiva
-            // 
-            this.rdbInactiva.AutoSize = true;
-            this.rdbInactiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbInactiva.Location = new System.Drawing.Point(412, 658);
-            this.rdbInactiva.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.rdbInactiva.Name = "rdbInactiva";
-            this.rdbInactiva.Size = new System.Drawing.Size(195, 58);
-            this.rdbInactiva.TabIndex = 72;
-            this.rdbInactiva.TabStop = true;
-            this.rdbInactiva.Text = "Inactiva";
-            this.rdbInactiva.UseVisualStyleBackColor = true;
-            // 
-            // rdbActiva
-            // 
-            this.rdbActiva.AutoSize = true;
-            this.rdbActiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbActiva.Location = new System.Drawing.Point(412, 552);
-            this.rdbActiva.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.rdbActiva.Name = "rdbActiva";
-            this.rdbActiva.Size = new System.Drawing.Size(167, 58);
-            this.rdbActiva.TabIndex = 71;
-            this.rdbActiva.TabStop = true;
-            this.rdbActiva.Text = "Activa";
-            this.rdbActiva.UseVisualStyleBackColor = true;
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstado.Location = new System.Drawing.Point(30, 558);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(141, 54);
-            this.lblEstado.TabIndex = 70;
-            this.lblEstado.Text = "Estado";
-            // 
-            // cmbDedPercCol
-            // 
-            this.cmbDedPercCol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDedPercCol.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDedPercCol.FormattingEnabled = true;
-            this.cmbDedPercCol.Location = new System.Drawing.Point(465, 128);
-            this.cmbDedPercCol.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.cmbDedPercCol.Name = "cmbDedPercCol";
-            this.cmbDedPercCol.Size = new System.Drawing.Size(659, 53);
-            this.cmbDedPercCol.TabIndex = 69;
-            // 
-            // cmbPrioridad
-            // 
-            this.cmbPrioridad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPrioridad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPrioridad.FormattingEnabled = true;
-            this.cmbPrioridad.Location = new System.Drawing.Point(412, 318);
-            this.cmbPrioridad.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.cmbPrioridad.Name = "cmbPrioridad";
-            this.cmbPrioridad.Size = new System.Drawing.Size(432, 62);
-            this.cmbPrioridad.TabIndex = 68;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tslblUsuarioConectado});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 994);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(2982, 61);
-            this.toolStrip1.TabIndex = 5;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tslblUsuarioConectado
-            // 
-            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
-            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
-            this.tslblUsuarioConectado.Text = "toolStripLabel1";
             // 
             // btnAgregar
             // 
@@ -450,6 +250,206 @@
             this.btnSalir.Text = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // errProv1
+            // 
+            this.errProv1.ContainerControl = this;
+            // 
+            // dgvDedPercColab
+            // 
+            this.dgvDedPercColab.AllowUserToAddRows = false;
+            this.dgvDedPercColab.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvDedPercColab.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDedPercColab.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDedPercColab.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDedPercColab.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvDedPercColab.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDedPercColab.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CodigoDeduccionPercepcion,
+            this.IdColaborador,
+            this.Prioridad,
+            this.Estado});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDedPercColab.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvDedPercColab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDedPercColab.Location = new System.Drawing.Point(0, 0);
+            this.dgvDedPercColab.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvDedPercColab.Name = "dgvDedPercColab";
+            this.dgvDedPercColab.ReadOnly = true;
+            this.dgvDedPercColab.RowHeadersVisible = false;
+            this.dgvDedPercColab.RowHeadersWidth = 102;
+            this.dgvDedPercColab.RowTemplate.Height = 40;
+            this.dgvDedPercColab.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDedPercColab.Size = new System.Drawing.Size(2982, 1055);
+            this.dgvDedPercColab.TabIndex = 4;
+            this.dgvDedPercColab.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDedPercColab_CellContentDoubleClick);
+            this.dgvDedPercColab.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDedPercColab_CellFormatting);
+            // 
+            // CodigoDeduccionPercepcion
+            // 
+            this.CodigoDeduccionPercepcion.DataPropertyName = "CodigoDeduccionPercepcion";
+            this.CodigoDeduccionPercepcion.HeaderText = "Deducción Percepción";
+            this.CodigoDeduccionPercepcion.MinimumWidth = 12;
+            this.CodigoDeduccionPercepcion.Name = "CodigoDeduccionPercepcion";
+            this.CodigoDeduccionPercepcion.ReadOnly = true;
+            // 
+            // IdColaborador
+            // 
+            this.IdColaborador.DataPropertyName = "IdColaborador";
+            this.IdColaborador.HeaderText = "IdColaborador";
+            this.IdColaborador.MinimumWidth = 12;
+            this.IdColaborador.Name = "IdColaborador";
+            this.IdColaborador.ReadOnly = true;
+            // 
+            // Prioridad
+            // 
+            this.Prioridad.DataPropertyName = "Prioridad";
+            this.Prioridad.HeaderText = "Prioridad";
+            this.Prioridad.MinimumWidth = 12;
+            this.Prioridad.Name = "Prioridad";
+            this.Prioridad.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado";
+            this.Estado.MinimumWidth = 12;
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightBlue;
+            this.splitContainer1.Panel1.Controls.Add(this.rdbInactiva);
+            this.splitContainer1.Panel1.Controls.Add(this.rdbActiva);
+            this.splitContainer1.Panel1.Controls.Add(this.lblEstado);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbDedPercCol);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbPrioridad);
+            this.splitContainer1.Panel1.Controls.Add(this.lblListaDedPercAsignadas);
+            this.splitContainer1.Panel1.Controls.Add(this.lblListaColaboradoresALL);
+            this.splitContainer1.Panel1.Controls.Add(this.btnQuitarColab);
+            this.splitContainer1.Panel1.Controls.Add(this.btnAgregarCol);
+            this.splitContainer1.Panel1.Controls.Add(this.lstDedPercPorColab);
+            this.splitContainer1.Panel1.Controls.Add(this.lstColaboradoresALL);
+            this.splitContainer1.Panel1.Controls.Add(this.btnConfirmar);
+            this.splitContainer1.Panel1.Controls.Add(this.lblPrioridad);
+            this.splitContainer1.Panel1.Controls.Add(this.lblCodDedPerc);
+            this.splitContainer1.Panel1.Controls.Add(this.toolStripMantDedPercColab);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.toolStrip1);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvDedPercColab);
+            this.splitContainer1.Size = new System.Drawing.Size(2982, 2010);
+            this.splitContainer1.SplitterDistance = 950;
+            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // rdbInactiva
+            // 
+            this.rdbInactiva.AutoSize = true;
+            this.rdbInactiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbInactiva.Location = new System.Drawing.Point(412, 658);
+            this.rdbInactiva.Margin = new System.Windows.Forms.Padding(8);
+            this.rdbInactiva.Name = "rdbInactiva";
+            this.rdbInactiva.Size = new System.Drawing.Size(195, 58);
+            this.rdbInactiva.TabIndex = 72;
+            this.rdbInactiva.TabStop = true;
+            this.rdbInactiva.Text = "Inactiva";
+            this.rdbInactiva.UseVisualStyleBackColor = true;
+            // 
+            // rdbActiva
+            // 
+            this.rdbActiva.AutoSize = true;
+            this.rdbActiva.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbActiva.Location = new System.Drawing.Point(412, 552);
+            this.rdbActiva.Margin = new System.Windows.Forms.Padding(8);
+            this.rdbActiva.Name = "rdbActiva";
+            this.rdbActiva.Size = new System.Drawing.Size(167, 58);
+            this.rdbActiva.TabIndex = 71;
+            this.rdbActiva.TabStop = true;
+            this.rdbActiva.Text = "Activa";
+            this.rdbActiva.UseVisualStyleBackColor = true;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.Location = new System.Drawing.Point(30, 558);
+            this.lblEstado.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(141, 54);
+            this.lblEstado.TabIndex = 70;
+            this.lblEstado.Text = "Estado";
+            // 
+            // cmbDedPercCol
+            // 
+            this.cmbDedPercCol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDedPercCol.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDedPercCol.FormattingEnabled = true;
+            this.cmbDedPercCol.Location = new System.Drawing.Point(465, 128);
+            this.cmbDedPercCol.Margin = new System.Windows.Forms.Padding(8);
+            this.cmbDedPercCol.Name = "cmbDedPercCol";
+            this.cmbDedPercCol.Size = new System.Drawing.Size(659, 53);
+            this.cmbDedPercCol.TabIndex = 69;
+            // 
+            // cmbPrioridad
+            // 
+            this.cmbPrioridad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPrioridad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPrioridad.FormattingEnabled = true;
+            this.cmbPrioridad.Location = new System.Drawing.Point(412, 318);
+            this.cmbPrioridad.Margin = new System.Windows.Forms.Padding(8);
+            this.cmbPrioridad.Name = "cmbPrioridad";
+            this.cmbPrioridad.Size = new System.Drawing.Size(432, 62);
+            this.cmbPrioridad.TabIndex = 68;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslblUsuarioConectado});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 994);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip1.Size = new System.Drawing.Size(2982, 61);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslblUsuarioConectado
+            // 
+            this.tslblUsuarioConectado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tslblUsuarioConectado.Name = "tslblUsuarioConectado";
+            this.tslblUsuarioConectado.Size = new System.Drawing.Size(291, 54);
+            this.tslblUsuarioConectado.Text = "toolStripLabel1";
+            // 
             // frmMantenimientoDeduccionesPercepcionesColaborador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
@@ -457,7 +457,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2982, 2010);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "frmMantenimientoDeduccionesPercepcionesColaborador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de Deducciones y Percepciones por Colaborador";
