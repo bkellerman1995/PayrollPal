@@ -550,7 +550,7 @@ namespace PayrollPal.UI.Mantenimientos
         private bool ValidarCampos()
         {
             Colaborador oColaborador = new Colaborador();
-            oColaborador = this.dgvColaboradores.SelectedRows[0].DataBoundItem as Colaborador;
+            //oColaborador = this.dgvColaboradores.SelectedRows[0].DataBoundItem as Colaborador;
             bool correcto = false;
             try
             {
@@ -709,18 +709,20 @@ namespace PayrollPal.UI.Mantenimientos
 
                 //Validar combo IDSupervisor
 
-                if (oColaborador.IDRol.IDRol == 2)
+                if (this.cmbIDSup.SelectedItem != null && this.cmbIDSup.Visible)
                 {
-                    if (this.cmbIDSup.SelectedItem != null && this.cmbIDSup.Visible)
-                    {
-                        this.errProv1.SetError(this.cmbIDSup, string.Empty);
-                    }
-                    else
-                    {
-                        this.errProv1.SetError(this.cmbIDSup, "Campo ID supervisorBuscar no es correcto");
-                        return false;
-                    }
+                    this.errProv1.SetError(this.cmbIDSup, string.Empty);
                 }
+                else
+                {
+                    this.errProv1.SetError(this.cmbIDSup, "Campo ID supervisorBuscar no es correcto");
+                    return false;
+                }
+
+                //if (oColaborador.IDRol.IDRol == 2)
+                //{
+
+                //}
 
 
                 //Validar pictureBox de Foto
@@ -826,7 +828,7 @@ namespace PayrollPal.UI.Mantenimientos
                     //debe cambiarse el estado del supervisorBuscar 
                     //que estaba anteriormente asignado 
 
-                    if (oColaborador.supID.ToString() != bLLColaborador.SelectById(idColaborador).supID.ToString())
+                    if (bLLColaborador.SelectById(idColaborador) !=null && oColaborador.supID.ToString() != bLLColaborador.SelectById(idColaborador).supID.ToString())
                     {
                         oSupDeshabilitar = bLLColaborador.SelectById(idColaborador).IDSupervisor;
                         oSupDeshabilitar.Asignado = false;
