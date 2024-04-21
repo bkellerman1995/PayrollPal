@@ -106,9 +106,16 @@ namespace PayrollPal.UI.Consultas
                 this.dgvListaMarcas.ClearSelection();
 
             }
-            catch (Exception er)
+            catch (Exception)
             {
-                MessageBox.Show("Ocurrió un error al cargar las marcas en la tabla: " + er.Message);
+                MessageBox.Show("Ocurrió un error al cargar las marcas en la tabla: " + 
+                    "\n"+
+                    "\nPor favor verifique lo siguiente:" +
+                    "\n" +
+                    "\n- El archivo es de tipo .json y tiene el formato correcto" + 
+                    "\n- El ID del colaborador existe" +
+                    "\n- La hora de entrada y de salida tiene el formato correcto: hh:mm" +
+                    "\n- La fecha tiene el formato: dd/MM/aaaa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
