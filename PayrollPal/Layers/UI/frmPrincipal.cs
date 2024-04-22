@@ -139,6 +139,7 @@ namespace PayrollPal.UI
 
                             this.archivoToolStripMenuItem.Visible = true;
                             this.mantenimientosToolStripMenuItem.Visible = true;
+                            this.empresaToolStripMenuItem.Visible = false;
                             this.reportesToolStripMenuItem.Visible = true;
                             this.usuariosToolStripMenuItem.Visible = false;
                             this.rolToolStripMenuItem.Visible = false;
