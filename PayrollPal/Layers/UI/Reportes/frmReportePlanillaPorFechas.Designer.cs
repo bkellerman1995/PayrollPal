@@ -34,6 +34,7 @@ namespace PayrollPal.Layers.UI.Reportes
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStripMantEmpresa = new System.Windows.Forms.ToolStrip();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.cmbColaborador = new System.Windows.Forms.ComboBox();
             this.lblColaborador = new System.Windows.Forms.Label();
             this.btnCargar = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@ namespace PayrollPal.Layers.UI.Reportes
             this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.errProv1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -56,7 +56,7 @@ namespace PayrollPal.Layers.UI.Reportes
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "PayrollPal.Layers.UI.Reportes.PlanillaPagoFecha.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(8);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(2000, 1331);
@@ -66,7 +66,7 @@ namespace PayrollPal.Layers.UI.Reportes
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(8);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -103,13 +103,24 @@ namespace PayrollPal.Layers.UI.Reportes
             this.toolStripMantEmpresa.TabIndex = 19;
             this.toolStripMantEmpresa.Text = "toolStrip1";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(102, 58);
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // cmbColaborador
             // 
             this.cmbColaborador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColaborador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColaborador.FormattingEnabled = true;
             this.cmbColaborador.Location = new System.Drawing.Point(298, 182);
-            this.cmbColaborador.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cmbColaborador.Margin = new System.Windows.Forms.Padding(8);
             this.cmbColaborador.Name = "cmbColaborador";
             this.cmbColaborador.Size = new System.Drawing.Size(646, 62);
             this.cmbColaborador.TabIndex = 6;
@@ -129,7 +140,7 @@ namespace PayrollPal.Layers.UI.Reportes
             // 
             this.btnCargar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargar.Location = new System.Drawing.Point(1540, 182);
-            this.btnCargar.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.btnCargar.Margin = new System.Windows.Forms.Padding(8);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(430, 88);
             this.btnCargar.TabIndex = 4;
@@ -164,7 +175,7 @@ namespace PayrollPal.Layers.UI.Reportes
             this.dtpFechaHasta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaHasta.Location = new System.Drawing.Point(1172, 96);
-            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(8);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(634, 61);
             this.dtpFechaHasta.TabIndex = 1;
@@ -174,7 +185,7 @@ namespace PayrollPal.Layers.UI.Reportes
             this.dtpFechaDesde.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaDesde.Location = new System.Drawing.Point(298, 96);
-            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(8);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(646, 61);
             this.dtpFechaDesde.TabIndex = 0;
@@ -183,17 +194,6 @@ namespace PayrollPal.Layers.UI.Reportes
             // 
             this.errProv1.ContainerControl = this;
             // 
-            // btnSalir
-            // 
-            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(102, 58);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
             // frmReportePlanillaPorFechas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
@@ -201,7 +201,8 @@ namespace PayrollPal.Layers.UI.Reportes
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2000, 1678);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "frmReportePlanillaPorFechas";
             this.Text = "Reporte Planillas Por Fecha";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

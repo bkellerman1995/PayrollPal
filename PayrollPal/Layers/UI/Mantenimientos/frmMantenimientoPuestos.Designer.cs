@@ -357,6 +357,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1285, 1105);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMantenimientoPuestos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

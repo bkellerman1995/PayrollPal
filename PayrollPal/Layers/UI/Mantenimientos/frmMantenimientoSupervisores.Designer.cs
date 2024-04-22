@@ -438,6 +438,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2830, 1938);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "frmMantenimientoSupervisores";
             this.Text = "Mantenimiento de Supervisores";
