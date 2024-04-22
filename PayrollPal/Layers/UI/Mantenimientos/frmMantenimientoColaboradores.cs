@@ -455,6 +455,7 @@ namespace PayrollPal.UI.Mantenimientos
                         this.txtNombre.Enabled = true;
                         this.txtApellido1.Enabled = true;
                         this.txtApellido2.Enabled = true;
+                        this.dtpFechaNacimiento.Enabled = true;
                         ConfigurarDateTimePickerFechaIngreso();
                         ConfigurarDateTimePickerFechaNacimiento();
                         this.txtDireccion.Enabled = true;
@@ -709,15 +710,22 @@ namespace PayrollPal.UI.Mantenimientos
 
                 //Validar combo IDSupervisor
 
-                if (this.cmbIDSup.SelectedItem != null && this.cmbIDSup.Visible)
+                if (this.cmbIDSup.Visible == true)
                 {
-                    this.errProv1.SetError(this.cmbIDSup, string.Empty);
+
+                    if (this.cmbIDSup.SelectedItem != null)
+                    {
+                        this.errProv1.SetError(this.cmbIDSup, string.Empty);
+                    }
+                    else
+                    {
+                        this.errProv1.SetError(this.cmbIDSup, "Campo ID supervisor no es correcto");
+                        return false;
+                    }
                 }
-                else
-                {
-                    this.errProv1.SetError(this.cmbIDSup, "Campo ID supervisorBuscar no es correcto");
-                    return false;
-                }
+
+
+
 
                 //if (oColaborador.IDRol.IDRol == 2)
                 //{

@@ -146,10 +146,10 @@ namespace PayrollPal.Layers.BLL
 
             foreach (var marca in listaMarcas)
             {
-                if (marca.HorasTrabajadas > 48)
+                if (marca.HorasTrabajadas > 9)
                 {
-                    horasOrdinarias += 48;
-                    horasExtraordinarias += marca.HorasTrabajadas - horasOrdinarias;
+                    horasOrdinarias += 9;
+                    horasExtraordinarias += marca.HorasTrabajadas - 9;
                 }
                 else
                 {

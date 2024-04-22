@@ -133,6 +133,9 @@
   <data name="candidates" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Layers\Imagenes\candidates.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="check_in" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Layers\Imagenes\check-in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Colaborador_Generico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Layers\Imagenes\Colaborador_Generico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

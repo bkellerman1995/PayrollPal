@@ -120,8 +120,7 @@ namespace PayrollPal.UI
 
 
                         frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
-                        frm.MdiParent = this;
-                        frm.Show();
+                        frm.ShowDialog();
                         break;
 
                     case 2:
@@ -172,6 +171,7 @@ namespace PayrollPal.UI
                             this.archivoToolStripMenuItem.Visible = true;
                             this.consultasToolStripMenuItem.Visible = true;
 
+                            this.empresaToolStripMenuItem.Visible = false;
                             this.usuariosToolStripMenuItem.Visible = false;
                             this.rolToolStripMenuItem.Visible = false;
                             this.puestoToolStripMenuItem.Visible = false;
@@ -382,6 +382,12 @@ namespace PayrollPal.UI
             frm.MantEmpFormClosed += frmMantEmp_MantEmpFormClosed;
             frm.MdiParent = this;
             frm.Show();
+        }
+
+        private void cargarMarcasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProcesoCargaDeMarcas frm = new frmProcesoCargaDeMarcas();
+            frm.ShowDialog();
         }
     }
 

@@ -424,6 +424,7 @@
     <None Include="Layers\Imagenes\business-report.png" />
     <None Include="Layers\Imagenes\right-arrow.png" />
     <None Include="Layers\Imagenes\Agregar.ico" />
+    <None Include="Layers\Imagenes\check-in.png" />
     <Content Include="Layers\UI\Reportes\PlanillaPago.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

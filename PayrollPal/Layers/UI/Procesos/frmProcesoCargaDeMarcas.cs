@@ -42,7 +42,7 @@ namespace PayrollPal.UI.Consultas
                 ofd.SupportMultiDottedExtensions = true;
                 ofd.DefaultExt = "*.json";
                 ofd.Filter = "Archivo JSON (*.json) | *.json";
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                 ofd.FileName = "";
 
                 //Verificacion de que el archivo se seleccione
@@ -106,16 +106,9 @@ namespace PayrollPal.UI.Consultas
                 this.dgvListaMarcas.ClearSelection();
 
             }
-            catch (Exception)
+            catch (Exception er)
             {
-                MessageBox.Show("Ocurrió un error al cargar las marcas en la tabla: " + 
-                    "\n"+
-                    "\nPor favor verifique lo siguiente:" +
-                    "\n" +
-                    "\n- El archivo es de tipo .json y tiene el formato correcto" + 
-                    "\n- El ID del colaborador existe" +
-                    "\n- La hora de entrada y de salida tiene el formato correcto: hh:mm" +
-                    "\n- La fecha tiene el formato: dd/MM/aaaa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(er.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -156,9 +149,17 @@ namespace PayrollPal.UI.Consultas
         {
             if (bLLControlDeMarcas.SelectAll().Count == 0)
             {
-                MessageBox.Show("¡No se puede proceder sin marcas en el sistema!",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                Application.Exit();
+                MessageBox.Show("¡No se puede proceder sin marcas en el sistema!" +
+                    "\n" +
+                    "\n" +
+                    "\nPor favor verifique lo siguiente:" +
+                    "\n" +
+                    "\n- El archivo es de tipo .json y tiene el formato correcto" +
+                    "\n- El ID del colaborador existe" +
+                    "\n- La hora de entrada y de salida tiene el formato correcto: hh:mm" +
+                    "\n- La fecha tiene el formato: dd/MM/aaaa" +
+                    "\n ¡El programa se cerrará!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Environment.Exit(0);
             }
         }
         private void frmConsultaMarcas_FormClosing(object sender, FormClosingEventArgs e)

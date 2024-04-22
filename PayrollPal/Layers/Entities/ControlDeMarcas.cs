@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PayrollPal.Entities
 {
@@ -26,33 +27,42 @@ namespace PayrollPal.Entities
         /// <param name="ruta"></param>
         public void ObtenerMarcasJSON (string ruta)
         {
-            List<ControlDeMarcas> listaMarcas = new List<ControlDeMarcas>();
-
-            string jsonDatos = "";
-            jsonDatos = File.ReadAllText(ruta);
-
-            using (StreamReader lector = new StreamReader(ruta))
+            try
             {
-                listaMarcas = JSONGenericObject<List<ControlDeMarcas>>.JSonToObject(jsonDatos);
+                List<ControlDeMarcas> listaMarcas = new List<ControlDeMarcas>();
 
-                foreach (var item in listaMarcas)
+                string jsonDatos = "";
+                jsonDatos = File.ReadAllText(ruta);
+                using (StreamReader lector = new StreamReader(ruta))
                 {
-                    ControlDeMarcas controlMarca = new ControlDeMarcas();
-                    controlMarca.idMarca = item.idMarca;
-                    controlMarca.IdColaborador = item.IdColaborador;
-                    controlMarca.HoraEntrada = item.HoraEntrada;
-                    controlMarca.HoraSalida = item.HoraSalida;
-                    controlMarca.Fecha = item.Fecha;
+                    listaMarcas = JSONGenericObject<List<ControlDeMarcas>>.JSonToObject(jsonDatos);
 
-                    double horasTrabajadas = Math.Abs(Math.Round(item.HorasTrabajadas, 1));
+                    foreach (var item in listaMarcas)
+                    {
+                        ControlDeMarcas controlMarca = new ControlDeMarcas();
+                        controlMarca.idMarca = item.idMarca;
+                        controlMarca.IdColaborador = item.IdColaborador;
+                        controlMarca.HoraEntrada = item.HoraEntrada;
+                        controlMarca.HoraSalida = item.HoraSalida;
+                        controlMarca.Fecha = item.Fecha;
 
-                    controlMarca.HorasTrabajadas = horasTrabajadas;
+                        double horasTrabajadas = Math.Abs(Math.Round(item.HorasTrabajadas, 1));
 
-                    IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
-                    bLLControlDeMarcas.CREATE(controlMarca);
+                        controlMarca.HorasTrabajadas = horasTrabajadas;
+
+                        IBLLControlDeMarcas bLLControlDeMarcas = new BLLControlDeMarcas();
+                        bLLControlDeMarcas.CREATE(controlMarca);
+                    }
+                    lector.Close();
                 }
-                lector.Close();
             }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+
+
+
 
         }
 

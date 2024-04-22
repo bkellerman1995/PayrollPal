@@ -41,7 +41,14 @@ namespace PayrollPal.Layers.DAL
             }
             catch (Exception er)
             {
-                MessageBox.Show(er.Message);
+                er.Message.Replace(er.Message, "Ocurrió un error al cargar las marcas en la tabla: " +
+                    "\n" +
+                    "\nPor favor verifique lo siguiente:" +
+                    "\n" +
+                    "\n- El archivo es de tipo .json y tiene el formato correcto" +
+                    "\n- El ID del colaborador existe" +
+                    "\n- La hora de entrada y de salida tiene el formato correcto: hh:mm" +
+                    "\n- La fecha tiene el formato: dd/MM/aaaa");
             }
         }
         #endregion
@@ -119,7 +126,14 @@ namespace PayrollPal.Layers.DAL
             }
             catch (Exception er)
             {
-                MessageBox.Show(er.Message);
+                er.Message.Replace(er.Message, "Ocurrió un error al cargar las marcas en la tabla: " +
+                    "\n" +
+                    "\nPor favor verifique lo siguiente:" +
+                    "\n" +
+                    "\n- El archivo es de tipo .json y tiene el formato correcto" +
+                    "\n- El ID del colaborador existe" +
+                    "\n- La hora de entrada y de salida tiene el formato correcto: hh:mm" +
+                    "\n- La fecha tiene el formato: dd/MM/aaaa");
                 return null;
             }
         }

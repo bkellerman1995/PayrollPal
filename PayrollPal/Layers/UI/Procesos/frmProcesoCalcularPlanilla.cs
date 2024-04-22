@@ -135,8 +135,7 @@ namespace PayrollPal.UI.Procesos
                     && (this.cmbPlanillas.SelectedItem != null && this.cmbPlanillas.SelectedIndex != 0))
                 {
                     Colaborador oColaborador = (Colaborador)this.cmbColaborador.SelectedItem;
-                    this.dgvListaMarcas.DataSource = bLLControlDeMarcas.SelectAll().Where(marc => marc.HorasTrabajadas >= 10
-                    && marc.IdColaborador == oColaborador.IDColaborador).ToList();
+                    this.dgvListaMarcas.DataSource = bLLControlDeMarcas.SelectAll().Where(marc => marc.IdColaborador == oColaborador.IDColaborador).ToList();
                     this.dgvListaMarcas.ClearSelection();
                 }
 
@@ -278,7 +277,7 @@ namespace PayrollPal.UI.Procesos
                 }
                 else
                 {
-                    this.errProv1.SetError(this.cmbColaborador, "No puede generar una colilla de pago sin colaboradores o colaboradores sin supervisor." +
+                    this.errProv1.SetError(this.cmbColaborador, "No puede generar una colilla de pago para los colaboradores regulares o colaboradores sin supervisor." +
                         "\nRevise que existan colaboradores y que tengan un supervisor asignado.");
 
                 }
