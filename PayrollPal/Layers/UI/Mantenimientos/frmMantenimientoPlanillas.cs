@@ -421,6 +421,7 @@ namespace PayrollPal
                         //y radiobuttons
 
                         this.txtCod.ReadOnly = true;
+                        this.txtNombre.Enabled = true;
 
                         break;
 
@@ -458,7 +459,7 @@ namespace PayrollPal
             }
 
             //Llamar al método que crea y actualiza los usuarios
-            CrearActualizarColaborador();
+            CrearActualizarPlanillaPago();
             LimpiarControles();
         }
 
@@ -489,17 +490,6 @@ namespace PayrollPal
                 {
                     this.errProv1.SetError(this.txtNombre, "Campo Nombre de planilla de pago no es correcto");
                     return false;
-                }
-
-                if (String.Equals(this.lblEstado2.Text, "Activa", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (VerificarSiHayPlanillasActivas())
-                    {
-                        MessageBox.Show("No se puede agregar otra planilla como activa" +
-                            " debido a que existe una planilla activa", "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Stop);
-                        return false;
-                    }
                 }
 
             }
@@ -557,7 +547,7 @@ namespace PayrollPal
         /// <summary>
         /// Método para crear las planillas de pago y de igual manera actualizarlos
         /// </summary>
-        private void CrearActualizarColaborador()
+        private void CrearActualizarPlanillaPago()
         {
             //Crear la instancia de planilla de pago
             PlanillaPago oPlanillaPago = new PlanillaPago();
@@ -580,7 +570,18 @@ namespace PayrollPal
             }
             else
             {
-                bLLPlanillaPago.Create(oPlanillaPago);
+                if (VerificarSiHayPlanillasActivas())
+                {
+                    MessageBox.Show("No se puede agregar otra planilla como activa" +
+                        " debido a que existe una planilla activa", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
+                    return;
+                }
+                else
+                {
+                    bLLPlanillaPago.Create(oPlanillaPago);
+                }
+
             }
 
             //Refrescar la lista
@@ -903,7 +904,7 @@ namespace PayrollPal
                 if (resultado == DialogResult.Yes)
                 {
                     string rutaPDF = @"C:\temp\" + "Planilla-" + planEnc.IdEncabezado + "-Envío.pdf";
-                    GenerarPDF(this.reportViewer1,false, rutaPDF);
+                    GenerarPDF(this.reportViewer1, false, rutaPDF);
                 }
             }
             catch (Exception msg)
@@ -920,7 +921,7 @@ namespace PayrollPal
             }
         }
 
-        private void GenerarPDF(ReportViewer reportViewer, Boolean pTipoVertical,string rutaDestino)
+        private void GenerarPDF(ReportViewer reportViewer, Boolean pTipoVertical, string rutaDestino)
         {
             try
             {
