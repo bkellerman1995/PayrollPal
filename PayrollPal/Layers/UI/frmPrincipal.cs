@@ -197,7 +197,7 @@ namespace PayrollPal.UI
         {
             if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 1)
             {
-                if (frmMantenimientoEmpresa.empresaUnica.Estado == true && frmMantenimientoEmpresa.empresaUnica !=null)
+                if (frmMantenimientoEmpresa.empresaUnica.Estado == true && frmMantenimientoEmpresa.empresaUnica!= null)
                 {
                     this.mantenimientosToolStripMenuItem.Visible = true;
                     this.archivoToolStripMenuItem.Visible = true;

@@ -25,6 +25,7 @@ namespace PayrollPal.UI.Mantenimientos
                              log4net.LogManager.GetLogger("MyControlEventos");
 
         IBLLDeduccionesPercepciones bLLDeduccionesPercepciones = new BLLDeduccionesPercepciones();
+        IBLLDeducciones_Percepciones_Por_Colaborador bLLDeducciones_Percepciones_Por_Colaborador = new BLLDeducciones_Percepciones_Por_Colaborador();
         public frmMantenimientoDeduccionesPercepciones()
         {
             InitializeComponent();
@@ -305,9 +306,20 @@ namespace PayrollPal.UI.Mantenimientos
 
             if (resultado == DialogResult.Yes)
             {
-                bLLDeduccionesPercepciones.Delete(codigoDeduccionPercepcion);
-                CargarLista();
-                LimpiarControles();
+
+                if (bLLDeducciones_Percepciones_Por_Colaborador.SelectAll().Count !=0)
+                {
+                    MessageBox.Show("Existen deducciones/percepciones asignadas a uno o más colaboradores" +
+                        "\nDebe desasignarlas (mantenimiento deducciones/percepciones por colaborador) antes de poder eliminarlas aquí",
+                        "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    bLLDeduccionesPercepciones.Delete(codigoDeduccionPercepcion);
+                    CargarLista();
+                    LimpiarControles();
+                }
+
             }
 
 

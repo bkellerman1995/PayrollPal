@@ -622,6 +622,7 @@ namespace PayrollPal.UI.Mantenimientos
                 {
                     bLLEmpresa.Delete(idEmpresa);
                     contEmpresa--;
+                    empresaUnica = new Empresa();
                     CargarLista();
                     LimpiarControles();
 
