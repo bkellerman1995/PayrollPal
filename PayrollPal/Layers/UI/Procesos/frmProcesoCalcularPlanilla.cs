@@ -602,6 +602,7 @@ namespace PayrollPal.UI.Procesos
                 using (FileStream stream = new FileStream(rutaDestino, FileMode.Create))
                 {
                     stream.Write(bytes, 0, bytes.Length);
+
                 }
 
                 bool enviado = Email.Enviar("hola", planDet.NombreColaborador, planDet.IdColaborador.CorreoElectronico, rutaDestino);

@@ -1178,7 +1178,7 @@ namespace PayrollPal.UI.Mantenimientos
             if (e.ColumnIndex == 15 && e.Value != null)
             {
                 if (e.Value.ToString().Contains("Nulo"))
-                    e.Value = "Sin supervisorBuscar";
+                    e.Value = "Sin supervisor";
             }
 
 

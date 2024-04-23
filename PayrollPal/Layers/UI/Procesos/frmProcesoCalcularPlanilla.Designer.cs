@@ -232,7 +232,7 @@
             this.cmbPlanillas.Location = new System.Drawing.Point(312, 238);
             this.cmbPlanillas.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cmbPlanillas.Name = "cmbPlanillas";
-            this.cmbPlanillas.Size = new System.Drawing.Size(577, 62);
+            this.cmbPlanillas.Size = new System.Drawing.Size(931, 62);
             this.cmbPlanillas.TabIndex = 38;
             this.cmbPlanillas.SelectedIndexChanged += new System.EventHandler(this.cmbPlanilla_SelectedIndexChanged);
             // 

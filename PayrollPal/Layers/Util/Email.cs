@@ -62,6 +62,7 @@ namespace PayrollPal.Layers.Util
                     cliente.Credentials = new System.Net.NetworkCredential("yt2023br@gmail.com", "tcprbobjrnevtoyx");
                     cliente.EnableSsl = true;
                     cliente.Send(correo);
+                    dato.Dispose();
                 }
 
                 enviar = true;
