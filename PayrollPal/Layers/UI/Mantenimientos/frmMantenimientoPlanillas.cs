@@ -565,7 +565,7 @@ namespace PayrollPal
 
             if (bLLPlanillaPago.SelectById(this.txtCod.Text) != null)
             {
-
+                oPlanillaPago.Estado = bLLPlanillaPago.SelectById(this.txtCod.Text).Estado;
                 bLLPlanillaPago.Update(oPlanillaPago);
             }
             else
