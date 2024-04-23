@@ -421,7 +421,6 @@ namespace PayrollPal
                         //y radiobuttons
 
                         this.txtCod.ReadOnly = true;
-                        this.txtNombre.Enabled = true;
 
                         break;
 
