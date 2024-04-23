@@ -365,7 +365,19 @@ namespace PayrollPal.UI.Mantenimientos
             }
             else
             {
-                cantDias = (this.dtpFechaHasta.Value.Day - this.dtpFechaDesde.Value.Day) + 1;
+                cantDias = this.dtpFechaHasta.Value.Subtract(this.dtpFechaDesde.Value).Days + 1;
+                for (DateTime fecha = this.dtpFechaDesde.Value; fecha <= this.dtpFechaHasta.Value; fecha = fecha.AddDays(1))
+                {
+                    if (fecha.DayOfWeek == DayOfWeek.Saturday)
+                    {
+                        cantDias = cantDias - 1;
+                    }
+                    if (fecha.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        cantDias = cantDias - 1;
+                    }
+                }
+
             }
 
             this.txtCantDias.Text = cantDias.ToString();

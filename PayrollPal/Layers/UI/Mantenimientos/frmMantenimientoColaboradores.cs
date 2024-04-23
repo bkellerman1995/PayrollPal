@@ -183,29 +183,40 @@ namespace PayrollPal.UI.Mantenimientos
         private void CargarCombos()
         {
 
+
             this.cmbDepartamento.DataSource = bLLDepartamento.SelectAll();
 
-            List<Usuario> listaUsuariosNoAsignados = bLLUsuario.SelectAllNoAsignado();
+            List<Usuario> listaUsuariosNoAsignados = bLLUsuario.SelectAll().Where(usr => usr.Asignado == false).ToList();
+
+            this.cmbUsuario.Items.Clear();
 
             foreach (var item in listaUsuariosNoAsignados)
             {
                 this.cmbUsuario.Items.Add(item);
             }
 
+            this.cmbIDSup.Items.Clear();
+
             foreach (var item in bLLSupervisor.SelectAllNoAsignado())
             {
                 this.cmbIDSup.Items.Add(item.IDSupervisor);
             }
+
+            this.cmbSupervisor.Items.Clear();
 
             foreach (var item in bLLSupervisor.SelectAll())
             {
                 this.cmbSupervisor.Items.Add(item);
             }
 
+            this.cmbPuestos.Items.Clear();
+
             foreach (var item in bLLPuesto.SelectAll().Where(pto => pto.Estado == true).ToList())
             {
                 this.cmbPuestos.Items.Add(item);
             }
+
+            this.cmbRol.Items.Clear();
 
             foreach (var item in bLLRol.SelectAll())
             {
@@ -277,8 +288,7 @@ namespace PayrollPal.UI.Mantenimientos
                 this.cmbUsuario.SelectedIndex = -1;
                 this.cmbPuestos.SelectedIndex = -1;
                 this.cmbRol.SelectedIndex = -1;
-
-
+                this.cmbIDSup.SelectedIndex = -1;
 
 
                 this.lblSupervisor.Visible = false;
@@ -888,6 +898,7 @@ namespace PayrollPal.UI.Mantenimientos
 
             //Refrescar la lista
             CargarLista();
+            CargarCombos();
 
             //Ocultar el boton de confirmar
             this.btnConfirmar.Visible = false;
@@ -1317,10 +1328,11 @@ namespace PayrollPal.UI.Mantenimientos
                 oUsuario.Asignado = false;
                 bLLUsuario.Update(oUsuario);
 
-                if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 2)
+                if (frmLogin.colaboradorLoggeado.IDRol.IDRol == 2 || bLLColaborador.SelectById(idColaborador).IDRol.IDRol == 2)
                 {
-                    bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID).Asignado = false;
-                    bLLSupervisor.Update(bLLColaborador.SelectById(idColaborador).IDSupervisor);
+                    Supervisor superVisorModificar = bLLSupervisor.SelectById(bLLColaborador.SelectById(idColaborador).supID);
+                    superVisorModificar.Asignado = false;
+                    bLLSupervisor.Update(superVisorModificar);
 
                     foreach (Colaborador colaborador in bLLColaborador.SelectAll().Where(
                         col => col.IDSupervisor.IDSupervisor == bLLColaborador.SelectById(idColaborador).supID).ToList())
@@ -1330,6 +1342,7 @@ namespace PayrollPal.UI.Mantenimientos
                     bLLColaborador.SelectById(idColaborador).supID = "";
 
                 }
+
                 bool existeSolicitud = false;
 
 
