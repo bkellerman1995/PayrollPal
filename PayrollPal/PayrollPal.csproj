@@ -367,12 +367,8 @@
     <EmbeddedResource Include="Layers\UI\Reportes\frmReporteSolVacasPorFecha.resx">
       <DependentUpon>frmReporteSolVacasPorFecha.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Layers\UI\Reportes\PlanillaPagoFecha.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Layers\UI\Reportes\SolVacasFecha.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Layers\UI\Reportes\PlanillaPagoFecha.rdlc" />
+    <EmbeddedResource Include="Layers\UI\Reportes\SolVacasFecha.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -429,9 +425,7 @@
     <None Include="Layers\Imagenes\right-arrow.png" />
     <None Include="Layers\Imagenes\Agregar.ico" />
     <None Include="Layers\Imagenes\check-in.png" />
-    <Content Include="Layers\UI\Reportes\PlanillaPago.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Layers\UI\Reportes\PlanillaPago.rdlc" />
     <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
     <None Include="DSPlanillaEnviar.xsc">
       <DependentUpon>DSPlanillaEnviar.xsd</DependentUpon>
