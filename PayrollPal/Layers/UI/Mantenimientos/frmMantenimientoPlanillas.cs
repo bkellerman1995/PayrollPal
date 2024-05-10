@@ -335,7 +335,7 @@ namespace PayrollPal
                 this.dtpFechaPago.MinDate = this.dtpFechaPago.Value.AddDays(2);
             }
 
-            if (this.dtpFechaDesde.Value.AddDays(14).DayOfWeek == DayOfWeek.Sunday)
+            if (this.dtpFechaPago.Value.DayOfWeek == DayOfWeek.Sunday)
             {
                 this.dtpFechaPago.MinDate = this.dtpFechaPago.Value.AddDays(1);
                 this.dtpFechaPago.MaxDate = this.dtpFechaPago.Value.AddDays(1);
